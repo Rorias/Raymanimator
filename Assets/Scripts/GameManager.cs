@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 using UnityEngine;
@@ -31,6 +32,19 @@ public class GameManager : MonoBehaviour
         }
 
         instance = this;
+        Application.targetFrameRate = 120;
+
+        GameSettings.file = Application.persistentDataPath + "/" + GameSettings.fileName + ".json";
+        //immediately loads the settings file into memory
+        gameSettings = GameSettings.Instance;
+        input = InputManager.Instance;
+
+        LoadSettings();
+
+        if (Input.GetJoystickNames().Length > 0 && !string.IsNullOrWhiteSpace(Input.GetJoystickNames()[0]))
+        {
+            input.controllerConnected = true;
+        }
 
         SceneManager.sceneLoaded += FauxAwake;
 
@@ -38,8 +52,14 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    private static readonly CultureInfo CultUS = new CultureInfo("en-US");
+
     private GameSettings gameSettings;
     private InputManager input;
+
+    [NonSerialized] public Dictionary<int, Sprite> spritesetImages = new Dictionary<int, Sprite>();
+    [NonSerialized] public Animation currentAnimation = null;
+
     private void FauxAwake(Scene _s, LoadSceneMode _lsm)
     {
         if (gameSettings.firstLoad)
@@ -53,8 +73,11 @@ public class GameManager : MonoBehaviour
 
             foreach (KeyValuePair<InputManager.InputKey, KeyCode> Default in input.DefaultButtons)
             {
-                InputManager.Key key = input.Inputs[Default.Key].First(x => x.type == InputManager.KeyType.Controller);
-                key.code = input.DefaultButtons[Default.Key];
+                InputManager.Key key = input.Inputs[Default.Key].FirstOrDefault(x => x.type == InputManager.KeyType.Controller);
+                if (key != null)
+                {
+                    key.code = input.DefaultButtons[Default.Key];
+                }
             }
 
             gameSettings.firstLoad = false;
@@ -81,5 +104,15 @@ public class GameManager : MonoBehaviour
     {
         input.SaveInputs(gameSettings);
         gameSettings.SaveSettings();
+    }
+
+    public float ParseToSingle(string parseValue)
+    {
+        return float.Parse(parseValue, NumberStyles.Float, CultUS);
+    }
+
+    public string ParseToString(float parseValue)
+    {
+        return parseValue.ToString(CultUS);
     }
 }
