@@ -13,22 +13,26 @@ public class BackgroundSettings : Settings
     public Slider greenSlider;
     public Slider blueSlider;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         //currentBackgroundTypeDD.onValueChanged.AddListener(delegate { SetSpritesetPath(); });
 
         //backgroundImagePathIF.onEndEdit.AddListener(delegate { SetSpritesetPath(); });
+
+        redSlider.onValueChanged.AddListener(delegate { BGColorRed(); });
+        greenSlider.onValueChanged.AddListener(delegate { BGColorGreen(); });
+        blueSlider.onValueChanged.AddListener(delegate { BGColorBlue(); });
     }
 
     protected override void Start()
     {
         base.Start();
 
-        redSlider.value = settings.bgColor.r * 255f;
-        greenSlider.value = settings.bgColor.g * 255f;
-        blueSlider.value = settings.bgColor.b * 255f;
-
-        Camera.main.backgroundColor = settings.bgColor;
+        redSlider.value = settings.bgColor.r;
+        greenSlider.value = settings.bgColor.g;
+        blueSlider.value = settings.bgColor.b;
     }
 
     public void BGColorRed()

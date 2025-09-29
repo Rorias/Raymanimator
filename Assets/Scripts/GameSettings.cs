@@ -68,8 +68,8 @@ public sealed class GameSettings
     [SerializeField] private float lastPS = 0.0f;
     public Themes editorTheme { get { return tme; } set { tme = value; } }
     [SerializeField] private Themes tme = Themes.Dark;
-    public Color bgColor { get { return bgc; } set { bgc = value; } }
-    [SerializeField] private Color bgc = new Color(0.196f, 0.294f, 0.627f);
+    public Color32 bgColor { get { return bgc; } set { bgc = value; } }
+    [SerializeField] private Color32 bgc = new Color32(50, 75, 150, 255);
 
     public void SaveSettings()
     {

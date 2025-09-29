@@ -7,55 +7,31 @@ using System.IO;
 using TMPro;
 
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class OptionsMenu : MonoBehaviour
 {
+    public UnityEvent initializeSettings;
+
     private GameManager gameManager;
     private GameSettings settings;
-    private ThemeController themeController;
 
     //Settings UI elements
     //Personal
     private Dropdown currentLanguageDD;
-    private TMP_InputField animationsPathIF;
     //Editor
     public TMP_Dropdown resolutionDD;
-    private TMP_Dropdown editorThemeDD;
 
     private void Awake()
     {
-        themeController = FindObjectOfType<ThemeController>();
-
-        //animationsPathIF = GameObject.Find("AnimationsPath").GetComponent<TMP_InputField>();
-        //animationsPathIF.onValueChanged.AddListener(delegate { SetAnimationsPathViaBrowse(); });
-        //animationsPathIF.onEndEdit.AddListener(delegate { SetAnimationsPath(); });
-        //
-        //editorThemeDD = GameObject.Find("ThemeDD").GetComponent<TMP_Dropdown>();
-        //editorThemeDD.onValueChanged.AddListener(delegate { SetEditorTheme(); });
+        settings = GameSettings.Instance;
     }
 
     public void Initialize()
     {
-        LoadAnimationsSettings();
         LoadResSettings();
-        LoadThemeSettings();
-    }
-
-    private void LoadAnimationsSettings()
-    {
-        if (!string.IsNullOrWhiteSpace(settings.animationsPath))
-        {
-            if (Directory.Exists(settings.animationsPath))
-            {
-                animationsPathIF.text = settings.animationsPath;
-            }
-            else
-            {
-                UnityEngine.Debug.Log("Animations path doesn't exist or has been changed.");
-                DebugHelper.Log("Animations path doesn't exist or has been changed.");
-            }
-        }
+        initializeSettings.Invoke();
     }
 
     private void LoadResSettings()
@@ -113,28 +89,6 @@ public class OptionsMenu : MonoBehaviour
         }
 
         settings.SaveSettings();
-    }
-
-    private void LoadThemeSettings()
-    {
-        editorThemeDD.ClearOptions();
-
-        List<string> themes = new List<string>();
-
-        for (int i = 0; i < Enum.GetNames(typeof(GameSettings.Themes)).Length; i++)
-        {
-            themes.Add(Enum.GetNames(typeof(GameSettings.Themes))[i]);
-        }
-
-        editorThemeDD.AddOptions(themes);
-        editorThemeDD.value = (int)settings.editorTheme;
-    }
-
-    public void SetEditorTheme()
-    {
-        settings.editorTheme = (GameSettings.Themes)editorThemeDD.value;
-        settings.SaveSettings();
-        themeController.UpdateTheme();
     }
 
     public void OpenSettingsFile()

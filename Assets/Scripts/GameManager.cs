@@ -92,6 +92,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadSettings()
     {
+        Camera.main.backgroundColor = gameSettings.bgColor;
         LoadInputs();
     }
 

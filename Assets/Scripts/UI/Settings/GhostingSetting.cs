@@ -7,26 +7,17 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GhostingSettings : MonoBehaviour
+public class GhostingSetting : Settings
 {
     public Toggle ghostingNextToggle;
     public Toggle ghostingPreviousToggle;
 
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         //ghostingNextToggle.onValueChanged.AddListener(delegate { SetSpritesetPath(); });
         //ghostingPreviousToggle.onValueChanged.AddListener(delegate { SetSpritesetPath(); });
     }
-
-    private void Start()
-    {
-        
-    }
-
-    private void Update()
-    {
-        
-    }
 }
-

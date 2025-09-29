@@ -42,6 +42,13 @@ public class InitialisationMenu : MonoBehaviour
             return;
         }
 
+        if (string.IsNullOrWhiteSpace(settings.animationsPath) || !Directory.Exists(settings.animationsPath))
+        {
+            Debug.Log("No animation save path has been selected, or the selected path is not valid.");
+            DebugHelper.Log("No animation save path has been selected, or the selected path is not valid.");
+            return;
+        }
+
         menus.ActivateNextMenu(startMenu);
     }
 }

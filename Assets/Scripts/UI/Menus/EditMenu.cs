@@ -22,6 +22,7 @@ public class EditMenu : MonoBehaviour
     public ButtonPlus deleteNoBtn;
     public ButtonPlus deleteYesBtn;
     public TMP_InputField renameIF;
+    public ButtonPlus backBtn;
 
     private GameManager gameManager;
     private GameSettings settings;
@@ -150,6 +151,7 @@ public class EditMenu : MonoBehaviour
         renameMenu.SetActive(true);
         loadAnimsDD.interactable = false;
         editOptionsMenu.SetActive(false);
+        backBtn.interactable = false;
 
         if (renameMenu.activeSelf)
         {
@@ -165,7 +167,7 @@ public class EditMenu : MonoBehaviour
         if (string.IsNullOrWhiteSpace(newName))
         {
             Debug.Log("Please give the animation a name.");
-            DebugHelper.Log("Please the your animation a name.");
+            DebugHelper.Log("Please give the animation a name.");
             return;
         }
 
@@ -197,6 +199,7 @@ public class EditMenu : MonoBehaviour
         renameMenu.SetActive(false);
         loadAnimsDD.interactable = true;
         editOptionsMenu.SetActive(true);
+        backBtn.interactable = true;
     }
 
     public void CopyAnimation()

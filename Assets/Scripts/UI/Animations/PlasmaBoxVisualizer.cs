@@ -43,10 +43,10 @@ public class PlasmaBoxVisualizer : MonoBehaviour
 
     private void Awake()
     {
-        box.rectTransform.anchoredPosition = new Vector2(x, y);
-        box.rectTransform.sizeDelta = new Vector2(width, height);
-        box.texture.width = width;
-        box.texture.height = height;
+        //box.rectTransform.anchoredPosition = new Vector2(x, y);
+        //box.rectTransform.sizeDelta = new Vector2(width, height);
+        //box.texture.width = width;
+        //box.texture.height = height;
     }
 
     private void Update()

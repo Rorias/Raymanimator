@@ -8,13 +8,15 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SpritesetSettings : Settings
+public class SpritesetSetting : Settings
 {
     public TMP_InputField spritesetPathIF;
     public TMP_Dropdown currentSpritesetDD;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         spritesetPathIF.onValueChanged.AddListener(delegate { SetSpritesetPathViaBrowse(); });
         spritesetPathIF.onEndEdit.AddListener(delegate { SetSpritesetPath(); });
 

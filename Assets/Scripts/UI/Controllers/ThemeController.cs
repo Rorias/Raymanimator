@@ -16,7 +16,7 @@ public class ThemeController : MonoBehaviour
     private GameObject[] panels;
     private TMP_Dropdown[] dropdowns;
     private TMP_InputField[] inputfields;
-    private Button[] buttons;
+    private ButtonPlus[] buttons;
     private Toggle[] toggles;
     private TMP_Text[] labels;
 
@@ -32,7 +32,7 @@ public class ThemeController : MonoBehaviour
         panels = GameObject.FindGameObjectsWithTag("MenuPanel");
         dropdowns = FindObjectsOfType<TMP_Dropdown>();
         inputfields = FindObjectsOfType<TMP_InputField>();
-        buttons = FindObjectsOfType<Button>();
+        buttons = FindObjectsOfType<ButtonPlus>();
         toggles = FindObjectsOfType<Toggle>();
         labels = FindObjectsOfType<TMP_Text>();
 
@@ -61,16 +61,21 @@ public class ThemeController : MonoBehaviour
                 colorScheme[4] = new Color(0.15f, 0.15f, 0.15f);
                 colorScheme[5] = new Color(0.85f, 0.85f, 0.85f, 0);
                 break;
+            case GameSettings.Themes.Colorcoded:
+                return;
             default:
                 Debug.Log("Settings file is missing or has been tampered with.");
                 break;
         }
 
-        foreach (Button b in buttons)
+        foreach (ButtonPlus b in buttons)
         {
             if (b.colors.normalColor == Color.white)
             {
-                b.GetComponent<Image>().color = colorScheme[0];
+                if (b.GetComponent<Image>())
+                {
+                    b.GetComponent<Image>().color = colorScheme[0];
+                }
             }
         }
 
@@ -91,7 +96,10 @@ public class ThemeController : MonoBehaviour
 
         foreach (GameObject panel in panels)
         {
-            panel.GetComponent<Image>().color = colorScheme[3];
+            if (panel.GetComponent<Image>())
+            {
+                panel.GetComponent<Image>().color = colorScheme[3];
+            }
         }
 
         foreach (Toggle t in toggles)
@@ -101,7 +109,7 @@ public class ThemeController : MonoBehaviour
 
         foreach (TMP_Text t in labels)
         {
-            if (t.name != "TooltipText")
+            if (t.name != "TooltipText" && t.fontStyle != FontStyles.UpperCase)
             {
                 t.color = colorScheme[5] + new Color(0, 0, 0, t.color.a);
             }
