@@ -6,17 +6,22 @@ using UnityEditor.UI;
 #endif
 
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class ButtonPlus : Button
 {
     //Should this button ignore validation?
     public bool ignoreValidation = false;
+    public UnityEvent onMouseEnter = new UnityEvent();
+    public UnityEvent onMouseExit = new UnityEvent();
+    public UnityEvent onButtonDeselect = new UnityEvent();
 
     protected override void Awake()
     {
         base.Awake();
-        onClick.AddListener(() => 
+        onClick.AddListener(() =>
         {
             //Plays the button sound attached to an AudioSource on object "ButtonSound".
             GameObject.Find("ButtonSound")?.GetComponent<AudioSource>()?.Play();
@@ -38,25 +43,66 @@ public class ButtonPlus : Button
     {
         base.DoStateTransition(SelectionState.Selected, false);
     }
+
+    public override void OnPointerEnter(PointerEventData eventData)
+    {
+        base.OnPointerEnter(eventData);
+        onMouseEnter.Invoke();
+    }
+
+    public override void OnPointerExit(PointerEventData eventData)
+    {
+        base.OnPointerExit(eventData);
+        onMouseExit.Invoke();
+    }
+
+    public override void OnDeselect(BaseEventData eventData)
+    {
+        base.OnDeselect(eventData);
+        onButtonDeselect.Invoke();
+    }
+
+#if UNITY_EDITOR
+    private void OnGUI()
+    {
+        // Updates the subcomponent of the button to have the buttons name with "Text" appended
+        if (transform.GetChild(0) != null && transform.GetChild(0).GetComponent<TMPro.TMP_Text>())
+        {
+            transform.GetChild(0).gameObject.name = gameObject.name + "Text";
+        }
+    }
+#endif
 }
 
 #if UNITY_EDITOR
-[CustomEditor(typeof(ButtonPlus))]
+[CustomEditor(typeof(ButtonPlus)), CanEditMultipleObjects]
 public class ButtonPlusEditor : ButtonEditor
 {
-    //Show ignore validation toggle on inspector GUI
+    //Show ignore validation toggle and all events on inspector GUI
     public override void OnInspectorGUI()
     {
         ButtonPlus btnPlus = (ButtonPlus)target;
         btnPlus.ignoreValidation = EditorGUILayout.Toggle("Ignore Validation", btnPlus.ignoreValidation);
 
         base.OnInspectorGUI();
+
+        SerializedProperty onMouseEnter = serializedObject.FindProperty("onMouseEnter");
+        EditorGUILayout.PropertyField(onMouseEnter, new GUIContent("On Mouse Enter"), true);
+        serializedObject.ApplyModifiedProperties();
+
+        SerializedProperty onMouseExit = serializedObject.FindProperty("onMouseExit");
+        EditorGUILayout.PropertyField(onMouseExit, new GUIContent("On Mouse Exit"), true);
+        serializedObject.ApplyModifiedProperties();
+
+        SerializedProperty onButtonDeselect = serializedObject.FindProperty("onButtonDeselect");
+        EditorGUILayout.PropertyField(onButtonDeselect, new GUIContent("On Button Deselect"), true);
+        serializedObject.ApplyModifiedProperties();
     }
 }
 
 public class ReplaceDefaultButtons : EditorWindow
 {
-#region GUI Creation
+    #region GUI Creation
     [UnityEditor.MenuItem("Window/Replace Buttons")]
     private static void Init()
     {
@@ -81,7 +127,7 @@ public class ReplaceDefaultButtons : EditorWindow
             ValidateButtons();
         }
     }
-#endregion
+    #endregion
 
     //Replace all non-ButtonPlus buttons with their ButtonPlus counterpart. Does not work on Prefabs.
     private void ReplaceButtons()

@@ -2136,6 +2136,7 @@ GameObject:
   - component: {fileID: 680515203}
   - component: {fileID: 680515202}
   - component: {fileID: 680515201}
+  - component: {fileID: 680515205}
   m_Layer: 5
   m_Name: OptionsMenu
   m_TagString: Untagged
@@ -2225,6 +2226,7 @@ MonoBehaviour:
   redSlider: {fileID: 4952170848773936913}
   greenSlider: {fileID: 4952170848930691008}
   blueSlider: {fileID: 4952170848655151140}
+  resetButton: {fileID: 1044422753}
 --- !u!114 &680515203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2251,6 +2253,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   editorThemeDD: {fileID: 1178467570}
+--- !u!114 &680515205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680515197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe91a21f9170394ebf3f9f414ac7627, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resolutionDD: {fileID: 1324885823}
 --- !u!1 &712623096
 GameObject:
   m_ObjectHideFlags: 0
@@ -3510,7 +3525,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.392}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.2509804}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3760,6 +3775,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4995144016994017681, guid: 135362558ef1c194fa3fb71dc42db36f, type: 3}
   m_PrefabInstance: {fileID: 1044422751}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1044422753 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2896829188235092594, guid: 135362558ef1c194fa3fb71dc42db36f, type: 3}
+  m_PrefabInstance: {fileID: 1044422751}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94126580b9470054f8420bce010b30ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1167917860 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4387130675993231231, guid: 95f24e8dbe2c7ef4fb4bf2582b0121c3, type: 3}
@@ -4186,7 +4212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.392}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.2509804}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6918,7 +6944,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  resolutionDD: {fileID: 1324885823}
+      - m_Target: {fileID: 680515205}
+        m_TargetAssemblyTypeName: ResolutionSetting, Scripts
+        m_MethodName: LoadResSettings
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1920594649
 MonoBehaviour:
   m_ObjectHideFlags: 0

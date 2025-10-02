@@ -109,7 +109,15 @@ public class GameManager : MonoBehaviour
 
     public float ParseToSingle(string parseValue)
     {
-        return float.Parse(parseValue, NumberStyles.Float, CultUS);
+        if (float.TryParse(parseValue, NumberStyles.Float, CultUS, out float conv))
+        {
+            return conv;
+        }
+        else
+        {
+            DebugHelper.Log("Could not parse empty value. Using 1.0 instead.", DebugHelper.Severity.error);
+            return 1.0f;
+        }
     }
 
     public string ParseToString(float parseValue)

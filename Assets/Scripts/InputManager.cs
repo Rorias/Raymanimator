@@ -43,6 +43,7 @@ public sealed class InputManager
         UpMenu,
         RightMenu,
         DownMenu,
+        Select,
         Confirm,
         Return,
     };
@@ -102,6 +103,7 @@ public sealed class InputManager
         { InputKey.UpMenu, new List<Key> { new Key() { code = KeyCode.UpArrow, type = KeyType.Meta } } },
         { InputKey.RightMenu, new List<Key> { new Key() { code = KeyCode.RightArrow, type = KeyType.Meta } } },
         { InputKey.DownMenu, new List<Key> { new Key() { code = KeyCode.DownArrow, type = KeyType.Meta } } },
+        {InputKey.Select, new List<Key>{ new Key { code = KeyCode.Mouse0, type = KeyType.Keyboard } } },
         { InputKey.Confirm, new List<Key> {
             new Key() { code = KeyCode.Return, type = KeyType.Meta },
             new Key() { code = KeyCode.JoystickButton7, type = KeyType.Meta } }

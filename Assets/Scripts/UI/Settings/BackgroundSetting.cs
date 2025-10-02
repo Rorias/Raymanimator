@@ -12,6 +12,7 @@ public class BackgroundSettings : Settings
     public Slider redSlider;
     public Slider greenSlider;
     public Slider blueSlider;
+    public ButtonPlus resetButton;
 
     protected override void Awake()
     {
@@ -24,6 +25,7 @@ public class BackgroundSettings : Settings
         redSlider.onValueChanged.AddListener(delegate { BGColorRed(); });
         greenSlider.onValueChanged.AddListener(delegate { BGColorGreen(); });
         blueSlider.onValueChanged.AddListener(delegate { BGColorBlue(); });
+        resetButton.onClick.AddListener(delegate { ResetColor(); });
     }
 
     protected override void Start()
@@ -74,8 +76,8 @@ public class BackgroundSettings : Settings
         settings.bgColor = Camera.main.backgroundColor;
         settings.SaveSettings();
 
-        redSlider.value = settings.bgColor.r * 255f;
-        greenSlider.value = settings.bgColor.g * 255f;
-        blueSlider.value = settings.bgColor.b * 255f;
+        redSlider.value = settings.bgColor.r;
+        greenSlider.value = settings.bgColor.g;
+        blueSlider.value = settings.bgColor.b;
     }
 }
