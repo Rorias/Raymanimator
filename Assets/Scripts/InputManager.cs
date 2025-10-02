@@ -38,7 +38,11 @@ public sealed class InputManager
         SpritePosRight,
         SpritePosDown,
         ZoomCamera,
-        MoveCamera,
+        DragCamera,
+        MoveCameraLeft,
+        MoveCameraUp,
+        MoveCameraRight,
+        MoveCameraDown,
         LeftMenu,
         UpMenu,
         RightMenu,
@@ -87,13 +91,13 @@ public sealed class InputManager
             new Key() { code = KeyCode.LeftArrow, type = KeyType.Keyboard },
             new Key() { code = KeyCode.JoystickButton0, type = KeyType.Controller } }
         },
-        { InputKey.SpritePosRight, new List<Key> {
-            new Key() { code = KeyCode.RightArrow, type = KeyType.Keyboard },
-            new Key() { code = KeyCode.JoystickButton1, type = KeyType.Controller } }
-        },
         { InputKey.SpritePosUp, new List<Key> {
             new Key() { code = KeyCode.UpArrow, type = KeyType.Keyboard },
             new Key() { code = KeyCode.JoystickButton2, type = KeyType.Controller } }
+        },
+        { InputKey.SpritePosRight, new List<Key> {
+            new Key() { code = KeyCode.RightArrow, type = KeyType.Keyboard },
+            new Key() { code = KeyCode.JoystickButton1, type = KeyType.Controller } }
         },
         { InputKey.SpritePosDown, new List<Key> {
             new Key() { code = KeyCode.DownArrow, type = KeyType.Keyboard },
@@ -103,6 +107,11 @@ public sealed class InputManager
         { InputKey.UpMenu, new List<Key> { new Key() { code = KeyCode.UpArrow, type = KeyType.Meta } } },
         { InputKey.RightMenu, new List<Key> { new Key() { code = KeyCode.RightArrow, type = KeyType.Meta } } },
         { InputKey.DownMenu, new List<Key> { new Key() { code = KeyCode.DownArrow, type = KeyType.Meta } } },
+        { InputKey.DragCamera, new List<Key> { new Key() { code = KeyCode.Mouse2, type = KeyType.Keyboard } } },
+        { InputKey.MoveCameraLeft, new List<Key> { new Key() { code = KeyCode.A, type = KeyType.Keyboard } } },
+        { InputKey.MoveCameraUp, new List<Key> { new Key() { code = KeyCode.W, type = KeyType.Keyboard } } },
+        { InputKey.MoveCameraRight, new List<Key> { new Key() { code = KeyCode.D, type = KeyType.Keyboard } } },
+        { InputKey.MoveCameraDown, new List<Key> { new Key() { code = KeyCode.S, type = KeyType.Keyboard } } },
         {InputKey.Select, new List<Key>{ new Key { code = KeyCode.Mouse0, type = KeyType.Keyboard } } },
         { InputKey.Confirm, new List<Key> {
             new Key() { code = KeyCode.Return, type = KeyType.Meta },
@@ -150,6 +159,12 @@ public sealed class InputManager
         { InputKey.SpritePosRight, KeyCode.RightArrow },
         { InputKey.SpritePosUp, KeyCode.UpArrow },
         { InputKey.SpritePosDown, KeyCode.DownArrow },
+        { InputKey.Select, KeyCode.Mouse0 },
+        { InputKey.DragCamera, KeyCode.Mouse2 },
+        { InputKey.MoveCameraLeft,  KeyCode.A },
+        { InputKey.MoveCameraUp,  KeyCode.W},
+        { InputKey.MoveCameraRight, KeyCode.D },
+        { InputKey.MoveCameraDown,  KeyCode.S },
     };
 
     public readonly Dictionary<InputKey, KeyCode> DefaultButtons = new Dictionary<InputKey, KeyCode>()
