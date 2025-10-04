@@ -13,6 +13,8 @@ public class ResolutionSetting : Settings
 
     protected override void Awake()
     {
+        base.Awake();
+
         resolutionDD.onValueChanged.AddListener(delegate { SetResolution(); });
     }
 

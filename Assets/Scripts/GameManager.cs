@@ -62,6 +62,8 @@ public class GameManager : MonoBehaviour
 
     private void FauxAwake(Scene _s, LoadSceneMode _lsm)
     {
+        Camera.main.backgroundColor = gameSettings.bgColor;
+
         if (gameSettings.firstLoad)
         {
             //Do initialization
@@ -92,7 +94,6 @@ public class GameManager : MonoBehaviour
 
     public void LoadSettings()
     {
-        Camera.main.backgroundColor = gameSettings.bgColor;
         LoadInputs();
     }
 

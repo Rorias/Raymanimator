@@ -29,14 +29,12 @@ public class GridSetting : Settings
         gridXsizeIF.onEndEdit.AddListener(delegate { SetGridXsize(); });
         gridYsizeIF.onEndEdit.AddListener(delegate { SetGridYsize(); });
         gridToggle.onValueChanged.AddListener(delegate { GridState(); });
-    }
-
-    protected override void Start()
-    {
-        base.Start();
 
         gameManager = GameManager.Instance;
+    }
 
+    protected void Start()
+    {
         SetGrid();
         InitializeInputFieldValues();
     }

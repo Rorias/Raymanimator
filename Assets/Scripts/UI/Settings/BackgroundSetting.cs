@@ -28,10 +28,8 @@ public class BackgroundSettings : Settings
         resetButton.onClick.AddListener(delegate { ResetColor(); });
     }
 
-    protected override void Start()
+    protected void Start()
     {
-        base.Start();
-
         redSlider.value = settings.bgColor.r;
         greenSlider.value = settings.bgColor.g;
         blueSlider.value = settings.bgColor.b;

@@ -23,6 +23,21 @@ public class SpritesetSetting : Settings
         currentSpritesetDD.onValueChanged.AddListener(delegate { SetCurrentSpriteset(); });
     }
 
+    public void LoadSpritesetSettings()
+    {
+        if (string.IsNullOrWhiteSpace(settings.spritesetsPath) || !Directory.Exists(settings.spritesetsPath))
+        {
+            Debug.Log("Spriteset path doesn't exist or has been changed.");
+            DebugHelper.Log("Spriteset path doesn't exist or has been changed.");
+            return;
+        }
+
+        spritesetPathIF.text = settings.spritesetsPath;
+        uiUtility.ReloadDropdownSpriteOptions(settings.spritesetsPath, currentSpritesetDD);
+        int index = currentSpritesetDD.options.FindIndex(x => x.text == settings.lastSpriteset);
+        currentSpritesetDD.value = index == -1 ? 0 : index;
+    }
+
     public void SetSpritesetPathViaBrowse()
     {
         if (!SetSpritesetPath())

@@ -8,10 +8,6 @@ public class Settings : MonoBehaviour
     protected virtual void Awake()
     {
         settings = GameSettings.Instance;
-    }
-
-    protected virtual void Start()
-    {
         uiUtility = FindObjectOfType<UIUtility>();
     }
 }

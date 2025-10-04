@@ -30,6 +30,8 @@ public class CameraSetting : Settings
     {
         base.Awake();
 
+        gameManager = GameManager.Instance;
+
         cameraZoomIF.onEndEdit.AddListener(delegate { SetCameraZoom(); });
         cameraZoomReset.onClick.AddListener(delegate { ResetCameraZoom(); });
         cameraSpeedIF.onEndEdit.AddListener(delegate { SetCameraSpeed(); });
@@ -39,11 +41,8 @@ public class CameraSetting : Settings
         OnCameraZoomed += () => InitializeInputFieldValues();
     }
 
-    protected override void Start()
+    protected void Start()
     {
-        base.Start();
-
-        gameManager = GameManager.Instance;
         InitializeInputFieldValues();
     }
 
