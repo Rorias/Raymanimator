@@ -13,14 +13,12 @@ public class EditMenu : MonoBehaviour
 {
     public GameObject editOptionsMenu;
     public GameObject renameMenu;
-    public GameObject deleteConfirmMenu;
+    public ConfirmWindow deleteConfirmWindow;
 
     public TMP_Dropdown loadAnimsDD;
     public ButtonPlus renameBtn;
     public ButtonPlus copyBtn;
     public ButtonPlus deleteBtn;
-    public ButtonPlus deleteNoBtn;
-    public ButtonPlus deleteYesBtn;
     public TMP_InputField renameIF;
     public ButtonPlus backBtn;
 
@@ -38,9 +36,7 @@ public class EditMenu : MonoBehaviour
 
         renameBtn.onClick.AddListener(delegate { OpenRenameMenu(); });
         copyBtn.onClick.AddListener(delegate { CopyAnimation(); });
-        deleteBtn.onClick.AddListener(delegate { DeleteConfirmationPopup(); });
-        deleteNoBtn.onClick.AddListener(delegate { DeleteConfirmationPopup(); });
-        deleteYesBtn.onClick.AddListener(delegate { DeleteAnimation(); });
+        deleteBtn.onClick.AddListener(delegate { deleteConfirmWindow.OpenWindow("Are you sure?", DeleteAnimation); });
 
         renameIF.onEndEdit.AddListener(delegate { RenameAnimation(); });
     }
@@ -55,7 +51,6 @@ public class EditMenu : MonoBehaviour
     public void Initialize()
     {
         renameMenu.SetActive(false);
-        deleteConfirmMenu.SetActive(false);
 
         GetLoadableAnimations();
 
@@ -218,16 +213,10 @@ public class EditMenu : MonoBehaviour
         InitializeDropdown();
     }
 
-    public void DeleteConfirmationPopup()
-    {
-        deleteConfirmMenu.SetActive(!deleteConfirmMenu.activeSelf);
-    }
-
     public void DeleteAnimation()
     {
         string animName = gameManager.currentAnimation.animationName;
         DeleteAnimation(animName);
-        DeleteConfirmationPopup();
     }
 
     private void DeleteAnimation(string _name)

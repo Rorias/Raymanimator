@@ -790,6 +790,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 283185351}
+  - component: {fileID: 283185352}
   m_Layer: 5
   m_Name: DeleteConfirmMenu
   m_TagString: Untagged
@@ -819,6 +820,21 @@ RectTransform:
   m_AnchoredPosition: {x: 994, y: -249}
   m_SizeDelta: {x: 256, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &283185352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 283185350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1131ae012fff1e44281e894ee5cdc24a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 1401207934}
+  yesButton: {fileID: 368283286}
+  noButton: {fileID: 209867573420693911}
 --- !u!1001 &294032153
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2821,7 +2837,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8486910321495066574, guid: a0a8bfcde742c6a4b89dc93e11331084, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8486910321495066574, guid: a0a8bfcde742c6a4b89dc93e11331084, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -6939,13 +6955,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   editOptionsMenu: {fileID: 235604413}
   renameMenu: {fileID: 1801212052}
-  deleteConfirmMenu: {fileID: 283185350}
+  deleteConfirmWindow: {fileID: 283185352}
   loadAnimsDD: {fileID: 5135636759562171236}
   renameBtn: {fileID: 383928591}
   copyBtn: {fileID: 1506588334}
   deleteBtn: {fileID: 1836625677}
-  deleteNoBtn: {fileID: 209867573420693911}
-  deleteYesBtn: {fileID: 368283286}
   renameIF: {fileID: 1801212051}
   backBtn: {fileID: 1167917860}
 --- !u!114 &1920594650
