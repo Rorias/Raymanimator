@@ -9,6 +9,8 @@ using UnityEngine.UI;
 
 public class GamePart : MonoBehaviour
 {
+    private static bool multipleSelected = false;
+
     [NonSerialized] public SpriteRenderer sr;
     [NonSerialized] public PolygonCollider2D polyColl;
     [NonSerialized] public Animator anim;
@@ -27,6 +29,7 @@ public class GamePart : MonoBehaviour
 
     public void Initialize(AnimatorController _animatorC)
     {
+        multipleSelected = false;
         animatorC = _animatorC;
         mainCam = Camera.main;
 
@@ -52,6 +55,8 @@ public class GamePart : MonoBehaviour
 
         if (inputManager.GetKey(InputManager.InputKey.MultiSelect))
         {
+            multipleSelected = true;
+
             if (canDoubleClick)
             {
                 animatorC.SelectAllParts();
@@ -63,10 +68,11 @@ public class GamePart : MonoBehaviour
         }
         else
         {
-            if (canDoubleClick)
+            if (canDoubleClick || !multipleSelected)
             {
                 animatorC.partSelectSlider.value = Convert.ToInt32(gameObject.name.Substring(8));
                 animatorC.ChangeSelectedPart();
+                multipleSelected = false;
             }
 
             doubleClickTimer = maxDoubleClickTime;
@@ -76,6 +82,7 @@ public class GamePart : MonoBehaviour
 
     private void OnMouseDrag()
     {
+        //TODO: update to animatorcontroller call that moves all parts based on the dragged one
         transform.position = new Vector3(Mathf.Round((mainCam.ScreenToWorldPoint(Input.mousePosition).x - xDifference) * 32.0f) / 32.0f, Mathf.Round((mainCam.ScreenToWorldPoint(Input.mousePosition).y - yDifference) * 32.0f) / 32.0f, 0);
         animatorC.UpdatePos();
     }
