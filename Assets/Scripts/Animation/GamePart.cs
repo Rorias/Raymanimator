@@ -19,8 +19,8 @@ public class GamePart : MonoBehaviour
     private AnimatorController animatorC;
     private Camera mainCam;
 
-    private float xDifference;
-    private float yDifference;
+    public float xDifference { get; private set; }
+    public float yDifference { get; private set; }
 
     private float doubleClickTimer = 0.0f;
     private float maxDoubleClickTime = 0.4f;
@@ -50,9 +50,6 @@ public class GamePart : MonoBehaviour
 
     private void OnMouseDown()
     {
-        xDifference = mainCam.ScreenToWorldPoint(Input.mousePosition).x - transform.position.x;
-        yDifference = mainCam.ScreenToWorldPoint(Input.mousePosition).y - transform.position.y;
-
         if (inputManager.GetKey(InputManager.InputKey.MultiSelect))
         {
             multipleSelected = true;
@@ -74,16 +71,24 @@ public class GamePart : MonoBehaviour
                 animatorC.ChangeSelectedPart();
                 multipleSelected = false;
             }
-
-            doubleClickTimer = maxDoubleClickTime;
-            canDoubleClick = true;
         }
+
+        doubleClickTimer = maxDoubleClickTime;
+        canDoubleClick = true;
+
+        animatorC.SetOffsetForSelectedParts();
     }
 
     private void OnMouseDrag()
     {
-        //TODO: update to animatorcontroller call that moves all parts based on the dragged one
-        transform.position = new Vector3(Mathf.Round((mainCam.ScreenToWorldPoint(Input.mousePosition).x - xDifference) * 32.0f) / 32.0f, Mathf.Round((mainCam.ScreenToWorldPoint(Input.mousePosition).y - yDifference) * 32.0f) / 32.0f, 0);
+        Vector3 dragPos = new Vector3(mainCam.ScreenToWorldPoint(Input.mousePosition).x, mainCam.ScreenToWorldPoint(Input.mousePosition).y, 0);
+        animatorC.DragSelectedParts(dragPos);
         animatorC.UpdatePos();
+    }
+
+    public void SetOffset()
+    {
+        xDifference = mainCam.ScreenToWorldPoint(Input.mousePosition).x - transform.position.x;
+        yDifference = mainCam.ScreenToWorldPoint(Input.mousePosition).y - transform.position.y;
     }
 }

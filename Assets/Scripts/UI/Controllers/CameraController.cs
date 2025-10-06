@@ -11,8 +11,11 @@ public class CameraController : MonoBehaviour
 
     private InputManager inputManager;
     private TMP_InputField[] allInputfields;
+    private Camera mainCam;
 
     private List<RaycastResult> rayResults = new List<RaycastResult>();
+
+    private Vector3 origin;
 
     private bool isOnUI = false;
 
@@ -20,6 +23,7 @@ public class CameraController : MonoBehaviour
     {
         inputManager = InputManager.Instance;
         allInputfields = FindObjectsOfType<TMP_InputField>();
+        mainCam = Camera.main;
     }
 
     private void Update()
@@ -46,9 +50,15 @@ public class CameraController : MonoBehaviour
             }
         }
 
+        if (inputManager.GetKeyDown(InputManager.InputKey.DragCamera))
+        {
+            origin = mainCam.ScreenToWorldPoint(Input.mousePosition);
+        }
+
         if (inputManager.GetKey(InputManager.InputKey.DragCamera))
         {
-            //TODO: implement camera drag code by mouse position 
+            Vector3 difference = mainCam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            transform.position = origin - difference;
         }
 
         if (inputManager.GetKey(InputManager.InputKey.MoveCameraUp) && Camera.main.transform.position.y < 24)

@@ -689,7 +689,7 @@ public class AnimatorController : MonoBehaviour
 
             if (!playingAnimation)
             {
-                currentGameParts[i].anim.SetBool("IsSelected", true);
+                currentGameParts[i].anim.SetBool("WasSelected", true);
             }
 
             currentParts.Add(currentFrame.frameParts[i]);
@@ -868,6 +868,22 @@ public class AnimatorController : MonoBehaviour
     public void MovePartLeft()
     {
         MovePart(new Vector3(-(1.0f / 16.0f), 0, 0));
+    }
+
+    public void SetOffsetForSelectedParts()
+    {
+        for (int i = 0; i < currentGameParts.Count; i++)
+        {
+            currentGameParts[i].SetOffset();
+        }
+    }
+
+    public void DragSelectedParts(Vector3 _drag)
+    {
+        for (int i = 0; i < currentGameParts.Count; i++)
+        {
+            currentGameParts[i].transform.position = new Vector3(Mathf.Round((_drag.x - currentGameParts[i].xDifference) * 32.0f) / 32.0f, Mathf.Round((_drag.y - currentGameParts[i].yDifference) * 32.0f) / 32.0f, 0);
+        }
     }
 
     public void FixPartX()
