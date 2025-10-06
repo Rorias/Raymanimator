@@ -127,6 +127,7 @@ public class AnimatorController : MonoBehaviour
         if (settings.lastSpriteset != thisAnim.usedSpriteset)
         {
             Debug.Log("A different spriteset was used when making this animation. Using this one can cause the animation to look different than intended.");
+            DebugHelper.Log("A different spriteset was used when making this animation. Using this one can cause the animation to look different than intended.", DebugHelper.Severity.warning);
         }
 
         playbackSpeedIF.text = gameManager.ParseToString(settings.lastPlaybackSpeed);

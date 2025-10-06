@@ -45,6 +45,7 @@ public class SubMenus : MonoBehaviour
         if (defaultSubMenu == null) { defaultSubMenu = subMenus[0]; }
 
         currentSubMenu = defaultSubMenu;
+        currentSubMenu.previousItem = currentSubMenu;
     }
 
     public void ActivateNextMenu(SubMenuItem _nextMenu)
