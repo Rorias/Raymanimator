@@ -33,6 +33,10 @@ public class SpritesetSetting : Settings
         }
 
         spritesetPathIF.text = settings.spritesetsPath;
+    }
+
+    private void UpdateSpritesetDropdown()
+    {
         uiUtility.ReloadDropdownSpriteOptions(settings.spritesetsPath, currentSpritesetDD);
         int index = currentSpritesetDD.options.FindIndex(x => x.text == settings.lastSpriteset);
         currentSpritesetDD.value = index == -1 ? 0 : index;
@@ -54,8 +58,7 @@ public class SpritesetSetting : Settings
         if (!string.IsNullOrWhiteSpace(spritesetPath) && Directory.Exists(spritesetPath))
         {
             settings.spritesetsPath = spritesetPath;
-            uiUtility.ReloadDropdownSpriteOptions(settings.spritesetsPath, currentSpritesetDD);
-            SetCurrentSpriteset();
+            UpdateSpritesetDropdown();
             return true;
         }
 
