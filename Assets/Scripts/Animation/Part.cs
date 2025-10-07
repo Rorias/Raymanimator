@@ -8,7 +8,15 @@ public class Part
 {
     private GameManager gameManager;
     public Part() { gameManager = GameManager.Instance; }
-
+    public Part(Part p)
+    {
+        partID = p.partID;
+        partIndex = p.partIndex;
+        xPos = p.xPos;
+        yPos = p.yPos;
+        flipX = p.flipX;
+        flipY = p.flipY;
+    }
     public Sprite part { get; set; }
 
     public int partID { get; set; }

@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class AnimatorController : MonoBehaviour
+public partial class AnimatorController : MonoBehaviour
 {
     private GameManager gameManager = GameManager.Instance;
     private GameSettings settings = GameSettings.Instance;
@@ -22,6 +22,8 @@ public class AnimatorController : MonoBehaviour
     public GameObject previousGhostPrefab;
     public GameObject nextGhostPrefab;
 
+    public Toggle xFlipToggle;
+    public Toggle yFlipToggle;
     public TMP_InputField xPosIF;
     public TMP_InputField yPosIF;
     public TMP_InputField priorityIF;
@@ -86,6 +88,13 @@ public class AnimatorController : MonoBehaviour
         exitButton.onClick.AddListener(delegate { exitConfirmWindow.OpenWindow("Save animation?", SaveAndQuit); exitConfirmWindow.noButton.onClick.AddListener(delegate { Quit(); }); });
         playButton.onClick.AddListener(delegate { PlayAnimation(); });
 
+        xFlipToggle.onValueChanged.AddListener((_state)=> { FlipX(_state); });
+        yFlipToggle.onValueChanged.AddListener((_state) => { FlipY(_state); });
+
+        xPosIF.onEndEdit.AddListener(delegate { SetXPos(); });
+        yPosIF.onEndEdit.AddListener(delegate { SetYPos(); });
+        priorityIF.onEndEdit.AddListener(delegate { SetPriority(); });
+
         thisAnim = gameManager.currentAnimation;
     }
 
@@ -126,27 +135,22 @@ public class AnimatorController : MonoBehaviour
 
         if (settings.lastSpriteset != thisAnim.usedSpriteset)
         {
-            Debug.Log("A different spriteset was used when making this animation. Using this one can cause the animation to look different than intended.");
-            DebugHelper.Log("A different spriteset was used when making this animation. Using this one can cause the animation to look different than intended.", DebugHelper.Severity.warning);
+            Debug.Log(thisAnim.usedSpriteset + " was used when making this animation. Using " + settings.lastSpriteset + " can cause the animation to look different than intended.");
+            DebugHelper.Log(thisAnim.usedSpriteset + " was used when making this animation. Using " + settings.lastSpriteset + " can cause the animation to look different than intended.", DebugHelper.Severity.warning);
         }
 
         playbackSpeedIF.text = gameManager.ParseToString(settings.lastPlaybackSpeed);
         SetPlaybackSpeed();
+        UpdatePos();
+        UpdatePriorityText();
+        UpdateFlip();
     }
 
     private void Update()
     {
         if (inputManager.GetKeyDown(InputManager.InputKey.DeletePart))
         {
-            for (int i = 0; i < currentGameParts.Count; i++)
-            {
-                currentGameParts[i].sr.sprite = null;
-            }
-
-            for (int i = 0; i < currentParts.Count; i++)
-            {
-                currentParts[i].part = null;
-            }
+            DeletePart();
         }
 
         foreach (TMP_InputField IF in allInputfields)
@@ -179,7 +183,7 @@ public class AnimatorController : MonoBehaviour
             }
         }
 
-        if (inputManager.GetKeyDown(InputManager.InputKey.FrameNext) && Time.time > frameSwapTimer)
+        if (inputManager.GetKey(InputManager.InputKey.FrameNext) && Time.time > frameSwapTimer)
         {
             if (Convert.ToInt32(frameSelectSlider.value) < thisAnim.maxFrameCount)
             {
@@ -187,7 +191,7 @@ public class AnimatorController : MonoBehaviour
                 frameSwapTimer = Time.time + hotkeyDelayTime;
             }
         }
-        if (inputManager.GetKeyDown(InputManager.InputKey.FramePrevious) && Time.time > frameSwapTimer)
+        else if (inputManager.GetKey(InputManager.InputKey.FramePrevious) && Time.time > frameSwapTimer)
         {
             if (Convert.ToInt32(frameSelectSlider.value) > 0)
             {
@@ -201,7 +205,7 @@ public class AnimatorController : MonoBehaviour
             MovePartLeft();
             leftArrowTimer = Time.time + standardDelayTime;
         }
-        if (inputManager.GetKeyDown(InputManager.InputKey.MoveSpriteLeft) && Time.time > leftArrowTimer)
+        if (inputManager.GetKey(InputManager.InputKey.MoveSpriteLeft) && Time.time > leftArrowTimer)
         {
             MovePartLeft();
             leftArrowTimer = Time.time + hotkeyDelayTime;
@@ -212,7 +216,7 @@ public class AnimatorController : MonoBehaviour
             MovePartRight();
             rightArrowTimer = Time.time + standardDelayTime;
         }
-        if (inputManager.GetKeyDown(InputManager.InputKey.MoveSpriteRight) && Time.time > rightArrowTimer)
+        if (inputManager.GetKey(InputManager.InputKey.MoveSpriteRight) && Time.time > rightArrowTimer)
         {
             MovePartRight();
             rightArrowTimer = Time.time + hotkeyDelayTime;
@@ -223,7 +227,7 @@ public class AnimatorController : MonoBehaviour
             MovePartUp();
             upArrowTimer = Time.time + standardDelayTime;
         }
-        if (inputManager.GetKeyDown(InputManager.InputKey.MoveSpriteUp) && Time.time > upArrowTimer)
+        if (inputManager.GetKey(InputManager.InputKey.MoveSpriteUp) && Time.time > upArrowTimer)
         {
             MovePartUp();
             upArrowTimer = Time.time + hotkeyDelayTime;
@@ -234,7 +238,7 @@ public class AnimatorController : MonoBehaviour
             MovePartDown();
             downArrowTimer = Time.time + standardDelayTime;
         }
-        if (inputManager.GetKeyDown(InputManager.InputKey.MoveSpriteDown) && Time.time > downArrowTimer)
+        if (inputManager.GetKey(InputManager.InputKey.MoveSpriteDown) && Time.time > downArrowTimer)
         {
             MovePartDown();
             downArrowTimer = Time.time + hotkeyDelayTime;
@@ -261,7 +265,7 @@ public class AnimatorController : MonoBehaviour
             }
         }
 
-        if (inputManager.GetKeyDown(InputManager.InputKey.SpriteNext) && Time.time > partSwapTimer)
+        if (inputManager.GetKey(InputManager.InputKey.SpriteNext) && Time.time > partSwapTimer)
         {
             if (Convert.ToInt32(partSelectSlider.value) < thisAnim.maxPartCount)
             {
@@ -270,7 +274,7 @@ public class AnimatorController : MonoBehaviour
                 partSwapTimer = Time.time + hotkeyDelayTime;
             }
         }
-        if (inputManager.GetKeyDown(InputManager.InputKey.SpritePrevious) && Time.time > partSwapTimer)
+        else if (inputManager.GetKey(InputManager.InputKey.SpritePrevious) && Time.time > partSwapTimer)
         {
             if (Convert.ToInt32(partSelectSlider.value) > 0)
             {
@@ -280,6 +284,21 @@ public class AnimatorController : MonoBehaviour
             }
         }
     }
+
+    #region Hotkeys
+    public void DeletePart()
+    {
+        for (int i = 0; i < currentGameParts.Count; i++)
+        {
+            currentGameParts[i].sr.sprite = null;
+        }
+
+        for (int i = 0; i < currentParts.Count; i++)
+        {
+            currentParts[i].part = null;
+        }
+    }
+    #endregion
 
     #region Initialization
     private void UpdatePartSelectText()
@@ -302,6 +321,7 @@ public class AnimatorController : MonoBehaviour
         GameParts.Add(gamePart);
 
         gamePart.sr.sortingOrder = _part + 1;
+        //Set visuals to position of first frame of the animation
         gamePart.sr.sprite = thisAnim.frames[0].frameParts[_part].part;
         gamePart.sr.transform.position = new Vector3(thisAnim.frames[0].frameParts[_part].xPos, thisAnim.frames[0].frameParts[_part].yPos, 0);
         gamePart.sr.flipX = thisAnim.frames[0].frameParts[_part].flipX;
@@ -615,13 +635,7 @@ public class AnimatorController : MonoBehaviour
             thisAnim.frames[allFrames].frameParts.Add(new Part() { partID = thisAnim.maxPartCount - 1 });
         }
 
-        GameObject newObjPart = Instantiate(gamePartPrefab);
-        newObjPart.name = "AnimPart" + (thisAnim.maxPartCount - 1);
-        GamePart gamePart = newObjPart.GetComponent<GamePart>();
-        gamePart.Initialize(this);
-        GameParts.Add(gamePart);
-        gamePart.sr.sortingOrder = thisAnim.maxPartCount;
-
+        CreatePart(thisAnim.maxPartCount - 1);
         CreatePreviousGhostPart(thisAnim.maxPartCount - 1);
         CreateNextGhostPart(thisAnim.maxPartCount - 1);
 
@@ -738,18 +752,16 @@ public class AnimatorController : MonoBehaviour
         currentParts.Add(currentFrame.frameParts[partID]);
         UpdatePartSelectText();
         UpdatePriorityText();
+        UpdateFlip();
 
         if (currentGameParts[0].polyColl != null)
         {
-            //if the part from the new frame has no sprite
             if (currentGameParts[0].sr.sprite == null)
             {
-                //turn off the box collider
                 currentGameParts[0].polyColl.enabled = false;
             }
-            else//otherwise
+            else
             {
-                //turn on the box collider
                 currentGameParts[0].polyColl.enabled = true;
             }
         }
@@ -757,6 +769,7 @@ public class AnimatorController : MonoBehaviour
 
     public void UpdateSelectedParts()
     {
+        //Update all currently selected part ids to be replaced with their counter part from the newly opened frame
         List<int> partIds = new List<int>();
 
         for (int i = 0; i < currentParts.Count; i++)
@@ -775,20 +788,20 @@ public class AnimatorController : MonoBehaviour
         }
     }
 
-    public void FlipX()
+    public void FlipX(bool _value)
     {
         for (int i = 0; i < currentGameParts.Count; i++)
         {
-            currentGameParts[i].sr.flipX = !currentGameParts[i].sr.flipX;
+            currentGameParts[i].sr.flipX = _value;
             currentParts[i].flipX = currentGameParts[i].sr.flipX;
         }
     }
 
-    public void FlipY()
+    public void FlipY(bool _value)
     {
         for (int i = 0; i < currentGameParts.Count; i++)
         {
-            currentGameParts[i].sr.flipY = !currentGameParts[i].sr.flipY;
+            currentGameParts[i].sr.flipY = _value;
             currentParts[i].flipY = currentGameParts[i].sr.flipY;
         }
     }
@@ -915,6 +928,12 @@ public class AnimatorController : MonoBehaviour
             yPosIF.text = gameManager.ParseToString((currentGameParts[i].transform.position.y * 16f) + (thisAnim.gridSizeY / 2));
             xPosIF.text = gameManager.ParseToString((currentGameParts[i].transform.position.x * 16f) - (thisAnim.gridSizeX / 2));
         }
+    }
+
+    public void UpdateFlip()
+    {
+        xFlipToggle.isOn = currentParts[0].flipX;
+        yFlipToggle.isOn = currentParts[0].flipY;
     }
     #endregion
 

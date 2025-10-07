@@ -22,13 +22,12 @@ public class ThemeController : MonoBehaviour
 
     private void Awake()
     {
+        settings = GameSettings.Instance;
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnSceneLoaded(Scene _scene, LoadSceneMode _lsm)
     {
-        settings = GameSettings.Instance;
-
         panels = GameObject.FindGameObjectsWithTag("MenuPanel");
         dropdowns = FindObjectsOfType<TMP_Dropdown>();
         inputfields = FindObjectsOfType<TMP_InputField>();

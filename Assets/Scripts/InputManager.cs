@@ -89,7 +89,7 @@ public sealed class InputManager
         { InputKey.SpriteNext, new List<Key> { new Key() { code = KeyCode.Period, type = KeyType.Keyboard } } },
         { InputKey.DeletePart, new List<Key>{ new Key() { code=KeyCode.Delete, type = KeyType.Keyboard } } },
         { InputKey.FramePrevious, new List<Key> { new Key() { code = KeyCode.Minus, type = KeyType.Keyboard } } },
-        { InputKey.FrameNext, new List<Key> { new Key() { code = KeyCode.Plus, type = KeyType.Keyboard } } },
+        { InputKey.FrameNext, new List<Key> { new Key() { code = KeyCode.Equals, type = KeyType.Keyboard } } },
         { InputKey.MoveSpriteLeft, new List<Key> {
             new Key() { code = KeyCode.LeftArrow, type = KeyType.Keyboard },
             new Key() { code = KeyCode.JoystickButton0, type = KeyType.Controller } }
@@ -162,7 +162,7 @@ public sealed class InputManager
         { InputKey.SpriteNext, KeyCode.Period },
         { InputKey.DeletePart, KeyCode.Delete },
         { InputKey.FramePrevious, KeyCode.Minus },
-        { InputKey.FrameNext, KeyCode.Plus },
+        { InputKey.FrameNext, KeyCode.Equals },
         { InputKey.MoveSpriteLeft, KeyCode.LeftArrow },
         { InputKey.MoveSpriteRight, KeyCode.RightArrow },
         { InputKey.MoveSpriteUp, KeyCode.UpArrow },

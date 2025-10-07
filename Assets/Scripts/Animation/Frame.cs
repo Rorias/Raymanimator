@@ -8,6 +8,16 @@ using UnityEngine;
 public class Frame
 {
     public Frame() { }
+    public Frame(Frame f)
+    {
+        frameID = f.frameID;
+        frameParts = new List<Part>();
+
+        foreach (Part p in f.frameParts)
+        {
+            frameParts.Add(new Part(p));
+        }
+    }
 
     public int frameID { get; set; }
     public List<Part> frameParts = new List<Part>();

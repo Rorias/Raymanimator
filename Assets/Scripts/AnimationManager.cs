@@ -39,19 +39,52 @@ public sealed class AnimationManager
     {
         SaveAnimationXMLFile(settings.animationsPath + "\\" + _anim.animationName, _anim);
         SaveAnimationCsFile(settings.animationsPath + "\\" + _anim.animationName, _anim);
+        DebugHelper.Log(_anim.animationName + " saved!");
     }
 
     public void SaveFileReversed(Animation _anim)
     {
-        List<Frame> rFrames = new List<Frame>(_anim.frames);
-        List<Frame> nFrames = new List<Frame>(_anim.frames);
-        rFrames.Reverse();
+        List<Frame> copyFrames = new List<Frame>(_anim.frames);
+        List<Frame> newFrames = new List<Frame>();
 
-        _anim.frames = rFrames;
-        _anim.animationName = _anim.animationName + "Reversed";
+        for (int i = copyFrames.Count - 1; i >= 0; i--)
+        {
+            Frame n = new Frame(copyFrames[i]);
+            n.frameID = _anim.maxFrameCount - 1 - copyFrames[i].frameID;
+            newFrames.Add(n);
+        }
+
+        _anim.frames = newFrames;
+        _anim.animationName = _anim.animationName + "Reverse";
         SaveFile(_anim);
-        _anim.frames = nFrames;
-        _anim.animationName = _anim.animationName.Replace("Reversed", "");
+        DebugHelper.Log(_anim.animationName + " saved as reverse!");
+        _anim.frames = copyFrames;
+        _anim.animationName = _anim.animationName.Replace("Reverse", "");
+    }
+
+    public void SaveFileDoubled(Animation _anim)
+    {
+        List<Frame> copyFrames = new List<Frame>(_anim.frames);
+        List<Frame> newFrames = new List<Frame>();
+        for (int i = 0; i < copyFrames.Count; i++)
+        {
+            Frame n = new Frame(copyFrames[i]);
+            newFrames.Add(n);
+            newFrames[^1].frameID = newFrames.Count - 1;
+
+            n = new Frame(copyFrames[i]);
+            n.frameID = newFrames.Count;
+            newFrames.Add(n);
+        }
+
+        _anim.frames = newFrames;
+        _anim.maxFrameCount = _anim.maxFrameCount * 2;
+        _anim.animationName = _anim.animationName + "Double";
+        SaveFile(_anim);
+        DebugHelper.Log(_anim.animationName + " saved as double!");
+        _anim.frames = copyFrames;
+        _anim.maxFrameCount = _anim.maxFrameCount / 2;
+        _anim.animationName = _anim.animationName.Replace("Double", "");
     }
 
     private void SaveAnimationXMLFile(string _path, Animation _anim)

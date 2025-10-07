@@ -32,6 +32,7 @@ public sealed class GameSettings
     public const string fileName = "RaymanimatorSettings";
 
     public enum Themes { Light, Dark, Colorcoded };
+    public enum Languages { English, Nederlands };
 
     public bool firstLoad;
 
@@ -73,6 +74,8 @@ public sealed class GameSettings
     [SerializeField] private float lastPS = 0.0f;
     public Themes editorTheme { get { return tme; } set { tme = value; } }
     [SerializeField] private Themes tme = Themes.Dark;
+    public Languages editorLanguage { get { return lne; } set { lne = value; } }
+    [SerializeField] private Languages lne = Languages.English;
     public Color32 bgColor { get { return bgc; } set { bgc = value; } }
     [SerializeField] private Color32 bgc = new Color32(50, 75, 150, 255);
 
