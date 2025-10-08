@@ -62,6 +62,8 @@ public sealed class GameSettings
 
     public bool fullScreen { get { return fs; } set { fs = value; } }
     [SerializeField] private bool fs = false;
+    public bool tooltipsOn { get { return tt; } set { tt = value; } }
+    [SerializeField] private bool tt = false;
     public int resNumber { get { return rnr; } set { rnr = value; } }
     [SerializeField] private int rnr = 1;
     public string spritesetsPath { get { return ssPath; } set { ssPath = value; } }
@@ -107,7 +109,7 @@ public sealed class GameSettings
         {
             File.WriteAllText(_path,
 @"{    
-    ""animationsPath"":""" + Application.dataPath + @"/StreamingAssets/"",
+    ""anPath"":""" + Application.dataPath + @"/StreamingAssets/"",
     ""firstLoad"": true,
     ""activeJoystick"": 0
 }");

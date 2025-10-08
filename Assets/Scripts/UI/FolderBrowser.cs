@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 using TMPro;
@@ -121,5 +122,27 @@ public class FolderBrowser : MonoBehaviour
         {
             pathInputField.text = result;
         }
+    }
+
+    public void OpenButtonClicked()
+    {
+        string path;
+
+        if (string.IsNullOrWhiteSpace(pathInputField.text))
+        {
+            path = Application.persistentDataPath.Replace("/", "\\");
+        }
+        else
+        {
+            path = pathInputField.text;
+        }
+
+        ProcessStartInfo startInfo = new ProcessStartInfo
+        {
+            Arguments = path,
+            FileName = "explorer.exe",
+        };
+
+        Process.Start(startInfo);
     }
 }

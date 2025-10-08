@@ -1,10 +1,13 @@
+using TMPro;
+
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class BackgroundSettings : Settings
 {
-    public Dropdown currentBackgroundTypeDD;
-    public InputField backgroundImagePathIF;
+    public TMP_InputField backgroundImagePathIF;
+    public TMP_Dropdown backgroundsDD;
 
     public Image redHandle;
     public Image greenHandle;
@@ -18,9 +21,16 @@ public class BackgroundSettings : Settings
     {
         base.Awake();
 
-        //currentBackgroundTypeDD.onValueChanged.AddListener(delegate { SetSpritesetPath(); });
+        if (backgroundImagePathIF != null)
+        {
+            backgroundImagePathIF.onValueChanged.AddListener(delegate { SetBackgroundPathViaBrowse(); });
+            backgroundImagePathIF.onEndEdit.AddListener(delegate { SetBackgroundPath(); });
+        }
 
-        //backgroundImagePathIF.onEndEdit.AddListener(delegate { SetSpritesetPath(); });
+        if (backgroundsDD != null)
+        {
+            backgroundsDD.onValueChanged.AddListener(delegate { SetCurrentBackground(); });
+        }
 
         redSlider.onValueChanged.AddListener(delegate { BGColorRed(); });
         greenSlider.onValueChanged.AddListener(delegate { BGColorGreen(); });
@@ -33,6 +43,21 @@ public class BackgroundSettings : Settings
         redSlider.value = settings.bgColor.r;
         greenSlider.value = settings.bgColor.g;
         blueSlider.value = settings.bgColor.b;
+    }
+
+    public void SetBackgroundPathViaBrowse()
+    {
+
+    }
+
+    public void SetBackgroundPath()
+    {
+
+    }
+
+    public void SetCurrentBackground()
+    {
+
     }
 
     public void BGColorRed()

@@ -46,7 +46,7 @@ public class UIUtility : MonoBehaviour
 
             foreach (string f in files)
             {
-                if (f.Contains("Thumbs.db"))
+                if (f.Contains("Thumbs.db") || Path.GetExtension(f).ToLowerInvariant() == ".meta")
                 {
                     continue;
                 }
