@@ -53,6 +53,7 @@ public class SpritesDropdown : MonoBehaviour
         }
         else
         {
+            Debug.LogError("Spriteset loading failed.");
             SceneManager.LoadScene(0);
             return;
         }

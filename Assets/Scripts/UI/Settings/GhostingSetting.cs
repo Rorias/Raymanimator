@@ -9,8 +9,8 @@ using UnityEngine.UI;
 
 public class GhostingSetting : Settings
 {
-    public Toggle ghostingNextToggle;
     public Toggle ghostingPreviousToggle;
+    public Toggle ghostingNextToggle;
 
 
     protected override void Awake()

@@ -64,6 +64,10 @@ public class UIUtility : MonoBehaviour
             }
 
             string spritesetName = s.Substring(s.LastIndexOf('\\') + 1);
+            if(spritesetName.Length == s.Length)
+            {
+                spritesetName = s.Substring(s.LastIndexOf('/') + 1);
+            }
             spritesetNames.Add(spritesetName);
         }
 
@@ -89,7 +93,13 @@ public class UIUtility : MonoBehaviour
                 {
                     foreach (string folder in spritesetFolders)
                     {
-                        if (folder.Substring(folder.LastIndexOf('\\') + 1) == settings.lastSpriteset)
+                        int index = folder.LastIndexOf('\\') + 1;
+                        if(index == 0)
+                        {
+                            index = folder.LastIndexOf('/') + 1;
+                        }
+
+                        if (folder.Substring(index) == settings.lastSpriteset)
                         {
                             string[] files = Directory.GetFiles(folder, "*.*", SearchOption.TopDirectoryOnly)
                                                       .Where(s => s.EndsWith(imageTypes[0]) || s.EndsWith(imageTypes[1]) || s.EndsWith(imageTypes[2])).ToArray();
@@ -122,7 +132,12 @@ public class UIUtility : MonoBehaviour
                 spriteName = _images[i].Remove(_images[i].Length - 4);
             }
 
-            newSprite.name = spriteName.Substring(spriteName.LastIndexOf('\\') + 1);
+            string newName = spriteName.Substring(spriteName.LastIndexOf('\\') + 1);
+            if (newName.Length == spriteName.Length)
+            {
+                newName = spriteName.Substring(spriteName.LastIndexOf('/') + 1);
+            }
+            newSprite.name = newName;
 
             gameManager.spritesetImages.Add(i, newSprite);
         }

@@ -37,33 +37,38 @@ public sealed class GameSettings
     public bool firstLoad;
 
     public InputManager.PossibleJoystick activeJoystick;
-    public KeyCode spritePrevious;
-    public KeyCode spriteNext;
-    public KeyCode deletePart;
-    public KeyCode framePrevious;
-    public KeyCode frameNext;
-    public KeyCode moveSpriteLeft;
-    public KeyCode moveSpriteUp;
-    public KeyCode moveSpriteRight;
-    public KeyCode moveSpriteDown;
+    
     public KeyCode zoomCamera;
+    public KeyCode dragCamera;
     public KeyCode moveCameraLeft;
     public KeyCode moveCameraUp;
     public KeyCode moveCameraRight;
     public KeyCode moveCameraDown;
+
+    public KeyCode select;
     public KeyCode multiSelect;
+    public KeyCode spritePrevious;
+    public KeyCode spriteNext;
+    public KeyCode deletePart;
+    public KeyCode moveSpriteLeft;
+    public KeyCode moveSpriteUp;
+    public KeyCode moveSpriteRight;
+    public KeyCode moveSpriteDown;
+
+    public KeyCode framePrevious;
+    public KeyCode frameNext;
+
+    public KeyCode hideUI;
+
     public KeyCode confirm;
     public KeyCode @return;
-
-    public KeyCode jumpJoy;
-    public KeyCode crouchJoy;
-    public KeyCode rollJoy;
-    public KeyCode runJoy;
 
     public bool fullScreen { get { return fs; } set { fs = value; } }
     [SerializeField] private bool fs = false;
     public bool tooltipsOn { get { return tt; } set { tt = value; } }
     [SerializeField] private bool tt = false;
+    public bool normalFont { get { return nf; } set { nf = value; } }
+    [SerializeField] private bool nf = false;
     public int resNumber { get { return rnr; } set { rnr = value; } }
     [SerializeField] private int rnr = 1;
     public string spritesetsPath { get { return ssPath; } set { ssPath = value; } }
@@ -109,7 +114,8 @@ public sealed class GameSettings
         {
             File.WriteAllText(_path,
 @"{    
-    ""anPath"":""" + Application.dataPath + @"/StreamingAssets/"",
+    ""ssPath"":""" + Application.dataPath + @"/StreamingAssets/Spritesets/"",
+    ""anPath"":""" + Application.dataPath + @"/StreamingAssets/Animations/"",
     ""firstLoad"": true,
     ""activeJoystick"": 0
 }");

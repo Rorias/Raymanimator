@@ -49,6 +49,7 @@ public sealed class InputManager
         RightMenu,
         DownMenu,
         MultiSelect,
+        HideUI,
         Select,
         Confirm,
         Return,
@@ -85,6 +86,17 @@ public sealed class InputManager
     public Dictionary<InputKey, List<Key>> Inputs = new Dictionary<InputKey, List<Key>>()
     {
         { InputKey.None, new List<Key> { new Key() { code = KeyCode.None, type = KeyType.None } } },
+        { InputKey.ZoomCamera, new List<Key> { new Key() { code = KeyCode.Mouse3, type = KeyType.Keyboard } } },
+        { InputKey.DragCamera, new List<Key> { new Key() { code = KeyCode.Mouse2, type = KeyType.Keyboard } } },
+        { InputKey.MoveCameraLeft, new List<Key> { new Key() { code = KeyCode.A, type = KeyType.Keyboard } } },
+        { InputKey.MoveCameraUp, new List<Key> { new Key() { code = KeyCode.W, type = KeyType.Keyboard } } },
+        { InputKey.MoveCameraRight, new List<Key> { new Key() { code = KeyCode.D, type = KeyType.Keyboard } } },
+        { InputKey.MoveCameraDown, new List<Key> { new Key() { code = KeyCode.S, type = KeyType.Keyboard } } },
+        { InputKey.Select, new List<Key>{ new Key { code = KeyCode.Mouse0, type = KeyType.Keyboard } } },
+        { InputKey.MultiSelect, new List<Key> {
+            new Key() { code = KeyCode.LeftShift, type = KeyType.Keyboard },
+            new Key() { code = KeyCode.RightShift, type = KeyType.Keyboard } }
+        },
         { InputKey.SpritePrevious, new List<Key> { new Key() { code = KeyCode.Comma, type = KeyType.Keyboard } } },
         { InputKey.SpriteNext, new List<Key> { new Key() { code = KeyCode.Period, type = KeyType.Keyboard } } },
         { InputKey.DeletePart, new List<Key>{ new Key() { code=KeyCode.Delete, type = KeyType.Keyboard } } },
@@ -106,20 +118,15 @@ public sealed class InputManager
             new Key() { code = KeyCode.DownArrow, type = KeyType.Keyboard },
             new Key() { code = KeyCode.JoystickButton4, type = KeyType.Controller } }
         },
+        { InputKey.HideUI, new List<Key>
+        {
+            new Key(){ code = KeyCode.F1, type = KeyType.Keyboard } }
+        },
         { InputKey.LeftMenu, new List<Key> { new Key() { code = KeyCode.LeftArrow, type = KeyType.Meta } } },
         { InputKey.UpMenu, new List<Key> { new Key() { code = KeyCode.UpArrow, type = KeyType.Meta } } },
         { InputKey.RightMenu, new List<Key> { new Key() { code = KeyCode.RightArrow, type = KeyType.Meta } } },
         { InputKey.DownMenu, new List<Key> { new Key() { code = KeyCode.DownArrow, type = KeyType.Meta } } },
-        { InputKey.DragCamera, new List<Key> { new Key() { code = KeyCode.Mouse2, type = KeyType.Keyboard } } },
-        { InputKey.MoveCameraLeft, new List<Key> { new Key() { code = KeyCode.A, type = KeyType.Keyboard } } },
-        { InputKey.MoveCameraUp, new List<Key> { new Key() { code = KeyCode.W, type = KeyType.Keyboard } } },
-        { InputKey.MoveCameraRight, new List<Key> { new Key() { code = KeyCode.D, type = KeyType.Keyboard } } },
-        { InputKey.MoveCameraDown, new List<Key> { new Key() { code = KeyCode.S, type = KeyType.Keyboard } } },
-        { InputKey.MultiSelect, new List<Key> {
-            new Key() { code = KeyCode.LeftShift, type = KeyType.Keyboard },
-            new Key() { code = KeyCode.RightShift, type = KeyType.Keyboard } }
-        },
-        {InputKey.Select, new List<Key>{ new Key { code = KeyCode.Mouse0, type = KeyType.Keyboard } } },
+
         { InputKey.Confirm, new List<Key> {
             new Key() { code = KeyCode.Return, type = KeyType.Meta },
             new Key() { code = KeyCode.JoystickButton7, type = KeyType.Meta } }
@@ -158,22 +165,27 @@ public sealed class InputManager
 
     public readonly Dictionary<InputKey, KeyCode> DefaultKeys = new Dictionary<InputKey, KeyCode>()
     {
-        { InputKey.SpritePrevious, KeyCode.Comma },
-        { InputKey.SpriteNext, KeyCode.Period },
-        { InputKey.DeletePart, KeyCode.Delete },
-        { InputKey.FramePrevious, KeyCode.Minus },
-        { InputKey.FrameNext, KeyCode.Equals },
-        { InputKey.MoveSpriteLeft, KeyCode.LeftArrow },
-        { InputKey.MoveSpriteRight, KeyCode.RightArrow },
-        { InputKey.MoveSpriteUp, KeyCode.UpArrow },
-        { InputKey.MoveSpriteDown, KeyCode.DownArrow },
-        { InputKey.Select, KeyCode.Mouse0 },
+        { InputKey.ZoomCamera, KeyCode.Mouse3 },
         { InputKey.DragCamera, KeyCode.Mouse2 },
         { InputKey.MoveCameraLeft,  KeyCode.A },
         { InputKey.MoveCameraUp,  KeyCode.W},
         { InputKey.MoveCameraRight, KeyCode.D },
         { InputKey.MoveCameraDown,  KeyCode.S },
-        { InputKey.MultiSelect, KeyCode.LeftShift }
+
+        { InputKey.Select, KeyCode.Mouse0 },
+        { InputKey.MultiSelect, KeyCode.LeftShift },
+        { InputKey.SpritePrevious, KeyCode.Comma },
+        { InputKey.SpriteNext, KeyCode.Period },
+        { InputKey.DeletePart, KeyCode.Delete },
+        { InputKey.MoveSpriteLeft, KeyCode.LeftArrow },
+        { InputKey.MoveSpriteRight, KeyCode.RightArrow },
+        { InputKey.MoveSpriteUp, KeyCode.UpArrow },
+        { InputKey.MoveSpriteDown, KeyCode.DownArrow },
+
+        { InputKey.FramePrevious, KeyCode.Minus },
+        { InputKey.FrameNext, KeyCode.Equals },
+
+        { InputKey.HideUI, KeyCode.F1 }
     };
 
     public readonly Dictionary<InputKey, KeyCode> DefaultButtons = new Dictionary<InputKey, KeyCode>()
@@ -348,21 +360,32 @@ public sealed class InputManager
 
     public void LoadInputs(GameSettings _settings)
     {
-        Inputs[InputKey.SpritePrevious].Find(x => x.type == KeyType.Keyboard).code = _settings.spritePrevious;
-        Inputs[InputKey.SpriteNext].Find(x => x.type == KeyType.Keyboard).code = _settings.spriteNext;
-        Inputs[InputKey.DeletePart].Find(x => x.type == KeyType.Keyboard).code = _settings.deletePart;
-        Inputs[InputKey.FramePrevious].Find(x => x.type == KeyType.Keyboard).code = _settings.framePrevious;
-        Inputs[InputKey.FrameNext].Find(x => x.type == KeyType.Keyboard).code = _settings.frameNext;
-        Inputs[InputKey.MoveSpriteLeft].Find(x => x.type == KeyType.Keyboard).code = _settings.moveSpriteLeft;
-        Inputs[InputKey.MoveSpriteRight].Find(x => x.type == KeyType.Keyboard).code = _settings.moveSpriteRight;
-        Inputs[InputKey.MoveSpriteUp].Find(x => x.type == KeyType.Keyboard).code = _settings.moveSpriteUp;
-        Inputs[InputKey.MoveSpriteDown].Find(x => x.type == KeyType.Keyboard).code = _settings.moveSpriteDown;
-        Inputs[InputKey.MultiSelect].Find(x => x.type == KeyType.Keyboard).code = _settings.multiSelect;
+        Load(InputKey.ZoomCamera, _settings.zoomCamera);
+        Load(InputKey.DragCamera, _settings.dragCamera);
+        Load(InputKey.MoveCameraLeft, _settings.moveCameraLeft);
+        Load(InputKey.MoveCameraUp, _settings.moveCameraUp);
+        Load(InputKey.MoveCameraRight, _settings.moveCameraRight);
+        Load(InputKey.MoveCameraDown, _settings.moveCameraDown);
 
-        //Inputs[InputKey.LeftMenu].Add(Inputs[InputKey.Left][0]);
-        //Inputs[InputKey.UpMenu].Add(Inputs[InputKey.Up][0]);
-        //Inputs[InputKey.RightMenu].Add(Inputs[InputKey.Right][0]);
-        //Inputs[InputKey.DownMenu].Add(Inputs[InputKey.Down][0]);
+        Load(InputKey.Select, _settings.select);
+        Load(InputKey.MultiSelect, _settings.multiSelect);
+        Load(InputKey.SpritePrevious, _settings.spritePrevious);
+        Load(InputKey.SpriteNext, _settings.spriteNext);
+        Load(InputKey.DeletePart, _settings.deletePart);
+        Load(InputKey.MoveSpriteLeft, _settings.moveSpriteLeft);
+        Load(InputKey.MoveSpriteRight, _settings.moveSpriteRight);
+        Load(InputKey.MoveSpriteUp, _settings.moveSpriteUp);
+        Load(InputKey.MoveSpriteDown, _settings.moveSpriteDown);
+
+        Load(InputKey.FramePrevious, _settings.framePrevious);
+        Load(InputKey.FrameNext, _settings.frameNext);
+
+        Load(InputKey.HideUI, _settings.hideUI);
+
+        Inputs[InputKey.LeftMenu].Add(Inputs[InputKey.MoveSpriteLeft][0]);
+        Inputs[InputKey.UpMenu].Add(Inputs[InputKey.MoveSpriteUp][0]);
+        Inputs[InputKey.RightMenu].Add(Inputs[InputKey.MoveSpriteRight][0]);
+        Inputs[InputKey.DownMenu].Add(Inputs[InputKey.MoveSpriteDown][0]);
         //Inputs[InputKey.Confirm].AddRange(Inputs[InputKey.Fist]);
 
         activeJoystick = _settings.activeJoystick;
@@ -397,17 +420,38 @@ public sealed class InputManager
 
     public void SaveInputs(GameSettings _settings)
     {
-        _settings.spritePrevious = Inputs[InputKey.SpritePrevious].Find(x => x.type == KeyType.Keyboard).code;
-        _settings.spriteNext = Inputs[InputKey.SpriteNext].Find(x => x.type == KeyType.Keyboard).code;
-        _settings.deletePart = Inputs[InputKey.DeletePart].Find(x => x.type == KeyType.Keyboard).code;
-        _settings.framePrevious = Inputs[InputKey.FramePrevious].Find(x => x.type == KeyType.Keyboard).code;
-        _settings.frameNext = Inputs[InputKey.FrameNext].Find(x => x.type == KeyType.Keyboard).code;
-        _settings.moveSpriteLeft = Inputs[InputKey.MoveSpriteLeft].Find(x => x.type == KeyType.Keyboard).code;
-        _settings.moveSpriteRight = Inputs[InputKey.MoveSpriteRight].Find(x => x.type == KeyType.Keyboard).code;
-        _settings.moveSpriteUp = Inputs[InputKey.MoveSpriteUp].Find(x => x.type == KeyType.Keyboard).code;
-        _settings.moveSpriteDown = Inputs[InputKey.MoveSpriteDown].Find(x => x.type == KeyType.Keyboard).code;
-        _settings.multiSelect = Inputs[InputKey.MultiSelect].Find(x => x.type == KeyType.Keyboard).code;
+        _settings.zoomCamera = Save(InputKey.ZoomCamera);
+        _settings.dragCamera = Save(InputKey.DragCamera);
+        _settings.moveCameraLeft = Save(InputKey.MoveCameraLeft);
+        _settings.moveCameraUp = Save(InputKey.MoveCameraUp);
+        _settings.moveCameraRight = Save(InputKey.MoveCameraRight);
+        _settings.moveCameraDown = Save(InputKey.MoveCameraDown);
+
+        _settings.select = Save(InputKey.Select);
+        _settings.multiSelect = Save(InputKey.MultiSelect);
+        _settings.spritePrevious = Save(InputKey.SpritePrevious);
+        _settings.spriteNext = Save(InputKey.SpriteNext);
+        _settings.deletePart = Save(InputKey.DeletePart);
+        _settings.moveSpriteLeft = Save(InputKey.MoveSpriteLeft);
+        _settings.moveSpriteRight = Save(InputKey.MoveSpriteRight);
+        _settings.moveSpriteUp = Save(InputKey.MoveSpriteUp);
+        _settings.moveSpriteDown = Save(InputKey.MoveSpriteDown);
+
+        _settings.framePrevious = Save(InputKey.FramePrevious);
+        _settings.frameNext = Save(InputKey.FrameNext);
+
+        _settings.hideUI = Save(InputKey.HideUI);
 
         _settings.activeJoystick = activeJoystick;
+    }
+
+    private KeyCode Save(InputKey _get)
+    {
+        return Inputs[_get].Find(x => x.type == KeyType.Keyboard).code;
+    }
+
+    private void Load(InputKey _set, KeyCode _get)
+    {
+        Inputs[_set].Find(x => x.type == KeyType.Keyboard).code = _get;
     }
 }

@@ -144,7 +144,7 @@ public class Tooltips : Settings
             return;
         }
 
-        bg.color = new Color(1, 1, 1, 0.7f);
+        bg.color = new Color(bg.color.r, bg.color.g, bg.color.b, 0.7f);
 
         tooltipText.text = rayResults[0].gameObject.name switch
         {
@@ -212,7 +212,7 @@ public class Tooltips : Settings
 
     private void DisableTooltip()
     {
-        bg.color = new Color(0, 0, 0, 0);
+        bg.color = new Color(bg.color.r, bg.color.g, bg.color.b, 0);
         tooltipText.text = "";
     }
 

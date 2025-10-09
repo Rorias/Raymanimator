@@ -18,10 +18,11 @@ public partial class AnimatorController : MonoBehaviour
     private Frame currentFrame;
     private List<Part> currentParts = new List<Part>();
 
+    public GameObject UI;
     public GameObject gamePartPrefab;
     public GameObject previousGhostPrefab;
     public GameObject nextGhostPrefab;
-
+    [Space]
     public Toggle xFlipToggle;
     public Toggle yFlipToggle;
     public TMP_InputField xPosIF;
@@ -151,6 +152,11 @@ public partial class AnimatorController : MonoBehaviour
         if (inputManager.GetKeyDown(InputManager.InputKey.DeletePart))
         {
             DeletePart();
+        }
+
+        if (inputManager.GetKeyDown(InputManager.InputKey.HideUI))
+        {
+            UI.SetActive(!UI.activeSelf);
         }
 
         foreach (TMP_InputField IF in allInputfields)

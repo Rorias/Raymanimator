@@ -1,18 +1,15 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 
 using TMPro;
 
 using UnityEngine;
-using UnityEngine.UI;
 
 public class InitialisationMenu : MonoBehaviour
 {
     public Menus menus;
     public MenuItem startMenu;
     public TMP_InputField spritesetPathIF;
+    public TMP_InputField animationPathIF;
 
     private GameSettings settings;
 
@@ -24,6 +21,8 @@ public class InitialisationMenu : MonoBehaviour
         {
             spritesetPathIF.text = settings.spritesetsPath;
         }
+
+        animationPathIF.text = settings.animationsPath;
     }
 
     public void ApplySettings()
