@@ -67,6 +67,14 @@ public sealed class GameSettings
     [SerializeField] private bool fs = false;
     public bool tooltipsOn { get { return tt; } set { tt = value; } }
     [SerializeField] private bool tt = false;
+    public bool previousGhostOn { get { return pg; } set { pg = value; } }
+    [SerializeField] private bool pg = true;
+    public bool nextGhostOn { get { return ng; } set { ng = value; } }
+    [SerializeField] private bool ng = true;
+    public Color32 previousGhostColor { get { return pgc; } set { pgc = value; } }
+    [SerializeField] private Color32 pgc = new Color32(0, 255, 255, 64);
+    public Color32 nextGhostColor { get { return ngc; } set { ngc = value; } }
+    [SerializeField] private Color32 ngc = new Color32(255, 64, 64, 64);
     public bool normalFont { get { return nf; } set { nf = value; } }
     [SerializeField] private bool nf = false;
     public int resNumber { get { return rnr; } set { rnr = value; } }

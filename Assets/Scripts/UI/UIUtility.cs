@@ -16,7 +16,7 @@ public class UIUtility : MonoBehaviour
     private GameManager gameManager;
     private GameSettings settings;
 
-    private void Start()
+    private void Awake()
     {
         gameManager = GameManager.Instance;
         settings = GameSettings.Instance;

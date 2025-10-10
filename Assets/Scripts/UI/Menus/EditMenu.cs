@@ -25,6 +25,7 @@ public class EditMenu : MonoBehaviour
     private GameManager gameManager;
     private GameSettings settings;
     private AnimationManager animManager;
+    private InputManager input;
 
     private List<string> loadableAnims = new List<string>();
 
@@ -46,6 +47,15 @@ public class EditMenu : MonoBehaviour
         gameManager = GameManager.Instance;
         settings = GameSettings.Instance;
         animManager = AnimationManager.Instance;
+        input = InputManager.Instance;
+    }
+
+    private void Update()
+    {
+        if (input.GetKeyDown(InputManager.InputKey.Confirm))
+        {
+            LoadAnimation();
+        }
     }
 
     public void Initialize()

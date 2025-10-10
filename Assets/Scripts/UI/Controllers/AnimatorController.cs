@@ -12,7 +12,7 @@ public partial class AnimatorController : MonoBehaviour
 {
     private GameManager gameManager = GameManager.Instance;
     private GameSettings settings = GameSettings.Instance;
-    private InputManager inputManager = InputManager.Instance;
+    private InputManager input = InputManager.Instance;
 
     //current frame and current parts
     private Frame currentFrame;
@@ -71,8 +71,7 @@ public partial class AnimatorController : MonoBehaviour
     private bool copyToNextFrame = true;
     private bool copyToNextFrameWasOn = false;
     private bool ghostingPrevious = true;
-    private bool ghostingNext = false;
-    private bool ghostingWasOn = false;
+    private bool ghostingNext = true;
 
     private void Awake()
     {
@@ -89,12 +88,15 @@ public partial class AnimatorController : MonoBehaviour
         exitButton.onClick.AddListener(delegate { exitConfirmWindow.OpenWindow("Save animation?", SaveAndQuit); exitConfirmWindow.noButton.onClick.AddListener(delegate { Quit(); }); });
         playButton.onClick.AddListener(delegate { PlayAnimation(); });
 
-        xFlipToggle.onValueChanged.AddListener((_state)=> { FlipX(_state); });
+        xFlipToggle.onValueChanged.AddListener((_state) => { FlipX(_state); });
         yFlipToggle.onValueChanged.AddListener((_state) => { FlipY(_state); });
 
         xPosIF.onEndEdit.AddListener(delegate { SetXPos(); });
         yPosIF.onEndEdit.AddListener(delegate { SetYPos(); });
         priorityIF.onEndEdit.AddListener(delegate { SetPriority(); });
+
+        ghostingPrevious = settings.previousGhostOn;
+        ghostingNext = settings.nextGhostOn;
 
         thisAnim = gameManager.currentAnimation;
     }
@@ -149,12 +151,12 @@ public partial class AnimatorController : MonoBehaviour
 
     private void Update()
     {
-        if (inputManager.GetKeyDown(InputManager.InputKey.DeletePart))
+        if (input.GetKeyDown(InputManager.InputKey.DeletePart))
         {
             DeletePart();
         }
 
-        if (inputManager.GetKeyDown(InputManager.InputKey.HideUI))
+        if (input.GetKeyDown(InputManager.InputKey.HideUI))
         {
             UI.SetActive(!UI.activeSelf);
         }
@@ -172,7 +174,7 @@ public partial class AnimatorController : MonoBehaviour
             return;
         }
 
-        if (inputManager.GetKeyDown(InputManager.InputKey.FrameNext))
+        if (input.GetKeyDown(InputManager.InputKey.FrameNext))
         {
             if (Convert.ToInt32(frameSelectSlider.value) < thisAnim.maxFrameCount)
             {
@@ -180,7 +182,7 @@ public partial class AnimatorController : MonoBehaviour
                 frameSwapTimer = Time.time + standardDelayTime;
             }
         }
-        else if (inputManager.GetKeyDown(InputManager.InputKey.FramePrevious))
+        else if (input.GetKeyDown(InputManager.InputKey.FramePrevious))
         {
             if (Convert.ToInt32(frameSelectSlider.value) > 0)
             {
@@ -189,7 +191,7 @@ public partial class AnimatorController : MonoBehaviour
             }
         }
 
-        if (inputManager.GetKey(InputManager.InputKey.FrameNext) && Time.time > frameSwapTimer)
+        if (input.GetKey(InputManager.InputKey.FrameNext) && Time.time > frameSwapTimer)
         {
             if (Convert.ToInt32(frameSelectSlider.value) < thisAnim.maxFrameCount)
             {
@@ -197,7 +199,7 @@ public partial class AnimatorController : MonoBehaviour
                 frameSwapTimer = Time.time + hotkeyDelayTime;
             }
         }
-        else if (inputManager.GetKey(InputManager.InputKey.FramePrevious) && Time.time > frameSwapTimer)
+        else if (input.GetKey(InputManager.InputKey.FramePrevious) && Time.time > frameSwapTimer)
         {
             if (Convert.ToInt32(frameSelectSlider.value) > 0)
             {
@@ -206,51 +208,51 @@ public partial class AnimatorController : MonoBehaviour
             }
         }
 
-        if (inputManager.GetKeyDown(InputManager.InputKey.MoveSpriteLeft))
+        if (input.GetKeyDown(InputManager.InputKey.MoveSpriteLeft))
         {
             MovePartLeft();
             leftArrowTimer = Time.time + standardDelayTime;
         }
-        if (inputManager.GetKey(InputManager.InputKey.MoveSpriteLeft) && Time.time > leftArrowTimer)
+        if (input.GetKey(InputManager.InputKey.MoveSpriteLeft) && Time.time > leftArrowTimer)
         {
             MovePartLeft();
             leftArrowTimer = Time.time + hotkeyDelayTime;
         }
 
-        if (inputManager.GetKeyDown(InputManager.InputKey.MoveSpriteRight))
+        if (input.GetKeyDown(InputManager.InputKey.MoveSpriteRight))
         {
             MovePartRight();
             rightArrowTimer = Time.time + standardDelayTime;
         }
-        if (inputManager.GetKey(InputManager.InputKey.MoveSpriteRight) && Time.time > rightArrowTimer)
+        if (input.GetKey(InputManager.InputKey.MoveSpriteRight) && Time.time > rightArrowTimer)
         {
             MovePartRight();
             rightArrowTimer = Time.time + hotkeyDelayTime;
         }
 
-        if (inputManager.GetKeyDown(InputManager.InputKey.MoveSpriteUp))
+        if (input.GetKeyDown(InputManager.InputKey.MoveSpriteUp))
         {
             MovePartUp();
             upArrowTimer = Time.time + standardDelayTime;
         }
-        if (inputManager.GetKey(InputManager.InputKey.MoveSpriteUp) && Time.time > upArrowTimer)
+        if (input.GetKey(InputManager.InputKey.MoveSpriteUp) && Time.time > upArrowTimer)
         {
             MovePartUp();
             upArrowTimer = Time.time + hotkeyDelayTime;
         }
 
-        if (inputManager.GetKeyDown(InputManager.InputKey.MoveSpriteDown))
+        if (input.GetKeyDown(InputManager.InputKey.MoveSpriteDown))
         {
             MovePartDown();
             downArrowTimer = Time.time + standardDelayTime;
         }
-        if (inputManager.GetKey(InputManager.InputKey.MoveSpriteDown) && Time.time > downArrowTimer)
+        if (input.GetKey(InputManager.InputKey.MoveSpriteDown) && Time.time > downArrowTimer)
         {
             MovePartDown();
             downArrowTimer = Time.time + hotkeyDelayTime;
         }
 
-        if (inputManager.GetKeyDown(InputManager.InputKey.SpriteNext))
+        if (input.GetKeyDown(InputManager.InputKey.SpriteNext))
         {
             if (Convert.ToInt32(partSelectSlider.value) < thisAnim.maxPartCount)
             {
@@ -260,7 +262,7 @@ public partial class AnimatorController : MonoBehaviour
                 partSwapTimer = Time.time + standardDelayTime;
             }
         }
-        else if (inputManager.GetKeyDown(InputManager.InputKey.SpritePrevious))
+        else if (input.GetKeyDown(InputManager.InputKey.SpritePrevious))
         {
             if (Convert.ToInt32(partSelectSlider.value) > 0)
             {
@@ -271,7 +273,7 @@ public partial class AnimatorController : MonoBehaviour
             }
         }
 
-        if (inputManager.GetKey(InputManager.InputKey.SpriteNext) && Time.time > partSwapTimer)
+        if (input.GetKey(InputManager.InputKey.SpriteNext) && Time.time > partSwapTimer)
         {
             if (Convert.ToInt32(partSelectSlider.value) < thisAnim.maxPartCount)
             {
@@ -280,7 +282,7 @@ public partial class AnimatorController : MonoBehaviour
                 partSwapTimer = Time.time + hotkeyDelayTime;
             }
         }
-        else if (inputManager.GetKey(InputManager.InputKey.SpritePrevious) && Time.time > partSwapTimer)
+        else if (input.GetKey(InputManager.InputKey.SpritePrevious) && Time.time > partSwapTimer)
         {
             if (Convert.ToInt32(partSelectSlider.value) > 0)
             {
@@ -342,22 +344,22 @@ public partial class AnimatorController : MonoBehaviour
 
     private void CreatePreviousGhostPart(int _part)
     {
-        GameObject ghostPart = Instantiate(previousGhostPrefab);
-        ghostPart.name = "PreviousFrameGhostPart" + _part;
-        SpriteRenderer ghostPartSR = ghostPart.GetComponent<SpriteRenderer>();
-        ghostPartSR.color = new Color(0, 1, 1, 0.25f);//TODO: change color based on user settings
+        GameObject prevGhostPart = Instantiate(previousGhostPrefab);
+        prevGhostPart.name = "PreviousFrameGhostPart" + _part;
+        SpriteRenderer prevGhostPartSR = prevGhostPart.GetComponent<SpriteRenderer>();
+        prevGhostPartSR.color = settings.previousGhostColor;
 
-        PreviousGhostParts.Add(ghostPartSR);
+        PreviousGhostParts.Add(prevGhostPartSR);
     }
 
     private void CreateNextGhostPart(int _part)
     {
-        GameObject ghostPart = Instantiate(nextGhostPrefab);
-        ghostPart.name = "NextFrameGhostPart" + _part;
-        SpriteRenderer ghostPartSR = ghostPart.GetComponent<SpriteRenderer>();
-        ghostPartSR.color = new Color(1, 0.25f, 0.25f, 0.25f);//TODO: change color based on user settings
+        GameObject nextGhostPart = Instantiate(nextGhostPrefab);
+        nextGhostPart.name = "NextFrameGhostPart" + _part;
+        SpriteRenderer nextGhostPartSR = nextGhostPart.GetComponent<SpriteRenderer>();
+        nextGhostPartSR.color = settings.nextGhostColor;
 
-        NextGhostParts.Add(ghostPartSR);
+        NextGhostParts.Add(nextGhostPartSR);
     }
 
     private void SetValues()
@@ -382,9 +384,6 @@ public partial class AnimatorController : MonoBehaviour
             if (copyToNextFrame) { copyToNextFrameWasOn = true; copyToNextFrame = false; }
             else { copyToNextFrameWasOn = false; }
 
-            if (ghostingNext || ghostingPrevious) { ghostingWasOn = true; ghostingNext = false; ghostingPrevious = false; }//TODO: split return to on function based on previous/next
-            else { ghostingWasOn = false; }
-
             for (int i = 0; i < GameParts.Count; i++)
             {
                 if (GameParts[i].polyColl != null)
@@ -403,7 +402,6 @@ public partial class AnimatorController : MonoBehaviour
             playingAnimation = false;
 
             if (copyToNextFrameWasOn) { copyToNextFrame = true; }
-            if (ghostingWasOn) { ghostingNext = true; ghostingPrevious = true; }//TODO: split return to on function based on previous/next
 
             for (int i = 0; i < GameParts.Count; i++)
             {
@@ -547,16 +545,28 @@ public partial class AnimatorController : MonoBehaviour
             currentFrame.frameParts[i].flipX = GameParts[i].sr.flipX;
             currentFrame.frameParts[i].flipY = GameParts[i].sr.flipY;
 
-            if (ghostingPrevious && !playingAnimation && frameSelectSlider.value > currentFrame.frameID)//TODO: apply ghosting next/previous logic
+            if (ghostingPrevious && !playingAnimation && frameSelectSlider.value > 0)//previous frame exists
             {
-                PreviousGhostParts[i].transform.position = new Vector2(currentFrame.frameParts[i].xPos, currentFrame.frameParts[i].yPos);
-                PreviousGhostParts[i].sprite = currentFrame.frameParts[i].part;
-                PreviousGhostParts[i].flipX = currentFrame.frameParts[i].flipX;
-                PreviousGhostParts[i].flipY = currentFrame.frameParts[i].flipY;
+                PreviousGhostParts[i].transform.position = new Vector2(thisAnim.frames[frameId - 1].frameParts[i].xPos, thisAnim.frames[frameId - 1].frameParts[i].yPos);
+                PreviousGhostParts[i].sprite = thisAnim.frames[frameId - 1].frameParts[i].part;
+                PreviousGhostParts[i].flipX = thisAnim.frames[frameId - 1].frameParts[i].flipX;
+                PreviousGhostParts[i].flipY = thisAnim.frames[frameId - 1].frameParts[i].flipY;
             }
             else
             {
                 PreviousGhostParts[i].sprite = null;
+            }
+
+            if (ghostingNext && !playingAnimation && frameSelectSlider.value < thisAnim.maxFrameCount - 1)//previous frame exists
+            {
+                NextGhostParts[i].transform.position = new Vector2(thisAnim.frames[frameId + 1].frameParts[i].xPos, thisAnim.frames[frameId + 1].frameParts[i].yPos);
+                NextGhostParts[i].sprite = thisAnim.frames[frameId + 1].frameParts[i].part;
+                NextGhostParts[i].flipX = thisAnim.frames[frameId + 1].frameParts[i].flipX;
+                NextGhostParts[i].flipY = thisAnim.frames[frameId + 1].frameParts[i].flipY;
+            }
+            else
+            {
+                NextGhostParts[i].sprite = null;
             }
 
             if (copyToNextFrame && frameSelectSlider.value > currentFrame.frameID &&
@@ -587,7 +597,7 @@ public partial class AnimatorController : MonoBehaviour
             }
         }
 
-        currentFrame = thisAnim.frames[frameId];
+        currentFrame = thisAnim.frames[frameId];//set current frame to selected frame from the frame selector
         UpdateFrameSelectText();
         UpdateSelectedParts();
 

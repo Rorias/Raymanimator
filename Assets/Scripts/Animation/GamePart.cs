@@ -15,7 +15,7 @@ public class GamePart : MonoBehaviour
     [NonSerialized] public PolygonCollider2D polyColl;
     [NonSerialized] public Animator anim;
 
-    private InputManager inputManager = InputManager.Instance;
+    private InputManager input = InputManager.Instance;
     private AnimatorController animatorC;
     private Camera mainCam;
 
@@ -50,7 +50,7 @@ public class GamePart : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (inputManager.GetKey(InputManager.InputKey.MultiSelect))
+        if (input.GetKey(InputManager.InputKey.MultiSelect))
         {
             multipleSelected = true;
 

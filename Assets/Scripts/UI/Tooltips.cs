@@ -174,7 +174,7 @@ public class Tooltips : Settings
             "AddFrameButton" => AddFrame + (extendedOn ? AddFrameExtended : ""),
             "PreviousFrameButton" => PreviousFrame + (extendedOn ? NextPreviousFrameExtended : ""),
             "NextFrameButton" => NextFrame + (extendedOn ? NextPreviousFrameExtended : ""),
-            "FrameSelectBackground" or "FrameFill" => FrameSlider + (extendedOn ? FrameSliderExtended : ""),
+            "FrameSelectBackground" or "FrameFill" or "FrameHandle" => FrameSlider + (extendedOn ? FrameSliderExtended : ""),
             "CopyToNextToggleBackground" => CopyToNextToggle + (extendedOn ? CopyToNextToggleExtended : ""),
             "PrevGhostBackground" => PreviousGhostToggle + (extendedOn ? GhostingToggleExtended : ""),
             "NextGhostBackground" => NextGhostToggle + (extendedOn ? GhostingToggleExtended : ""),
@@ -182,7 +182,7 @@ public class Tooltips : Settings
             //Part settings
             "RemovePartButton" => RemovePart + (extendedOn ? RemovePartExtended : ""),
             "AddPartButton" => AddPart + (extendedOn ? AddPartExtended : ""),
-            "PartSelectBackground" or "PartFill" => PartSlider + (extendedOn ? PartSliderExtended : ""),
+            "PartSelectBackground" or "PartFill" or "PartHandle" => PartSlider + (extendedOn ? PartSliderExtended : ""),
             "XPosIF" => XPos + (extendedOn ? XYPosExtended : ""),
             "YPosIF" => YPos + (extendedOn ? XYPosExtended : ""),
             "FlipXToggle" => FlipX + (extendedOn ? FlipXYExtended : ""),

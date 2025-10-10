@@ -11,17 +11,17 @@ public class SubMenus : MonoBehaviour
     private List<RaycastResult> rayResults = new List<RaycastResult>();
     private SubMenuItem currentSubMenu;
 
-    private InputManager inputManager;
+    private InputManager input;
 
     private void Start()
     {
-        inputManager = InputManager.Instance;
+        input = InputManager.Instance;
         ResetMenu();
     }
 
     private void Update()
     {
-        if (inputManager.GetKeyDown(InputManager.InputKey.Select))
+        if (input.GetKeyDown(InputManager.InputKey.Select))
         {
             EventSystem.current.RaycastAll(new PointerEventData(EventSystem.current)
             { position = Input.mousePosition, pointerId = -1 }, rayResults);
