@@ -15,16 +15,26 @@ public class SpritesDropdown : MonoBehaviour
 
     public bool dropdownActive { get; private set; } = false;
 
-    private GameManager gameManager = GameManager.Instance;
+    private GameManager gameManager;
 
     private Dictionary<int, Sprite> possibleSprites = new Dictionary<int, Sprite>();
 
     private float lastOpenedPositionDD = 0f;
 
+    private void Awake()
+    {
+        gameManager = GameManager.Instance;
+    }
+
     private void Update()
     {
-        if (!dropdownActive && null != GameObject.Find("Dropdown List"))
+        if (!dropdownActive)
         {
+            if (GameObject.Find("Dropdown List") is null)
+            {
+                return;
+            }
+
             dropdownActive = true;
             GameObject spriteContent = GameObject.Find("SpritesContent");
             RectTransform contentRect = spriteContent.GetComponent<RectTransform>();
@@ -36,7 +46,7 @@ public class SpritesDropdown : MonoBehaviour
                 currentImage.sprite = ddSprites.options[i - 1].image;
             }
         }
-        else if (dropdownActive && null == GameObject.Find("Dropdown List"))
+        else if (GameObject.Find("Dropdown List") is null)
         {
             dropdownActive = false;
         }

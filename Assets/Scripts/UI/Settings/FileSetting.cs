@@ -14,12 +14,15 @@ public class FileSetting : Settings
     public Camera gifCamera;
     public AnimatorController animatorC;
 
-    private GameManager gameManager = GameManager.Instance;
-    private AnimationManager animManager = AnimationManager.Instance;
+    private GameManager gameManager;
+    private AnimationManager animManager;
 
     protected override void Awake()
     {
-        base.Awake(); 
+        base.Awake();
+
+        gameManager = GameManager.Instance;
+        animManager = AnimationManager.Instance;
     }
 
     public void Save()

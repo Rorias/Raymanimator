@@ -91,6 +91,10 @@ public sealed class GameSettings
     [SerializeField] private Themes tme = Themes.Dark;
     public Languages editorLanguage { get { return lne; } set { lne = value; } }
     [SerializeField] private Languages lne = Languages.English;
+    public string backgroundPath { get { return bgp; } set { bgp = value; } }
+    [SerializeField] private string bgp = string.Empty;
+    public string lastBackground { get { return lbg; } set { lbg = value; } }
+    [SerializeField] private string lbg = string.Empty;
     public Color32 bgColor { get { return bgc; } set { bgc = value; } }
     [SerializeField] private Color32 bgc = new Color32(50, 75, 150, 255);
 

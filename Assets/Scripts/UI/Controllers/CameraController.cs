@@ -13,8 +13,6 @@ public class CameraController : MonoBehaviour
     private TMP_InputField[] allInputfields;
     private Camera mainCam;
 
-    private List<RaycastResult> rayResults = new List<RaycastResult>();
-
     private Vector3 origin;
 
     private bool isOnUI = false;
@@ -36,10 +34,9 @@ public class CameraController : MonoBehaviour
             }
         }
 
-        EventSystem.current.RaycastAll(new PointerEventData(EventSystem.current)
-        { position = Input.mousePosition, pointerId = -1 }, rayResults);
+        UIUtility.GetRayResults();
 
-        isOnUI = rayResults.Count > 0;
+        isOnUI = UIUtility.rayResults.Count > 0;
 
         if (!isOnUI)
         {

@@ -20,6 +20,11 @@ public class AnimationPathSetting : Settings
         animationPathIF.onEndEdit.AddListener(delegate { SetAnimationPath(); });
     }
 
+    private void Start()
+    {
+        LoadAnimationsSettings();
+    }
+
     public void LoadAnimationsSettings()
     {
         if (string.IsNullOrWhiteSpace(settings.animationsPath) || !Directory.Exists(settings.animationsPath))
@@ -53,6 +58,7 @@ public class AnimationPathSetting : Settings
         }
 
         settings.animationsPath = animationPath;
+        settings.SaveSettings();
         return true;
     }
 }

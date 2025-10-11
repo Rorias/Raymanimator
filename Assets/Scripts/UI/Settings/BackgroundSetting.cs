@@ -28,9 +28,14 @@ public class BackgroundSettings : Settings
             backgroundsDD.onValueChanged.AddListener(delegate { SetCurrentBackground(); });
         }
 
-        colorSlider.SetRed += BGColorRed;
-        colorSlider.SetGreen += BGColorGreen;
-        colorSlider.SetBlue += BGColorBlue;
+        colorSlider.UpdateRed += SetColorRed;
+        colorSlider.UpdateGreen += BGColorGreen;
+        colorSlider.UpdateBlue += BGColorBlue;
+
+        colorSlider.SetRed += SaveColor;
+        colorSlider.SetGreen += SaveColor;
+        colorSlider.SetBlue += SaveColor;
+
         colorSlider.Reset += ResetColor;
 
         cam = Camera.main;
@@ -56,23 +61,23 @@ public class BackgroundSettings : Settings
 
     }
 
-    public void BGColorRed()
+    public void SetColorRed()
     {
         cam.backgroundColor = colorSlider.GetColorBarRed(cam.backgroundColor);
-        settings.bgColor = cam.backgroundColor;
-        settings.SaveSettings();
     }
 
     public void BGColorGreen()
     {
         cam.backgroundColor = colorSlider.GetColorBarGreen(cam.backgroundColor);
-        settings.bgColor = cam.backgroundColor;
-        settings.SaveSettings();
     }
 
     public void BGColorBlue()
     {
         cam.backgroundColor = colorSlider.GetColorBarBlue(cam.backgroundColor);
+    }
+
+    public void SaveColor()
+    {
         settings.bgColor = cam.backgroundColor;
         settings.SaveSettings();
     }
@@ -80,9 +85,7 @@ public class BackgroundSettings : Settings
     public void ResetColor()
     {
         cam.backgroundColor = new Color(0.196f, 0.294f, 0.627f, 1);
-        settings.bgColor = cam.backgroundColor;
-        settings.SaveSettings();
-
         colorSlider.SetColorSliders(cam.backgroundColor);
+        SaveColor();
     }
 }

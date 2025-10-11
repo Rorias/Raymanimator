@@ -13,12 +13,18 @@ public class CreateMenu : MonoBehaviour
     public TMP_InputField partsIF;
     public TMP_InputField xSizeIF;
     public TMP_InputField ySizeIF;
+    public ButtonPlus createBtn;
 
     private GameManager gameManager;
     private GameSettings settings;
+    private InputManager input;
 
     private void Awake()
     {
+        gameManager = GameManager.Instance;
+        settings = GameSettings.Instance;
+        input = InputManager.Instance;
+
         nameIF.onEndEdit.AddListener(delegate { SetAnimationName(); });
         framesIF.onEndEdit.AddListener(delegate { SetMaxFrameCount(); });
         partsIF.onEndEdit.AddListener(delegate { SetMaxPartCount(); });
@@ -26,10 +32,17 @@ public class CreateMenu : MonoBehaviour
         ySizeIF.onEndEdit.AddListener(delegate { SetGridSizeY(); });
     }
 
-    private void Start()
+    private void Update()
     {
-        gameManager = GameManager.Instance;
-        settings = GameSettings.Instance;
+        if (!createBtn.gameObject.activeInHierarchy)
+        {
+            return;
+        }
+
+        if (input.GetKeyDown(InputManager.InputKey.Confirm))
+        {
+            createBtn.onClick.Invoke();
+        }
     }
 
     public void Initialize()

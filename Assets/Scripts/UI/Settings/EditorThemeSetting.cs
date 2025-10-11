@@ -22,6 +22,11 @@ public class EditorThemeSetting : Settings
         editorThemeDD.onValueChanged.AddListener(delegate { SetEditorTheme(); });
     }
 
+    private void Start()
+    {
+        LoadThemeSettings();
+    }
+
     public void LoadThemeSettings()
     {
         editorThemeDD.ClearOptions();

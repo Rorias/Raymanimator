@@ -20,7 +20,7 @@ public class Tooltips : Settings
     private Image bg;
     private TMP_Text tooltipText;
 
-    private List<RaycastResult> rayResults = new List<RaycastResult>();
+    private Vector2 tooltipSize;
 
     private bool tooltipsOn = true;
     private bool extendedOn = false;
@@ -125,6 +125,8 @@ public class Tooltips : Settings
 
         tooltipsToggle.onValueChanged.AddListener(delegate { TooltipState(); });
         extendedToggle.onValueChanged.AddListener(delegate { ExtendedState(); });
+
+        tooltipSize = new Vector2(76, 76);
     }
 
     private void Update()
@@ -135,18 +137,19 @@ public class Tooltips : Settings
             return;
         }
 
-        EventSystem.current.RaycastAll(new PointerEventData(EventSystem.current)
-        { position = Input.mousePosition, pointerId = -1 }, rayResults);
+        UIUtility.GetRayResults();
 
-        if (rayResults.Count <= 0)
+        if (UIUtility.rayResults.Count <= 0)
         {
             DisableTooltip();
             return;
         }
 
-        bg.color = new Color(bg.color.r, bg.color.g, bg.color.b, 0.7f);
+        Color c = bg.color;
+        c.a = 0.7f;
+        bg.color = c;
 
-        tooltipText.text = rayResults[0].gameObject.name switch
+        tooltipText.text = UIUtility.rayResults[0].gameObject.name switch
         {
             //File settings
             "SaveAnimationButtonText" => SaveButton + (extendedOn ? SaveButtonExtended : ""),
@@ -200,8 +203,8 @@ public class Tooltips : Settings
         }
 
         int textLength = tooltipText.text.Split('.').Max(x => x.Length);
-
-        rect.sizeDelta = new Vector2(textLength * 7f, 76);
+        tooltipSize.x = textLength * 7f;
+        rect.sizeDelta = tooltipSize;
 
         float tooltipsSizeX = (rect.sizeDelta.x / 2f) * (Screen.width / uiScaler.referenceResolution.x);
         float tooltipsSizeY = (rect.sizeDelta.y / 2f) * (Screen.height / uiScaler.referenceResolution.y);
@@ -212,7 +215,9 @@ public class Tooltips : Settings
 
     private void DisableTooltip()
     {
-        bg.color = new Color(bg.color.r, bg.color.g, bg.color.b, 0);
+        Color c = bg.color;
+        c.a = 0f;
+        bg.color = c;
         tooltipText.text = "";
     }
 
@@ -227,4 +232,3 @@ public class Tooltips : Settings
         extendedOn = !extendedOn;
     }
 }
-

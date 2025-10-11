@@ -5,10 +5,16 @@ using UnityEngine.UI;
 
 public class ColorSlider : MonoBehaviour
 {
+    public Action UpdateRed;
+    public Action UpdateGreen;
+    public Action UpdateBlue;
+    public Action UpdateAlpha;
+
     public Action SetRed;
     public Action SetGreen;
     public Action SetBlue;
     public Action SetAlpha;
+
     public Action Reset;
 
     public Image redHandle;
@@ -16,19 +22,25 @@ public class ColorSlider : MonoBehaviour
     public Image blueHandle;
     public Image alphaHandle;
 
-    public Slider redSlider;
-    public Slider greenSlider;
-    public Slider blueSlider;
-    public Slider alphaSlider;
+    public SliderPlus redSlider;
+    public SliderPlus greenSlider;
+    public SliderPlus blueSlider;
+    public SliderPlus alphaSlider;
 
     public ButtonPlus resetButton;
 
     private void Awake()
     {
-        redSlider.onValueChanged.AddListener(delegate { SetRed?.Invoke(); });
-        greenSlider.onValueChanged.AddListener(delegate { SetGreen?.Invoke(); });
-        blueSlider.onValueChanged.AddListener(delegate { SetBlue?.Invoke(); });
-        alphaSlider.onValueChanged.AddListener(delegate { SetAlpha?.Invoke(); });
+        redSlider.onValueChanged.AddListener(delegate { UpdateRed?.Invoke(); });
+        greenSlider.onValueChanged.AddListener(delegate { UpdateGreen?.Invoke(); });
+        blueSlider.onValueChanged.AddListener(delegate { UpdateBlue?.Invoke(); });
+        alphaSlider.onValueChanged.AddListener(delegate { UpdateAlpha?.Invoke(); });
+
+        redSlider.onMouseUp.AddListener(delegate { SetRed?.Invoke(); });
+        greenSlider.onMouseUp.AddListener(delegate { SetGreen?.Invoke(); });
+        blueSlider.onMouseUp.AddListener(delegate { SetBlue?.Invoke(); });
+        alphaSlider.onMouseUp.AddListener(delegate { SetAlpha?.Invoke(); });
+
         resetButton.onClick.AddListener(delegate { Reset?.Invoke(); });
     }
 

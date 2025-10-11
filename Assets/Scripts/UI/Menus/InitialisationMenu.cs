@@ -16,13 +16,7 @@ public class InitialisationMenu : MonoBehaviour
     private void Start()
     {
         settings = GameSettings.Instance;
-
-        if (settings.lastSpriteset == "")
-        {
-            spritesetPathIF.text = settings.spritesetsPath;
-        }
-
-        animationPathIF.text = settings.animationsPath;
+        spritesetPathIF.text = settings.spritesetsPath;
     }
 
     public void ApplySettings()

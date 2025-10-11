@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,11 +5,13 @@ using System.Linq;
 using TMPro;
 
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class UIUtility : MonoBehaviour
 {
     public static readonly List<string> imageTypes = new List<string> { ".jpg", ".jpeg", ".png" };
+    public static readonly List<RaycastResult> rayResults = new List<RaycastResult>();
+    private static PointerEventData pointerData;
 
     private GameManager gameManager;
     private GameSettings settings;
@@ -20,6 +20,17 @@ public class UIUtility : MonoBehaviour
     {
         gameManager = GameManager.Instance;
         settings = GameSettings.Instance;
+
+        pointerData = new PointerEventData(EventSystem.current)
+        {
+            pointerId = -1,
+        };
+    }
+
+    public static void GetRayResults()
+    {
+        pointerData.position = Input.mousePosition;
+        EventSystem.current.RaycastAll(pointerData, rayResults);
     }
 
     public void ReloadDropdownSpriteOptions(string _path, TMP_Dropdown _dropdown)

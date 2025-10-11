@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 using TMPro;
 
@@ -10,9 +11,9 @@ using UnityEngine.UI;
 
 public partial class AnimatorController : MonoBehaviour
 {
-    private GameManager gameManager = GameManager.Instance;
-    private GameSettings settings = GameSettings.Instance;
-    private InputManager input = InputManager.Instance;
+    private GameManager gameManager;
+    private GameSettings settings;
+    private InputManager input;
 
     //current frame and current parts
     private Frame currentFrame;
@@ -39,9 +40,9 @@ public partial class AnimatorController : MonoBehaviour
     public Slider frameSelectSlider;
     public Slider partSelectSlider;
 
-    private List<GamePart> GameParts = new List<GamePart>();
-    private List<SpriteRenderer> PreviousGhostParts = new List<SpriteRenderer>();
-    private List<SpriteRenderer> NextGhostParts = new List<SpriteRenderer>();
+    private List<GamePart> gameParts = new List<GamePart>();
+    private List<SpriteRenderer> previousGhostParts = new List<SpriteRenderer>();
+    private List<SpriteRenderer> nextGhostParts = new List<SpriteRenderer>();
 
     private List<GamePart> currentGameParts = new List<GamePart>();
 
@@ -52,8 +53,10 @@ public partial class AnimatorController : MonoBehaviour
     private TMP_Text partSelectText;
     private TMP_Text frameSelectText;
 
-    private WaitForSeconds playbackSpeedWFS = new WaitForSeconds(0.02f);
+    private WaitForSecondsRealtime playbackSpeedWFS = new WaitForSecondsRealtime(0.02f);
     private Animation thisAnim;
+
+    private Vector3 nextFramePosition;
 
     private const float standardDelayTime = 0.3f;
     private const float hotkeyDelayTime = 0.05f;
@@ -70,11 +73,15 @@ public partial class AnimatorController : MonoBehaviour
     private bool playingAnimation = false;
     private bool copyToNextFrame = true;
     private bool copyToNextFrameWasOn = false;
-    private bool ghostingPrevious = true;
-    private bool ghostingNext = true;
+    [NonSerialized] public bool ghostingPrevious = true;
+    [NonSerialized] public bool ghostingNext = true;
 
     private void Awake()
     {
+        gameManager = GameManager.Instance;
+        settings = GameSettings.Instance;
+        input = InputManager.Instance;
+
         allInputfields = FindObjectsOfType<TMP_InputField>();
         allButtons = FindObjectsOfType<ButtonPlus>();
         allToggles = FindObjectsOfType<Toggle>();
@@ -83,7 +90,7 @@ public partial class AnimatorController : MonoBehaviour
         partSelectSlider.onValueChanged.AddListener(delegate { ChangeSelectedPart(); });
 
         frameSelectText = GameObject.Find("CurrentFrame").GetComponent<TMP_Text>();
-        frameSelectSlider.onValueChanged.AddListener(delegate { ChangeSelectedFrame(); });
+        frameSelectSlider.onValueChanged.AddListener((_value) => { ChangeSelectedFrame(_value); });
 
         exitButton.onClick.AddListener(delegate { exitConfirmWindow.OpenWindow("Save animation?", SaveAndQuit); exitConfirmWindow.noButton.onClick.AddListener(delegate { Quit(); }); });
         playButton.onClick.AddListener(delegate { PlayAnimation(); });
@@ -94,9 +101,6 @@ public partial class AnimatorController : MonoBehaviour
         xPosIF.onEndEdit.AddListener(delegate { SetXPos(); });
         yPosIF.onEndEdit.AddListener(delegate { SetYPos(); });
         priorityIF.onEndEdit.AddListener(delegate { SetPriority(); });
-
-        ghostingPrevious = settings.previousGhostOn;
-        ghostingNext = settings.nextGhostOn;
 
         thisAnim = gameManager.currentAnimation;
     }
@@ -134,7 +138,7 @@ public partial class AnimatorController : MonoBehaviour
 
         currentFrame = thisAnim.frames[0];
         currentParts.Add(currentFrame.frameParts[0]);
-        currentGameParts.Add(GameParts[0]);
+        currentGameParts.Add(gameParts[0]);
 
         if (settings.lastSpriteset != thisAnim.usedSpriteset)
         {
@@ -326,7 +330,7 @@ public partial class AnimatorController : MonoBehaviour
         GamePart gamePart = gameObjPart.GetComponent<GamePart>();
         gamePart.Initialize(this);
 
-        GameParts.Add(gamePart);
+        gameParts.Add(gamePart);
 
         gamePart.sr.sortingOrder = _part + 1;
         //Set visuals to position of first frame of the animation
@@ -349,7 +353,7 @@ public partial class AnimatorController : MonoBehaviour
         SpriteRenderer prevGhostPartSR = prevGhostPart.GetComponent<SpriteRenderer>();
         prevGhostPartSR.color = settings.previousGhostColor;
 
-        PreviousGhostParts.Add(prevGhostPartSR);
+        previousGhostParts.Add(prevGhostPartSR);
     }
 
     private void CreateNextGhostPart(int _part)
@@ -359,7 +363,7 @@ public partial class AnimatorController : MonoBehaviour
         SpriteRenderer nextGhostPartSR = nextGhostPart.GetComponent<SpriteRenderer>();
         nextGhostPartSR.color = settings.nextGhostColor;
 
-        NextGhostParts.Add(nextGhostPartSR);
+        nextGhostParts.Add(nextGhostPartSR);
     }
 
     private void SetValues()
@@ -384,12 +388,14 @@ public partial class AnimatorController : MonoBehaviour
             if (copyToNextFrame) { copyToNextFrameWasOn = true; copyToNextFrame = false; }
             else { copyToNextFrameWasOn = false; }
 
-            for (int i = 0; i < GameParts.Count; i++)
+            for (int i = 0; i < gameParts.Count; i++)
             {
-                if (GameParts[i].polyColl != null)
+                if (gameParts[i].polyColl != null)
                 {
-                    GameParts[i].polyColl.enabled = false;
+                    gameParts[i].polyColl.enabled = false;
                 }
+
+                gameParts[i].anim.enabled = false;
             }
 
             playButton.GetComponentInChildren<TMP_Text>().text = "Stop";
@@ -403,12 +409,14 @@ public partial class AnimatorController : MonoBehaviour
 
             if (copyToNextFrameWasOn) { copyToNextFrame = true; }
 
-            for (int i = 0; i < GameParts.Count; i++)
+            for (int i = 0; i < gameParts.Count; i++)
             {
-                if (GameParts[i].polyColl != null)
+                if (gameParts[i].polyColl != null)
                 {
-                    GameParts[i].polyColl.enabled = true;
+                    gameParts[i].polyColl.enabled = true;
                 }
+
+                gameParts[i].anim.enabled = true;
             }
 
             playButton.GetComponentInChildren<TMP_Text>().text = "Play";
@@ -480,7 +488,7 @@ public partial class AnimatorController : MonoBehaviour
             playbackSpeedIF.text = gameManager.ParseToString(playbackSpeed);
         }
 
-        playbackSpeedWFS = new WaitForSeconds(playbackSpeed);
+        playbackSpeedWFS = new WaitForSecondsRealtime(playbackSpeed);
         settings.lastPlaybackSpeed = playbackSpeed;
         settings.SaveSettings();
     }
@@ -533,43 +541,43 @@ public partial class AnimatorController : MonoBehaviour
         frameSelectSlider.value--;
     }
 
-    public void ChangeSelectedFrame()
+    public void ChangeSelectedFrame(float _value)
     {
-        int frameId = Convert.ToInt32(frameSelectSlider.value);
+        int frameId = Convert.ToInt32(_value);
 
         for (int i = 0; i < thisAnim.maxPartCount; i++)
         {
-            currentFrame.frameParts[i].part = GameParts[i].sr.sprite;
-            currentFrame.frameParts[i].xPos = GameParts[i].transform.position.x;
-            currentFrame.frameParts[i].yPos = GameParts[i].transform.position.y;
-            currentFrame.frameParts[i].flipX = GameParts[i].sr.flipX;
-            currentFrame.frameParts[i].flipY = GameParts[i].sr.flipY;
+            currentFrame.frameParts[i].part = gameParts[i].sr.sprite;
+            currentFrame.frameParts[i].xPos = gameParts[i].transform.position.x;
+            currentFrame.frameParts[i].yPos = gameParts[i].transform.position.y;
+            currentFrame.frameParts[i].flipX = gameParts[i].sr.flipX;
+            currentFrame.frameParts[i].flipY = gameParts[i].sr.flipY;
 
-            if (ghostingPrevious && !playingAnimation && frameSelectSlider.value > 0)//previous frame exists
+            if (ghostingPrevious && !playingAnimation && frameId > 0)//previous frame exists
             {
-                PreviousGhostParts[i].transform.position = new Vector2(thisAnim.frames[frameId - 1].frameParts[i].xPos, thisAnim.frames[frameId - 1].frameParts[i].yPos);
-                PreviousGhostParts[i].sprite = thisAnim.frames[frameId - 1].frameParts[i].part;
-                PreviousGhostParts[i].flipX = thisAnim.frames[frameId - 1].frameParts[i].flipX;
-                PreviousGhostParts[i].flipY = thisAnim.frames[frameId - 1].frameParts[i].flipY;
+                previousGhostParts[i].transform.position = new Vector2(thisAnim.frames[frameId - 1].frameParts[i].xPos, thisAnim.frames[frameId - 1].frameParts[i].yPos);
+                previousGhostParts[i].sprite = thisAnim.frames[frameId - 1].frameParts[i].part;
+                previousGhostParts[i].flipX = thisAnim.frames[frameId - 1].frameParts[i].flipX;
+                previousGhostParts[i].flipY = thisAnim.frames[frameId - 1].frameParts[i].flipY;
             }
             else
             {
-                PreviousGhostParts[i].sprite = null;
+                previousGhostParts[i].sprite = null;
             }
 
-            if (ghostingNext && !playingAnimation && frameSelectSlider.value < thisAnim.maxFrameCount - 1)//previous frame exists
+            if (ghostingNext && !playingAnimation && frameId < thisAnim.maxFrameCount - 1)//previous frame exists
             {
-                NextGhostParts[i].transform.position = new Vector2(thisAnim.frames[frameId + 1].frameParts[i].xPos, thisAnim.frames[frameId + 1].frameParts[i].yPos);
-                NextGhostParts[i].sprite = thisAnim.frames[frameId + 1].frameParts[i].part;
-                NextGhostParts[i].flipX = thisAnim.frames[frameId + 1].frameParts[i].flipX;
-                NextGhostParts[i].flipY = thisAnim.frames[frameId + 1].frameParts[i].flipY;
+                nextGhostParts[i].transform.position = new Vector2(thisAnim.frames[frameId + 1].frameParts[i].xPos, thisAnim.frames[frameId + 1].frameParts[i].yPos);
+                nextGhostParts[i].sprite = thisAnim.frames[frameId + 1].frameParts[i].part;
+                nextGhostParts[i].flipX = thisAnim.frames[frameId + 1].frameParts[i].flipX;
+                nextGhostParts[i].flipY = thisAnim.frames[frameId + 1].frameParts[i].flipY;
             }
             else
             {
-                NextGhostParts[i].sprite = null;
+                nextGhostParts[i].sprite = null;
             }
 
-            if (copyToNextFrame && frameSelectSlider.value > currentFrame.frameID &&
+            if (copyToNextFrame && frameId > currentFrame.frameID &&
                 thisAnim.frames[frameId].frameParts[i].part == null)
             {
                 //Set actual current part data to the last frame part data if copyToNextFrame is true
@@ -581,18 +589,21 @@ public partial class AnimatorController : MonoBehaviour
                 thisAnim.frames[frameId].frameParts[i].flipY = currentFrame.frameParts[i].flipY;
             }
 
-            GameParts[i].transform.position = new Vector3(thisAnim.frames[frameId].frameParts[i].xPos, thisAnim.frames[frameId].frameParts[i].yPos, 0);
-            GameParts[i].sr.sprite = thisAnim.frames[frameId].frameParts[i].part;
-            GameParts[i].sr.flipX = thisAnim.frames[frameId].frameParts[i].flipX;
-            GameParts[i].sr.flipY = thisAnim.frames[frameId].frameParts[i].flipY;
+            nextFramePosition.x = thisAnim.frames[frameId].frameParts[i].xPos;
+            nextFramePosition.y = thisAnim.frames[frameId].frameParts[i].yPos;
+            gameParts[i].transform.position = nextFramePosition;
+
+            gameParts[i].sr.sprite = thisAnim.frames[frameId].frameParts[i].part;
+            gameParts[i].sr.flipX = thisAnim.frames[frameId].frameParts[i].flipX;
+            gameParts[i].sr.flipY = thisAnim.frames[frameId].frameParts[i].flipY;
 
             if (!playingAnimation)
             {
-                if (GameParts[i].polyColl && GameParts[i].polyColl.enabled)
+                if (gameParts[i].polyColl && gameParts[i].polyColl.enabled)
                 {
-                    Destroy(GameParts[i].polyColl);
-                    GameParts[i].gameObject.AddComponent<PolygonCollider2D>();
-                    GameParts[i].polyColl = GameParts[i].GetComponent<PolygonCollider2D>();
+                    DestroyImmediate(gameParts[i].polyColl);
+                    gameParts[i].gameObject.AddComponent<PolygonCollider2D>();
+                    gameParts[i].polyColl = gameParts[i].GetComponent<PolygonCollider2D>();
                 }
             }
         }
@@ -613,7 +624,7 @@ public partial class AnimatorController : MonoBehaviour
         for (int i = 0; i < thisAnim.maxPartCount; i++)
         {
             currentFrame.frameParts[i].part = null;
-            GameParts[i].sr.sprite = null;
+            gameParts[i].sr.sprite = null;
         }
     }
 
@@ -622,9 +633,20 @@ public partial class AnimatorController : MonoBehaviour
         copyToNextFrame = !copyToNextFrame;
     }
 
-    public void Ghosting()//TODO: apply ghosting next/previous
+    public void UpdatePrevGhostColor()
     {
-        ghostingPrevious = !ghostingPrevious;
+        for (int i = 0; i < previousGhostParts.Count; i++)
+        {
+            previousGhostParts[i].color = settings.previousGhostColor;
+        }
+    }
+
+    public void UpdateNextGhostColor()
+    {
+        for (int i = 0; i < nextGhostParts.Count; i++)
+        {
+            nextGhostParts[i].color = settings.nextGhostColor;
+        }
     }
 
     //private void LoadPartData()
@@ -676,10 +698,10 @@ public partial class AnimatorController : MonoBehaviour
             thisAnim.frames[allFrames].frameParts.RemoveAt(thisAnim.maxPartCount);
         }
 
-        GameParts.RemoveAt(thisAnim.maxPartCount);
+        gameParts.RemoveAt(thisAnim.maxPartCount);
 
-        PreviousGhostParts.RemoveAt(thisAnim.maxPartCount);
-        NextGhostParts.RemoveAt(thisAnim.maxPartCount);
+        previousGhostParts.RemoveAt(thisAnim.maxPartCount);
+        nextGhostParts.RemoveAt(thisAnim.maxPartCount);
 
         partSelectSlider.maxValue = thisAnim.maxPartCount - 1;
 
@@ -691,12 +713,12 @@ public partial class AnimatorController : MonoBehaviour
     public void AddPartToMultiselect(int _partID)
     {
         //If ?? or part is already selected
-        if (_partID >= thisAnim.maxPartCount || currentGameParts.Contains(GameParts[_partID]))
+        if (_partID >= thisAnim.maxPartCount || currentGameParts.Contains(gameParts[_partID]))
         {
             return;
         }
 
-        currentGameParts.Add(GameParts[_partID]);
+        currentGameParts.Add(gameParts[_partID]);
 
         if (!playingAnimation)
         {
@@ -716,7 +738,7 @@ public partial class AnimatorController : MonoBehaviour
 
         for (int i = 0; i < thisAnim.maxPartCount; i++)
         {
-            currentGameParts.Add(GameParts[i]);
+            currentGameParts.Add(gameParts[i]);
 
             if (!playingAnimation)
             {
@@ -758,7 +780,7 @@ public partial class AnimatorController : MonoBehaviour
         currentParts.Clear();
         currentGameParts.Clear();
 
-        currentGameParts.Add(GameParts[partID]);
+        currentGameParts.Add(gameParts[partID]);
 
         if (!playingAnimation)
         {
@@ -786,21 +808,9 @@ public partial class AnimatorController : MonoBehaviour
     public void UpdateSelectedParts()
     {
         //Update all currently selected part ids to be replaced with their counter part from the newly opened frame
-        List<int> partIds = new List<int>();
-
         for (int i = 0; i < currentParts.Count; i++)
         {
-            partIds.Add(currentParts[i].partID);
-        }
-
-        currentParts.Clear();
-
-        for (int i = 0; i < thisAnim.maxPartCount; i++)
-        {
-            if (partIds.Contains(i))
-            {
-                currentParts.Add(currentFrame.frameParts[i]);
-            }
+            currentParts[i] = currentFrame.frameParts[i];
         }
     }
 

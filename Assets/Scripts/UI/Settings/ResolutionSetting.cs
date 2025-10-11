@@ -18,6 +18,11 @@ public class ResolutionSetting : Settings
         resolutionDD.onValueChanged.AddListener(delegate { SetResolution(); });
     }
 
+    private void Start()
+    {
+        LoadResSettings();
+    }
+
     public void LoadResSettings()
     {
         resolutionDD.ClearOptions();
@@ -42,8 +47,6 @@ public class ResolutionSetting : Settings
         }
 
         resolutionDD.value = settings.resNumber;
-
-        SetResolution();
     }
 
     public void SetResolution()

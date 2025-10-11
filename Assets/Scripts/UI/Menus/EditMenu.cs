@@ -16,6 +16,7 @@ public class EditMenu : MonoBehaviour
     public ConfirmWindow deleteConfirmWindow;
 
     public TMP_Dropdown loadAnimsDD;
+    public ButtonPlus loadBtn;
     public ButtonPlus renameBtn;
     public ButtonPlus copyBtn;
     public ButtonPlus deleteBtn;
@@ -33,6 +34,11 @@ public class EditMenu : MonoBehaviour
 
     private void Awake()
     {
+        gameManager = GameManager.Instance;
+        settings = GameSettings.Instance;
+        animManager = AnimationManager.Instance;
+        input = InputManager.Instance;
+
         loadAnimsDD.onValueChanged.AddListener(delegate { GetAnimationName(); });
 
         renameBtn.onClick.AddListener(delegate { OpenRenameMenu(); });
@@ -42,19 +48,16 @@ public class EditMenu : MonoBehaviour
         renameIF.onEndEdit.AddListener(delegate { RenameAnimation(); });
     }
 
-    private void Start()
-    {
-        gameManager = GameManager.Instance;
-        settings = GameSettings.Instance;
-        animManager = AnimationManager.Instance;
-        input = InputManager.Instance;
-    }
-
     private void Update()
     {
+        if (!loadBtn.gameObject.activeInHierarchy)
+        {
+            return;
+        }
+
         if (input.GetKeyDown(InputManager.InputKey.Confirm))
         {
-            LoadAnimation();
+            loadBtn.onClick.Invoke();
         }
     }
 

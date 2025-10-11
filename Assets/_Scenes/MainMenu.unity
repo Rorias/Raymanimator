@@ -188,6 +188,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8757e2e791253494199eb58509c40446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &58290065 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6903536507357118851, guid: b38f102f9d2dcaf448f8feeae38fcb6f, type: 3}
+  m_PrefabInstance: {fileID: 1275805285}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c9a9568e4fca0440825ea678a0e65cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &60436791
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4492,6 +4503,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3624370161639182568, guid: 95f24e8dbe2c7ef4fb4bf2582b0121c3, type: 3}
   m_PrefabInstance: {fileID: 1178745340}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1178745342 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4387130675993231231, guid: 95f24e8dbe2c7ef4fb4bf2582b0121c3, type: 3}
+  m_PrefabInstance: {fileID: 1178745340}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94126580b9470054f8420bce010b30ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1186644460
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4969,6 +4991,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: BackgroundColorSlider
       objectReference: {fileID: 0}
+    - target: {fileID: 4797396630732406210, guid: b38f102f9d2dcaf448f8feeae38fcb6f, type: 3}
+      propertyPath: redSlider
+      value: 
+      objectReference: {fileID: 2037038201}
+    - target: {fileID: 4797396630732406210, guid: b38f102f9d2dcaf448f8feeae38fcb6f, type: 3}
+      propertyPath: blueSlider
+      value: 
+      objectReference: {fileID: 1580643105}
+    - target: {fileID: 4797396630732406210, guid: b38f102f9d2dcaf448f8feeae38fcb6f, type: 3}
+      propertyPath: alphaSlider
+      value: 
+      objectReference: {fileID: 1302470117}
+    - target: {fileID: 4797396630732406210, guid: b38f102f9d2dcaf448f8feeae38fcb6f, type: 3}
+      propertyPath: greenSlider
+      value: 
+      objectReference: {fileID: 58290065}
     - target: {fileID: 4928515794511686171, guid: b38f102f9d2dcaf448f8feeae38fcb6f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -5028,6 +5066,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ca4339fa5860a7749825723ad0745095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1302470117 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8843453777820057302, guid: b38f102f9d2dcaf448f8feeae38fcb6f, type: 3}
+  m_PrefabInstance: {fileID: 1275805285}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c9a9568e4fca0440825ea678a0e65cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1324885823 stripped
@@ -5699,6 +5748,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 94126580b9470054f8420bce010b30ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1580643105 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4274530726383616000, guid: b38f102f9d2dcaf448f8feeae38fcb6f, type: 3}
+  m_PrefabInstance: {fileID: 1275805285}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c9a9568e4fca0440825ea678a0e65cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1602940338
@@ -7574,42 +7634,6 @@ MonoBehaviour:
   initializeSettings:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 680515204}
-        m_TargetAssemblyTypeName: EditorThemeSetting, Scripts
-        m_MethodName: LoadThemeSettings
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 680515203}
-        m_TargetAssemblyTypeName: AnimationPathSetting, Scripts
-        m_MethodName: LoadAnimationsSettings
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 680515205}
-        m_TargetAssemblyTypeName: ResolutionSetting, Scripts
-        m_MethodName: LoadResSettings
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 680515200}
         m_TargetAssemblyTypeName: SpritesetSetting, Scripts
         m_MethodName: LoadSpritesetSettings
@@ -7638,6 +7662,7 @@ MonoBehaviour:
   renameMenu: {fileID: 1801212052}
   deleteConfirmWindow: {fileID: 283185352}
   loadAnimsDD: {fileID: 5135636759562171236}
+  loadBtn: {fileID: 1178745342}
   renameBtn: {fileID: 383928591}
   copyBtn: {fileID: 1506588334}
   deleteBtn: {fileID: 1836625677}
@@ -7660,6 +7685,7 @@ MonoBehaviour:
   partsIF: {fileID: 1602940340}
   xSizeIF: {fileID: 2110240304}
   ySizeIF: {fileID: 2126923758}
+  createBtn: {fileID: 2105179386}
 --- !u!114 &1920594651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8147,6 +8173,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startMenu: {fileID: 418209002}
   currentMenu: {fileID: 0}
+--- !u!114 &2037038201 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1152722606701240311, guid: b38f102f9d2dcaf448f8feeae38fcb6f, type: 3}
+  m_PrefabInstance: {fileID: 1275805285}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c9a9568e4fca0440825ea678a0e65cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2105179386 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4387130675993231231, guid: 95f24e8dbe2c7ef4fb4bf2582b0121c3, type: 3}
+  m_PrefabInstance: {fileID: 1996769132}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94126580b9470054f8420bce010b30ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2110240302
 PrefabInstance:
   m_ObjectHideFlags: 0

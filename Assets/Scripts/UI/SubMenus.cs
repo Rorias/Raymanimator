@@ -8,7 +8,6 @@ public class SubMenus : MonoBehaviour
     public SubMenuItem defaultSubMenu;
     public List<SubMenuItem> subMenus = new List<SubMenuItem>();
 
-    private List<RaycastResult> rayResults = new List<RaycastResult>();
     private SubMenuItem currentSubMenu;
 
     private InputManager input;
@@ -23,10 +22,9 @@ public class SubMenus : MonoBehaviour
     {
         if (input.GetKeyDown(InputManager.InputKey.Select))
         {
-            EventSystem.current.RaycastAll(new PointerEventData(EventSystem.current)
-            { position = Input.mousePosition, pointerId = -1 }, rayResults);
+            UIUtility.GetRayResults();
             //If something was clicked, keep the menu open
-            if (rayResults.Count > 0)
+            if (UIUtility.rayResults.Count > 0)
             {
                 return;
             }

@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 7175204038350114200}
   - component: {fileID: 7097630877464316855}
   m_Layer: 5
-  m_Name: Fill
+  m_Name: RedFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -316,10 +316,10 @@ MonoBehaviour:
   greenHandle: {fileID: 5820709620779105465}
   blueHandle: {fileID: 3504443763020605013}
   alphaHandle: {fileID: 7622855110556480553}
-  redSlider: {fileID: 3840538668384532671}
-  greenSlider: {fileID: 7449523147661721869}
-  blueSlider: {fileID: 2117700570680964329}
-  alphaSlider: {fileID: 2947847321423597099}
+  redSlider: {fileID: 1152722606701240311}
+  greenSlider: {fileID: 6903536507357118851}
+  blueSlider: {fileID: 4274530726383616000}
+  alphaSlider: {fileID: 8843453777820057302}
   resetButton: {fileID: 1189818926780645867}
 --- !u!222 &6700657995517823404
 CanvasRenderer:
@@ -452,7 +452,7 @@ GameObject:
   - component: {fileID: 8150254032634577840}
   - component: {fileID: 5055448821542878126}
   m_Layer: 5
-  m_Name: Fill
+  m_Name: BlueFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -749,7 +749,7 @@ GameObject:
   - component: {fileID: 2828269735667198111}
   - component: {fileID: 1421819618941756599}
   m_Layer: 5
-  m_Name: Fill
+  m_Name: GreenFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -896,7 +896,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7637321874988784616}
-  - component: {fileID: 7449523147661721869}
+  - component: {fileID: 6903536507357118851}
   m_Layer: 5
   m_Name: GreenSlider
   m_TagString: Untagged
@@ -926,7 +926,7 @@ RectTransform:
   m_AnchoredPosition: {x: -16, y: -23}
   m_SizeDelta: {x: -32, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7449523147661721869
+--- !u!114 &6903536507357118851
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -935,7 +935,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5727260741390168694}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c9a9568e4fca0440825ea678a0e65cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -977,6 +977,9 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+  onMouseUp:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5911974302464262287
 GameObject:
   m_ObjectHideFlags: 0
@@ -986,7 +989,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8158174361275866032}
-  - component: {fileID: 2117700570680964329}
+  - component: {fileID: 4274530726383616000}
   m_Layer: 5
   m_Name: BlueSlider
   m_TagString: Untagged
@@ -1016,7 +1019,7 @@ RectTransform:
   m_AnchoredPosition: {x: -16, y: -38}
   m_SizeDelta: {x: -32, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2117700570680964329
+--- !u!114 &4274530726383616000
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1025,7 +1028,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5911974302464262287}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c9a9568e4fca0440825ea678a0e65cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -1065,6 +1068,9 @@ MonoBehaviour:
   m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  onMouseUp:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &5990104255750151151
@@ -1151,7 +1157,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2772743713003883325}
-  - component: {fileID: 3840538668384532671}
+  - component: {fileID: 1152722606701240311}
   m_Layer: 5
   m_Name: RedSlider
   m_TagString: Untagged
@@ -1181,7 +1187,7 @@ RectTransform:
   m_AnchoredPosition: {x: -16, y: -8}
   m_SizeDelta: {x: -32, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3840538668384532671
+--- !u!114 &1152722606701240311
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1190,7 +1196,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6683731299998375811}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c9a9568e4fca0440825ea678a0e65cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -1230,6 +1236,9 @@ MonoBehaviour:
   m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  onMouseUp:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &7074593751061188542
@@ -1316,7 +1325,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6738981244761878999}
-  - component: {fileID: 2947847321423597099}
+  - component: {fileID: 8843453777820057302}
   m_Layer: 5
   m_Name: AlphaSlider
   m_TagString: Untagged
@@ -1346,7 +1355,7 @@ RectTransform:
   m_AnchoredPosition: {x: -16, y: -53}
   m_SizeDelta: {x: -32, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2947847321423597099
+--- !u!114 &8843453777820057302
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1355,7 +1364,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7233006296202299220}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c9a9568e4fca0440825ea678a0e65cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -1395,6 +1404,9 @@ MonoBehaviour:
   m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  onMouseUp:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &7330673686509261333
@@ -1556,7 +1568,7 @@ GameObject:
   - component: {fileID: 2433652854622957220}
   - component: {fileID: 7872056395050246733}
   m_Layer: 5
-  m_Name: Fill
+  m_Name: AlphaFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
