@@ -27,11 +27,17 @@ public class GamePart : MonoBehaviour
 
     private bool canDoubleClick = false;
 
+    private void Awake()
+    {
+        mainCam = Camera.main;
+
+        sr = GetComponent<SpriteRenderer>();
+    }
+
     public void Initialize(AnimatorController _animatorC)
     {
         multipleSelected = false;
         animatorC = _animatorC;
-        mainCam = Camera.main;
 
         sr = GetComponent<SpriteRenderer>();
         polyColl = GetComponent<PolygonCollider2D>();

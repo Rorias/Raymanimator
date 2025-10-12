@@ -17,8 +17,6 @@ public class SpritesDropdown : MonoBehaviour
 
     private GameManager gameManager;
 
-    private Dictionary<int, Sprite> possibleSprites = new Dictionary<int, Sprite>();
-
     private float lastOpenedPositionDD = 0f;
 
     private void Awake()
@@ -30,7 +28,7 @@ public class SpritesDropdown : MonoBehaviour
     {
         if (!dropdownActive)
         {
-            if (GameObject.Find("Dropdown List") is null)
+            if (transform.Find("Dropdown List") is null)
             {
                 return;
             }
@@ -46,7 +44,7 @@ public class SpritesDropdown : MonoBehaviour
                 currentImage.sprite = ddSprites.options[i - 1].image;
             }
         }
-        else if (GameObject.Find("Dropdown List") is null)
+        else if (transform.Find("Dropdown List") is null)
         {
             dropdownActive = false;
         }
@@ -54,6 +52,8 @@ public class SpritesDropdown : MonoBehaviour
 
     public void InitializeSpritesDropdown()
     {
+        Dictionary<int, Sprite> possibleSprites = new Dictionary<int, Sprite>();
+
         if (gameManager.spritesetImages.Count > 0)
         {
             foreach (KeyValuePair<int, Sprite> mapping in gameManager.spritesetImages)

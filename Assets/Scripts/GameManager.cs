@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
     private InputManager input;
 
     [NonSerialized] public Dictionary<int, Sprite> spritesetImages = new Dictionary<int, Sprite>();
+    [NonSerialized] public Dictionary<int, Sprite> backgroundImages = new Dictionary<int, Sprite>();
     [NonSerialized] public Animation currentAnimation = null;
 
     private void FauxAwake(Scene _s, LoadSceneMode _lsm)

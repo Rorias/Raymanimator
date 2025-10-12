@@ -75,7 +75,7 @@ public class UIUtility : MonoBehaviour
             }
 
             string spritesetName = s.Substring(s.LastIndexOf('\\') + 1);
-            if(spritesetName.Length == s.Length)
+            if (spritesetName.Length == s.Length)
             {
                 spritesetName = s.Substring(s.LastIndexOf('/') + 1);
             }
@@ -105,7 +105,7 @@ public class UIUtility : MonoBehaviour
                     foreach (string folder in spritesetFolders)
                     {
                         int index = folder.LastIndexOf('\\') + 1;
-                        if(index == 0)
+                        if (index == 0)
                         {
                             index = folder.LastIndexOf('/') + 1;
                         }
@@ -115,7 +115,8 @@ public class UIUtility : MonoBehaviour
                             string[] files = Directory.GetFiles(folder, "*.*", SearchOption.TopDirectoryOnly)
                                                       .Where(s => s.EndsWith(imageTypes[0]) || s.EndsWith(imageTypes[1]) || s.EndsWith(imageTypes[2])).ToArray();
 
-                            ImportImagesAsSprites(files);
+                            gameManager.spritesetImages.Clear();
+                            gameManager.spritesetImages = ImportImagesAsSprites(files, 16);
                             break;
                         }
                     }
@@ -124,9 +125,21 @@ public class UIUtility : MonoBehaviour
         }
     }
 
-    private void ImportImagesAsSprites(string[] _images)
+    public void LoadBackgrounds()
     {
-        gameManager.spritesetImages.Clear();
+        if (!string.IsNullOrWhiteSpace(settings.backgroundPath) && Directory.Exists(settings.spritesetsPath))
+        {
+            string[] files = Directory.GetFiles(settings.backgroundPath, "*.*", SearchOption.TopDirectoryOnly)
+                                      .Where(s => s.EndsWith(imageTypes[0]) || s.EndsWith(imageTypes[1]) || s.EndsWith(imageTypes[2])).ToArray();
+
+            gameManager.backgroundImages.Clear();
+            gameManager.backgroundImages = ImportImagesAsSprites(files, 32);
+        }
+    }
+
+    private Dictionary<int, Sprite> ImportImagesAsSprites(string[] _images, int _size)
+    {
+        Dictionary<int, Sprite> folderImages = new Dictionary<int, Sprite>();
 
         for (int i = 0; i < _images.Length; i++)
         {
@@ -134,7 +147,7 @@ public class UIUtility : MonoBehaviour
             Texture2D sampleTexture = new Texture2D(2, 2);
             sampleTexture.LoadImage(byteArray);
             sampleTexture.filterMode = FilterMode.Point;
-            Sprite newSprite = Sprite.Create(sampleTexture, new Rect(0, 0, sampleTexture.width, sampleTexture.height), new Vector2(0.5f, 0.5f), 16, 0, SpriteMeshType.FullRect);
+            Sprite newSprite = Sprite.Create(sampleTexture, new Rect(0, 0, sampleTexture.width, sampleTexture.height), new Vector2(0.5f, 0.5f), _size, 0, SpriteMeshType.FullRect);
 
             string spriteName = _images[i];
 
@@ -150,7 +163,9 @@ public class UIUtility : MonoBehaviour
             }
             newSprite.name = newName;
 
-            gameManager.spritesetImages.Add(i, newSprite);
+            folderImages.Add(i, newSprite);
         }
+
+        return folderImages;
     }
 }

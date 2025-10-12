@@ -85,8 +85,8 @@ public sealed class GameSettings
     [SerializeField] private string lastSS = string.Empty;
     public string animationsPath { get { return anPath; } set { anPath = value; } }
     [SerializeField] private string anPath = string.Empty;
-    public float lastPlaybackSpeed { get { return lastPS; } set { lastPS = value; } }
-    [SerializeField] private float lastPS = 0.0f;
+    public int lastPlaybackSpeed { get { return lastPS; } set { lastPS = value; } }
+    [SerializeField] private int lastPS = 1;
     public Themes editorTheme { get { return tme; } set { tme = value; } }
     [SerializeField] private Themes tme = Themes.Dark;
     public Languages editorLanguage { get { return lne; } set { lne = value; } }

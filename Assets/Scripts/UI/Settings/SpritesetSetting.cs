@@ -35,13 +35,6 @@ public class SpritesetSetting : Settings
         spritesetPathIF.text = settings.spritesetsPath;
     }
 
-    private void UpdateSpritesetDropdown()
-    {
-        uiUtility.ReloadDropdownSpriteOptions(settings.spritesetsPath, currentSpritesetDD);
-        int index = currentSpritesetDD.options.FindIndex(x => x.text == settings.lastSpriteset);
-        currentSpritesetDD.value = index == -1 ? 0 : index;
-    }
-
     public void SetSpritesetPathViaBrowse()
     {
         if (!SetSpritesetPath())
@@ -66,6 +59,13 @@ public class SpritesetSetting : Settings
         DebugHelper.Log("Path cannot be found. Check if you spelled it correctly or use the browse button instead.");
         currentSpritesetDD.ClearOptions();
         return false;
+    }
+
+    private void UpdateSpritesetDropdown()
+    {
+        uiUtility.ReloadDropdownSpriteOptions(settings.spritesetsPath, currentSpritesetDD);
+        int index = currentSpritesetDD.options.FindIndex(x => x.text == settings.lastSpriteset);
+        currentSpritesetDD.value = index == -1 ? 0 : index;
     }
 
     public void SetCurrentSpriteset()

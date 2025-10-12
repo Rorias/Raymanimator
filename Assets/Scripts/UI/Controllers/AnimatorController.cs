@@ -53,7 +53,6 @@ public partial class AnimatorController : MonoBehaviour
     private TMP_Text partSelectText;
     private TMP_Text frameSelectText;
 
-    private WaitForSecondsRealtime playbackSpeedWFS = new WaitForSecondsRealtime(0.02f);
     private Animation thisAnim;
 
     private Vector3 nextFramePosition;
@@ -453,11 +452,18 @@ public partial class AnimatorController : MonoBehaviour
     {
         while (playingAnimation)
         {
+            float targetTime = Time.time + ((1f / (float)settings.lastPlaybackSpeed) * (float)thisAnim.maxFrameCount);
+            //float animTime = Time.time;
+            float offset = 0.0f;
             for (int animFrames = 0; animFrames < thisAnim.maxFrameCount; animFrames++)
             {
+                float frameTime = Time.time;
                 frameSelectSlider.value = animFrames;
-                yield return playbackSpeedWFS;
+                yield return new WaitForSecondsRealtime(((targetTime - Time.time) / (thisAnim.maxFrameCount - animFrames)) - offset);
+                offset += (Time.time - frameTime) - (1f / (float)settings.lastPlaybackSpeed);
+                //Debug.Log("Frame time:" + (Time.time - frameTime) + ", offset: " + ((Time.time - frameTime) - (1f / (float)settings.lastPlaybackSpeed)));
             }
+            //Debug.Log("Total time:" + (Time.time - animTime) + ", offset: " + ((Time.time - animTime) - (((1f / (float)settings.lastPlaybackSpeed) * (float)thisAnim.maxFrameCount))));
         }
     }
 
@@ -481,15 +487,21 @@ public partial class AnimatorController : MonoBehaviour
     {
         playbackSpeed = gameManager.ParseToSingle(playbackSpeedIF.text);
 
-        if (playbackSpeed < 0.001f)
+        if (playbackSpeed < 1f)
         {
-            Debug.Log("Playback speed cannot be lower than 0.001. Auto-set to 0.1.");
-            playbackSpeed = 0.1f;
+            Debug.Log("Playback speed cannot be lower than 1. Auto-set to 1.");
+            playbackSpeed = 1f;
             playbackSpeedIF.text = gameManager.ParseToString(playbackSpeed);
         }
 
-        playbackSpeedWFS = new WaitForSecondsRealtime(playbackSpeed);
-        settings.lastPlaybackSpeed = playbackSpeed;
+        if (playbackSpeed > 120f)
+        {
+            Debug.Log("Playback speed cannot be higher than 120. Auto-set to 120.");
+            playbackSpeed = 120f;
+            playbackSpeedIF.text = gameManager.ParseToString(playbackSpeed);
+        }
+
+        settings.lastPlaybackSpeed = (int)playbackSpeed;
         settings.SaveSettings();
     }
     #endregion
