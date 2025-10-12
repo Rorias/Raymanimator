@@ -38,7 +38,7 @@ public class SpritesDropdown : MonoBehaviour
             RectTransform contentRect = spriteContent.GetComponent<RectTransform>();
             contentRect.position = new Vector3(contentRect.position.x, lastOpenedPositionDD, contentRect.position.z);
 
-            for (int i = 1; i < spriteContent.transform.childCount; i++)//TODO: look into optimizing this somehow
+            for (int i = 1; i < spriteContent.transform.childCount; i++)
             {
                 Image currentImage = spriteContent.transform.GetChild(i).Find("Item Background").GetComponent<Image>();
                 currentImage.sprite = ddSprites.options[i - 1].image;

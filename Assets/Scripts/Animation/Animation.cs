@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 using System.Xml.XPath;
 
+using TMPro;
+
 using UnityEngine;
 
 public class Animation
@@ -27,6 +29,20 @@ public class Animation
     private const string xYSize = "Ysize";
     private const string xUsedSpriteset = "UsedSpriteset";
     private const string xFrames = "Frames";
+
+    public void SetMaxPartCount(TMP_InputField _if)
+    {
+        int.TryParse(_if.text, out int conv);
+        maxPartCount = Mathf.Min(Mathf.Max(conv, 1), 99);
+        _if.text = maxPartCount.ToString();
+    }
+
+    public void SetMaxFrameCount(TMP_InputField _if)
+    {
+        int.TryParse(_if.text, out int conv);
+        maxFrameCount = Mathf.Min(Mathf.Max(conv, 1), 9999);
+        _if.text = maxFrameCount.ToString();
+    }
 
     public XElement Save()
     {

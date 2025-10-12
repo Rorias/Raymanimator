@@ -26,8 +26,7 @@ public class CreateMenu : MonoBehaviour
         input = InputManager.Instance;
 
         nameIF.onEndEdit.AddListener(delegate { SetAnimationName(); });
-        framesIF.onEndEdit.AddListener(delegate { SetMaxFrameCount(); });
-        partsIF.onEndEdit.AddListener(delegate { SetMaxPartCount(); });
+
         xSizeIF.onEndEdit.AddListener(delegate { SetGridSizeX(); });
         ySizeIF.onEndEdit.AddListener(delegate { SetGridSizeY(); });
     }
@@ -68,6 +67,11 @@ public class CreateMenu : MonoBehaviour
         {
             ySizeIF.text = "64";
         }
+
+        framesIF.onEndEdit.RemoveAllListeners();
+        framesIF.onEndEdit.AddListener(delegate { gameManager.currentAnimation.SetMaxFrameCount(framesIF); });
+        partsIF.onEndEdit.RemoveAllListeners();
+        partsIF.onEndEdit.AddListener(delegate { gameManager.currentAnimation.SetMaxPartCount(partsIF); });
     }
 
     public void SetAnimationName()
@@ -88,20 +92,6 @@ public class CreateMenu : MonoBehaviour
         }
 
         return true;
-    }
-
-    public void SetMaxFrameCount()
-    {
-        int.TryParse(framesIF.text, out int conv);
-        gameManager.currentAnimation.maxFrameCount = Mathf.Min(Mathf.Max(conv, 1), 9999);
-        framesIF.text = gameManager.currentAnimation.maxFrameCount.ToString();
-    }
-
-    public void SetMaxPartCount()
-    {
-        int.TryParse(partsIF.text, out int conv);
-        gameManager.currentAnimation.maxPartCount = Mathf.Min(Mathf.Max(conv, 1), 99);
-        partsIF.text = gameManager.currentAnimation.maxPartCount.ToString();
     }
 
     public void SetGridSizeX()
@@ -130,8 +120,8 @@ public class CreateMenu : MonoBehaviour
         if (!CheckAnimationName()) { return; };
 
         SetAnimationName();
-        SetMaxFrameCount();
-        SetMaxPartCount();
+        gameManager.currentAnimation.SetMaxFrameCount(framesIF);
+        gameManager.currentAnimation.SetMaxPartCount(partsIF);
         SetGridSizeX();
         SetGridSizeY();
 

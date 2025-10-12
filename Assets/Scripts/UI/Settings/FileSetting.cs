@@ -14,6 +14,9 @@ public class FileSetting : Settings
     public Camera gifCamera;
     public AnimatorController animatorC;
 
+    public ImportWindow importWindow;
+    public ButtonPlus importButton;
+
     private GameManager gameManager;
     private AnimationManager animManager;
 
@@ -23,6 +26,8 @@ public class FileSetting : Settings
 
         gameManager = GameManager.Instance;
         animManager = AnimationManager.Instance;
+
+        importButton.onClick.AddListener(delegate { importWindow.OpenWindow(); });
     }
 
     public void Save()

@@ -483,7 +483,7 @@ public partial class AnimatorController : MonoBehaviour
         playingAnimation = false;
     }
 
-    public void SetPlaybackSpeed()//TODO: change from milliseconds to frames per second counter, capped at 120
+    public void SetPlaybackSpeed()
     {
         playbackSpeed = gameManager.ParseToSingle(playbackSpeedIF.text);
 
@@ -507,13 +507,10 @@ public partial class AnimatorController : MonoBehaviour
     #endregion
 
     #region Frame Functions
-    public void AddFrame()//TODO: add AddFrameToEnd function to differentiate between current and late adding
+    public void AddFrame()//TODO: change to add from current pos
     {
         int newMax = thisAnim.maxFrameCount + 1;
-        newMax = Mathf.Min(Mathf.Max(newMax, 1), 999);
-        thisAnim.maxFrameCount = newMax;
-
-        UpdateFrameSelectText();
+        thisAnim.maxFrameCount = Mathf.Min(Mathf.Max(newMax, 1), 9999);
 
         thisAnim.frames.Add(new Frame() { frameID = thisAnim.maxFrameCount - 1 });
 
@@ -522,10 +519,10 @@ public partial class AnimatorController : MonoBehaviour
             thisAnim.frames[thisAnim.maxFrameCount - 1].frameParts.Add(new Part() { partID = allParts });
         }
 
-        frameSelectSlider.maxValue = thisAnim.maxFrameCount - 1;
+        UpdateFrameUI();
     }
 
-    public void RemoveFrame()
+    public void RemoveFrame()//TODO: change to remove from current pos
     {
         if (frameSelectSlider.value == thisAnim.maxFrameCount - 1)
         {
@@ -533,13 +530,16 @@ public partial class AnimatorController : MonoBehaviour
         }
 
         int newMax = thisAnim.maxFrameCount - 1;
-        newMax = Mathf.Min(Mathf.Max(newMax, 1), 999);
-        thisAnim.maxFrameCount = newMax;
-
-        UpdateFrameSelectText();
+        thisAnim.maxFrameCount = Mathf.Min(Mathf.Max(newMax, 1), 9999);
 
         thisAnim.frames.RemoveAt(thisAnim.maxFrameCount);
 
+        UpdateFrameUI();
+    }
+
+    public void UpdateFrameUI()
+    {
+        UpdateFrameSelectText();
         frameSelectSlider.maxValue = thisAnim.maxFrameCount - 1;
     }
 
@@ -669,6 +669,7 @@ public partial class AnimatorController : MonoBehaviour
 
     //    UpdatePos();
     //}
+
     #endregion
 
     #region Part Functions

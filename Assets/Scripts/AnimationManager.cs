@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -30,6 +31,7 @@ public sealed class AnimationManager
     }
     #endregion
 
+    private GameManager gameManager = GameManager.Instance;
     private GameSettings settings = GameSettings.Instance;
 
     private XDocument model;
@@ -87,6 +89,33 @@ public sealed class AnimationManager
         _anim.animationName = _anim.animationName.Replace("Double", "");
     }
 
+    public void ImportFrames(Animation _import, Animation _current, int _startFrame, int _endFrame, int _insertFrame)
+    {
+        int offset = 0;
+        for (int i = _startFrame; i < _endFrame; i++)
+        {
+            int newMax = _current.maxFrameCount + 1;
+            _current.maxFrameCount = Math.Min(Math.Max(newMax, 1), 9999);
+
+            Frame n = new Frame(_import.frames[i]) { frameID = _insertFrame + offset };
+
+            for (int p = 0; p < n.frameParts.Count; p++)
+            {
+                if (n.frameParts[p].partIndex > -1)
+                {
+                    n.frameParts[p].part = gameManager.spritesetImages[n.frameParts[p].partIndex];
+                }
+            }
+
+            _current.frames.Insert(_insertFrame + offset, n);
+            offset++;
+        }
+
+        for (int i = _insertFrame + (_endFrame - _startFrame); i < _current.maxFrameCount; i++)
+        {
+            _current.frames[i].frameID = i;
+        }
+    }
     private void SaveAnimationXMLFile(string _path, Animation _anim)
     {
         XModel = _anim.Save();
