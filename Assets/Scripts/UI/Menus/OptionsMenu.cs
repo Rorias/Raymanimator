@@ -17,7 +17,7 @@ public class OptionsMenu : MonoBehaviour
         ProcessStartInfo startInfo = new ProcessStartInfo
         {
             Arguments = Application.persistentDataPath + "/RaymanimatorSettings.json",
-            FileName = "notepad.exe",
+            FileName = Application.persistentDataPath + "/RaymanimatorSettings.json",
         };
 
         Process.Start(startInfo);

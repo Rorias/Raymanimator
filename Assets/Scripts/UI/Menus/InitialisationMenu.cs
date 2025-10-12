@@ -1,22 +1,19 @@
 using System.IO;
 
-using TMPro;
-
 using UnityEngine;
 
 public class InitialisationMenu : MonoBehaviour
 {
     public Menus menus;
     public MenuItem startMenu;
-    public TMP_InputField spritesetPathIF;
-    public TMP_InputField animationPathIF;
+    public SpritesetSetting spritesetSetting;
 
     private GameSettings settings;
 
     private void Start()
     {
         settings = GameSettings.Instance;
-        spritesetPathIF.text = settings.spritesetsPath;
+        spritesetSetting.LoadSpritesetSettings();
     }
 
     public void ApplySettings()
@@ -42,6 +39,8 @@ public class InitialisationMenu : MonoBehaviour
             return;
         }
 
+        settings.firstLoad = false;
+        settings.SaveSettings();
         menus.ActivateNextMenu(startMenu);
     }
 }

@@ -39,14 +39,14 @@ public class GameManager : MonoBehaviour
         gameSettings = GameSettings.Instance;
         input = InputManager.Instance;
 
-        LoadSettings();
-
         if (Input.GetJoystickNames().Length > 0 && !string.IsNullOrWhiteSpace(Input.GetJoystickNames()[0]))
         {
             input.controllerConnected = true;
         }
 
         SceneManager.sceneLoaded += FauxAwake;
+
+        LoadSettings();
 
         DontDestroyOnLoad(gameObject);
     }
@@ -68,10 +68,13 @@ public class GameManager : MonoBehaviour
         if (gameSettings.firstLoad)
         {
             //Do initialization
-            foreach (KeyValuePair<InputManager.InputKey, KeyCode> Default in input.DefaultKeys)
+            foreach (KeyValuePair<InputManager.InputKey, KeyCode[]> Default in input.DefaultKeys)
             {
-                InputManager.Key key = input.Inputs[Default.Key].First(x => x.type == InputManager.KeyType.Keyboard);
-                key.code = input.DefaultKeys[Default.Key];
+                InputManager.Key[] keys = input.Inputs[Default.Key].Where(x => x.type == InputManager.KeyType.Keyboard).ToArray();
+                for (int i = 0; i < keys.Length; i++)
+                {
+                    keys[i].code = input.DefaultKeys[Default.Key][i];
+                }
             }
 
             foreach (KeyValuePair<InputManager.InputKey, KeyCode> Default in input.DefaultButtons)
@@ -83,7 +86,6 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-            gameSettings.firstLoad = false;
             SaveInputs();
         }
     }

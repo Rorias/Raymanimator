@@ -182,7 +182,7 @@ public class BackgroundSettings : Settings
 
     public void ResetColor()
     {
-        cam.backgroundColor = new Color(0.196f, 0.294f, 0.627f, 1);
+        cam.backgroundColor = new Color32(50, 75, 150, 255);
         colorSlider.SetColorSliders(cam.backgroundColor);
         SaveColor();
     }

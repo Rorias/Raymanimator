@@ -38,27 +38,27 @@ public sealed class GameSettings
 
     public InputManager.PossibleJoystick activeJoystick;
     
-    public KeyCode zoomCamera;
-    public KeyCode dragCamera;
-    public KeyCode moveCameraLeft;
-    public KeyCode moveCameraUp;
-    public KeyCode moveCameraRight;
-    public KeyCode moveCameraDown;
-
-    public KeyCode select;
-    public KeyCode multiSelect;
-    public KeyCode spritePrevious;
-    public KeyCode spriteNext;
-    public KeyCode deletePart;
-    public KeyCode moveSpriteLeft;
-    public KeyCode moveSpriteUp;
-    public KeyCode moveSpriteRight;
-    public KeyCode moveSpriteDown;
-
-    public KeyCode framePrevious;
-    public KeyCode frameNext;
-
-    public KeyCode hideUI;
+    public KeyCode[] zoomCamera;
+    public KeyCode[] dragCamera;
+    public KeyCode[] moveCameraLeft;
+    public KeyCode[] moveCameraUp;
+    public KeyCode[] moveCameraRight;
+    public KeyCode[] moveCameraDown;
+                  
+    public KeyCode[] select;
+    public KeyCode[] multiSelect;
+    public KeyCode[] spritePrevious;
+    public KeyCode[] spriteNext;
+    public KeyCode[] deletePart;
+    public KeyCode[] moveSpriteLeft;
+    public KeyCode[] moveSpriteUp;
+    public KeyCode[] moveSpriteRight;
+    public KeyCode[] moveSpriteDown;
+                  
+    public KeyCode[] framePrevious;
+    public KeyCode[] frameNext;
+                  
+    public KeyCode[] hideUI;
 
     public KeyCode confirm;
     public KeyCode @return;
@@ -78,7 +78,7 @@ public sealed class GameSettings
     public bool normalFont { get { return nf; } set { nf = value; } }
     [SerializeField] private bool nf = false;
     public int resNumber { get { return rnr; } set { rnr = value; } }
-    [SerializeField] private int rnr = 1;
+    [SerializeField] private int rnr = -1;
     public string spritesetsPath { get { return ssPath; } set { ssPath = value; } }
     [SerializeField] private string ssPath = string.Empty;
     public string lastSpriteset { get { return lastSS; } set { lastSS = value; } }
@@ -86,7 +86,7 @@ public sealed class GameSettings
     public string animationsPath { get { return anPath; } set { anPath = value; } }
     [SerializeField] private string anPath = string.Empty;
     public int lastPlaybackSpeed { get { return lastPS; } set { lastPS = value; } }
-    [SerializeField] private int lastPS = 1;
+    [SerializeField] private int lastPS = 24;
     public Themes editorTheme { get { return tme; } set { tme = value; } }
     [SerializeField] private Themes tme = Themes.Dark;
     public Languages editorLanguage { get { return lne; } set { lne = value; } }

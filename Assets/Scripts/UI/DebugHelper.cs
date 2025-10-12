@@ -10,6 +10,7 @@ using UnityEngine.UI;
 
 public class DebugHelper : MonoBehaviour
 {
+    private static Image debugBG;
     private static TMP_Text debugText;
     public enum Severity { none, warning, error, critical }
 
@@ -18,11 +19,15 @@ public class DebugHelper : MonoBehaviour
     private static readonly Color error = new Color(1, 0.4f, 0);
     private static readonly Color critical = new Color(1, 0, 0);
 
+    private static readonly Color empty = new Color(0, 0, 0, 0);
+    private static readonly Color vague = new Color(0, 0, 0, 0.4f);
+
     private static float disappearTime = 5.0f;
     private static bool visible = false;
 
     private void Awake()
     {
+        debugBG = GetComponentInParent<Image>();
         debugText = GetComponent<TMP_Text>();
     }
 
@@ -41,6 +46,7 @@ public class DebugHelper : MonoBehaviour
 
             if (debugText.color.a <= 0)
             {
+                debugBG.color = empty;
                 debugText.text = "";
                 visible = false;
             }
@@ -49,6 +55,7 @@ public class DebugHelper : MonoBehaviour
 
     public static void Log(string _text, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
     {
+        debugBG.color = vague;
         debugText.text = _text;
         debugText.color = none;
         disappearTime = 3;
@@ -59,6 +66,7 @@ public class DebugHelper : MonoBehaviour
 
     public static void Log(string _text, Severity _severity, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
     {
+        debugBG.color = vague;
         debugText.text = _text;
         disappearTime = 5;
         visible = true;

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 using TMPro;
 
@@ -23,30 +24,38 @@ public class ResolutionSetting : Settings
         LoadResSettings();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            Debug.Log(Screen.fullScreenMode);
+        }
+    }
+
     public void LoadResSettings()
     {
         resolutionDD.ClearOptions();
 
-        Resolution[] resolutions = Screen.resolutions;
+        Dictionary<int, string> resOptions = CreateResolutions();
 
-        List<string> resOptions = new List<string>();
+        resolutionDD.AddOptions(resOptions.Values.ToList());
 
-        foreach (Resolution res in resolutions)
+        int i = 0;
+        foreach (KeyValuePair<int, string> kvp in resOptions)
         {
-            if (res.height % 9 == 0 && res.width % 16 == 0 && Mathf.Approximately((float)res.width / (float)res.height, 1.777778f))
-            {
-                resOptions.Add(res.width + "x" + res.height + " : " + res.refreshRateRatio.value);
-            }
+            resolutionDD.options[i].text = kvp.Value;
+            i++;
         }
 
-        resolutionDD.AddOptions(resOptions);
-
-        for (int i = 0; i < resOptions.Count; i++)
+        int option = settings.resNumber;
+        if (settings.resNumber == -1)
         {
-            resolutionDD.options[i].text = resOptions[i];
+            option = resOptions.First(x => x.Value.StartsWith(Screen.currentResolution.width.ToString()) && x.Value.EndsWith(Screen.currentResolution.refreshRateRatio.ToString())).Key;
         }
 
-        resolutionDD.value = settings.resNumber;
+        settings.fullScreen = Screen.fullScreenMode == FullScreenMode.FullScreenWindow;
+        settings.SaveSettings();
+        resolutionDD.value = option;
     }
 
     public void SetResolution()
@@ -56,25 +65,34 @@ public class ResolutionSetting : Settings
         Screen.fullScreenMode = settings.fullScreen ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed;
 
         Resolution[] resolutions = Screen.resolutions;
-        List<int> acceptedResNumbers = new List<int>();
+        Dictionary<int, string> resOptions = CreateResolutions();
 
-        for (int i = 0; i < resolutions.Length; i++)
+        foreach (KeyValuePair<int, string> kvp in resOptions)
         {
-            if (resolutions[i].height % 9 == 0 && resolutions[i].width % 16 == 0 && Mathf.Approximately((float)resolutions[i].width / (float)resolutions[i].height, 1.777778f))
+            if (kvp.Key == settings.resNumber)
             {
-                acceptedResNumbers.Add(i);
-            }
-        }
-
-        for (int i = 0; i < acceptedResNumbers.Count; i++)
-        {
-            if (i == settings.resNumber)
-            {
-                Screen.SetResolution(resolutions[acceptedResNumbers[i]].width, resolutions[acceptedResNumbers[i]].height, Screen.fullScreenMode, resolutions[acceptedResNumbers[i]].refreshRateRatio);
+                Screen.SetResolution(resolutions[kvp.Key].width, resolutions[kvp.Key].height, Screen.fullScreenMode, resolutions[kvp.Key].refreshRateRatio);
                 break;
             }
         }
 
         settings.SaveSettings();
+    }
+
+    private Dictionary<int, string> CreateResolutions()
+    {
+        Dictionary<int, string> resOptions = new Dictionary<int, string>();
+
+        Resolution[] resolutions = Screen.resolutions;
+
+        for (int i = 0; i < resolutions.Length; i++)
+        {
+            if (resolutions[i].height % 9 == 0 && resolutions[i].width % 16 == 0 && Mathf.Approximately((float)resolutions[i].width / (float)resolutions[i].height, 1.777778f))
+            {
+                resOptions.Add(i, resolutions[i].width + "x" + resolutions[i].height + " : " + resolutions[i].refreshRateRatio.value);
+            }
+        }
+
+        return resOptions;
     }
 }

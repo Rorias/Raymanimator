@@ -38,11 +38,15 @@ public class ThemeController : MonoBehaviour
     private void OnSceneLoaded(Scene _scene, LoadSceneMode _lsm)
     {
         panels = FindObjectsByType<Image>(FindObjectsInactive.Include, FindObjectsSortMode.None).Where(x => x.tag == "MenuPanel").ToArray();
-        dropdowns = FindObjectsOfType<TMP_Dropdown>();
-        inputfields = FindObjectsOfType<TMP_InputField>();
-        buttons = FindObjectsOfType<ButtonPlus>();
-        toggles = FindObjectsOfType<Toggle>();
-        labels = FindObjectsOfType<TMP_Text>(true);
+        dropdowns = FindObjectsByType<TMP_Dropdown>(FindObjectsSortMode.None);
+        inputfields = FindObjectsByType<TMP_InputField>(FindObjectsSortMode.None);
+        buttons = FindObjectsByType<ButtonPlus>(FindObjectsSortMode.None);
+        toggles = FindObjectsByType<Toggle>(FindObjectsSortMode.None);
+        labels = FindObjectsByType<TMP_Text>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        for (int i = 0; i < inputfields.Length; i++)
+        {
+            inputfields[i].transform.GetChild(0).GetChild(0).GetComponent<TMP_SelectionCaret>().raycastTarget = false;
+        }
 
         defaultFonts.Clear();
         for (int i = 0; i < labels.Length; i++)

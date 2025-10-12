@@ -140,7 +140,7 @@ public class FolderBrowser : MonoBehaviour
         ProcessStartInfo startInfo = new ProcessStartInfo
         {
             Arguments = path,
-            FileName = "explorer.exe",
+            FileName = path,
         };
 
         Process.Start(startInfo);

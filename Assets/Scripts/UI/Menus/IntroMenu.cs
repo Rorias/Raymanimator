@@ -23,7 +23,7 @@ public class IntroMenu : MonoBehaviour
         if ((anim.GetCurrentAnimatorStateInfo(0).IsName("lol") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99f) ||
             ((input.GetKeyDown(InputManager.InputKey.Confirm) || input.GetKeyDown(InputManager.InputKey.Select)) && menus.currentMenu == introMenu))
         {
-            if (settings.lastSpriteset == "" || string.IsNullOrWhiteSpace(settings.animationsPath))
+            if (settings.lastSpriteset == "" || string.IsNullOrWhiteSpace(settings.animationsPath) || settings.firstLoad)
             {
                 menus.ActivateNextMenu(initMenu);
             }

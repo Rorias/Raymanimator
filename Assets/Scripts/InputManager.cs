@@ -163,29 +163,31 @@ public sealed class InputManager
     };
 
 
-    public readonly Dictionary<InputKey, KeyCode> DefaultKeys = new Dictionary<InputKey, KeyCode>()
+    public readonly Dictionary<InputKey, KeyCode[]> DefaultKeys = new Dictionary<InputKey, KeyCode[]>()
     {
-        { InputKey.ZoomCamera, KeyCode.Mouse3 },
-        { InputKey.DragCamera, KeyCode.Mouse2 },
-        { InputKey.MoveCameraLeft,  KeyCode.A },
-        { InputKey.MoveCameraUp,  KeyCode.W},
-        { InputKey.MoveCameraRight, KeyCode.D },
-        { InputKey.MoveCameraDown,  KeyCode.S },
+        { InputKey.ZoomCamera, new KeyCode[]{ KeyCode.Mouse3 } },
+        { InputKey.DragCamera, new KeyCode[]{ KeyCode.Mouse2 } },
+        { InputKey.MoveCameraLeft, new KeyCode[]{ KeyCode.A } },
+        { InputKey.MoveCameraUp, new KeyCode[]{ KeyCode.W } },
+        { InputKey.MoveCameraRight,new KeyCode[]{ KeyCode.D } },
+        { InputKey.MoveCameraDown,  new KeyCode[]{ KeyCode.S } },
 
-        { InputKey.Select, KeyCode.Mouse0 },
-        { InputKey.MultiSelect, KeyCode.LeftShift },
-        { InputKey.SpritePrevious, KeyCode.Comma },
-        { InputKey.SpriteNext, KeyCode.Period },
-        { InputKey.DeletePart, KeyCode.Delete },
-        { InputKey.MoveSpriteLeft, KeyCode.LeftArrow },
-        { InputKey.MoveSpriteRight, KeyCode.RightArrow },
-        { InputKey.MoveSpriteUp, KeyCode.UpArrow },
-        { InputKey.MoveSpriteDown, KeyCode.DownArrow },
+        { InputKey.Select, new KeyCode[]{ KeyCode.Mouse0 } },
+        { InputKey.MultiSelect,new KeyCode[]{ KeyCode.LeftShift, KeyCode.RightShift } },
+        { InputKey.SpritePrevious,new KeyCode[]{ KeyCode.Comma } },
+        { InputKey.SpriteNext, new KeyCode[]{ KeyCode.Period } },
+        { InputKey.DeletePart, new KeyCode[]{ KeyCode.Delete } },
+        { InputKey.MoveSpriteLeft, new KeyCode[]{ KeyCode.LeftArrow } },
+        { InputKey.MoveSpriteRight, new KeyCode[]{ KeyCode.RightArrow } },
+        { InputKey.MoveSpriteUp, new KeyCode[]{ KeyCode.UpArrow } },
+        { InputKey.MoveSpriteDown,new KeyCode[]{ KeyCode.DownArrow } },
 
-        { InputKey.FramePrevious, KeyCode.Minus },
-        { InputKey.FrameNext, KeyCode.Equals },
+        { InputKey.FramePrevious, new KeyCode[]{ KeyCode.Minus } },
+        { InputKey.FrameNext, new KeyCode[]{ KeyCode.Equals } },
 
-        { InputKey.HideUI, KeyCode.F1 }
+        { InputKey.HideUI,new KeyCode[]{ KeyCode.F1 } },
+
+        { InputKey.Return,new KeyCode[]{  KeyCode.Escape, KeyCode.Backspace } },
     };
 
     public readonly Dictionary<InputKey, KeyCode> DefaultButtons = new Dictionary<InputKey, KeyCode>()
@@ -445,13 +447,29 @@ public sealed class InputManager
         _settings.activeJoystick = activeJoystick;
     }
 
-    private KeyCode Save(InputKey _get)
+    private KeyCode[] Save(InputKey _get)
     {
-        return Inputs[_get].Find(x => x.type == KeyType.Keyboard).code;
+        List<Key> keys = Inputs[_get].FindAll(x => x.type == KeyType.Keyboard);
+        KeyCode[] codes = new KeyCode[keys.Count];
+        for (int i = 0; i < keys.Count; i++)
+        {
+            codes[i] = keys[i].code;
+        }
+
+        return codes;
     }
 
-    private void Load(InputKey _set, KeyCode _get)
+    private void Load(InputKey _set, KeyCode[] _get)
     {
-        Inputs[_set].Find(x => x.type == KeyType.Keyboard).code = _get;
+        if (_get == null || _get.Length <= 0)
+        {
+            return;
+        }
+
+        List<Key> keys = Inputs[_set].FindAll(x => x.type == KeyType.Keyboard);
+        for (int i = 0; i < keys.Count; i++)
+        {
+            keys[i].code = _get[i];
+        }
     }
 }
