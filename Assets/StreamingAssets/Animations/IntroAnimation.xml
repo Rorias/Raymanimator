@@ -1,0 +1,1919 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation>
+  <AnimationName>IntroAnimation</AnimationName>
+  <FrameCount>36</FrameCount>
+  <PartCount>7</PartCount>
+  <Xsize>320</Xsize>
+  <Ysize>180</Ysize>
+  <UsedSpriteset>Rayman</UsedSpriteset>
+  <Frames>
+    <Frame ID="0">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>2</PartIndex>
+          <Xpos>10.1875</Xpos>
+          <Ypos>-4.5625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>16</PartIndex>
+          <Xpos>9.875</Xpos>
+          <Ypos>-4.75</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>49</PartIndex>
+          <Xpos>10.25</Xpos>
+          <Ypos>-3.75</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>53</PartIndex>
+          <Xpos>9.8125</Xpos>
+          <Ypos>-2.59375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>83</PartIndex>
+          <Xpos>9.8125</Xpos>
+          <Ypos>-1.90625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>108</PartIndex>
+          <Xpos>10.5</Xpos>
+          <Ypos>-5.28125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>117</PartIndex>
+          <Xpos>10.25</Xpos>
+          <Ypos>-4.65625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="1">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>2</PartIndex>
+          <Xpos>10.3125</Xpos>
+          <Ypos>-4.5625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>16</PartIndex>
+          <Xpos>9.625</Xpos>
+          <Ypos>-4.8125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>49</PartIndex>
+          <Xpos>10.125</Xpos>
+          <Ypos>-3.75</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>53</PartIndex>
+          <Xpos>9.6875</Xpos>
+          <Ypos>-2.59375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>83</PartIndex>
+          <Xpos>9.6875</Xpos>
+          <Ypos>-1.90625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>108</PartIndex>
+          <Xpos>10.5</Xpos>
+          <Ypos>-5.28125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>117</PartIndex>
+          <Xpos>9.8125</Xpos>
+          <Ypos>-4.65625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="2">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>2</PartIndex>
+          <Xpos>10.375</Xpos>
+          <Ypos>-4.5625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>16</PartIndex>
+          <Xpos>9.375</Xpos>
+          <Ypos>-4.875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>49</PartIndex>
+          <Xpos>10</Xpos>
+          <Ypos>-3.75</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>53</PartIndex>
+          <Xpos>9.5625</Xpos>
+          <Ypos>-2.59375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>83</PartIndex>
+          <Xpos>9.5625</Xpos>
+          <Ypos>-1.90625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>108</PartIndex>
+          <Xpos>10.5</Xpos>
+          <Ypos>-5.28125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>118</PartIndex>
+          <Xpos>9.4375</Xpos>
+          <Ypos>-4.625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="3">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>2</PartIndex>
+          <Xpos>10.5</Xpos>
+          <Ypos>-4.4375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>16</PartIndex>
+          <Xpos>9.0625</Xpos>
+          <Ypos>-4.875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>50</PartIndex>
+          <Xpos>9.9375</Xpos>
+          <Ypos>-3.6875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>53</PartIndex>
+          <Xpos>9.4375</Xpos>
+          <Ypos>-2.59375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>84</PartIndex>
+          <Xpos>9.5625</Xpos>
+          <Ypos>-1.875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>108</PartIndex>
+          <Xpos>10.5</Xpos>
+          <Ypos>-5.28125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>118</PartIndex>
+          <Xpos>9</Xpos>
+          <Ypos>-4.5</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="4">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>2</PartIndex>
+          <Xpos>10.4375</Xpos>
+          <Ypos>-4.4375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>16</PartIndex>
+          <Xpos>8.75</Xpos>
+          <Ypos>-5</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>50</PartIndex>
+          <Xpos>9.75</Xpos>
+          <Ypos>-3.75</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>53</PartIndex>
+          <Xpos>9.3125</Xpos>
+          <Ypos>-2.65625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>84</PartIndex>
+          <Xpos>9.4375</Xpos>
+          <Ypos>-1.9375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>109</PartIndex>
+          <Xpos>10.5</Xpos>
+          <Ypos>-5.1875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>112</PartIndex>
+          <Xpos>8.75</Xpos>
+          <Ypos>-4.40625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="5">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>2</PartIndex>
+          <Xpos>10.4375</Xpos>
+          <Ypos>-4.375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>28</PartIndex>
+          <Xpos>8.5</Xpos>
+          <Ypos>-5.28125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>50</PartIndex>
+          <Xpos>9.625</Xpos>
+          <Ypos>-3.8125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>53</PartIndex>
+          <Xpos>9.1875</Xpos>
+          <Ypos>-2.71875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>84</PartIndex>
+          <Xpos>9.3125</Xpos>
+          <Ypos>-2</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>109</PartIndex>
+          <Xpos>10.5</Xpos>
+          <Ypos>-5.1875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>112</PartIndex>
+          <Xpos>8.5</Xpos>
+          <Ypos>-4.28125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="6">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>2</PartIndex>
+          <Xpos>10.375</Xpos>
+          <Ypos>-4.375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>28</PartIndex>
+          <Xpos>8.5</Xpos>
+          <Ypos>-5.28125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>50</PartIndex>
+          <Xpos>9.5</Xpos>
+          <Ypos>-3.875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>53</PartIndex>
+          <Xpos>9.0625</Xpos>
+          <Ypos>-2.84375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>84</PartIndex>
+          <Xpos>9.1875</Xpos>
+          <Ypos>-2.125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>109</PartIndex>
+          <Xpos>10.5</Xpos>
+          <Ypos>-5.1875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>112</PartIndex>
+          <Xpos>8.3125</Xpos>
+          <Ypos>-4.28125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="7">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>2</PartIndex>
+          <Xpos>10.375</Xpos>
+          <Ypos>-4.25</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>28</PartIndex>
+          <Xpos>8.5</Xpos>
+          <Ypos>-5.28125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>43</PartIndex>
+          <Xpos>9.5</Xpos>
+          <Ypos>-3.875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>53</PartIndex>
+          <Xpos>8.9375</Xpos>
+          <Ypos>-2.84375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>85</PartIndex>
+          <Xpos>9</Xpos>
+          <Ypos>-2.15625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>109</PartIndex>
+          <Xpos>10.5</Xpos>
+          <Ypos>-5.1875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>112</PartIndex>
+          <Xpos>8.125</Xpos>
+          <Ypos>-4.09375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="8">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>2</PartIndex>
+          <Xpos>10.25</Xpos>
+          <Ypos>-4.25</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>28</PartIndex>
+          <Xpos>8.5</Xpos>
+          <Ypos>-5.28125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>43</PartIndex>
+          <Xpos>9.375</Xpos>
+          <Ypos>-3.875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>53</PartIndex>
+          <Xpos>8.8125</Xpos>
+          <Ypos>-2.84375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>85</PartIndex>
+          <Xpos>8.875</Xpos>
+          <Ypos>-2.15625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>107</PartIndex>
+          <Xpos>10.25</Xpos>
+          <Ypos>-5.03125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>112</PartIndex>
+          <Xpos>8.125</Xpos>
+          <Ypos>-4.15625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="9">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>2</PartIndex>
+          <Xpos>10.0625</Xpos>
+          <Ypos>-4.3125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>28</PartIndex>
+          <Xpos>8.5</Xpos>
+          <Ypos>-5.28125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>43</PartIndex>
+          <Xpos>9.25</Xpos>
+          <Ypos>-3.8125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>53</PartIndex>
+          <Xpos>8.6875</Xpos>
+          <Ypos>-2.78125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>85</PartIndex>
+          <Xpos>8.75</Xpos>
+          <Ypos>-2.09375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>107</PartIndex>
+          <Xpos>9.875</Xpos>
+          <Ypos>-4.96875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>112</PartIndex>
+          <Xpos>8.125</Xpos>
+          <Ypos>-4.28125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="10">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>2</PartIndex>
+          <Xpos>9.8125</Xpos>
+          <Ypos>-4.375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>28</PartIndex>
+          <Xpos>8.5</Xpos>
+          <Ypos>-5.28125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>43</PartIndex>
+          <Xpos>9.125</Xpos>
+          <Ypos>-3.8125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>53</PartIndex>
+          <Xpos>8.5625</Xpos>
+          <Ypos>-2.78125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>85</PartIndex>
+          <Xpos>8.625</Xpos>
+          <Ypos>-2.09375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>107</PartIndex>
+          <Xpos>9.625</Xpos>
+          <Ypos>-4.90625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>112</PartIndex>
+          <Xpos>8.125</Xpos>
+          <Ypos>-4.34375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="11">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>2</PartIndex>
+          <Xpos>9.5</Xpos>
+          <Ypos>-4.5</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>28</PartIndex>
+          <Xpos>8.5</Xpos>
+          <Ypos>-5.28125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>44</PartIndex>
+          <Xpos>9</Xpos>
+          <Ypos>-3.875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>53</PartIndex>
+          <Xpos>8.4375</Xpos>
+          <Ypos>-2.71875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>82</PartIndex>
+          <Xpos>8.4375</Xpos>
+          <Ypos>-2.09375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>107</PartIndex>
+          <Xpos>9.375</Xpos>
+          <Ypos>-4.90625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>112</PartIndex>
+          <Xpos>8.1875</Xpos>
+          <Ypos>-4.46875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="12">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>2</PartIndex>
+          <Xpos>9.1875</Xpos>
+          <Ypos>-4.5</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>28</PartIndex>
+          <Xpos>8.5</Xpos>
+          <Ypos>-5.28125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>44</PartIndex>
+          <Xpos>8.875</Xpos>
+          <Ypos>-3.875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>53</PartIndex>
+          <Xpos>8.3125</Xpos>
+          <Ypos>-2.71875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>82</PartIndex>
+          <Xpos>8.3125</Xpos>
+          <Ypos>-2.09375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>107</PartIndex>
+          <Xpos>9.125</Xpos>
+          <Ypos>-4.96875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>118</PartIndex>
+          <Xpos>8.25</Xpos>
+          <Ypos>-4.5</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="13">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>2</PartIndex>
+          <Xpos>8.875</Xpos>
+          <Ypos>-4.5</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>28</PartIndex>
+          <Xpos>8.5</Xpos>
+          <Ypos>-5.28125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>44</PartIndex>
+          <Xpos>8.75</Xpos>
+          <Ypos>-3.8125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>53</PartIndex>
+          <Xpos>8.1875</Xpos>
+          <Ypos>-2.65625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>82</PartIndex>
+          <Xpos>8.1875</Xpos>
+          <Ypos>-2.03125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>107</PartIndex>
+          <Xpos>8.875</Xpos>
+          <Ypos>-4.90625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>118</PartIndex>
+          <Xpos>8.25</Xpos>
+          <Ypos>-4.5</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="14">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>2</PartIndex>
+          <Xpos>8.5625</Xpos>
+          <Ypos>-4.4375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>28</PartIndex>
+          <Xpos>8.5</Xpos>
+          <Ypos>-5.28125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>44</PartIndex>
+          <Xpos>8.625</Xpos>
+          <Ypos>-3.75</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>53</PartIndex>
+          <Xpos>8.0625</Xpos>
+          <Ypos>-2.59375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>82</PartIndex>
+          <Xpos>8.0625</Xpos>
+          <Ypos>-1.96875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>107</PartIndex>
+          <Xpos>8.625</Xpos>
+          <Ypos>-4.90625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>117</PartIndex>
+          <Xpos>8.3125</Xpos>
+          <Ypos>-4.46875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="15">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>2</PartIndex>
+          <Xpos>8.1875</Xpos>
+          <Ypos>-4.3125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>28</PartIndex>
+          <Xpos>8.5</Xpos>
+          <Ypos>-5.28125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>45</PartIndex>
+          <Xpos>8.375</Xpos>
+          <Ypos>-3.65625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>53</PartIndex>
+          <Xpos>7.9375</Xpos>
+          <Ypos>-2.46875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>83</PartIndex>
+          <Xpos>7.9375</Xpos>
+          <Ypos>-1.78125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>107</PartIndex>
+          <Xpos>8.375</Xpos>
+          <Ypos>-4.84375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>117</PartIndex>
+          <Xpos>8.375</Xpos>
+          <Ypos>-4.46875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="16">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>0</PartIndex>
+          <Xpos>7.875</Xpos>
+          <Ypos>-4.25</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>28</PartIndex>
+          <Xpos>8.5</Xpos>
+          <Ypos>-5.28125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>45</PartIndex>
+          <Xpos>8.25</Xpos>
+          <Ypos>-3.59375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>53</PartIndex>
+          <Xpos>7.8125</Xpos>
+          <Ypos>-2.40625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>83</PartIndex>
+          <Xpos>7.8125</Xpos>
+          <Ypos>-1.71875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>110</PartIndex>
+          <Xpos>7.9375</Xpos>
+          <Ypos>-4.84375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>117</PartIndex>
+          <Xpos>8.4375</Xpos>
+          <Ypos>-4.34375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="17">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>0</PartIndex>
+          <Xpos>7.5625</Xpos>
+          <Ypos>-4.25</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>28</PartIndex>
+          <Xpos>8.5</Xpos>
+          <Ypos>-5.28125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>45</PartIndex>
+          <Xpos>8.125</Xpos>
+          <Ypos>-3.65625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>53</PartIndex>
+          <Xpos>7.6875</Xpos>
+          <Ypos>-2.46875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>83</PartIndex>
+          <Xpos>7.6875</Xpos>
+          <Ypos>-1.78125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>110</PartIndex>
+          <Xpos>7.625</Xpos>
+          <Ypos>-4.84375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>117</PartIndex>
+          <Xpos>8.5</Xpos>
+          <Ypos>-4.40625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="18">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>0</PartIndex>
+          <Xpos>7.25</Xpos>
+          <Ypos>-4.25</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>28</PartIndex>
+          <Xpos>8.5</Xpos>
+          <Ypos>-5.28125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>45</PartIndex>
+          <Xpos>8</Xpos>
+          <Ypos>-3.71875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>53</PartIndex>
+          <Xpos>7.5625</Xpos>
+          <Ypos>-2.53125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>83</PartIndex>
+          <Xpos>7.5625</Xpos>
+          <Ypos>-1.84375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>110</PartIndex>
+          <Xpos>7.3125</Xpos>
+          <Ypos>-4.84375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>117</PartIndex>
+          <Xpos>8.5625</Xpos>
+          <Ypos>-4.46875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="19">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>0</PartIndex>
+          <Xpos>6.9375</Xpos>
+          <Ypos>-4.1875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>28</PartIndex>
+          <Xpos>8.5</Xpos>
+          <Ypos>-5.28125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>46</PartIndex>
+          <Xpos>7.875</Xpos>
+          <Ypos>-3.6875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>53</PartIndex>
+          <Xpos>7.375</Xpos>
+          <Ypos>-2.65625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>84</PartIndex>
+          <Xpos>7.5</Xpos>
+          <Ypos>-1.9375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>110</PartIndex>
+          <Xpos>7</Xpos>
+          <Ypos>-4.84375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>136</PartIndex>
+          <Xpos>8.6875</Xpos>
+          <Ypos>-4.375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="20">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>1</PartIndex>
+          <Xpos>6.75</Xpos>
+          <Ypos>-4.125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>17</PartIndex>
+          <Xpos>8.375</Xpos>
+          <Ypos>-5.03125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>46</PartIndex>
+          <Xpos>7.75</Xpos>
+          <Ypos>-3.6875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>53</PartIndex>
+          <Xpos>7.25</Xpos>
+          <Ypos>-2.65625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>84</PartIndex>
+          <Xpos>7.375</Xpos>
+          <Ypos>-1.9375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>110</PartIndex>
+          <Xpos>6.6875</Xpos>
+          <Ypos>-4.90625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>136</PartIndex>
+          <Xpos>8.5625</Xpos>
+          <Ypos>-4.3125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="21">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>1</PartIndex>
+          <Xpos>6.5</Xpos>
+          <Ypos>-4.125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>17</PartIndex>
+          <Xpos>8.375</Xpos>
+          <Ypos>-5.03125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>46</PartIndex>
+          <Xpos>7.625</Xpos>
+          <Ypos>-3.75</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>53</PartIndex>
+          <Xpos>7.125</Xpos>
+          <Ypos>-2.71875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>84</PartIndex>
+          <Xpos>7.25</Xpos>
+          <Ypos>-2</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>108</PartIndex>
+          <Xpos>6.5</Xpos>
+          <Ypos>-5.21875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>136</PartIndex>
+          <Xpos>8.5</Xpos>
+          <Ypos>-4.25</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="22">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>1</PartIndex>
+          <Xpos>6.3125</Xpos>
+          <Ypos>-4.0625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>17</PartIndex>
+          <Xpos>8.375</Xpos>
+          <Ypos>-5.03125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>46</PartIndex>
+          <Xpos>7.5</Xpos>
+          <Ypos>-3.75</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>53</PartIndex>
+          <Xpos>7</Xpos>
+          <Ypos>-2.78125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>84</PartIndex>
+          <Xpos>7.125</Xpos>
+          <Ypos>-2.0625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>108</PartIndex>
+          <Xpos>6.5</Xpos>
+          <Ypos>-5.21875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>136</PartIndex>
+          <Xpos>8.4375</Xpos>
+          <Ypos>-4.1875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="23">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>1</PartIndex>
+          <Xpos>6.125</Xpos>
+          <Ypos>-4.0625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>17</PartIndex>
+          <Xpos>8.375</Xpos>
+          <Ypos>-5.03125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>47</PartIndex>
+          <Xpos>7.3125</Xpos>
+          <Ypos>-3.8125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>53</PartIndex>
+          <Xpos>6.8125</Xpos>
+          <Ypos>-2.84375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>85</PartIndex>
+          <Xpos>6.875</Xpos>
+          <Ypos>-2.15625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>108</PartIndex>
+          <Xpos>6.5</Xpos>
+          <Ypos>-5.21875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>136</PartIndex>
+          <Xpos>8.375</Xpos>
+          <Ypos>-4.125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="24">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>0</PartIndex>
+          <Xpos>6.0625</Xpos>
+          <Ypos>-4.125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>25</PartIndex>
+          <Xpos>8.1875</Xpos>
+          <Ypos>-4.96875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>47</PartIndex>
+          <Xpos>7.1875</Xpos>
+          <Ypos>-3.8125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>53</PartIndex>
+          <Xpos>6.6875</Xpos>
+          <Ypos>-2.84375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>85</PartIndex>
+          <Xpos>6.75</Xpos>
+          <Ypos>-2.15625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>108</PartIndex>
+          <Xpos>6.5</Xpos>
+          <Ypos>-5.21875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>136</PartIndex>
+          <Xpos>8.25</Xpos>
+          <Ypos>-4.1875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="25">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>0</PartIndex>
+          <Xpos>6</Xpos>
+          <Ypos>-4.125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>25</PartIndex>
+          <Xpos>7.9375</Xpos>
+          <Ypos>-4.96875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>47</PartIndex>
+          <Xpos>7.0625</Xpos>
+          <Ypos>-3.75</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>53</PartIndex>
+          <Xpos>6.5625</Xpos>
+          <Ypos>-2.78125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>85</PartIndex>
+          <Xpos>6.625</Xpos>
+          <Ypos>-2.09375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>108</PartIndex>
+          <Xpos>6.5</Xpos>
+          <Ypos>-5.21875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>136</PartIndex>
+          <Xpos>8.125</Xpos>
+          <Ypos>-4.125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="26">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>0</PartIndex>
+          <Xpos>5.9375</Xpos>
+          <Ypos>-4.125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>25</PartIndex>
+          <Xpos>7.75</Xpos>
+          <Ypos>-4.96875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>47</PartIndex>
+          <Xpos>6.9375</Xpos>
+          <Ypos>-3.6875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>53</PartIndex>
+          <Xpos>6.4375</Xpos>
+          <Ypos>-2.71875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>85</PartIndex>
+          <Xpos>6.5</Xpos>
+          <Ypos>-2.03125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>108</PartIndex>
+          <Xpos>6.5</Xpos>
+          <Ypos>-5.21875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>136</PartIndex>
+          <Xpos>8</Xpos>
+          <Ypos>-4.125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="27">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>0</PartIndex>
+          <Xpos>5.9375</Xpos>
+          <Ypos>-4.3125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>25</PartIndex>
+          <Xpos>7.5</Xpos>
+          <Ypos>-4.90625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>48</PartIndex>
+          <Xpos>6.8125</Xpos>
+          <Ypos>-3.75</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>53</PartIndex>
+          <Xpos>6.375</Xpos>
+          <Ypos>-2.65625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>82</PartIndex>
+          <Xpos>6.375</Xpos>
+          <Ypos>-2.03125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>108</PartIndex>
+          <Xpos>6.5</Xpos>
+          <Ypos>-5.21875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>136</PartIndex>
+          <Xpos>7.8125</Xpos>
+          <Ypos>-4.3125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="28">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>0</PartIndex>
+          <Xpos>5.9375</Xpos>
+          <Ypos>-4.3125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>25</PartIndex>
+          <Xpos>7.25</Xpos>
+          <Ypos>-4.84375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>48</PartIndex>
+          <Xpos>6.6875</Xpos>
+          <Ypos>-3.75</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>53</PartIndex>
+          <Xpos>6.25</Xpos>
+          <Ypos>-2.65625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>82</PartIndex>
+          <Xpos>6.25</Xpos>
+          <Ypos>-2.03125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>108</PartIndex>
+          <Xpos>6.5</Xpos>
+          <Ypos>-5.21875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>136</PartIndex>
+          <Xpos>7.5625</Xpos>
+          <Ypos>-4.3125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="29">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>0</PartIndex>
+          <Xpos>6</Xpos>
+          <Ypos>-4.375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>25</PartIndex>
+          <Xpos>7</Xpos>
+          <Ypos>-4.78125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>48</PartIndex>
+          <Xpos>6.5625</Xpos>
+          <Ypos>-3.6875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>53</PartIndex>
+          <Xpos>6.125</Xpos>
+          <Ypos>-2.59375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>82</PartIndex>
+          <Xpos>6.125</Xpos>
+          <Ypos>-1.96875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>108</PartIndex>
+          <Xpos>6.5</Xpos>
+          <Ypos>-5.21875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>136</PartIndex>
+          <Xpos>7.25</Xpos>
+          <Ypos>-4.375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="30">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>0</PartIndex>
+          <Xpos>6.0625</Xpos>
+          <Ypos>-4.375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>25</PartIndex>
+          <Xpos>6.6875</Xpos>
+          <Ypos>-4.71875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>48</PartIndex>
+          <Xpos>6.4375</Xpos>
+          <Ypos>-3.6875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>53</PartIndex>
+          <Xpos>6</Xpos>
+          <Ypos>-2.59375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>82</PartIndex>
+          <Xpos>6</Xpos>
+          <Ypos>-1.96875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>108</PartIndex>
+          <Xpos>6.5</Xpos>
+          <Ypos>-5.21875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>117</PartIndex>
+          <Xpos>6.9375</Xpos>
+          <Ypos>-4.46875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="31">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>0</PartIndex>
+          <Xpos>5.8125</Xpos>
+          <Ypos>-4.25</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>28</PartIndex>
+          <Xpos>6</Xpos>
+          <Ypos>-4.78125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>48</PartIndex>
+          <Xpos>6.4375</Xpos>
+          <Ypos>-3.6875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>54</PartIndex>
+          <Xpos>5.9375</Xpos>
+          <Ypos>-2.59375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>82</PartIndex>
+          <Xpos>6</Xpos>
+          <Ypos>-1.96875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>108</PartIndex>
+          <Xpos>6.5</Xpos>
+          <Ypos>-5.21875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>117</PartIndex>
+          <Xpos>6.875</Xpos>
+          <Ypos>-4.53125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="32">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>118</PartIndex>
+          <Xpos>5.6875</Xpos>
+          <Ypos>-4.1875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>17</PartIndex>
+          <Xpos>5.875</Xpos>
+          <Ypos>-4.59375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>39</PartIndex>
+          <Xpos>6.5</Xpos>
+          <Ypos>-3.71875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>54</PartIndex>
+          <Xpos>6</Xpos>
+          <Ypos>-2.59375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>82</PartIndex>
+          <Xpos>6.0625</Xpos>
+          <Ypos>-1.96875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>104</PartIndex>
+          <Xpos>6.5625</Xpos>
+          <Ypos>-5.1875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>111</PartIndex>
+          <Xpos>6.6875</Xpos>
+          <Ypos>-4.5</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="33">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>1</PartIndex>
+          <Xpos>5.5625</Xpos>
+          <Ypos>-4.0625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>17</PartIndex>
+          <Xpos>5.625</Xpos>
+          <Ypos>-4.78125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>39</PartIndex>
+          <Xpos>6.5625</Xpos>
+          <Ypos>-3.71875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>54</PartIndex>
+          <Xpos>6.0625</Xpos>
+          <Ypos>-2.59375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>82</PartIndex>
+          <Xpos>6.125</Xpos>
+          <Ypos>-1.96875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>103</PartIndex>
+          <Xpos>6.375</Xpos>
+          <Ypos>-5.125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>118</PartIndex>
+          <Xpos>6.5</Xpos>
+          <Ypos>-4.4375</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="34">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>1</PartIndex>
+          <Xpos>5.375</Xpos>
+          <Ypos>-3.875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>17</PartIndex>
+          <Xpos>5.5</Xpos>
+          <Ypos>-4.90625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>40</PartIndex>
+          <Xpos>6.5625</Xpos>
+          <Ypos>-3.75</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>69</PartIndex>
+          <Xpos>6.1875</Xpos>
+          <Ypos>-2.5</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>82</PartIndex>
+          <Xpos>6.3125</Xpos>
+          <Ypos>-1.90625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>104</PartIndex>
+          <Xpos>6.25</Xpos>
+          <Ypos>-5.125</Ypos>
+          <FlipX>true</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>118</PartIndex>
+          <Xpos>6.25</Xpos>
+          <Ypos>-4.3125</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+    <Frame ID="35">
+      <Parts>
+        <Part ID="0">
+          <PartIndex>1</PartIndex>
+          <Xpos>5.3125</Xpos>
+          <Ypos>-3.6875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="1">
+          <PartIndex>17</PartIndex>
+          <Xpos>5.375</Xpos>
+          <Ypos>-4.90625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="2">
+          <PartIndex>40</PartIndex>
+          <Xpos>6.625</Xpos>
+          <Ypos>-3.75</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="3">
+          <PartIndex>69</PartIndex>
+          <Xpos>6.3125</Xpos>
+          <Ypos>-2.5</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="4">
+          <PartIndex>82</PartIndex>
+          <Xpos>6.4375</Xpos>
+          <Ypos>-1.90625</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="5">
+          <PartIndex>104</PartIndex>
+          <Xpos>6.375</Xpos>
+          <Ypos>-5.125</Ypos>
+          <FlipX>true</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+        <Part ID="6">
+          <PartIndex>118</PartIndex>
+          <Xpos>6.1875</Xpos>
+          <Ypos>-4.1875</Ypos>
+          <FlipX>false</FlipX>
+          <FlipY>false</FlipY>
+        </Part>
+      </Parts>
+    </Frame>
+  </Frames>
+</Animation>

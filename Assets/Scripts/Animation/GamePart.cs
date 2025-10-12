@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class GamePart : MonoBehaviour
@@ -18,6 +19,7 @@ public class GamePart : MonoBehaviour
     private InputManager input = InputManager.Instance;
     private AnimatorController animatorC;
     private Camera mainCam;
+    private List<RaycastResult> results = new List<RaycastResult>();
 
     public float xDifference { get; private set; }
     public float yDifference { get; private set; }
@@ -56,6 +58,13 @@ public class GamePart : MonoBehaviour
 
     private void OnMouseDown()
     {
+        UIUtility.GetRayResults();
+        for (int i = 0; i < UIUtility.rayResults.Count; i++)
+        {
+            results.Add(UIUtility.rayResults[i]);
+        }
+        if (results.Count > 0) { return; }
+
         if (input.GetKey(InputManager.InputKey.MultiSelect))
         {
             multipleSelected = true;
@@ -87,6 +96,9 @@ public class GamePart : MonoBehaviour
 
     private void OnMouseDrag()
     {
+        Debug.Log(results.Count);
+        if (results.Count > 0) { return; }
+
         Vector3 dragPos = new Vector3(mainCam.ScreenToWorldPoint(Input.mousePosition).x, mainCam.ScreenToWorldPoint(Input.mousePosition).y, 0);
         animatorC.DragSelectedParts(dragPos);
         animatorC.UpdatePos();
