@@ -59,6 +59,7 @@ public class GamePart : MonoBehaviour
     private void OnMouseDown()
     {
         UIUtility.GetRayResults();
+        results.Clear();
         for (int i = 0; i < UIUtility.rayResults.Count; i++)
         {
             results.Add(UIUtility.rayResults[i]);
@@ -96,7 +97,6 @@ public class GamePart : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        Debug.Log(results.Count);
         if (results.Count > 0) { return; }
 
         Vector3 dragPos = new Vector3(mainCam.ScreenToWorldPoint(Input.mousePosition).x, mainCam.ScreenToWorldPoint(Input.mousePosition).y, 0);
