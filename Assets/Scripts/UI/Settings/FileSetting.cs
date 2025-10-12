@@ -68,7 +68,7 @@ public class FileSetting : Settings
             Directory.CreateDirectory(animDir);
         }
 
-        int multiplier = Mathf.CeilToInt(Camera.main.orthographicSize / 2.0f);
+        float multiplier = Camera.main.orthographicSize / 2.0f;
 
         float xRatio = (float)anim.gridSizeX / anim.gridSizeY;
         float yRatio = (float)anim.gridSizeY / anim.gridSizeX;
@@ -76,8 +76,8 @@ public class FileSetting : Settings
         if (xRatio > yRatio) { yRatio = 1; }
         if (yRatio > xRatio) { xRatio = 1; }
 
-        int xSize = (int)(64 * xRatio * multiplier);
-        int ySize = (int)(64 * yRatio * multiplier);
+        int xSize = Mathf.RoundToInt(64f * xRatio * multiplier);
+        int ySize = Mathf.RoundToInt(64f * yRatio * multiplier);
 
         for (int animFrames = 0; animFrames < gameManager.currentAnimation.maxFrameCount; animFrames++)
         {

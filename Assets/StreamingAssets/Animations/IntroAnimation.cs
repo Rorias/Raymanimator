@@ -320,40 +320,202 @@ asm.SetPart(5, 108, 6.5f, -5.21875f, false);
 asm.SetPart(6, 117, 6.875f, -4.53125f, false);
 break;
 case 32:
-asm.SetPart(0, 118, 5.6875f, -4.1875f, false);
-asm.SetPart(1, 17, 5.875f, -4.59375f, false);
-asm.SetPart(2, 39, 6.5f, -3.71875f, false);
+asm.SetPart(0, 118, 5.5f, -4.125f, false);
+asm.SetPart(1, 17, 5.75f, -4.71875f, false);
+asm.SetPart(2, 39, 6.5625f, -3.71875f, false);
 asm.SetPart(3, 54, 6f, -2.59375f, false);
 asm.SetPart(4, 82, 6.0625f, -1.96875f, false);
-asm.SetPart(5, 104, 6.5625f, -5.1875f, false);
-asm.SetPart(6, 111, 6.6875f, -4.5f, false);
+asm.SetPart(5, 104, 6.625f, -5.1875f, false);
+asm.SetPart(6, 111, 6.625f, -4.5f, false);
 break;
 case 33:
-asm.SetPart(0, 1, 5.5625f, -4.0625f, false);
-asm.SetPart(1, 17, 5.625f, -4.78125f, false);
-asm.SetPart(2, 39, 6.5625f, -3.71875f, false);
+asm.SetPart(0, 1, 5.3125f, -3.9375f, false);
+asm.SetPart(1, 17, 5.5625f, -4.84375f, false);
+asm.SetPart(2, 39, 6.75f, -3.71875f, false);
 asm.SetPart(3, 54, 6.0625f, -2.59375f, false);
 asm.SetPart(4, 82, 6.125f, -1.96875f, false);
-asm.SetPart(5, 103, 6.375f, -5.125f, false);
-asm.SetPart(6, 118, 6.5f, -4.4375f, false);
+asm.SetPart(5, 103, 6.5625f, -5.125f, false);
+asm.SetPart(6, 118, 6.375f, -4.375f, false);
 break;
 case 34:
-asm.SetPart(0, 1, 5.375f, -3.875f, false);
-asm.SetPart(1, 17, 5.5f, -4.90625f, false);
-asm.SetPart(2, 40, 6.5625f, -3.75f, false);
-asm.SetPart(3, 69, 6.1875f, -2.5f, false);
-asm.SetPart(4, 82, 6.3125f, -1.90625f, false);
-asm.SetPart(5, 104, 6.25f, -5.125f, true);
+asm.SetPart(0, 1, 5.1875f, -3.75f, false);
+asm.SetPart(1, 17, 5.4375f, -4.90625f, false);
+asm.SetPart(2, 40, 6.75f, -3.6875f, false);
+asm.SetPart(3, 69, 6.125f, -2.5f, false);
+asm.SetPart(4, 82, 6.25f, -1.90625f, false);
+asm.SetPart(5, 104, 6.5f, -5.1875f, true);
 asm.SetPart(6, 118, 6.25f, -4.3125f, false);
 break;
 case 35:
-asm.SetPart(0, 1, 5.3125f, -3.6875f, false);
-asm.SetPart(1, 17, 5.375f, -4.90625f, false);
-asm.SetPart(2, 40, 6.625f, -3.75f, false);
-asm.SetPart(3, 69, 6.3125f, -2.5f, false);
-asm.SetPart(4, 82, 6.4375f, -1.90625f, false);
-asm.SetPart(5, 104, 6.375f, -5.125f, true);
-asm.SetPart(6, 118, 6.1875f, -4.1875f, false);
+asm.SetPart(0, 5, 5.0625f, -3.25f, false);
+asm.SetPart(1, 17, 5.25f, -4.90625f, false);
+asm.SetPart(2, 40, 6.875f, -3.6875f, false);
+asm.SetPart(3, 69, 6.25f, -2.5f, false);
+asm.SetPart(4, 82, 6.375f, -1.90625f, false);
+asm.SetPart(5, 104, 6.75f, -5.1875f, true);
+asm.SetPart(6, 124, 6.3125f, -4.15625f, false);
+break;
+case 36:
+asm.SetPart(0, 5, 5f, -3.0625f, false);
+asm.SetPart(1, 28, 5.1875f, -5.09375f, false);
+asm.SetPart(2, 40, 6.9375f, -3.6875f, false);
+asm.SetPart(3, 61, 6.625f, -2.8125f, false);
+asm.SetPart(4, 70, 6.5625f, -2.15625f, false);
+asm.SetPart(5, 104, 6.9375f, -5.1875f, true);
+asm.SetPart(6, 124, 6.5625f, -4.03125f, false);
+break;
+case 37:
+asm.SetPart(0, 5, 5.125f, -2.8125f, false);
+asm.SetPart(1, 28, 5.125f, -5.09375f, false);
+asm.SetPart(2, 40, 6.9375f, -3.75f, false);
+asm.SetPart(3, 61, 6.8125f, -2.75f, false);
+asm.SetPart(4, 70, 6.75f, -2.09375f, false);
+asm.SetPart(5, 104, 7.1875f, -5.1875f, true);
+asm.SetPart(6, 124, 6.75f, -3.96875f, false);
+break;
+case 38:
+asm.SetPart(0, 5, 5.3125f, -2.6875f, false);
+asm.SetPart(1, 28, 5.125f, -5.09375f, false);
+asm.SetPart(2, 40, 6.875f, -3.875f, false);
+asm.SetPart(3, 61, 6.875f, -2.8125f, false);
+asm.SetPart(4, 70, 6.8125f, -2.15625f, false);
+asm.SetPart(5, 104, 7.25f, -5.1875f, true);
+asm.SetPart(6, 124, 7f, -3.84375f, false);
+break;
+case 39:
+asm.SetPart(0, 5, 5.4375f, -2.5f, false);
+asm.SetPart(1, 28, 5.1875f, -5.09375f, false);
+asm.SetPart(2, 40, 6.8125f, -4f, false);
+asm.SetPart(3, 61, 6.8125f, -2.875f, false);
+asm.SetPart(4, 70, 6.75f, -2.21875f, false);
+asm.SetPart(5, 104, 7.25f, -5.1875f, true);
+asm.SetPart(6, 120, 7.5f, -3.59375f, false);
+break;
+case 40:
+asm.SetPart(0, 5, 5.625f, -2.4375f, false);
+asm.SetPart(1, 28, 5.1875f, -5.09375f, false);
+asm.SetPart(2, 40, 6.6875f, -4f, false);
+asm.SetPart(3, 61, 6.8125f, -2.9375f, false);
+asm.SetPart(4, 70, 6.75f, -2.28125f, false);
+asm.SetPart(5, 104, 7.1875f, -5.1875f, true);
+asm.SetPart(6, 120, 7.75f, -3.40625f, false);
+break;
+case 41:
+asm.SetPart(0, 5, 5.625f, -2.5f, false);
+asm.SetPart(1, 28, 5.1875f, -5.09375f, false);
+asm.SetPart(2, 40, 6.5625f, -3.9375f, false);
+asm.SetPart(3, 61, 6.8125f, -3f, false);
+asm.SetPart(4, 70, 6.75f, -2.28125f, false);
+asm.SetPart(5, 104, 7.125f, -5.1875f, true);
+asm.SetPart(6, 121, 7.9375f, -2.9375f, false);
+break;
+case 42:
+asm.SetPart(0, 5, 5.5625f, -2.625f, false);
+asm.SetPart(1, 28, 5.1875f, -5.09375f, false);
+asm.SetPart(2, 40, 6.5625f, -3.9375f, false);
+asm.SetPart(3, 62, 6.75f, -3.03125f, false);
+asm.SetPart(4, 70, 6.75f, -2.28125f, false);
+asm.SetPart(5, 104, 7.0625f, -5.1875f, true);
+asm.SetPart(6, 121, 8f, -3.0625f, false);
+break;
+case 43:
+asm.SetPart(0, 5, 5.5f, -2.75f, false);
+asm.SetPart(1, 28, 5.1875f, -5.09375f, false);
+asm.SetPart(2, 40, 6.5625f, -3.9375f, false);
+asm.SetPart(3, 62, 6.75f, -3.09375f, false);
+asm.SetPart(4, 70, 6.75f, -2.28125f, false);
+asm.SetPart(5, 104, 7.0625f, -5.1875f, true);
+asm.SetPart(6, 121, 8f, -3.1875f, false);
+break;
+case 44:
+asm.SetPart(0, 5, 5.5625f, -2.875f, false);
+asm.SetPart(1, 28, 5.1875f, -5.09375f, false);
+asm.SetPart(2, 40, 6.5625f, -4f, false);
+asm.SetPart(3, 62, 6.75f, -3.09375f, false);
+asm.SetPart(4, 70, 6.75f, -2.28125f, false);
+asm.SetPart(5, 104, 7.0625f, -5.1875f, true);
+asm.SetPart(6, 121, 7.9375f, -3.3125f, false);
+break;
+case 45:
+asm.SetPart(0, 11, 5.625f, -3.1875f, false);
+asm.SetPart(1, 28, 5.1875f, -5.09375f, false);
+asm.SetPart(2, 40, 6.5625f, -4f, false);
+asm.SetPart(3, 62, 6.75f, -3.03125f, false);
+asm.SetPart(4, 70, 6.75f, -2.28125f, false);
+asm.SetPart(5, 104, 7.0625f, -5.1875f, true);
+asm.SetPart(6, 121, 7.875f, -3.4375f, false);
+break;
+case 46:
+asm.SetPart(0, 11, 5.6875f, -3.375f, false);
+asm.SetPart(1, 28, 5.1875f, -5.09375f, false);
+asm.SetPart(2, 40, 6.5625f, -4f, false);
+asm.SetPart(3, 64, 6.8125f, -3f, false);
+asm.SetPart(4, 70, 6.75f, -2.28125f, false);
+asm.SetPart(5, 104, 7.0625f, -5.1875f, true);
+asm.SetPart(6, 121, 7.875f, -3.5f, false);
+break;
+case 47:
+asm.SetPart(0, 9, 5.75f, -3.78125f, false);
+asm.SetPart(1, 28, 5.1875f, -5.09375f, false);
+asm.SetPart(2, 40, 6.5625f, -4f, false);
+asm.SetPart(3, 62, 6.75f, -2.96875f, false);
+asm.SetPart(4, 70, 6.75f, -2.28125f, false);
+asm.SetPart(5, 104, 7.0625f, -5.1875f, true);
+asm.SetPart(6, 121, 7.875f, -3.5f, false);
+break;
+case 48:
+asm.SetPart(0, 9, 5.8125f, -3.96875f, false);
+asm.SetPart(1, 28, 5.1875f, -5.09375f, false);
+asm.SetPart(2, 40, 6.5625f, -4f, false);
+asm.SetPart(3, 61, 6.8125f, -3f, false);
+asm.SetPart(4, 70, 6.75f, -2.28125f, false);
+asm.SetPart(5, 104, 7.0625f, -5.1875f, true);
+asm.SetPart(6, 121, 7.875f, -3.5f, false);
+break;
+case 49:
+asm.SetPart(0, 9, 5.9375f, -4.09375f, false);
+asm.SetPart(1, 28, 5.1875f, -5.09375f, false);
+asm.SetPart(2, 40, 6.5625f, -4.0625f, false);
+asm.SetPart(3, 80, 7f, -3f, false);
+asm.SetPart(4, 70, 6.75f, -2.28125f, false);
+asm.SetPart(5, 104, 7.0625f, -5.1875f, true);
+asm.SetPart(6, 121, 7.875f, -3.5f, false);
+break;
+case 50:
+asm.SetPart(0, 9, 5.9375f, -4.09375f, false);
+asm.SetPart(1, 28, 5.1875f, -5.09375f, false);
+asm.SetPart(2, 40, 6.5625f, -4.0625f, false);
+asm.SetPart(3, 80, 7f, -3f, false);
+asm.SetPart(4, 70, 6.75f, -2.28125f, false);
+asm.SetPart(5, 104, 7.0625f, -5.1875f, true);
+asm.SetPart(6, 121, 7.875f, -3.5f, false);
+break;
+case 51:
+asm.SetPart(0, 9, 5.9375f, -4.09375f, false);
+asm.SetPart(1, 28, 5.1875f, -5.09375f, false);
+asm.SetPart(2, 40, 6.5625f, -4.0625f, false);
+asm.SetPart(3, 80, 7f, -3f, false);
+asm.SetPart(4, 70, 6.75f, -2.28125f, false);
+asm.SetPart(5, 104, 7.0625f, -5.1875f, true);
+asm.SetPart(6, 121, 7.875f, -3.5f, false);
+break;
+case 52:
+asm.SetPart(0, 9, 5.9375f, -4.09375f, false);
+asm.SetPart(1, 28, 5.1875f, -5.09375f, false);
+asm.SetPart(2, 40, 6.5625f, -4.0625f, false);
+asm.SetPart(3, 80, 7f, -3f, false);
+asm.SetPart(4, 70, 6.75f, -2.28125f, false);
+asm.SetPart(5, 104, 7.0625f, -5.1875f, true);
+asm.SetPart(6, 121, 7.875f, -3.5f, false);
+break;
+case 53:
+asm.SetPart(0, 9, 5.9375f, -4.09375f, false);
+asm.SetPart(1, 28, 5.1875f, -5.09375f, false);
+asm.SetPart(2, 40, 6.5625f, -4.0625f, false);
+asm.SetPart(3, 80, 7f, -3f, false);
+asm.SetPart(4, 70, 6.75f, -2.28125f, false);
+asm.SetPart(5, 104, 7.0625f, -5.1875f, true);
+asm.SetPart(6, 121, 7.875f, -3.5f, false);
 break;
 }
 }

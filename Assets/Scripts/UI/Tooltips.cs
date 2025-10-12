@@ -149,8 +149,6 @@ public class Tooltips : Settings
         c.a = 0.7f;
         bg.color = c;
 
-        Debug.Log(UIUtility.rayResults[0].gameObject.name);
-
         tooltipText.text = UIUtility.rayResults[0].gameObject.name switch
         {
             //File settings
