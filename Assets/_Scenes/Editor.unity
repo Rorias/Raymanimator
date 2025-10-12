@@ -2670,6 +2670,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 99f2bae184509634ca6e8831794e2364, type: 2}
     - target: {fileID: 148911520179628319, guid: b7d4d6f86bcce284e881d0771cd092cd, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 148911520179628319, guid: b7d4d6f86bcce284e881d0771cd092cd, type: 3}
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: -7577939231897647816, guid: 99f2bae184509634ca6e8831794e2364, type: 2}
@@ -7098,6 +7102,10 @@ PrefabInstance:
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 3853773045602947128, guid: 9f10abc4e783ed1488b0034fbd39404b, type: 3}
+      propertyPath: m_Name
+      value: NextGhostLabel
+      objectReference: {fileID: 0}
     - target: {fileID: 4664280209940967650, guid: 9f10abc4e783ed1488b0034fbd39404b, type: 3}
       propertyPath: m_Name
       value: GhostingNextToggle
@@ -9852,6 +9860,10 @@ PrefabInstance:
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 3853773045602947128, guid: 9f10abc4e783ed1488b0034fbd39404b, type: 3}
+      propertyPath: m_Name
+      value: PrevGhostLabel
+      objectReference: {fileID: 0}
     - target: {fileID: 4664280209940967650, guid: 9f10abc4e783ed1488b0034fbd39404b, type: 3}
       propertyPath: m_Name
       value: GhostingPreviousToggle
@@ -10169,6 +10181,10 @@ PrefabInstance:
     - target: {fileID: 3782626596087012820, guid: 9f10abc4e783ed1488b0034fbd39404b, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853773045602947128, guid: 9f10abc4e783ed1488b0034fbd39404b, type: 3}
+      propertyPath: m_Name
+      value: CopyToNextLabel
       objectReference: {fileID: 0}
     - target: {fileID: 4664280209940967650, guid: 9f10abc4e783ed1488b0034fbd39404b, type: 3}
       propertyPath: m_Name
@@ -13690,6 +13706,10 @@ PrefabInstance:
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 3853773045602947128, guid: 9f10abc4e783ed1488b0034fbd39404b, type: 3}
+      propertyPath: m_Name
+      value: FlipYLabel
+      objectReference: {fileID: 0}
     - target: {fileID: 4664280209940967650, guid: 9f10abc4e783ed1488b0034fbd39404b, type: 3}
       propertyPath: m_Name
       value: FlipYToggle
@@ -14035,6 +14055,10 @@ PrefabInstance:
     - target: {fileID: 3782626596087012820, guid: 9f10abc4e783ed1488b0034fbd39404b, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853773045602947128, guid: 9f10abc4e783ed1488b0034fbd39404b, type: 3}
+      propertyPath: m_Name
+      value: FlipXLabel
       objectReference: {fileID: 0}
     - target: {fileID: 4664280209940967650, guid: 9f10abc4e783ed1488b0034fbd39404b, type: 3}
       propertyPath: m_Name
@@ -15802,6 +15826,10 @@ PrefabInstance:
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: 23709b94e5d26354fb3c136b0d77baea, type: 2}
+    - target: {fileID: 148911520179628319, guid: b7d4d6f86bcce284e881d0771cd092cd, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 148911520179628319, guid: b7d4d6f86bcce284e881d0771cd092cd, type: 3}
       propertyPath: m_sharedMaterial
       value: 

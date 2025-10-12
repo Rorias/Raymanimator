@@ -57,8 +57,8 @@ public class Tooltips : Settings
     private const string Play = "Press this button to start playing your animation.\nCopy To Next will be automatically turned off when you press play.\n";
     private const string PlayExtended = "No functions can be used whilst the animation is playing to prevent accidental changes during the playback.";
 
-    private const string PlaybackSpeed = "Type the speed you want your animation to play at.\nThe lower the value, the faster the animation will play.\n";
-    private const string PlaybackSpeedExtended = "You cannot go lower than 0.001.";
+    private const string PlaybackSpeed = "Type the speed you want your animation to play at.\nThe higher the value, the faster the animation will play.\n";
+    private const string PlaybackSpeedExtended = "You cannot go lower than 1.";
     #endregion
     #region Frame settings
     private const string PreviousFrame = "Load the previous frame of the animation to edit.\n";
@@ -149,6 +149,8 @@ public class Tooltips : Settings
         c.a = 0.7f;
         bg.color = c;
 
+        Debug.Log(UIUtility.rayResults[0].gameObject.name);
+
         tooltipText.text = UIUtility.rayResults[0].gameObject.name switch
         {
             //File settings
@@ -162,7 +164,7 @@ public class Tooltips : Settings
             "CameraSpeedField" or "CameraSpeedIF" => CameraSpeed,
             "ResetSpeedButtonText" => CameraSpeedReset,
             //Tooltip settings
-            "ExtendedToggleBackground" => ExtendedTooltipsToggle + (extendedOn ? ExtendedTooltipsExtended : ""),
+            "ExtendedLabel" => ExtendedTooltipsToggle + (extendedOn ? ExtendedTooltipsExtended : ""),
             //Grid settings
             "GridLODField" or "GridLODIF" => GridLOD,
             "GridXField" or "GridXIF" => GridX,
@@ -173,23 +175,23 @@ public class Tooltips : Settings
             "PlayText" => Play + (extendedOn ? PlayExtended : ""),
             "PlaybackSpeedIF" => PlaybackSpeed + (extendedOn ? PlaybackSpeedExtended : ""),
             //Frame settings
-            "RemoveFrameButton" => RemoveFrame + (extendedOn ? RemoveFrameExtended : ""),
-            "AddFrameButton" => AddFrame + (extendedOn ? AddFrameExtended : ""),
-            "PreviousFrameButton" => PreviousFrame + (extendedOn ? NextPreviousFrameExtended : ""),
-            "NextFrameButton" => NextFrame + (extendedOn ? NextPreviousFrameExtended : ""),
+            "RemoveFrameButtonText" => RemoveFrame + (extendedOn ? RemoveFrameExtended : ""),
+            "AddFrameButtonText" => AddFrame + (extendedOn ? AddFrameExtended : ""),
+            "PreviousFrameButtonText" => PreviousFrame + (extendedOn ? NextPreviousFrameExtended : ""),
+            "NextFrameButtonText" => NextFrame + (extendedOn ? NextPreviousFrameExtended : ""),
             "FrameSelectBackground" or "FrameFill" or "FrameHandle" => FrameSlider + (extendedOn ? FrameSliderExtended : ""),
-            "CopyToNextToggleBackground" => CopyToNextToggle + (extendedOn ? CopyToNextToggleExtended : ""),
-            "PrevGhostBackground" => PreviousGhostToggle + (extendedOn ? GhostingToggleExtended : ""),
-            "NextGhostBackground" => NextGhostToggle + (extendedOn ? GhostingToggleExtended : ""),
+            "CopyToNextLabel" => CopyToNextToggle + (extendedOn ? CopyToNextToggleExtended : ""),
+            "PrevGhostLabel" => PreviousGhostToggle + (extendedOn ? GhostingToggleExtended : ""),
+            "NextGhostLabel" => NextGhostToggle + (extendedOn ? GhostingToggleExtended : ""),
             "ClearFrameButtonText" => ClearFrame + (extendedOn ? ClearFrameExtended : ""),
             //Part settings
-            "RemovePartButton" => RemovePart + (extendedOn ? RemovePartExtended : ""),
-            "AddPartButton" => AddPart + (extendedOn ? AddPartExtended : ""),
+            "RemovePartButtonText" => RemovePart + (extendedOn ? RemovePartExtended : ""),
+            "AddPartButtonText" => AddPart + (extendedOn ? AddPartExtended : ""),
             "PartSelectBackground" or "PartFill" or "PartHandle" => PartSlider + (extendedOn ? PartSliderExtended : ""),
             "XPosIF" => XPos + (extendedOn ? XYPosExtended : ""),
             "YPosIF" => YPos + (extendedOn ? XYPosExtended : ""),
-            "FlipXToggle" => FlipX + (extendedOn ? FlipXYExtended : ""),
-            "FlipYToggle" => FlipY + (extendedOn ? FlipXYExtended : ""),
+            "FlipXLabel" => FlipX + (extendedOn ? FlipXYExtended : ""),
+            "FlipYLabel" => FlipY + (extendedOn ? FlipXYExtended : ""),
             "FixX" => FixX + (extendedOn ? FixXYExtended : ""),
             "FixY" => FixY + (extendedOn ? FixXYExtended : ""),
             "PriorityField" or "PriorityIF" => Priority + (extendedOn ? PriorityExtended : ""),
