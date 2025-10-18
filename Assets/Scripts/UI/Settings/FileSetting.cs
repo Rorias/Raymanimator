@@ -62,13 +62,6 @@ public class FileSetting : Settings
     {
         Animation anim = gameManager.currentAnimation;
 
-        string animDir = settings.animationsPath + "/" + anim.animationName;
-
-        if (!Directory.Exists(animDir))
-        {
-            Directory.CreateDirectory(animDir);
-        }
-
         float multiplier = Camera.main.orthographicSize / 2.0f;
 
         float xRatio = (float)anim.gridSizeX / anim.gridSizeY;
@@ -79,6 +72,8 @@ public class FileSetting : Settings
 
         int xSize = Mathf.RoundToInt(64f * xRatio * multiplier);
         int ySize = Mathf.RoundToInt(64f * yRatio * multiplier);
+
+        using MagickImageCollection imgColl = new MagickImageCollection();
 
         for (int animFrames = 0; animFrames < anim.maxFrameCount; animFrames++)
         {
@@ -94,36 +89,15 @@ public class FileSetting : Settings
             RenderTexture.active = null;
             gifCamera.targetTexture = null;
             byte[] byteArray = renderedTexture.EncodeToPNG();
-            File.WriteAllBytes(animDir + "/" + anim.animationName + animFrames + ".png", byteArray);
-        }
-
-        using MagickImageCollection imgColl = new MagickImageCollection();
-
-        for (int i = 0; i < anim.maxFrameCount; i++)
-        {
-            imgColl.Add(new MagickImage(animDir + "/" + anim.animationName + i + ".png"));
-            imgColl[i].AnimationDelay = 1;
-            imgColl[i].AnimationTicksPerSecond = settings.lastPlaybackSpeed;
-            imgColl[i].GifDisposeMethod = GifDisposeMethod.Background;
+            imgColl.Add(new MagickImage(byteArray));
+            imgColl[animFrames].AnimationDelay = 1;
+            imgColl[animFrames].AnimationTicksPerSecond = settings.lastPlaybackSpeed;
+            imgColl[animFrames].GifDisposeMethod = GifDisposeMethod.Background;
         }
 
         imgColl.Write(settings.animationsPath + "/" + anim.animationName + ".gif");
 
-        DeleteDirectory(animDir);
-
         DebugHelper.Log(gameManager.currentAnimation.animationName + " saved as gif!");
         animatorC.AnimToZipEnd();
-    }
-
-    private void DeleteDirectory(string _dir)
-    {
-        string[] files = Directory.GetFiles(_dir, "*.png", SearchOption.TopDirectoryOnly);
-
-        foreach (string file in files)
-        {
-            File.Delete(file);
-        }
-
-        Directory.Delete(_dir);
     }
 }

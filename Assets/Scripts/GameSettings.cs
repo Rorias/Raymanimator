@@ -37,14 +37,14 @@ public sealed class GameSettings
     public bool firstLoad;
 
     public InputManager.PossibleJoystick activeJoystick;
-    
+
     public KeyCode[] zoomCamera;
     public KeyCode[] dragCamera;
     public KeyCode[] moveCameraLeft;
     public KeyCode[] moveCameraUp;
     public KeyCode[] moveCameraRight;
     public KeyCode[] moveCameraDown;
-                  
+
     public KeyCode[] select;
     public KeyCode[] multiSelect;
     public KeyCode[] spritePrevious;
@@ -54,10 +54,10 @@ public sealed class GameSettings
     public KeyCode[] moveSpriteUp;
     public KeyCode[] moveSpriteRight;
     public KeyCode[] moveSpriteDown;
-                  
+
     public KeyCode[] framePrevious;
     public KeyCode[] frameNext;
-                  
+
     public KeyCode[] hideUI;
 
     public KeyCode confirm;
@@ -97,6 +97,8 @@ public sealed class GameSettings
     [SerializeField] private string lbg = string.Empty;
     public Color32 bgColor { get { return bgc; } set { bgc = value; } }
     [SerializeField] private Color32 bgc = new Color32(50, 75, 150, 255);
+    public Color32 gridOpacity { get { return new Color32(255, 255, 255, gOp); } set { gOp = value.a; } }
+    [SerializeField] private byte gOp = 100;
 
     public void SaveSettings()
     {

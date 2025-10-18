@@ -18,6 +18,7 @@ public class GridSetting : Settings
     public TMP_InputField gridLODIF;
     public TMP_InputField gridXsizeIF;
     public TMP_InputField gridYsizeIF;
+    public ColorSlider gridOpacity;
 
     private float gridDetail = 2.0f;
 
@@ -29,6 +30,9 @@ public class GridSetting : Settings
         gridXsizeIF.onEndEdit.AddListener(delegate { SetGridXsize(); });
         gridYsizeIF.onEndEdit.AddListener(delegate { SetGridYsize(); });
         gridToggle.onValueChanged.AddListener(delegate { GridState(); });
+        gridOpacity.UpdateAlpha += SetOpacity;
+        gridOpacity.SetAlpha += SaveColor;
+        gridOpacity.Reset += ResetColor;
 
         gameManager = GameManager.Instance;
     }
@@ -37,6 +41,7 @@ public class GridSetting : Settings
     {
         SetGrid();
         InitializeInputFieldValues();
+        gridOpacity.SetColorSliders(settings.gridOpacity);
     }
 
     private void InitializeInputFieldValues()
@@ -86,5 +91,23 @@ public class GridSetting : Settings
     public void GridState()
     {
         grid.gameObject.SetActive(!grid.gameObject.activeSelf);
+    }
+
+    public void SetOpacity()
+    {
+        gridMaterial.color = gridOpacity.GetColorBarAlpha(gridMaterial.color);
+    }
+
+    public void SaveColor()
+    {
+        settings.gridOpacity = gridMaterial.color;
+        settings.SaveSettings();
+    }
+
+    public void ResetColor()
+    {
+        gridMaterial.color = new Color32(255, 255, 255, 100);
+        gridOpacity.SetColorSliders(gridMaterial.color);
+        SaveColor();
     }
 }
