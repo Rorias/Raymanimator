@@ -1,3 +1,5 @@
+using ImageMagick;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -54,7 +56,6 @@ public class FileSetting : Settings
         animatorC.AnimToZipStart();
 
         StartCoroutine(CreateImageList());
-        DebugHelper.Log(gameManager.currentAnimation.animationName + " saved as gif!");
     }
 
     private IEnumerator CreateImageList()
@@ -79,7 +80,7 @@ public class FileSetting : Settings
         int xSize = Mathf.RoundToInt(64f * xRatio * multiplier);
         int ySize = Mathf.RoundToInt(64f * yRatio * multiplier);
 
-        for (int animFrames = 0; animFrames < gameManager.currentAnimation.maxFrameCount; animFrames++)
+        for (int animFrames = 0; animFrames < anim.maxFrameCount; animFrames++)
         {
             animatorC.frameSelectSlider.value = animFrames;
             yield return new WaitForEndOfFrame();
@@ -96,25 +97,27 @@ public class FileSetting : Settings
             File.WriteAllBytes(animDir + "/" + anim.animationName + animFrames + ".png", byteArray);
         }
 
-        CreateZipFile(animDir);
-        DeleteDirectory(animDir);
+        using MagickImageCollection imgColl = new MagickImageCollection();
 
-        animatorC.AnimToZipEnd();
-    }
-
-    private void CreateZipFile(string _dir)
-    {
-        if (File.Exists(_dir + "GIF.zip"))
+        for (int i = 0; i < anim.maxFrameCount; i++)
         {
-            File.Delete(_dir + "GIF.zip");
+            imgColl.Add(new MagickImage(animDir + "/" + anim.animationName + i + ".png"));
+            imgColl[i].AnimationDelay = 1;
+            imgColl[i].AnimationTicksPerSecond = settings.lastPlaybackSpeed;
+            imgColl[i].GifDisposeMethod = GifDisposeMethod.Background;
         }
 
-        ZipFile.CreateFromDirectory(_dir, _dir + "GIF.zip");
+        imgColl.Write(settings.animationsPath + "/" + anim.animationName + ".gif");
+
+        DeleteDirectory(animDir);
+
+        DebugHelper.Log(gameManager.currentAnimation.animationName + " saved as gif!");
+        animatorC.AnimToZipEnd();
     }
 
     private void DeleteDirectory(string _dir)
     {
-        string[] files = Directory.GetFiles(_dir);
+        string[] files = Directory.GetFiles(_dir, "*.png", SearchOption.TopDirectoryOnly);
 
         foreach (string file in files)
         {
