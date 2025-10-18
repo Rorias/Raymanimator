@@ -68,6 +68,8 @@ public class GameManager : MonoBehaviour
         if (gameSettings.firstLoad)
         {
             //Do initialization
+            gameSettings.keyboardHotkeys = new GameSettings.Hotkeys[input.DefaultKeys.Count];
+            int h = 0;
             foreach (KeyValuePair<InputManager.InputKey, KeyCode[]> Default in input.DefaultKeys)
             {
                 InputManager.Key[] keys = input.Inputs[Default.Key].Where(x => x.type == InputManager.KeyType.Keyboard).ToArray();
@@ -75,6 +77,9 @@ public class GameManager : MonoBehaviour
                 {
                     keys[i].code = input.DefaultKeys[Default.Key][i];
                 }
+
+                gameSettings.keyboardHotkeys[h] = new GameSettings.Hotkeys() { nm = Default.Key, hks = Default.Value };
+                h++;
             }
 
             foreach (KeyValuePair<InputManager.InputKey, KeyCode> Default in input.DefaultButtons)

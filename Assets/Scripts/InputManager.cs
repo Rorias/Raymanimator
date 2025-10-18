@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 using UnityEngine;
 
@@ -186,8 +188,6 @@ public sealed class InputManager
         { InputKey.FrameNext, new KeyCode[]{ KeyCode.Equals } },
 
         { InputKey.HideUI,new KeyCode[]{ KeyCode.F1 } },
-
-        { InputKey.Return,new KeyCode[]{  KeyCode.Escape, KeyCode.Backspace } },
     };
 
     public readonly Dictionary<InputKey, KeyCode> DefaultButtons = new Dictionary<InputKey, KeyCode>()
@@ -362,33 +362,22 @@ public sealed class InputManager
 
     public void LoadInputs(GameSettings _settings)
     {
-        Load(InputKey.ZoomCamera, _settings.zoomCamera);
-        Load(InputKey.DragCamera, _settings.dragCamera);
-        Load(InputKey.MoveCameraLeft, _settings.moveCameraLeft);
-        Load(InputKey.MoveCameraUp, _settings.moveCameraUp);
-        Load(InputKey.MoveCameraRight, _settings.moveCameraRight);
-        Load(InputKey.MoveCameraDown, _settings.moveCameraDown);
-
-        Load(InputKey.Select, _settings.select);
-        Load(InputKey.MultiSelect, _settings.multiSelect);
-        Load(InputKey.SpritePrevious, _settings.spritePrevious);
-        Load(InputKey.SpriteNext, _settings.spriteNext);
-        Load(InputKey.DeletePart, _settings.deletePart);
-        Load(InputKey.MoveSpriteLeft, _settings.moveSpriteLeft);
-        Load(InputKey.MoveSpriteRight, _settings.moveSpriteRight);
-        Load(InputKey.MoveSpriteUp, _settings.moveSpriteUp);
-        Load(InputKey.MoveSpriteDown, _settings.moveSpriteDown);
-
-        Load(InputKey.FramePrevious, _settings.framePrevious);
-        Load(InputKey.FrameNext, _settings.frameNext);
-
-        Load(InputKey.HideUI, _settings.hideUI);
+        foreach (InputKey iKey in Enum.GetValues(typeof(InputKey)))
+        {
+            if (_settings.keyboardHotkeys != null)
+            {
+                GameSettings.Hotkeys key = _settings.keyboardHotkeys.FirstOrDefault(x => x.nm == iKey);
+                if (key != null)
+                {
+                    Load(iKey, key.hks);
+                }
+            }
+        }
 
         Inputs[InputKey.LeftMenu].Add(Inputs[InputKey.MoveSpriteLeft][0]);
         Inputs[InputKey.UpMenu].Add(Inputs[InputKey.MoveSpriteUp][0]);
         Inputs[InputKey.RightMenu].Add(Inputs[InputKey.MoveSpriteRight][0]);
         Inputs[InputKey.DownMenu].Add(Inputs[InputKey.MoveSpriteDown][0]);
-        //Inputs[InputKey.Confirm].AddRange(Inputs[InputKey.Fist]);
 
         activeJoystick = _settings.activeJoystick;
 
@@ -420,29 +409,33 @@ public sealed class InputManager
         #endregion
     }
 
+    private void Load(InputKey _set, KeyCode[] _get)
+    {
+        if (_get == null || _get.Length <= 0)
+        {
+            return;
+        }
+
+        List<Key> keys = Inputs[_set].FindAll(x => x.type == KeyType.Keyboard);
+        for (int i = 0; i < keys.Count; i++)
+        {
+            keys[i].code = _get[i];
+        }
+    }
+
     public void SaveInputs(GameSettings _settings)
     {
-        _settings.zoomCamera = Save(InputKey.ZoomCamera);
-        _settings.dragCamera = Save(InputKey.DragCamera);
-        _settings.moveCameraLeft = Save(InputKey.MoveCameraLeft);
-        _settings.moveCameraUp = Save(InputKey.MoveCameraUp);
-        _settings.moveCameraRight = Save(InputKey.MoveCameraRight);
-        _settings.moveCameraDown = Save(InputKey.MoveCameraDown);
-
-        _settings.select = Save(InputKey.Select);
-        _settings.multiSelect = Save(InputKey.MultiSelect);
-        _settings.spritePrevious = Save(InputKey.SpritePrevious);
-        _settings.spriteNext = Save(InputKey.SpriteNext);
-        _settings.deletePart = Save(InputKey.DeletePart);
-        _settings.moveSpriteLeft = Save(InputKey.MoveSpriteLeft);
-        _settings.moveSpriteRight = Save(InputKey.MoveSpriteRight);
-        _settings.moveSpriteUp = Save(InputKey.MoveSpriteUp);
-        _settings.moveSpriteDown = Save(InputKey.MoveSpriteDown);
-
-        _settings.framePrevious = Save(InputKey.FramePrevious);
-        _settings.frameNext = Save(InputKey.FrameNext);
-
-        _settings.hideUI = Save(InputKey.HideUI);
+        foreach (InputKey iKey in Enum.GetValues(typeof(InputKey)))
+        {
+            if (_settings.keyboardHotkeys != null)
+            {
+                GameSettings.Hotkeys key = _settings.keyboardHotkeys.FirstOrDefault(x => x.nm == iKey);
+                if (key != null)
+                {
+                    key.hks = Save(iKey);
+                }
+            }
+        }
 
         _settings.activeJoystick = activeJoystick;
     }
@@ -457,19 +450,5 @@ public sealed class InputManager
         }
 
         return codes;
-    }
-
-    private void Load(InputKey _set, KeyCode[] _get)
-    {
-        if (_get == null || _get.Length <= 0)
-        {
-            return;
-        }
-
-        List<Key> keys = Inputs[_set].FindAll(x => x.type == KeyType.Keyboard);
-        for (int i = 0; i < keys.Count; i++)
-        {
-            keys[i].code = _get[i];
-        }
     }
 }

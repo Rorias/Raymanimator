@@ -38,27 +38,15 @@ public sealed class GameSettings
 
     public InputManager.PossibleJoystick activeJoystick;
 
-    public KeyCode[] zoomCamera;
-    public KeyCode[] dragCamera;
-    public KeyCode[] moveCameraLeft;
-    public KeyCode[] moveCameraUp;
-    public KeyCode[] moveCameraRight;
-    public KeyCode[] moveCameraDown;
+    [Serializable]
+    public class Hotkeys
+    {
+        [SerializeField] public InputManager.InputKey nm;
+        [SerializeField] public KeyCode[] hks;//hotkeys
+    }
 
-    public KeyCode[] select;
-    public KeyCode[] multiSelect;
-    public KeyCode[] spritePrevious;
-    public KeyCode[] spriteNext;
-    public KeyCode[] deletePart;
-    public KeyCode[] moveSpriteLeft;
-    public KeyCode[] moveSpriteUp;
-    public KeyCode[] moveSpriteRight;
-    public KeyCode[] moveSpriteDown;
-
-    public KeyCode[] framePrevious;
-    public KeyCode[] frameNext;
-
-    public KeyCode[] hideUI;
+    public Hotkeys[] keyboardHotkeys { get { return kbhs; } set { kbhs = value; } }
+    [SerializeField] private Hotkeys[] kbhs;
 
     public KeyCode confirm;
     public KeyCode @return;
