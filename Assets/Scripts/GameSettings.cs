@@ -87,6 +87,8 @@ public sealed class GameSettings
     [SerializeField] private Color32 bgc = new Color32(50, 75, 150, 255);
     public Color32 gridOpacity { get { return new Color32(255, 255, 255, gOp); } set { gOp = value.a; } }
     [SerializeField] private byte gOp = 100;
+    public string binaryBasePath { get { return bbp; } set { bbp = value; } }
+    [SerializeField] private string bbp = string.Empty;
 
     public void SaveSettings()
     {

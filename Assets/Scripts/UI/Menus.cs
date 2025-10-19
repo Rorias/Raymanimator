@@ -7,12 +7,15 @@ public class Menus : MonoBehaviour
 {
     public MenuItem startMenu;
 
-    private List<MenuItem> menus = new List<MenuItem>();
+    public List<MenuItem> menus = new List<MenuItem>();
     [HideInInspector] public MenuItem currentMenu;
 
     private void Start()
     {
-        menus = FindObjectsByType<MenuItem>(FindObjectsSortMode.None).ToList();
+        if (menus.Count < 1)
+        {
+            menus = FindObjectsByType<MenuItem>(FindObjectsSortMode.None).ToList();
+        }
         ResetMenu();
     }
 

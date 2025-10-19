@@ -15,8 +15,6 @@ public sealed class Rayman1BinaryAnimation : MonoBehaviour
 {
     #region Singleton
     private static Rayman1BinaryAnimation _instance;
-    private static object _lock = new object();
-
     private Rayman1BinaryAnimation() { }
 
     public static Rayman1BinaryAnimation Instance
@@ -26,14 +24,15 @@ public sealed class Rayman1BinaryAnimation : MonoBehaviour
             if (null == _instance)
             {
                 _instance = new Rayman1BinaryAnimation();
-                LoadBinaryAnimations();
+                _instance.InitializeBinary();
+                LoadBinaryAnimations(GameSettings.Instance);
             }
             return _instance;
         }
     }
     #endregion
 
-    private static string basePath = @"C:\UbiSoft\UBISOFT\RAYMAN";
+    private string basePath = @"C:\UbiSoft\UBISOFT\RAYMAN";
     private static string allfixFilePath = @"PCMAP\ALLFIX.DAT";
     private static string world1FilePath = @"PCMAP\RAY1.WLD";
 
@@ -41,9 +40,11 @@ public sealed class Rayman1BinaryAnimation : MonoBehaviour
     [NonSerialized] private static AllfixFile allfix;
     [NonSerialized] private static WorldFile world1;
 
-    private static void LoadBinaryAnimations()
+    private GameSettings settings;
+
+    private static void LoadBinaryAnimations(GameSettings _settings)
     {
-        context = new Context(basePath);
+        context = new Context(_settings.binaryBasePath);
         context.AddSettings(new Ray1Settings(Ray1EngineVersion.PC));
 
         using (context)
@@ -57,6 +58,11 @@ public sealed class Rayman1BinaryAnimation : MonoBehaviour
             context.AddFile(new LinearFile(context, world1FilePath));
             world1 = FileFactory.Read<WorldFile>(context, world1FilePath);
         }
+    }
+
+    private void InitializeBinary()
+    {
+        settings = GameSettings.Instance;
     }
 
     public Animation GetRaymAnimationFromBinary(string _animName, int _objectIndex, int _animIndex)

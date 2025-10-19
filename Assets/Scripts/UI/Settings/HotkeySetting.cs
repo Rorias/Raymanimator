@@ -139,8 +139,6 @@ public class HotkeySetting : Settings
             yield return null;
         }
 
-        yield return new WaitForSecondsRealtime(0.04f);
-
         for (int i = 0; i < hotkeys.Count; i++)
         {
             hotkeys[i].key1Btn.interactable = true;
