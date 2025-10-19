@@ -12,6 +12,7 @@ public class HotkeyGroup : MonoBehaviour
     [NonSerialized] public TMP_Text key1NameText;
     [NonSerialized] public ButtonPlus key2Btn;
     [NonSerialized] public TMP_Text key2NameText;
+    [NonSerialized] public ButtonPlus resetBtn;
 
     public void Initialize()
     {
@@ -22,5 +23,7 @@ public class HotkeyGroup : MonoBehaviour
 
         key2Btn = transform.GetChild(2).GetComponent<ButtonPlus>();
         key2NameText = transform.GetChild(2).GetComponentInChildren<TMP_Text>();
+
+        resetBtn = transform.GetChild(3).GetComponent<ButtonPlus>();
     }
 }

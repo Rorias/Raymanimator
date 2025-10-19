@@ -50,7 +50,7 @@ public class ResolutionSetting : Settings
         int option = settings.resNumber;
         if (settings.resNumber == -1)
         {
-            option = resOptions.First(x => x.Value.StartsWith(Screen.currentResolution.width.ToString()) && x.Value.EndsWith(Screen.currentResolution.refreshRateRatio.ToString())).Key;
+            option = resOptions.FirstOrDefault(x => x.Value.StartsWith(Screen.currentResolution.width.ToString()) && x.Value.EndsWith(Screen.currentResolution.refreshRateRatio.ToString())).Key;
         }
 
         settings.fullScreen = Screen.fullScreenMode == FullScreenMode.FullScreenWindow;

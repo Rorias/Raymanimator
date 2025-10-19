@@ -151,6 +151,13 @@ public class EditMenu : MonoBehaviour
 
         SceneManager.LoadScene(1);
     }
+
+    public void LoadBinaryAnimation()
+    {
+        Rayman1BinaryAnimation rayBinary = Rayman1BinaryAnimation.Instance;
+        gameManager.currentAnimation = rayBinary.GetRaymAnimationFromBinary("fistCharge", 0, 0);
+        SceneManager.LoadScene(1);
+    }
     #endregion
 
     #region Edit settings

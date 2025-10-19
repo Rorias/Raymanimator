@@ -87,42 +87,85 @@ public sealed class InputManager
 
     public Dictionary<InputKey, List<Key>> Inputs = new Dictionary<InputKey, List<Key>>()
     {
-        { InputKey.None, new List<Key> { new Key() { code = KeyCode.None, type = KeyType.None } } },
-        { InputKey.ZoomCamera, new List<Key> { new Key() { code = KeyCode.Mouse3, type = KeyType.Keyboard } } },
-        { InputKey.DragCamera, new List<Key> { new Key() { code = KeyCode.Mouse2, type = KeyType.Keyboard } } },
-        { InputKey.MoveCameraLeft, new List<Key> { new Key() { code = KeyCode.A, type = KeyType.Keyboard } } },
-        { InputKey.MoveCameraUp, new List<Key> { new Key() { code = KeyCode.W, type = KeyType.Keyboard } } },
-        { InputKey.MoveCameraRight, new List<Key> { new Key() { code = KeyCode.D, type = KeyType.Keyboard } } },
-        { InputKey.MoveCameraDown, new List<Key> { new Key() { code = KeyCode.S, type = KeyType.Keyboard } } },
-        { InputKey.Select, new List<Key>{ new Key { code = KeyCode.Mouse0, type = KeyType.Keyboard } } },
+        { InputKey.None, new List<Key> {
+            new Key() { code = KeyCode.None, type = KeyType.None } }
+        },
+        { InputKey.ZoomCamera, new List<Key> {
+            new Key() { code = KeyCode.Mouse3, type = KeyType.Keyboard },
+            new Key() { code = KeyCode.None, type = KeyType.Keyboard } }
+        },
+        { InputKey.DragCamera, new List<Key> {
+            new Key() { code = KeyCode.Mouse2, type = KeyType.Keyboard },
+            new Key() { code = KeyCode.None, type = KeyType.Keyboard } }
+        },
+        { InputKey.MoveCameraLeft, new List<Key> {
+            new Key() { code = KeyCode.A, type = KeyType.Keyboard },
+            new Key() { code = KeyCode.None, type = KeyType.Keyboard } }
+        },
+        { InputKey.MoveCameraUp, new List<Key> {
+            new Key() { code = KeyCode.W, type = KeyType.Keyboard },
+            new Key() { code = KeyCode.None, type = KeyType.Keyboard } }
+        },
+        { InputKey.MoveCameraRight, new List<Key> {
+            new Key() { code = KeyCode.D, type = KeyType.Keyboard },
+            new Key() { code = KeyCode.None, type = KeyType.Keyboard } }
+        },
+        { InputKey.MoveCameraDown, new List<Key> {
+            new Key() { code = KeyCode.S, type = KeyType.Keyboard },
+            new Key() { code = KeyCode.None, type = KeyType.Keyboard } }
+        },
+        { InputKey.Select, new List<Key>{
+            new Key { code = KeyCode.Mouse0, type = KeyType.Keyboard },
+            new Key() { code = KeyCode.None, type = KeyType.Keyboard } }
+        },
         { InputKey.MultiSelect, new List<Key> {
             new Key() { code = KeyCode.LeftShift, type = KeyType.Keyboard },
             new Key() { code = KeyCode.RightShift, type = KeyType.Keyboard } }
         },
-        { InputKey.SpritePrevious, new List<Key> { new Key() { code = KeyCode.Comma, type = KeyType.Keyboard } } },
-        { InputKey.SpriteNext, new List<Key> { new Key() { code = KeyCode.Period, type = KeyType.Keyboard } } },
-        { InputKey.DeletePart, new List<Key>{ new Key() { code=KeyCode.Delete, type = KeyType.Keyboard } } },
-        { InputKey.FramePrevious, new List<Key> { new Key() { code = KeyCode.Minus, type = KeyType.Keyboard } } },
-        { InputKey.FrameNext, new List<Key> { new Key() { code = KeyCode.Equals, type = KeyType.Keyboard } } },
+        { InputKey.SpritePrevious, new List<Key> {
+            new Key() { code = KeyCode.Comma, type = KeyType.Keyboard },
+            new Key() { code = KeyCode.None, type = KeyType.Keyboard } }
+        },
+        { InputKey.SpriteNext, new List<Key> {
+            new Key() { code = KeyCode.Period, type = KeyType.Keyboard },
+            new Key() { code = KeyCode.None, type = KeyType.Keyboard } }
+        },
+        { InputKey.DeletePart, new List<Key>{
+            new Key() { code=KeyCode.Delete, type = KeyType.Keyboard },
+            new Key() { code = KeyCode.None, type = KeyType.Keyboard } }
+        },
+        { InputKey.FramePrevious, new List<Key> {
+            new Key() { code = KeyCode.Minus, type = KeyType.Keyboard },
+            new Key() { code = KeyCode.None, type = KeyType.Keyboard } }
+        },
+        { InputKey.FrameNext, new List<Key> {
+            new Key() { code = KeyCode.Equals, type = KeyType.Keyboard },
+            new Key() { code = KeyCode.None, type = KeyType.Keyboard } }
+        },
         { InputKey.MoveSpriteLeft, new List<Key> {
             new Key() { code = KeyCode.LeftArrow, type = KeyType.Keyboard },
+            new Key() { code = KeyCode.None, type = KeyType.Keyboard },
             new Key() { code = KeyCode.JoystickButton0, type = KeyType.Controller } }
         },
         { InputKey.MoveSpriteUp, new List<Key> {
             new Key() { code = KeyCode.UpArrow, type = KeyType.Keyboard },
+            new Key() { code = KeyCode.None, type = KeyType.Keyboard },
             new Key() { code = KeyCode.JoystickButton2, type = KeyType.Controller } }
         },
         { InputKey.MoveSpriteRight, new List<Key> {
             new Key() { code = KeyCode.RightArrow, type = KeyType.Keyboard },
+            new Key() { code = KeyCode.None, type = KeyType.Keyboard },
             new Key() { code = KeyCode.JoystickButton1, type = KeyType.Controller } }
         },
         { InputKey.MoveSpriteDown, new List<Key> {
             new Key() { code = KeyCode.DownArrow, type = KeyType.Keyboard },
+            new Key() { code = KeyCode.None, type = KeyType.Keyboard },
             new Key() { code = KeyCode.JoystickButton4, type = KeyType.Controller } }
         },
         { InputKey.HideUI, new List<Key>
         {
-            new Key(){ code = KeyCode.F1, type = KeyType.Keyboard } }
+            new Key(){ code = KeyCode.F1, type = KeyType.Keyboard },
+            new Key(){ code = KeyCode.None, type = KeyType.Keyboard } }
         },
         { InputKey.LeftMenu, new List<Key> { new Key() { code = KeyCode.LeftArrow, type = KeyType.Meta } } },
         { InputKey.UpMenu, new List<Key> { new Key() { code = KeyCode.UpArrow, type = KeyType.Meta } } },
@@ -167,27 +210,27 @@ public sealed class InputManager
 
     public readonly Dictionary<InputKey, KeyCode[]> DefaultKeys = new Dictionary<InputKey, KeyCode[]>()
     {
-        { InputKey.ZoomCamera, new KeyCode[]{ KeyCode.Mouse3 } },
-        { InputKey.DragCamera, new KeyCode[]{ KeyCode.Mouse2 } },
-        { InputKey.MoveCameraLeft, new KeyCode[]{ KeyCode.A } },
-        { InputKey.MoveCameraUp, new KeyCode[]{ KeyCode.W } },
-        { InputKey.MoveCameraRight,new KeyCode[]{ KeyCode.D } },
-        { InputKey.MoveCameraDown,  new KeyCode[]{ KeyCode.S } },
+        { InputKey.ZoomCamera, new KeyCode[]{ KeyCode.Mouse3, KeyCode.None } },
+        { InputKey.DragCamera, new KeyCode[]{ KeyCode.Mouse2, KeyCode.None } },
+        { InputKey.MoveCameraLeft, new KeyCode[]{ KeyCode.A, KeyCode.None } },
+        { InputKey.MoveCameraUp, new KeyCode[]{ KeyCode.W, KeyCode.None } },
+        { InputKey.MoveCameraRight,new KeyCode[]{ KeyCode.D, KeyCode.None } },
+        { InputKey.MoveCameraDown,  new KeyCode[]{ KeyCode.S, KeyCode.None } },
 
-        { InputKey.Select, new KeyCode[]{ KeyCode.Mouse0 } },
+        { InputKey.Select, new KeyCode[]{ KeyCode.Mouse0, KeyCode.None } },
         { InputKey.MultiSelect,new KeyCode[]{ KeyCode.LeftShift, KeyCode.RightShift } },
-        { InputKey.SpritePrevious,new KeyCode[]{ KeyCode.Comma } },
-        { InputKey.SpriteNext, new KeyCode[]{ KeyCode.Period } },
-        { InputKey.DeletePart, new KeyCode[]{ KeyCode.Delete } },
-        { InputKey.MoveSpriteLeft, new KeyCode[]{ KeyCode.LeftArrow } },
-        { InputKey.MoveSpriteRight, new KeyCode[]{ KeyCode.RightArrow } },
-        { InputKey.MoveSpriteUp, new KeyCode[]{ KeyCode.UpArrow } },
-        { InputKey.MoveSpriteDown,new KeyCode[]{ KeyCode.DownArrow } },
+        { InputKey.SpritePrevious,new KeyCode[]{ KeyCode.Comma, KeyCode.None } },
+        { InputKey.SpriteNext, new KeyCode[]{ KeyCode.Period, KeyCode.None } },
+        { InputKey.DeletePart, new KeyCode[]{ KeyCode.Delete, KeyCode.None } },
+        { InputKey.MoveSpriteLeft, new KeyCode[]{ KeyCode.LeftArrow, KeyCode.None } },
+        { InputKey.MoveSpriteRight, new KeyCode[]{ KeyCode.RightArrow, KeyCode.None } },
+        { InputKey.MoveSpriteUp, new KeyCode[]{ KeyCode.UpArrow, KeyCode.None } },
+        { InputKey.MoveSpriteDown,new KeyCode[]{ KeyCode.DownArrow, KeyCode.None } },
 
-        { InputKey.FramePrevious, new KeyCode[]{ KeyCode.Minus } },
-        { InputKey.FrameNext, new KeyCode[]{ KeyCode.Equals } },
+        { InputKey.FramePrevious, new KeyCode[]{ KeyCode.Minus, KeyCode.None } },
+        { InputKey.FrameNext, new KeyCode[]{ KeyCode.Equals, KeyCode.None } },
 
-        { InputKey.HideUI,new KeyCode[]{ KeyCode.F1 } },
+        { InputKey.HideUI,new KeyCode[]{ KeyCode.F1, KeyCode.None } },
     };
 
     public readonly Dictionary<InputKey, KeyCode> DefaultButtons = new Dictionary<InputKey, KeyCode>()
@@ -417,7 +460,7 @@ public sealed class InputManager
         }
 
         List<Key> keys = Inputs[_set].FindAll(x => x.type == KeyType.Keyboard);
-        for (int i = 0; i < keys.Count; i++)
+        for (int i = 0; i < _get.Length; i++)
         {
             keys[i].code = _get[i];
         }

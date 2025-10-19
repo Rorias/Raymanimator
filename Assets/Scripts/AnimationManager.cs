@@ -89,6 +89,13 @@ public sealed class AnimationManager
         _anim.animationName = _anim.animationName.Replace("Double", "");
     }
 
+    public void SaveToBinary(Animation _anim)
+    {
+        Rayman1BinaryAnimation rayBinary = Rayman1BinaryAnimation.Instance;
+        rayBinary.SaveRaymAnimationToBinary(_anim);
+        DebugHelper.Log(_anim.animationName + " saved to binary!");
+    }
+
     public void ImportFrames(Animation _import, Animation _current, int _startFrame, int _endFrame, int _insertFrame)
     {
         int offset = 0;

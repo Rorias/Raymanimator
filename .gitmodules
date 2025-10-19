@@ -1,0 +1,12 @@
+[submodule "Assets/Scripts/Libraries/BinarySerializer"]
+	path = Assets/Scripts/Libraries/BinarySerializer
+	url = https://github.com/BinarySerializer/BinarySerializer
+[submodule "Assets/Scripts/Libraries/BinarySerializer.Ray1"]
+	path = Assets/Scripts/Libraries/BinarySerializer.Ray1
+	url = https://github.com/BinarySerializer/BinarySerializer.Ray1
+[submodule "Assets/Scripts/Libraries/BinarySerializer.PlayStation"]
+	path = Assets/Scripts/Libraries/BinarySerializer.PlayStation
+	url = https://github.com/BinarySerializer/BinarySerializer.PlayStation
+[submodule "Assets/Scripts/Libraries/BinarySerializer.Nintendo"]
+	path = Assets/Scripts/Libraries/BinarySerializer.Nintendo
+	url = https://github.com/BinarySerializer/BinarySerializer.Nintendo

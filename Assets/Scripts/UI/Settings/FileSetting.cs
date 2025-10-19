@@ -47,6 +47,11 @@ public class FileSetting : Settings
         animManager.SaveFileDoubled(gameManager.currentAnimation);
     }
 
+    public void SaveToBinary()
+    {
+        animManager.SaveToBinary(gameManager.currentAnimation);
+    }
+
     public void SaveAsImageListZip()
     {
         //Set GIF view to real view

@@ -147,7 +147,7 @@ public class UIUtility : MonoBehaviour
             Texture2D sampleTexture = new Texture2D(2, 2);
             sampleTexture.LoadImage(byteArray);
             sampleTexture.filterMode = FilterMode.Point;
-            Sprite newSprite = Sprite.Create(sampleTexture, new Rect(0, 0, sampleTexture.width, sampleTexture.height), new Vector2(0.5f, 0.5f), _size, 0, SpriteMeshType.FullRect);
+            Sprite newSprite = Sprite.Create(sampleTexture, new Rect(0, 0, sampleTexture.width, sampleTexture.height), new Vector2(0f, 1f), _size, 0, SpriteMeshType.FullRect);
 
             string spriteName = _images[i];
 
