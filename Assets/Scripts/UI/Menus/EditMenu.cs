@@ -27,6 +27,7 @@ public class EditMenu : MonoBehaviour
     private GameSettings settings;
     private AnimationManager animManager;
     private InputManager input;
+    private UIUtility uiUtility;
 
     private List<string> loadableAnims = new List<string>();
 
@@ -38,6 +39,7 @@ public class EditMenu : MonoBehaviour
         settings = GameSettings.Instance;
         animManager = AnimationManager.Instance;
         input = InputManager.Instance;
+        uiUtility = FindObjectOfType<UIUtility>();
 
         loadAnimsDD.onValueChanged.AddListener(delegate { GetAnimationName(); });
 
@@ -97,16 +99,7 @@ public class EditMenu : MonoBehaviour
 
         foreach (string s in fileNames)
         {
-            string animName = s.Substring(s.LastIndexOf('/') + 1);
-
-            //Check in case / = \\
-            if (animName.Length == s.Length)
-            {
-                animName = s.Substring(s.LastIndexOf('\\') + 1);
-            }
-
-            animName = animName.Split('.')[0];
-            loadableAnims.Add(animName);
+            loadableAnims.Add(Path.GetFileNameWithoutExtension(s));
         }
     }
 
@@ -149,13 +142,6 @@ public class EditMenu : MonoBehaviour
             return;
         }
 
-        SceneManager.LoadScene(1);
-    }
-
-    public void LoadBinaryAnimation()
-    {
-        Rayman1BinaryAnimation rayBinary = Rayman1BinaryAnimation.Instance;
-        gameManager.currentAnimation = rayBinary.GetRaymAnimationFromBinary("fistCharge", 0, 0);
         SceneManager.LoadScene(1);
     }
     #endregion

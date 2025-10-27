@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 
 using UnityEngine;
@@ -57,6 +58,7 @@ public class GameManager : MonoBehaviour
     private GameSettings gameSettings;
     private InputManager input;
 
+    [NonSerialized] public List<Mapping> mappings = new List<Mapping>();
     [NonSerialized] public Dictionary<int, Sprite> spritesetImages = new Dictionary<int, Sprite>();
     [NonSerialized] public Dictionary<int, Sprite> backgroundImages = new Dictionary<int, Sprite>();
     [NonSerialized] public Animation currentAnimation = null;
@@ -103,6 +105,7 @@ public class GameManager : MonoBehaviour
     public void LoadSettings()
     {
         LoadInputs();
+        LoadMappings();
     }
 
     private void LoadInputs()
@@ -114,6 +117,25 @@ public class GameManager : MonoBehaviour
     {
         input.SaveInputs(gameSettings);
         gameSettings.SaveSettings();
+    }
+
+    public void LoadMappings()
+    {
+        if (!Directory.Exists(Mapping.filePath))
+        {
+            DebugHelper.Log("The mapping folder has been destroyed or could not be found.", DebugHelper.Severity.error);
+            return;
+        }
+
+        mappings.Clear();
+
+        string[] fileMappings = Directory.GetFiles(Mapping.filePath, "*.json", SearchOption.AllDirectories);
+
+        for (int i = 0; i < fileMappings.Length; i++)
+        {
+            Mapping m = Mapping.LoadMapping(Path.GetFileNameWithoutExtension(fileMappings[i]));
+            mappings.Add(m);
+        }
     }
 
     public float ParseToSingle(string parseValue)

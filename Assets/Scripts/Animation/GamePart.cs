@@ -34,6 +34,7 @@ public class GamePart : MonoBehaviour
         mainCam = Camera.main;
 
         sr = GetComponent<SpriteRenderer>();
+        polyColl = GetComponent<PolygonCollider2D>();
     }
 
     public void Initialize(AnimatorController _animatorC)
@@ -108,5 +109,36 @@ public class GamePart : MonoBehaviour
     {
         xDifference = mainCam.ScreenToWorldPoint(Input.mousePosition).x - transform.position.x;
         yDifference = mainCam.ScreenToWorldPoint(Input.mousePosition).y - transform.position.y;
+    }
+
+    public void RecalculateCollision()
+    {
+        if (polyColl.enabled && sr.sprite != null)
+        {
+            polyColl.pathCount = 0;
+            polyColl.pathCount = 1;
+
+            List<Vector2> path = new List<Vector2>();
+            for (int p = 0; p < polyColl.pathCount; p++)
+            {
+                //Skip sprites that are too small from generating a physics shape as it throws errors?
+                if(sr.sprite.texture.width < 2 || sr.sprite.texture.height < 2)
+                {
+                    continue;
+                }
+
+                sr.sprite.GetPhysicsShape(p, path);
+                if (path.Count > 0)
+                {
+                    for (int n = 0; n < path.Count; n++)
+                    {
+                        float x = sr.flipX ? -path[n].x : path[n].x;
+                        float y = sr.flipY ? -path[n].y : path[n].y;
+                        path[n] = new Vector2(x, y);
+                    }
+                    polyColl.SetPath(p, path);
+                }
+            }
+        }
     }
 }

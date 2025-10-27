@@ -13,9 +13,12 @@ public class SpritesetSetting : Settings
     public TMP_InputField spritesetPathIF;
     public TMP_Dropdown currentSpritesetDD;
 
+    private GameManager gameManager;
+
     protected override void Awake()
     {
         base.Awake();
+        gameManager = GameManager.Instance;
 
         spritesetPathIF.onValueChanged.AddListener(delegate { SetSpritesetPathViaBrowse(); });
         spritesetPathIF.onEndEdit.AddListener(delegate { SetSpritesetPath(); });
@@ -78,7 +81,7 @@ public class SpritesetSetting : Settings
         }
 
         settings.lastSpriteset = currentSpritesetDD.options[currentSpritesetDD.value].text;
-        uiUtility.LoadSpriteset();
+        gameManager.spritesetImages = uiUtility.LoadSpriteset(settings.lastSpriteset);
         settings.SaveSettings();
     }
 }

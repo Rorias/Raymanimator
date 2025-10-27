@@ -57,7 +57,7 @@ public class ImportWindow : MonoBehaviour
 
     private void GetLoadableAnimations()
     {
-        if (string.IsNullOrWhiteSpace(settings.animationsPath))
+        if (string.IsNullOrWhiteSpace(settings.animationsPath) || !Directory.Exists(settings.animationsPath))
         {
             Debug.Log("Animations path is not set. Please select a path in the options menu.");
             DebugHelper.Log("Animations path is not set. Please select a path in the options menu.");
@@ -70,16 +70,7 @@ public class ImportWindow : MonoBehaviour
 
         foreach (string s in fileNames)
         {
-            string animName = s.Substring(s.LastIndexOf('/') + 1);
-
-            //Check in case / = \\
-            if (animName.Length == s.Length)
-            {
-                animName = s.Substring(s.LastIndexOf('\\') + 1);
-            }
-
-            animName = animName.Split('.')[0];
-            loadableAnims.Add(animName);
+            loadableAnims.Add(Path.GetFileNameWithoutExtension(s));
         }
 
         InitializeDropdown();

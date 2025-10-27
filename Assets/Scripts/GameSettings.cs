@@ -100,6 +100,11 @@ public sealed class GameSettings
 
     private static void LoadSettings()
     {
+        if (file == null)
+        {
+            DebugHelper.Log("No file string has been created, yet instantiation was called.", DebugHelper.Severity.error);
+        }
+
         if (File.Exists(file))
         {
             string json = File.ReadAllText(file);

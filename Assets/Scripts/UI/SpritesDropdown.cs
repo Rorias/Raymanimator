@@ -52,35 +52,19 @@ public class SpritesDropdown : MonoBehaviour
 
     public void InitializeSpritesDropdown()
     {
-        Dictionary<int, Sprite> possibleSprites = new Dictionary<int, Sprite>();
-
-        if (gameManager.spritesetImages.Count > 0)
-        {
-            foreach (KeyValuePair<int, Sprite> mapping in gameManager.spritesetImages)
-            {
-                possibleSprites.Add(mapping.Key, mapping.Value);
-            }
-        }
-        else
+        if (gameManager.spritesetImages.Count <= 0)
         {
             Debug.LogError("Spriteset loading failed.");
             SceneManager.LoadScene(0);
             return;
         }
 
-        if (possibleSprites.Count > 0)
-        {
-            ddSprites.AddOptions(possibleSprites.Select(x => x.Value).ToList());
-        }
-        else
-        {
-            Debug.Log("Possible sprites list is empty.");
-        }
+        ddSprites.AddOptions(gameManager.spritesetImages.Select(x => x.Value).ToList());
 
-        foreach (KeyValuePair<int, Sprite> mapping in possibleSprites)
+        foreach (KeyValuePair<int, Sprite> mapping in gameManager.spritesetImages)
         {
-            ddSprites.options[mapping.Key].text = possibleSprites[mapping.Key].name;
-            ddSprites.options[mapping.Key].image = possibleSprites[mapping.Key];
+            ddSprites.options[mapping.Key].text = gameManager.spritesetImages[mapping.Key].name;
+            ddSprites.options[mapping.Key].image = gameManager.spritesetImages[mapping.Key];
         }
     }
 
@@ -91,14 +75,6 @@ public class SpritesDropdown : MonoBehaviour
             _currentParts[i].part = ddSprites.options[ddSprites.value].image;
             _currentParts[i].partIndex = ddSprites.value;
             _currentGameParts[i].sr.sprite = _currentParts[i].part;
-
-            //When setting a sprite for the gamePart, turn on the poly collider
-            if (_currentGameParts[i].polyColl != null)
-            {
-                Destroy(_currentGameParts[i].polyColl);
-            }
-            _currentGameParts[i].gameObject.AddComponent<PolygonCollider2D>();
-            _currentGameParts[i].polyColl = _currentGameParts[i].GetComponent<PolygonCollider2D>();
             _currentGameParts[i].anim.SetBool("WasSelected", true);
         }
 

@@ -13,12 +13,10 @@ public class UIUtility : MonoBehaviour
     public static readonly List<RaycastResult> rayResults = new List<RaycastResult>();
     private static PointerEventData pointerData;
 
-    private GameManager gameManager;
     private GameSettings settings;
 
     private void Awake()
     {
-        gameManager = GameManager.Instance;
         settings = GameSettings.Instance;
 
         pointerData = new PointerEventData(EventSystem.current)
@@ -85,59 +83,57 @@ public class UIUtility : MonoBehaviour
         if (_dropdown.options.Count > 0) { _dropdown.ClearOptions(); }
 
         _dropdown.AddOptions(spritesetNames);
-
-        for (int i = 0; i < spritesetNames.Count; i++)
-        {
-            _dropdown.options[i].text = spritesetNames[i];
-        }
     }
 
-    public void LoadSpriteset()
+    public Dictionary<int, Sprite> LoadSpriteset(string _spritesetName)
     {
-        if (!string.IsNullOrWhiteSpace(settings.spritesetsPath))
+        if (!string.IsNullOrWhiteSpace(settings.spritesetsPath) && Directory.Exists(settings.spritesetsPath))
         {
-            if (Directory.Exists(settings.spritesetsPath))
+            string[] spritesetFolders = Directory.GetDirectories(settings.spritesetsPath);
+
+            if (spritesetFolders.Length > 0)
             {
-                string[] spritesetFolders = Directory.GetDirectories(settings.spritesetsPath);
+                Dictionary<int, Sprite> spritesetImages = new Dictionary<int, Sprite>();
 
-                if (spritesetFolders.Length > 0)
+                foreach (string folder in spritesetFolders)
                 {
-                    foreach (string folder in spritesetFolders)
+                    int index = folder.LastIndexOf('\\') + 1;
+                    if (index == 0)
                     {
-                        int index = folder.LastIndexOf('\\') + 1;
-                        if (index == 0)
-                        {
-                            index = folder.LastIndexOf('/') + 1;
-                        }
+                        index = folder.LastIndexOf('/') + 1;
+                    }
 
-                        if (folder.Substring(index) == settings.lastSpriteset)
-                        {
-                            string[] files = Directory.GetFiles(folder, "*.*", SearchOption.TopDirectoryOnly)
-                                                      .Where(s => s.EndsWith(imageTypes[0]) || s.EndsWith(imageTypes[1]) || s.EndsWith(imageTypes[2])).ToArray();
+                    if (folder.Substring(index) == _spritesetName)
+                    {
+                        string[] files = Directory.GetFiles(folder, "*.*", SearchOption.TopDirectoryOnly)
+                                                  .Where(s => s.EndsWith(imageTypes[0]) || s.EndsWith(imageTypes[1]) || s.EndsWith(imageTypes[2])).ToArray();
 
-                            gameManager.spritesetImages.Clear();
-                            gameManager.spritesetImages = ImportImagesAsSprites(files, 16);
-                            break;
-                        }
+                        spritesetImages.Clear();
+                        spritesetImages = ImportImagesAsSprites(files, 16);
+                        break;
                     }
                 }
+
+                return spritesetImages;
             }
         }
+
+        return null;
     }
 
-    public void LoadBackgrounds()
+    public void LoadBackgrounds(Dictionary<int, Sprite> _backgroundImages)
     {
         if (!string.IsNullOrWhiteSpace(settings.backgroundPath) && Directory.Exists(settings.spritesetsPath))
         {
             string[] files = Directory.GetFiles(settings.backgroundPath, "*.*", SearchOption.TopDirectoryOnly)
                                       .Where(s => s.EndsWith(imageTypes[0]) || s.EndsWith(imageTypes[1]) || s.EndsWith(imageTypes[2])).ToArray();
 
-            gameManager.backgroundImages.Clear();
-            gameManager.backgroundImages = ImportImagesAsSprites(files, 32);
+            _backgroundImages.Clear();
+            _backgroundImages = ImportImagesAsSprites(files, 16);
         }
     }
 
-    private Dictionary<int, Sprite> ImportImagesAsSprites(string[] _images, int _size)
+    public Dictionary<int, Sprite> ImportImagesAsSprites(string[] _images, int _pixelsPerUnit)
     {
         Dictionary<int, Sprite> folderImages = new Dictionary<int, Sprite>();
 
@@ -147,21 +143,9 @@ public class UIUtility : MonoBehaviour
             Texture2D sampleTexture = new Texture2D(2, 2);
             sampleTexture.LoadImage(byteArray);
             sampleTexture.filterMode = FilterMode.Point;
-            Sprite newSprite = Sprite.Create(sampleTexture, new Rect(0, 0, sampleTexture.width, sampleTexture.height), new Vector2(0f, 1f), _size, 0, SpriteMeshType.FullRect);
+            Sprite newSprite = Sprite.Create(sampleTexture, new Rect(0, 0, sampleTexture.width, sampleTexture.height), new Vector2(0f, 1f), _pixelsPerUnit, 0, SpriteMeshType.FullRect, new Vector4(0, 0, 0, 0), true);
 
-            string spriteName = _images[i];
-
-            if (spriteName.Contains(imageTypes[0]) || spriteName.Contains(imageTypes[1]) || spriteName.Contains(imageTypes[2]))
-            {
-                spriteName = _images[i].Remove(_images[i].Length - 4);
-            }
-
-            string newName = spriteName.Substring(spriteName.LastIndexOf('\\') + 1);
-            if (newName.Length == spriteName.Length)
-            {
-                newName = spriteName.Substring(spriteName.LastIndexOf('/') + 1);
-            }
-            newSprite.name = newName;
+            newSprite.name = Path.GetFileNameWithoutExtension(_images[i]);
 
             folderImages.Add(i, newSprite);
         }

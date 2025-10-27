@@ -91,8 +91,9 @@ public sealed class AnimationManager
 
     public void SaveToBinary(Animation _anim)
     {
+        Rayman1MSDOS.DesignObjects currObject = (Rayman1MSDOS.DesignObjects)Enum.Parse(typeof(Rayman1MSDOS.DesignObjects), _anim.usedSpriteset);
         Rayman1BinaryAnimation rayBinary = Rayman1BinaryAnimation.Instance;
-        rayBinary.SaveRaymAnimationToBinary(_anim);
+        rayBinary.SaveRaymAnimationToBinary(_anim, gameManager.spritesetImages, (int)currObject, _anim.binaryAnimationIndex);
         DebugHelper.Log(_anim.animationName + " saved to binary!");
     }
 

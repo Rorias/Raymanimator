@@ -61,7 +61,7 @@ public class BackgroundSettings : Settings
         }
         if (backgroundsDD != null)
         {
-            uiUtility.LoadBackgrounds();
+            uiUtility.LoadBackgrounds(gameManager.backgroundImages);
             InitializeBackgroundsDropdown();
             CreateBackground(0);
         }
