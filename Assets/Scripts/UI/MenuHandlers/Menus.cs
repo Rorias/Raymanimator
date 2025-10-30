@@ -3,7 +3,7 @@ using System.Linq;
 
 using UnityEngine;
 
-public class Menus : MonoBehaviour
+public class Menus : Raymanimator
 {
     public MenuItem startMenu;
 

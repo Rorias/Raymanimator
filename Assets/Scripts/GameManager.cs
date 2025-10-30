@@ -138,6 +138,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void AddNewMapping(string _mappingName)
+    {
+        if (!Directory.Exists(Mapping.filePath))
+        {
+            DebugHelper.Log("The mapping folder has been destroyed or could not be found.", DebugHelper.Severity.error);
+            return;
+        }
+
+        string[] fileMappings = Directory.GetFiles(Mapping.filePath, _mappingName + ".json", SearchOption.AllDirectories);
+        Mapping m = Mapping.LoadMapping(Path.GetFileNameWithoutExtension(fileMappings[0]));
+        mappings.Add(m);
+    }
+
     public float ParseToSingle(string parseValue)
     {
         if (float.TryParse(parseValue, NumberStyles.Float, CultUS, out float conv))

@@ -3,7 +3,7 @@ using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class OptionsMenu : MonoBehaviour
+public class OptionsMenu : Raymanimator
 {
     public UnityEvent initializeSettings;
 

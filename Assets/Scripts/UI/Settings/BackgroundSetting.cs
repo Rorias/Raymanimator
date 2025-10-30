@@ -14,7 +14,7 @@ public class BackgroundSettings : Settings
     public GameObject backgroundPrefab;
 
     public TMP_InputField backgroundImagePathIF;
-    public TMP_Dropdown backgroundsDD;
+    public TMP_DropdownPlus backgroundsDD;
 
     public ColorSlider colorSlider;
 

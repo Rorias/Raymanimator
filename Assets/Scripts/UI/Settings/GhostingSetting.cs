@@ -63,74 +63,76 @@ public class GhostingSetting : Settings
     public void PrevGhostColorRed()
     {
         settings.previousGhostColor = previousGhostColorSlider.GetColorBarRed(settings.previousGhostColor);
-        animatorC.UpdatePrevGhostColor();
-        settings.SaveSettings();
+        SavePreviousGhostColor();
     }
 
     public void PrevGhostColorGreen()
     {
         settings.previousGhostColor = previousGhostColorSlider.GetColorBarGreen(settings.previousGhostColor);
-        animatorC.UpdatePrevGhostColor();
-        settings.SaveSettings();
+        SavePreviousGhostColor();
     }
 
     public void PrevGhostColorBlue()
     {
         settings.previousGhostColor = previousGhostColorSlider.GetColorBarBlue(settings.previousGhostColor);
-        animatorC.UpdatePrevGhostColor();
-        settings.SaveSettings();
+        SavePreviousGhostColor();
     }
 
     public void PrevGhostColorAlpha()
     {
         settings.previousGhostColor = previousGhostColorSlider.GetColorBarAlpha(settings.previousGhostColor);
-        animatorC.UpdatePrevGhostColor();
-        settings.SaveSettings();
+        SavePreviousGhostColor();
     }
 
     public void ResetPrevGhostColor()
     {
         settings.previousGhostColor = new Color(0, 1, 1, 0.25f);
-        animatorC.UpdatePrevGhostColor();
-        settings.SaveSettings();
+        SavePreviousGhostColor();
 
         previousGhostColorSlider.SetColorSliders(settings.previousGhostColor);
+    }
+
+    private void SavePreviousGhostColor()
+    {
+        animatorC.UpdatePrevGhostColor();
+        settings.SaveSettings();
     }
 
     public void NextGhostColorRed()
     {
         settings.nextGhostColor = nextGhostColorSlider.GetColorBarRed(settings.nextGhostColor);
-        animatorC.UpdateNextGhostColor();
-        settings.SaveSettings();
+        SaveNextGhostColor();
     }
 
     public void NextGhostColorGreen()
     {
         settings.nextGhostColor = nextGhostColorSlider.GetColorBarGreen(settings.nextGhostColor);
-        animatorC.UpdateNextGhostColor();
-        settings.SaveSettings();
+        SaveNextGhostColor();
     }
 
     public void NextGhostColorBlue()
     {
         settings.nextGhostColor = nextGhostColorSlider.GetColorBarBlue(settings.nextGhostColor);
-        animatorC.UpdateNextGhostColor();
-        settings.SaveSettings();
+        SaveNextGhostColor();
     }
 
     public void NextGhostColorAlpha()
     {
         settings.nextGhostColor = nextGhostColorSlider.GetColorBarAlpha(settings.nextGhostColor);
-        animatorC.UpdateNextGhostColor();
-        settings.SaveSettings();
+        SaveNextGhostColor();
     }
 
     public void ResetNextGhostColor()
     {
         settings.nextGhostColor = new Color(1, 0.2f, 0.2f, 0.25f);
-        animatorC.UpdateNextGhostColor();
-        settings.SaveSettings();
+        SaveNextGhostColor();
 
         nextGhostColorSlider.SetColorSliders(settings.nextGhostColor);
+    }
+
+    private void SaveNextGhostColor()
+    {
+        animatorC.UpdateNextGhostColor();
+        settings.SaveSettings();
     }
 }

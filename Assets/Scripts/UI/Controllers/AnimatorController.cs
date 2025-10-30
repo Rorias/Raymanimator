@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 using TMPro;
 
@@ -9,7 +8,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public partial class AnimatorController : MonoBehaviour
+public partial class AnimatorController : Raymanimator
 {
     private GameManager gameManager;
     private GameSettings settings;
@@ -32,7 +31,7 @@ public partial class AnimatorController : MonoBehaviour
     public TMP_InputField priorityIF;
     public TMP_InputField playbackSpeedIF;
     public SpritesDropdown spritesDDController;
-    public TMP_Dropdown ddSprites;
+    public TMP_DropdownPlus ddSprites;
     public ButtonPlus playButton;
     [Space]
     public ConfirmWindow exitConfirmWindow;
@@ -68,7 +67,7 @@ public partial class AnimatorController : MonoBehaviour
     private float partSwapTimer;
     private float frameSwapTimer;
 
-    private float playbackSpeed = 0.02f;
+    private float playbackSpeed = 24f;
 
     private bool playingAnimation = false;
     private bool copyToNextFrame = true;
@@ -112,26 +111,11 @@ public partial class AnimatorController : MonoBehaviour
 
     private void Start()
     {
-        if (gameManager.mappings.Count > 0)
+        if (thisAnim == null || thisAnim.maxFrameCount == 0)
         {
-            Mapping map = gameManager.mappings.FirstOrDefault(x => x.MapFromSet == settings.lastSpriteset && x.MapToSet == thisAnim.usedSpriteset);
-            if (map != null)
-            {
-                gameManager.spritesetImages = map.GenerateMappingSpriteset(settings.lastSpriteset, thisAnim.usedSpriteset, settings.spritesetsPath, uiUtility);
-            }
-            else
-            {
-                if (settings.lastSpriteset != thisAnim.usedSpriteset)
-                {
-                    Debug.Log(thisAnim.usedSpriteset + " was used when making this animation. Using " + settings.lastSpriteset + " can cause the animation to look different than intended.");
-                    DebugHelper.Log(thisAnim.usedSpriteset + " was used when making this animation. Using " + settings.lastSpriteset + " can cause the animation to look different than intended.\n" +
-                        "No mapping was found for the current spriteset match.", DebugHelper.Severity.warning);
-                }
-                else
-                {
-                    DebugHelper.Log("No mapping was found for the current spriteset.");
-                }
-            }
+            DebugHelper.Log("No proper animation was loaded during initiatization.", DebugHelper.Severity.critical);
+            Debug.Log("No proper animation was loaded during initiatization.");
+            return;
         }
 
         spritesDDController.InitializeSpritesDropdown();
@@ -161,7 +145,7 @@ public partial class AnimatorController : MonoBehaviour
             CreateNextGhostPart(part);
         }
 
-        SetValues();
+        SetSliderValues();
 
         currentFrame = thisAnim.frames[0];
         currentParts.Add(currentFrame.frameParts[0]);
@@ -395,7 +379,7 @@ public partial class AnimatorController : MonoBehaviour
         nextGhostParts.Add(nextGhostPartSR);
     }
 
-    private void SetValues()
+    private void SetSliderValues()
     {
         partSelectSlider.maxValue = thisAnim.maxPartCount - 1;
         frameSelectSlider.maxValue = thisAnim.maxFrameCount - 1;
@@ -854,7 +838,7 @@ public partial class AnimatorController : MonoBehaviour
         {
             for (int j = 0; j < currentFrame.frameParts.Count; j++)
             {
-                if(currentParts[i].partID == currentFrame.frameParts[j].partID)
+                if (currentParts[i].partID == currentFrame.frameParts[j].partID)
                 {
                     currentParts[i] = currentFrame.frameParts[j];
                     break;

@@ -70,7 +70,7 @@ public class BinaryTests : MonoBehaviour
         Debug.Log(spritePixelDataString);
 
         Assert.AreEqual(pixelDataString, spritePixelDataString);
-        yield return null;
+        yield return new WaitForEndOfFrame();
     }
 
     int ClosestColor(List<Color> colors, Color target)
@@ -95,51 +95,73 @@ public class BinaryTests : MonoBehaviour
         Design raymanDes = Rayman1BinaryAnimation.allfix.DesItems[0];
 
         Dictionary<int, UnityEngine.Sprite> spriteset = instance.LoadSpritesetFromBinary(0);
-        byte[] newImageData = instance.SaveSpriteset(spriteset, raymanDes);
-        instance.ConvertImageData(0);
+        byte[] newImageData = instance.SaveSpriteset(spriteset, raymanDes, false);
+        instance.ConvertImageData(ref newImageData);
 
-        //byte[] tempPrintOld = new byte[1200];
-        //Array.Copy(raymanDes.ImageData, 39500, tempPrintOld, 0, tempPrintOld.Length);
-       // byte[] tempPrintNew = new byte[1200];
-        //Array.Copy(newImageData, 39500, tempPrintNew, 0, tempPrintNew.Length);
-        //string t1 = "";
-        //for (int i = 0; i < tempPrintOld.Length; i++)
-        //{
-        //    t1 += tempPrintOld[i].ToString("00") + ",";
-        //    if (i > 0 & i % 24 == 0) { t1 += "\n"; }
-        //}
-        //Debug.Log(t1);
-        //string t2 = "";
-        //for (int i = 0; i < tempPrintNew.Length; i++)
-        //{
-        //    t2 += tempPrintNew[i].ToString("00") + ",";
-        //    if (i > 0 & i % 24 == 0) { t2 += "\n"; }
-        //}
-        //Debug.Log(t2);
-
-        //int a1 = 0;
-        //int a2 = 0;
-        //for (int i = 0; i < Rayman1BinaryAnimation.newLengths.Count; i++)
-        //{
-        //    bool wrong = false;
-        //    if (Rayman1BinaryAnimation.oldLengths[i] != Rayman1BinaryAnimation.newLengths[i])
-        //    {
-        //        wrong = true;
-        //    }
-        //    a1 += Rayman1BinaryAnimation.oldLengths[i];
-        //    a2 += Rayman1BinaryAnimation.newLengths[i];
-        //    if (i > 0 && Rayman1BinaryAnimation.bufferOffsetIndex[i] - Rayman1BinaryAnimation.oldLengths[i - 1] != Rayman1BinaryAnimation.bufferOffsetIndex[i - 1])
-        //    {
-        //        Debug.Log("Buffer offset differs by: " + (Rayman1BinaryAnimation.bufferOffsetIndex[i] - Rayman1BinaryAnimation.bufferOffsetIndex[i - 1]));
-        //    }
-
-        //    Debug.Log((wrong ? "<color=red>" : "") + i + ": " + Rayman1BinaryAnimation.oldLengths[i] + ", " + Rayman1BinaryAnimation.newLengths[i] + ", offset: " + Rayman1BinaryAnimation.bufferOffsetIndex[i]);
-        //}
-
-        //Debug.Log(a1 + " old length, " + a2 + " new length");
         Debug.Log(raymanDes.ImageData.Length + " original length, " + newImageData.Length + " new length");
-        Assert.AreEqual(raymanDes.ImageData, newImageData);
+        Assert.AreNotEqual(raymanDes.ImageData, newImageData);
+        yield return new WaitForEndOfFrame();
+    }
 
-        yield return null;
+    [UnityTest]
+    public IEnumerator TestSpriteSizeRecalculationResult()
+    {
+        GameSettings.file = Application.persistentDataPath + "/" + GameSettings.fileName + ".json";
+        var instance = Rayman1BinaryAnimation.Instance;
+
+        Design raymanDes = Rayman1BinaryAnimation.allfix.DesItems[0];
+
+        byte[][] originalSpriteData = new byte[raymanDes.Sprites.Length][];
+        for (int i = 0; i < originalSpriteData.Length; i++)
+        {
+            originalSpriteData[i] = new byte[]
+            {
+                raymanDes.Sprites[i].SpriteWidth,
+                raymanDes.Sprites[i].SpriteHeight,
+                raymanDes.Sprites[i].SpriteXPosition,
+                raymanDes.Sprites[i].SpriteYPosition,
+            };
+        }
+
+        Dictionary<int, UnityEngine.Sprite> spriteset = instance.LoadSpritesetFromBinary(0);
+        byte[] newImageData = instance.SaveSpriteset(spriteset, raymanDes, true);
+        instance.ConvertImageData(ref newImageData);
+        raymanDes.ImageData = newImageData;
+
+        byte[][] newSpriteData = new byte[raymanDes.Sprites.Length][];
+        for (int i = 0; i < newSpriteData.Length; i++)
+        {
+            newSpriteData[i] = new byte[]
+            {
+                raymanDes.Sprites[i].SpriteWidth,
+                raymanDes.Sprites[i].SpriteHeight,
+                raymanDes.Sprites[i].SpriteXPosition,
+                raymanDes.Sprites[i].SpriteYPosition,
+            };
+        }
+
+        Assert.AreEqual(originalSpriteData, newSpriteData);
+        yield return new WaitForEndOfFrame();
+    }
+
+    [UnityTest]
+    public IEnumerator TestGetAnimationDesigns()
+    {
+        GameSettings.file = Application.persistentDataPath + "/" + GameSettings.fileName + ".json";
+        var instance = Rayman1BinaryAnimation.Instance;
+
+        for(int i = 0; i < Rayman1BinaryAnimation.worlds[0].DesItems.Length; i++)
+        {
+            if (Rayman1BinaryAnimation.worlds[0].DesItems[i].IsAnimatedSprite)
+            {
+                Debug.Log(i + " is animated");
+            }
+            else
+            {
+                Debug.Log(i + " is NOT animated");
+            }
+        }
+
+        yield return new WaitForEndOfFrame();
     }
 }

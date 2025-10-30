@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 using TMPro;
 
@@ -9,13 +10,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class EditMenu : MonoBehaviour
+public class EditMenu : Raymanimator
 {
     public GameObject editOptionsMenu;
     public GameObject renameMenu;
     public ConfirmWindow deleteConfirmWindow;
 
-    public TMP_Dropdown loadAnimsDD;
+    public TMP_DropdownPlus loadAnimsDD;
     public ButtonPlus loadBtn;
     public ButtonPlus renameBtn;
     public ButtonPlus copyBtn;
@@ -131,15 +132,24 @@ public class EditMenu : MonoBehaviour
             return;
         }
 
+        if (renameMenu.activeSelf)
+        {
+            DebugHelper.Log("Please finish renaming your animation before loading it.");
+            return;
+        }
+
         if (!animManager.LoadAnimation(gameManager.currentAnimation))
         {
             return;
         }
 
-        if (renameMenu.activeSelf)
+        if (gameManager.mappings.Count > 0)
         {
-            DebugHelper.Log("Please finish renaming your animation before loading it.");
-            return;
+            Mapping map = gameManager.mappings.FirstOrDefault(x => x.Enabled && x.MapFromSet == settings.lastSpriteset && x.MapToSet == gameManager.currentAnimation.usedSpriteset);
+            if (map != null)
+            {
+                gameManager.spritesetImages = map.GenerateMappingSpriteset(settings.lastSpriteset, gameManager.currentAnimation.usedSpriteset, settings.spritesetsPath, uiUtility);
+            }
         }
 
         SceneManager.LoadScene(1);

@@ -356,7 +356,7 @@ GameObject:
   - component: {fileID: 8789068050851159692}
   - component: {fileID: 5005900821467212073}
   - component: {fileID: 7349204872222568297}
-  - component: {fileID: 4602391139960305256}
+  - component: {fileID: 6183650114642789801}
   m_Layer: 5
   m_Name: DefaultDropdown
   m_TagString: Untagged
@@ -424,7 +424,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4602391139960305256
+--- !u!114 &6183650114642789801
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -433,7 +433,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3387267437590559715}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b743370ac3e4ec2a1668f5455a8ef8a, type: 3}
+  m_Script: {fileID: 11500000, guid: 1b259f4a7df6e024ea4f5b4ff0830536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -478,6 +478,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_AlphaFadeSpeed: 0.15
+  openLastPosition: 1
 --- !u!1 &3689637588296988357
 GameObject:
   m_ObjectHideFlags: 0
@@ -1142,7 +1143,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
+  m_fontSize: 16
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1

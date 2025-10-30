@@ -32,6 +32,7 @@ public class ObjectSafety : MonoBehaviour
             foreach (var property in scripts[i].GetType().GetFields())
             {
                 if (property.GetCustomAttributes(typeof(HideInInspector), true).Length != 0) { continue; }
+                if (property.GetCustomAttributes(typeof(NonSerializedAttribute), true).Length != 0) { continue; }
 
                 Assert.NotNull(property.GetValue(scripts[i]), "Field " + property.Name + " of " + scripts[i].name + " is not set.");
 

@@ -8,7 +8,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public partial class AnimatorController : MonoBehaviour
+public partial class AnimatorController : Raymanimator
 {
     public List<GamePart> GetCurrentGameParts()
     {

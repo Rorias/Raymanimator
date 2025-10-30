@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 using TMPro;
 
@@ -9,18 +10,21 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class EditBinaryMenu : MonoBehaviour
+public class EditBinaryMenu : Raymanimator
 {
     public ButtonPlus loadBinaryBtn;
-    public TMP_Dropdown gameVersionDD;
+    public TMP_DropdownPlus gameVersionDD;
     public TMP_InputField dataPathIF;
-    public TMP_Dropdown objectDD;
-    public TMP_Dropdown animationDD;
+    public TMP_DropdownPlus objectDD;
+    public TMP_DropdownPlus animationDD;
 
     private GameManager gameManager;
     private GameSettings settings;
     private InputManager input;
     private Rayman1BinaryAnimation rayBinary;
+    private UIUtility uiUtility;
+    private MiniPlaybackController miniPlayback;
+
     private string selectedSpriteset;
 
     private void Awake()
@@ -29,6 +33,8 @@ public class EditBinaryMenu : MonoBehaviour
         settings = GameSettings.Instance;
         input = InputManager.Instance;
         rayBinary = Rayman1BinaryAnimation.Instance;
+        uiUtility = FindObjectOfType<UIUtility>();
+        miniPlayback = FindObjectOfType<MiniPlaybackController>();
     }
 
     private void Start()
@@ -57,6 +63,7 @@ public class EditBinaryMenu : MonoBehaviour
         dataPathIF.text = settings.binaryBasePath;
 
         objectDD.onValueChanged.AddListener(delegate { SetAnimationsForObject(); });
+        animationDD.onValueChanged.AddListener(delegate { CreatePreviewAnimation(); });
 
         objectDD.interactable = false;
         animationDD.interactable = false;
@@ -97,6 +104,8 @@ public class EditBinaryMenu : MonoBehaviour
 
         Debug.Log("Path cannot be found. Check if you spelled it correctly or use the browse button instead.");
         DebugHelper.Log("Path cannot be found. Check if you spelled it correctly or use the browse button instead.");
+        objectDD.interactable = false;
+        animationDD.interactable = false;
         return false;
     }
 
@@ -104,21 +113,26 @@ public class EditBinaryMenu : MonoBehaviour
     {
         if (gameVersionDD.value >= 0 && !string.IsNullOrWhiteSpace(dataPathIF.text))
         {
-            List<string> objects = new List<string>();
+            Type designObjects;
 
             switch (gameVersionDD.captionText.text)
             {
                 case Rayman1MSDOS.msdos:
-                    foreach (Rayman1MSDOS.DesignObjects obj in Enum.GetValues(typeof(Rayman1MSDOS.DesignObjects)))
-                    {
-                        objects.Add(obj.ToString());
-                    }
+                    designObjects = typeof(Rayman1MSDOS.DesignObjects);
                     break;
                 default:
+                    designObjects = null;
                     break;
             }
 
-            objectDD.AddOptions(objects);
+            List<string> objs = new List<string>();
+
+            foreach (object obj in Enum.GetValues(designObjects))
+            {
+                objs.Add(obj.ToString());
+            }
+
+            objectDD.AddOptions(objs);
             objectDD.interactable = true;
         }
     }
@@ -135,7 +149,8 @@ public class EditBinaryMenu : MonoBehaviour
         switch (gameVersionDD.captionText.text)
         {
             case Rayman1MSDOS.msdos:
-                anims = Rayman1MSDOS.SetAnimationsForObject(objectDD.value, out selectedSpriteset);
+                selectedSpriteset = objectDD.captionText.text;
+                anims = Rayman1MSDOS.SetAnimationsForObject(objectDD.value);
                 break;
             default:
                 break;
@@ -146,11 +161,35 @@ public class EditBinaryMenu : MonoBehaviour
         animationDD.interactable = true;
     }
 
-    public void LoadBinaryAnimation()
+    private void LoadBinaryAnimation()
     {
         Rayman1MSDOS.DesignObjects currObject = (Rayman1MSDOS.DesignObjects)Enum.Parse(typeof(Rayman1MSDOS.DesignObjects), objectDD.captionText.text);
-        gameManager.spritesetImages = rayBinary.LoadSpritesetFromBinary((int)currObject);
-        gameManager.currentAnimation = rayBinary.LoadRaymAnimationFromBinary(animationDD.captionText.text, (int)currObject, animationDD.value, selectedSpriteset);
+        Mapping map = null;
+        if (gameManager.mappings.Count > 0)
+        {
+            map = gameManager.mappings.FirstOrDefault(x => x.Enabled && x.MapFromSet == settings.lastSpriteset && x.MapToSet == selectedSpriteset);
+            if (map != null)
+            {
+                gameManager.spritesetImages = map.GenerateMappingSpriteset(settings.lastSpriteset, selectedSpriteset, settings.spritesetsPath, uiUtility);
+            }
+            else
+            {
+                gameManager.spritesetImages = rayBinary.LoadSpritesetFromBinary((int)currObject);
+            }
+        }
+
+        gameManager.currentAnimation = rayBinary.LoadRaymAnimationFromBinary(animationDD.captionText.text, (int)currObject, animationDD.value, selectedSpriteset, map);
+    }
+
+    private void CreatePreviewAnimation()
+    {
+        LoadBinaryAnimation();
+        miniPlayback.StartMiniPlayback();
+    }
+
+    public void LoadEditorWithAnimation()
+    {
+        LoadBinaryAnimation();
         SceneManager.LoadScene(1);
     }
 }

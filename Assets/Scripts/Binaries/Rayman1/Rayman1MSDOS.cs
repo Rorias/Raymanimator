@@ -11,53 +11,53 @@ public class Rayman1MSDOS
 {
     public const string msdos = "Rayman 1 PC (MS-DOS)";
 
-    public static List<string> SetAnimationsForObject(int _object, out string _spritesetName)
+    public static List<string> SetAnimationsForObject(int _object)
     {
-        List<string> anims = new List<string>();
-        _spritesetName = ((DesignObjects)_object).ToString();
+        Type animations;
 
         switch ((DesignObjects)_object)
         {
             case DesignObjects.Rayman:
-                foreach (RayAnimations obj in Enum.GetValues(typeof(RayAnimations)))
-                {
-                    anims.Add(obj.ToString());
-                }
+                animations = typeof(RayAnimations);
                 break;
             case DesignObjects.Items:
-                foreach (ItemsAnimations obj in Enum.GetValues(typeof(ItemsAnimations)))
-                {
-                    anims.Add(obj.ToString());
-                }
+                animations = typeof(ItemsAnimations);
                 break;
             case DesignObjects.MiniRayman:
+                animations = typeof(MiniRayAnimations);
                 break;
             case DesignObjects.Items2:
-                foreach (Items2Animations obj in Enum.GetValues(typeof(Items2Animations)))
-                {
-                    anims.Add(obj.ToString());
-                }
+                animations = typeof(Items2Animations);
                 break;
             case DesignObjects.Font:
-                foreach (FontAnimations obj in Enum.GetValues(typeof(FontAnimations)))
-                {
-                    anims.Add(obj.ToString());
-                }
+                animations = typeof(FontAnimations);
                 break;
             case DesignObjects.BigFont:
-                foreach (BigFontAnimations obj in Enum.GetValues(typeof(BigFontAnimations)))
-                {
-                    anims.Add(obj.ToString());
-                }
+                animations = typeof(BigFontAnimations);
                 break;
             case DesignObjects.ContinueClock:
-                foreach (ContinueClockAnimations obj in Enum.GetValues(typeof(ContinueClockAnimations)))
-                {
-                    anims.Add(obj.ToString());
-                }
+                animations = typeof(ContinueClockAnimations);
+                break;
+            case DesignObjects.EmptyObject:
+                animations = typeof(EmptyAnimations);
+                break;
+            case DesignObjects.AnotherObject:
+                animations = typeof(AnotherAnimations);
+                break;
+            case DesignObjects.AnotherObject2:
+                animations = typeof(AnotherAnimations2);
                 break;
             default:
-                break;
+                DebugHelper.Log(((DesignObjects)_object).ToString() + " Could not be found.", DebugHelper.Severity.error);
+                Debug.LogError(((DesignObjects)_object).ToString() + " Could not be found.");
+                return null;
+        }
+
+        List<string> anims = new List<string>();
+
+        foreach (object obj in Enum.GetValues(animations))
+        {
+            anims.Add(obj.ToString());
         }
 
         return anims;
@@ -72,6 +72,10 @@ public class Rayman1MSDOS
         Font,
         BigFont,
         ContinueClock,
+        EmptyObject,
+        EmptyObject2,
+        AnotherObject,
+        AnotherObject2,
     }
 
     public enum RayAnimations
@@ -243,6 +247,11 @@ public class Rayman1MSDOS
         ItemMagicianShowTingRequirement,
     }
 
+    public enum MiniRayAnimations
+    {
+
+    }
+
     public enum Items2Animations
     {
         Item2Power,
@@ -326,5 +335,24 @@ public class Rayman1MSDOS
         ClockRing,
         ClockRingDance,
         ClockSleeping,
+    }
+
+    public enum EmptyAnimations
+    {
+        Empty1,
+    }
+
+    public enum AnotherAnimations
+    {
+        SomeAnimation1,
+        SomeAnimation2,
+        SomeAnimation3,
+    }
+
+    public enum AnotherAnimations2
+    {
+        SomeAnimation1,
+        SomeAnimation2,
+        SomeAnimation3,
     }
 }

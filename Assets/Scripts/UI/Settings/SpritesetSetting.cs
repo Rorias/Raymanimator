@@ -11,7 +11,7 @@ using UnityEngine.UI;
 public class SpritesetSetting : Settings
 {
     public TMP_InputField spritesetPathIF;
-    public TMP_Dropdown currentSpritesetDD;
+    public TMP_DropdownPlus currentSpritesetDD;
 
     private GameManager gameManager;
 

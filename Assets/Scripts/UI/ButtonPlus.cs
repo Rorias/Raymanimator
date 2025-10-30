@@ -81,8 +81,9 @@ public class ButtonPlusEditor : ButtonEditor
     //Show ignore validation toggle and all events on inspector GUI
     public override void OnInspectorGUI()
     {
-        ButtonPlus btnPlus = (ButtonPlus)target;
-        btnPlus.ignoreValidation = EditorGUILayout.Toggle("Ignore Validation", btnPlus.ignoreValidation);
+        SerializedProperty ignoreValidation = serializedObject.FindProperty("ignoreValidation");
+        EditorGUILayout.PropertyField(ignoreValidation, new GUIContent("Ignore Validation"), true);
+        serializedObject.ApplyModifiedProperties();
 
         base.OnInspectorGUI();
 

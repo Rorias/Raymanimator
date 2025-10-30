@@ -2,7 +2,7 @@ using System;
 
 using UnityEngine;
 
-public class TabMenuItem : MonoBehaviour
+public class TabMenuItem : Raymanimator
 {
     [NonSerialized] public TabMenuItem previousItem;
 }

@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.TestTools;
 using UnityEngine.Events;
+using System;
 
 public class MenuTests : MonoBehaviour
 {
@@ -113,7 +114,7 @@ public class MenuTests : MonoBehaviour
 
     private void DropdownHasValidEvents()
     {
-        TMP_Dropdown[] dropdowns = FindObjectsOfType<TMP_Dropdown>(true);
+        TMP_DropdownPlus[] dropdowns = FindObjectsOfType<TMP_DropdownPlus>(true);
 
         if (dropdowns.Length <= 0)
         {
@@ -195,9 +196,7 @@ public class MenuTests : MonoBehaviour
     public IEnumerator MainMenuMenus()
     {
         yield return TestUtility.LoadSelectedGameScene(0);
-
         IsMenuItemSet();
-
         yield return null;
     }
 
@@ -205,9 +204,7 @@ public class MenuTests : MonoBehaviour
     public IEnumerator EditorMenus()
     {
         yield return TestUtility.LoadSelectedGameScene(1);
-
         IsMenuItemSet();
-
         yield return null;
     }
 

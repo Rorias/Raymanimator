@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class SubMenus : MonoBehaviour
+public class SubMenus : Raymanimator
 {
     public SubMenuItem defaultSubMenu;
     public List<SubMenuItem> subMenus = new List<SubMenuItem>();

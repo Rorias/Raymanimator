@@ -1,23 +1,15 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-using TMPro;
-
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SpritesDropdown : MonoBehaviour
 {
-    public TMP_Dropdown ddSprites;
-
+    public TMP_DropdownPlus ddSprites;
     public bool dropdownActive { get; private set; } = false;
 
     private GameManager gameManager;
-
-    private float lastOpenedPositionDD = 0f;
 
     private void Awake()
     {
@@ -26,36 +18,15 @@ public class SpritesDropdown : MonoBehaviour
 
     private void Update()
     {
-        if (!dropdownActive)
-        {
-            if (transform.Find("Dropdown List") is null)
-            {
-                return;
-            }
-
-            dropdownActive = true;
-            GameObject spriteContent = GameObject.Find("SpritesContent");
-            RectTransform contentRect = spriteContent.GetComponent<RectTransform>();
-            contentRect.position = new Vector3(contentRect.position.x, lastOpenedPositionDD, contentRect.position.z);
-
-            for (int i = 1; i < spriteContent.transform.childCount; i++)
-            {
-                Image currentImage = spriteContent.transform.GetChild(i).Find("Item Background").GetComponent<Image>();
-                currentImage.sprite = ddSprites.options[i - 1].image;
-            }
-        }
-        else if (transform.Find("Dropdown List") is null)
-        {
-            dropdownActive = false;
-        }
+        dropdownActive = transform.Find("Dropdown List") is null;
     }
 
     public void InitializeSpritesDropdown()
     {
         if (gameManager.spritesetImages.Count <= 0)
         {
-            Debug.LogError("Spriteset loading failed.");
-            SceneManager.LoadScene(0);
+            DebugHelper.Log("Spriteset loading failed.", DebugHelper.Severity.critical);
+            Debug.Log("Spriteset loading failed.");
             return;
         }
 
@@ -77,7 +48,5 @@ public class SpritesDropdown : MonoBehaviour
             _currentGameParts[i].sr.sprite = _currentParts[i].part;
             _currentGameParts[i].anim.SetBool("WasSelected", true);
         }
-
-        lastOpenedPositionDD = GameObject.Find("SpritesContent").GetComponent<RectTransform>().position.y;
     }
 }

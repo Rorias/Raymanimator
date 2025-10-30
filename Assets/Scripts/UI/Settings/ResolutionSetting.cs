@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 public class ResolutionSetting : Settings
 {
-    public TMP_Dropdown resolutionDD;
+    public TMP_DropdownPlus resolutionDD;
 
     protected override void Awake()
     {
@@ -54,7 +54,6 @@ public class ResolutionSetting : Settings
         }
 
         settings.fullScreen = Screen.fullScreenMode == FullScreenMode.FullScreenWindow;
-        settings.SaveSettings();
         resolutionDD.value = option;
     }
 

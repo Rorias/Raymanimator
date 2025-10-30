@@ -718,7 +718,7 @@ GameObject:
   - component: {fileID: 1528925566256672618}
   - component: {fileID: 8612763964302925712}
   - component: {fileID: 6466683353598207197}
-  - component: {fileID: 4907494294390540291}
+  - component: {fileID: 8525185896868305843}
   m_Layer: 5
   m_Name: DefaultDropdown
   m_TagString: Untagged
@@ -786,7 +786,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4907494294390540291
+--- !u!114 &8525185896868305843
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -795,7 +795,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4588915572252293875}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b743370ac3e4ec2a1668f5455a8ef8a, type: 3}
+  m_Script: {fileID: 11500000, guid: 1b259f4a7df6e024ea4f5b4ff0830536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -840,6 +840,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_AlphaFadeSpeed: 0.15
+  openLastPosition: 0
 --- !u!1 &6464249553619258885
 GameObject:
   m_ObjectHideFlags: 0

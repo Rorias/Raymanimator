@@ -20,11 +20,14 @@ public class GridSetting : Settings
     public TMP_InputField gridYsizeIF;
     public ColorSlider gridOpacity;
 
+    private Animation thisAnim;
+
     private float gridDetail = 2.0f;
 
     protected override void Awake()
     {
         base.Awake();
+        gameManager = GameManager.Instance;
 
         gridLODIF.onEndEdit.AddListener(delegate { SetGridLOD(); });
         gridXsizeIF.onEndEdit.AddListener(delegate { SetGridXsize(); });
@@ -34,11 +37,18 @@ public class GridSetting : Settings
         gridOpacity.SetAlpha += SaveColor;
         gridOpacity.Reset += ResetColor;
 
-        gameManager = GameManager.Instance;
+        thisAnim = gameManager.currentAnimation;
     }
 
     protected void Start()
     {
+        if(thisAnim == null)
+        {
+            DebugHelper.Log("No proper animation was loaded during initiatization.", DebugHelper.Severity.critical);
+            Debug.Log("No proper animation was loaded during initiatization.");
+            return;
+        }
+
         SetGrid();
         InitializeInputFieldValues();
         gridOpacity.SetColorSliders(settings.gridOpacity);
@@ -46,8 +56,8 @@ public class GridSetting : Settings
 
     private void InitializeInputFieldValues()
     {
-        gridXsizeIF.text = gameManager.currentAnimation.gridSizeX.ToString();
-        gridYsizeIF.text = gameManager.currentAnimation.gridSizeY.ToString();
+        gridXsizeIF.text = thisAnim.gridSizeX.ToString();
+        gridYsizeIF.text = thisAnim.gridSizeY.ToString();
 
         if (gridLODIF != null)
         {
@@ -59,24 +69,24 @@ public class GridSetting : Settings
     {
         if (grid != null)
         {
-            grid.localScale = new Vector2(gameManager.currentAnimation.gridSizeX / 16f, gameManager.currentAnimation.gridSizeY / 16f);
-            gridMaterial.mainTextureScale = new Vector2(gameManager.currentAnimation.gridSizeX / gridDetail, gameManager.currentAnimation.gridSizeY / gridDetail);
+            grid.localScale = new Vector2(thisAnim.gridSizeX / 16f, thisAnim.gridSizeY / 16f);
+            gridMaterial.mainTextureScale = new Vector2(thisAnim.gridSizeX / gridDetail, thisAnim.gridSizeY / gridDetail);
         }
     }
 
     public void SetGridXsize()
     {
         int.TryParse(gridXsizeIF.text, out int conv);
-        gameManager.currentAnimation.gridSizeX = Mathf.Min(Mathf.Max(conv, 1), 4095);
-        gridXsizeIF.text = gameManager.currentAnimation.gridSizeX.ToString();
+        thisAnim.gridSizeX = Mathf.Min(Mathf.Max(conv, 1), 4095);
+        gridXsizeIF.text = thisAnim.gridSizeX.ToString();
         SetGrid();
     }
 
     public void SetGridYsize()
     {
         int.TryParse(gridYsizeIF.text, out int conv);
-        gameManager.currentAnimation.gridSizeY = Mathf.Min(Mathf.Max(conv, 1), 4095);
-        gridYsizeIF.text = gameManager.currentAnimation.gridSizeY.ToString();
+        thisAnim.gridSizeY = Mathf.Min(Mathf.Max(conv, 1), 4095);
+        gridYsizeIF.text = thisAnim.gridSizeY.ToString();
         SetGrid();
     }
 

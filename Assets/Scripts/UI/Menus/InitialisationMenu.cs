@@ -2,7 +2,7 @@ using System.IO;
 
 using UnityEngine;
 
-public class InitialisationMenu : MonoBehaviour
+public class InitialisationMenu : Raymanimator
 {
     public Menus menus;
     public MenuItem startMenu;

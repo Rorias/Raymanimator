@@ -1,20 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-
-using TMPro;
-
-using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
-public class LanguageController : MonoBehaviour
+public class LanguageController : Raymanimator
 {
-    private GameSettings settings;
-
     private void Awake()
     {
-        settings = GameSettings.Instance;
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 

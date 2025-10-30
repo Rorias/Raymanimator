@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ThemeController : MonoBehaviour
+public class ThemeController : Raymanimator
 {
     public TMP_FontAsset normalFont;
 
@@ -17,7 +17,7 @@ public class ThemeController : MonoBehaviour
 
     //Editor style settings
     private Image[] panels;
-    private TMP_Dropdown[] dropdowns;
+    private TMP_DropdownPlus[] dropdowns;
     private TMP_InputField[] inputfields;
     private ButtonPlus[] buttons;
     private Toggle[] toggles;
@@ -37,8 +37,15 @@ public class ThemeController : MonoBehaviour
 
     private void OnSceneLoaded(Scene _scene, LoadSceneMode _lsm)
     {
+        ReloadSceneData();
+
+        UpdateFonts(settings.normalFont);
+    }
+
+    public void ReloadSceneData()
+    {
         panels = FindObjectsByType<Image>(FindObjectsInactive.Include, FindObjectsSortMode.None).Where(x => x.tag == "MenuPanel").ToArray();
-        dropdowns = FindObjectsByType<TMP_Dropdown>(FindObjectsSortMode.None);
+        dropdowns = FindObjectsByType<TMP_DropdownPlus>(FindObjectsSortMode.None);
         inputfields = FindObjectsByType<TMP_InputField>(FindObjectsSortMode.None);
         buttons = FindObjectsByType<ButtonPlus>(FindObjectsSortMode.None);
         toggles = FindObjectsByType<Toggle>(FindObjectsSortMode.None);
@@ -55,7 +62,6 @@ public class ThemeController : MonoBehaviour
         }
 
         UpdateTheme();
-        UpdateFonts(settings.normalFont);
     }
 
     public void UpdateTheme()
@@ -91,7 +97,7 @@ public class ThemeController : MonoBehaviour
             IF.GetComponent<Image>().color = currentScheme[1];
         }
 
-        foreach (TMP_Dropdown dd in dropdowns)
+        foreach (TMP_DropdownPlus dd in dropdowns)
         {
             dd.GetComponent<Image>().color = currentScheme[2];
 

@@ -19,6 +19,9 @@ public class FileSetting : Settings
     public ImportWindow importWindow;
     public ButtonPlus importButton;
 
+    public ExportBinaryWindow exportBinaryWindow;
+    public ButtonPlus exportBinaryButton;
+
     private GameManager gameManager;
     private AnimationManager animManager;
 
@@ -29,7 +32,15 @@ public class FileSetting : Settings
         gameManager = GameManager.Instance;
         animManager = AnimationManager.Instance;
 
-        importButton.onClick.AddListener(delegate { importWindow.OpenWindow(); });
+        importButton.onClick.AddListener(delegate { importWindow.OpenWindow(); gameObject.SetActive(false); });
+
+        if (gameManager.currentAnimation != null && gameManager.currentAnimation.binaryAnimationIndex == -1)
+        {
+            exportBinaryButton.gameObject.SetActive(false);
+            return;
+        }
+
+        exportBinaryButton.onClick.AddListener(delegate { exportBinaryWindow.OpenWindow(); gameObject.SetActive(false); });
     }
 
     public void Save()
@@ -45,11 +56,6 @@ public class FileSetting : Settings
     public void SaveAsDouble()
     {
         animManager.SaveFileDoubled(gameManager.currentAnimation);
-    }
-
-    public void SaveToBinary()
-    {
-        animManager.SaveToBinary(gameManager.currentAnimation);
     }
 
     public void SaveAsImageListZip()

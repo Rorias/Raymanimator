@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public class EditorThemeSetting : Settings
 {
-    public TMP_Dropdown editorThemeDD;
+    public TMP_DropdownPlus editorThemeDD;
 
     private ThemeController themeController;
 

@@ -17,7 +17,7 @@ public class Animation
     public int gridSizeX { get; set; }
     public int gridSizeY { get; set; }
     public string usedSpriteset { get; set; }
-    public int binaryAnimationIndex { get; set; }//TODO: implement
+    public int binaryAnimationIndex { get; set; } = -1;
     public string lastPlaybackSpeed { get; set; }//TODO: implement
 
     public List<Frame> frames = new List<Frame>();

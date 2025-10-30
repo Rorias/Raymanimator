@@ -31,7 +31,7 @@ public class UIUtility : MonoBehaviour
         EventSystem.current.RaycastAll(pointerData, rayResults);
     }
 
-    public void ReloadDropdownSpriteOptions(string _path, TMP_Dropdown _dropdown)
+    public void ReloadDropdownSpriteOptions(string _path, TMP_DropdownPlus _dropdown)
     {
         List<string> spritesetNames = new List<string>();
         string[] spritesets = Directory.GetDirectories(_path);

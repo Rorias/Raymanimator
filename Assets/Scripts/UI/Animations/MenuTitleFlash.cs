@@ -7,7 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MenuTitleFlash : MonoBehaviour
+public class MenuTitleFlash : Raymanimator
 {
     public TMP_FontAsset[] cycleFonts;
 

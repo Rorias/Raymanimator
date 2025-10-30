@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public class LanguageSetting : Settings
 {
-    public TMP_Dropdown languagesDD;
+    public TMP_DropdownPlus languagesDD;
     private LanguageController languageController;
 
     protected override void Awake()

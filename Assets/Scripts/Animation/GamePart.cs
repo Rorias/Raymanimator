@@ -31,10 +31,12 @@ public class GamePart : MonoBehaviour
 
     private void Awake()
     {
+        multipleSelected = false;
         mainCam = Camera.main;
 
         sr = GetComponent<SpriteRenderer>();
         polyColl = GetComponent<PolygonCollider2D>();
+        anim = GetComponent<Animator>();
     }
 
     public void Initialize(AnimatorController _animatorC)

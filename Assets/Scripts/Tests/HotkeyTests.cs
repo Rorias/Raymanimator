@@ -32,6 +32,7 @@ public class HotkeyTests : MonoBehaviour
         }
         menus.ActivateNextMenu(menu);
         GameObject.Find("EditButton").GetComponent<ButtonPlus>().onClick.Invoke();
+        GameObject.Find("AnimationDropdown").GetComponent<TMP_DropdownPlus>().value = 0;
         GameObject.Find("LoadButton").GetComponent<ButtonPlus>().onClick.Invoke();
         yield return new WaitForSecondsRealtime(1f);
         #endregion

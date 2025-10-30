@@ -15,6 +15,8 @@ public class Mapping
     [SerializeField] private string mfs = "Custom";
     public string MapToSet { get { return mts; } set { mts = value; } }
     [SerializeField] private string mts = "Rayman";
+    public float PixelSize { get { return pd; } set { pd = value; } }
+    [SerializeField] private float pd = 16.0f;
 
     public Mapper[] MappingValues { get { return mv; } set { mv = value; } }
     [SerializeField] private Mapper[] mv;
@@ -26,7 +28,7 @@ public class Mapping
         [SerializeField] public int t;
     }
 
-    public static string filePath { get; private set; } = Application.streamingAssetsPath + "\\Mappings\\";
+    public static string filePath { get; private set; } = Application.streamingAssetsPath + @"/Mappings/";
 
     public void SaveMapping(string _fileName)
     {

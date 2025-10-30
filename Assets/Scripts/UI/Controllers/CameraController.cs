@@ -1,9 +1,6 @@
-using System.Collections.Generic;
-
 using TMPro;
 
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class CameraController : MonoBehaviour
 {
@@ -15,6 +12,9 @@ public class CameraController : MonoBehaviour
 
     private Vector3 origin;
 
+    private float maxZoom;
+    private float speed;
+
     private bool isOnUI = false;
 
     private void Awake()
@@ -22,6 +22,11 @@ public class CameraController : MonoBehaviour
         input = InputManager.Instance;
         allInputfields = FindObjectsOfType<TMP_InputField>();
         mainCam = Camera.main;
+    }
+
+    private void Start()
+    {
+        maxZoom = camSettings == null ? 4 : camSettings.maxCameraZoom;
     }
 
     private void Update()
@@ -34,6 +39,8 @@ public class CameraController : MonoBehaviour
             }
         }
 
+        speed = camSettings == null ? 1 : camSettings.cameraSpeed;
+
         UIUtility.GetRayResults();
 
         isOnUI = UIUtility.rayResults.Count > 0;
@@ -42,7 +49,7 @@ public class CameraController : MonoBehaviour
         {
             if (Input.GetAxisRaw("Mouse ScrollWheel") != 0f)
             {
-                Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize + (Input.GetAxisRaw("Mouse ScrollWheel") * -2), 1, camSettings.maxCameraZoom);
+                Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize + (Input.GetAxisRaw("Mouse ScrollWheel") * -2), 1, maxZoom);
                 CameraSetting.CameraZoomed();
             }
         }
@@ -60,20 +67,20 @@ public class CameraController : MonoBehaviour
 
         if (input.GetKey(InputManager.InputKey.MoveCameraUp) && Camera.main.transform.position.y < 24)
         {
-            Camera.main.transform.position += (Vector3.up / (camSettings.maxCameraZoom / Camera.main.orthographicSize)) * camSettings.cameraSpeed;
+            Camera.main.transform.position += (Vector3.up / (maxZoom / Camera.main.orthographicSize)) * speed;
         }
         else if (input.GetKey(InputManager.InputKey.MoveCameraDown) && Camera.main.transform.position.y > -24)
         {
-            Camera.main.transform.position += (Vector3.down / (camSettings.maxCameraZoom / Camera.main.orthographicSize)) * camSettings.cameraSpeed;
+            Camera.main.transform.position += (Vector3.down / (maxZoom / Camera.main.orthographicSize)) * speed;
         }
 
         if (input.GetKey(InputManager.InputKey.MoveCameraLeft) && Camera.main.transform.position.x > -24)
         {
-            Camera.main.transform.position += (Vector3.left / (camSettings.maxCameraZoom / Camera.main.orthographicSize)) * camSettings.cameraSpeed;
+            Camera.main.transform.position += (Vector3.left / (maxZoom / Camera.main.orthographicSize)) * speed;
         }
         else if (input.GetKey(InputManager.InputKey.MoveCameraRight) && Camera.main.transform.position.x < 24)
         {
-            Camera.main.transform.position += (Vector3.right / (camSettings.maxCameraZoom / Camera.main.orthographicSize)) * camSettings.cameraSpeed;
+            Camera.main.transform.position += (Vector3.right / (maxZoom / Camera.main.orthographicSize)) * speed;
         }
     }
 }

@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class CreateMenu : MonoBehaviour
+public class CreateMenu : Raymanimator
 {
     public TMP_InputField nameIF;
     public TMP_InputField framesIF;

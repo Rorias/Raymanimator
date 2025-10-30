@@ -12,11 +12,6 @@ public class SliderPlus : Slider
 {
     public UnityEvent<float> onMouseUp = new UnityEvent<float>();
 
-    protected override void Awake()
-    {
-        base.Awake();
-    }
-
     public override void OnPointerUp(PointerEventData eventData)
     {
         base.OnPointerUp(eventData);

@@ -13,7 +13,7 @@ public class MapperItem : MonoBehaviour
     public TMP_Text targetText;
     public Image targetSprite;
 
-    public TMP_Dropdown sourceSpritesDD;
+    public TMP_DropdownPlus sourceSpritesDD;
 
     public void SetSourceSpritesDropdown(Dictionary<int, Sprite> _sourceSpriteset)
     {

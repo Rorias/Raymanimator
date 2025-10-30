@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class IntroMenu : MonoBehaviour
+public class IntroMenu : Raymanimator
 {
     public Menus menus;
     public MenuItem introMenu;

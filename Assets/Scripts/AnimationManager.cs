@@ -89,11 +89,18 @@ public sealed class AnimationManager
         _anim.animationName = _anim.animationName.Replace("Double", "");
     }
 
-    public void SaveToBinary(Animation _anim)
+    public void SaveToBinary(Animation _anim, bool _animData, bool _visuals, bool _colls, float _pixelSize)
     {
         Rayman1MSDOS.DesignObjects currObject = (Rayman1MSDOS.DesignObjects)Enum.Parse(typeof(Rayman1MSDOS.DesignObjects), _anim.usedSpriteset);
         Rayman1BinaryAnimation rayBinary = Rayman1BinaryAnimation.Instance;
-        rayBinary.SaveRaymAnimationToBinary(_anim, gameManager.spritesetImages, (int)currObject, _anim.binaryAnimationIndex);
+        rayBinary.SaveRaymAnimationToBinary(
+            _anim, gameManager.spritesetImages,
+            (int)currObject,
+            _anim.binaryAnimationIndex,
+            _animData,
+            _visuals,
+            _colls,
+            _pixelSize);
         DebugHelper.Log(_anim.animationName + " saved to binary!");
     }
 
