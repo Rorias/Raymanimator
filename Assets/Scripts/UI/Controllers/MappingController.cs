@@ -168,7 +168,6 @@ public class MappingController : Settings
         uiUtility.ReloadDropdownSpriteOptions(settings.spritesetsPath, sourceSpritesetDD);
         uiUtility.ReloadDropdownSpriteOptions(settings.spritesetsPath, targetSpritesetDD);
 
-        sourceSpritesetDD.value = sourceSpritesetDD.options.FindIndex(x => x.text == thisMap.MapFromSet);
         int targetIndex = targetSpritesetDD.options.FindIndex(x => x.text == thisMap.MapToSet);
         binaryToggle.isOn = targetIndex == -1;
         if (targetIndex == -1)
@@ -178,7 +177,14 @@ public class MappingController : Settings
             targetSpritesetDD.AddOptions(objectSpritesets);
             targetIndex = targetSpritesetDD.options.FindIndex(x => x.text == thisMap.MapToSet);
         }
+        //If target index is still not found, the mapping no longer exists
+        if (targetIndex == -1)
+        {
+            DebugHelper.Log("The mapping " + thisMap.MapToSet + " does not exist.", DebugHelper.Severity.warning);
+            EndMapping();
+        }
 
+        sourceSpritesetDD.value = sourceSpritesetDD.options.FindIndex(x => x.text == thisMap.MapFromSet);
         targetSpritesetDD.value = targetIndex;
 
         for (int i = 0; i < thisMap.MappingValues.Length; i++)
@@ -197,7 +203,8 @@ public class MappingController : Settings
         sourceSpriteset = uiUtility.LoadSpriteset(sourceSpritesetDD.captionText.text);
         if (binary)
         {
-            targetSpriteset = Rayman1BinaryAnimation.Instance.LoadSpritesetFromBinary(targetSpritesetDD.value);
+            Rayman1MSDOS.DesignObjects currObject = (Rayman1MSDOS.DesignObjects)Enum.Parse(typeof(Rayman1MSDOS.DesignObjects), targetSpritesetDD.captionText.text);
+            targetSpriteset = Rayman1BinaryAnimation.Instance.LoadSpritesetFromBinary(currObject);
         }
         else
         {

@@ -95,6 +95,7 @@ public partial class AnimatorController : Raymanimator
         exitButton.onClick.AddListener(delegate
         { //TODO: Add check for changes in animation to show popup, otherwise no need
             exitConfirmWindow.OpenWindow("Save animation?", SaveAndQuit);
+            exitConfirmWindow.noButton.onClick.RemoveAllListeners();
             exitConfirmWindow.noButton.onClick.AddListener(delegate { Quit(); });
         });
         playButton.onClick.AddListener(delegate { PlayAnimation(); });

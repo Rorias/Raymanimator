@@ -111,7 +111,7 @@ public class ThemeController : Raymanimator
         {
             if (panel)
             {
-                panel.color = currentScheme[3];
+                panel.color = new Color(currentScheme[3].r, currentScheme[3].g, currentScheme[3].b, panel.color.a);
             }
         }
 

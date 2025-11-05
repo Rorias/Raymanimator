@@ -6,24 +6,20 @@ using System.Linq;
 using TMPro;
 
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Tooltips : Settings
+public class Tooltips : MonoBehaviour
 {
     public CanvasScaler uiScaler;
-    [Space]
-    public Toggle tooltipsToggle;
-    public Toggle extendedToggle;
+
+    private GameSettings settings;
 
     private RectTransform rect;
     private Image bg;
     private TMP_Text tooltipText;
 
     private Vector2 tooltipSize;
-
-    private bool tooltipsOn = true;
-    private bool extendedOn = false;
+    [NonSerialized] public bool extendedOn = false;
 
     #region Tooltip text
     #region Editor settings
@@ -115,23 +111,20 @@ public class Tooltips : Settings
     #endregion
     #endregion
 
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
+        settings = GameSettings.Instance;
 
         rect = GetComponent<RectTransform>();
         bg = GetComponent<Image>();
         tooltipText = GetComponentInChildren<TMP_Text>();
-
-        tooltipsToggle.onValueChanged.AddListener(delegate { TooltipState(); });
-        extendedToggle.onValueChanged.AddListener(delegate { ExtendedState(); });
 
         tooltipSize = new Vector2(76, 76);
     }
 
     private void Update()
     {
-        if (!tooltipsOn)
+        if (!settings.tooltipsOn)
         {
             DisableTooltip();
             return;
@@ -219,16 +212,5 @@ public class Tooltips : Settings
         c.a = 0f;
         bg.color = c;
         tooltipText.text = "";
-    }
-
-    public void TooltipState()
-    {
-        tooltipsOn = !tooltipsOn;
-        extendedToggle.interactable = tooltipsOn;
-    }
-
-    public void ExtendedState()
-    {
-        extendedOn = !extendedOn;
     }
 }

@@ -13,7 +13,7 @@ public class Rayman1MSDOS
 
     public static List<string> SetAnimationsForObject(int _object)
     {
-        Type animations;
+        Type animations = null;
 
         switch ((DesignObjects)_object)
         {
@@ -29,23 +29,86 @@ public class Rayman1MSDOS
             case DesignObjects.Items2:
                 animations = typeof(Items2Animations);
                 break;
-            case DesignObjects.Font:
-                animations = typeof(FontAnimations);
-                break;
-            case DesignObjects.BigFont:
-                animations = typeof(BigFontAnimations);
-                break;
             case DesignObjects.ContinueClock:
                 animations = typeof(ContinueClockAnimations);
                 break;
-            case DesignObjects.EmptyObject:
-                animations = typeof(EmptyAnimations);
+            case DesignObjects.HunterDreamForest:
+                animations = typeof(HunterDreamForestAnimations);
                 break;
-            case DesignObjects.AnotherObject:
-                animations = typeof(AnotherAnimations);
+            case DesignObjects.PoofEffects:
+                animations = typeof(PoofAnimations);
                 break;
-            case DesignObjects.AnotherObject2:
-                animations = typeof(AnotherAnimations2);
+            case DesignObjects.Electoons:
+                animations = typeof(ElectoonAnimations);
+                break;
+            case DesignObjects.Livingstones:
+                animations = typeof(LivingStoneAnimations);
+                break;
+            case DesignObjects.Bzzit:
+                animations = typeof(BzzitAnimations);
+                break;
+            case DesignObjects.Moskito:
+                animations = typeof(MoskitoAnimations);
+                break;
+            case DesignObjects.Plants:
+                animations = typeof(PlantAnimations);
+                break;
+            case DesignObjects.Piranha:
+                animations = typeof(PiranhaAnimations);
+                break;
+            case DesignObjects.WaterSplash:
+                animations = typeof(WaterSplashAnimation);
+                break;
+            case DesignObjects.LipMonster:
+                animations = typeof(LipMonsterAnimations);
+                break;
+            case DesignObjects.TarRayzan:
+                animations = typeof(TarRayzanAnimations);
+                break;
+            case DesignObjects.BlueAntitoons:
+                animations = typeof(BlueAntitoonAnimations);
+                break;
+            case DesignObjects.RedAntitoons:
+                animations = typeof(RedAntitoonAnimations);
+                break;
+            case DesignObjects.RaymanOnBzzit:
+                animations = typeof(RaymanOnBzzitAnimations);
+                break;
+            case DesignObjects.RisingWater:
+                animations = typeof(RisingWaterAnimations);
+                break;
+            case DesignObjects.WingedRing:
+                animations = typeof(WingedRingAnimations);
+                break;
+            case DesignObjects.BetillaJungle:
+                animations = typeof(BetillaAnimations);
+                break;
+            case DesignObjects.CloudSplash:
+                animations = typeof(CloudSplashAnimations);
+                break;
+            case DesignObjects.SpikyPlant:
+                animations = typeof(SpikyPlantAnimations);
+                break;
+            case DesignObjects.CageUnlock:
+                animations = typeof(CageUnlockAnimations);
+                break;
+            case DesignObjects.StrangeGate:
+                animations = typeof(StrangeGateAnimations);
+                break;
+            case DesignObjects.Breakout:
+                animations = typeof(BreakoutAnimations);
+                break;
+            case DesignObjects.HunterBandLand:
+                animations = typeof(HunterBandLandAnimations);
+                break;
+            case DesignObjects.SomeObject3:
+                animations = typeof(SomeAnimations3);
+                break;
+            case DesignObjects.SomeObject4:
+                animations = typeof(SomeAnimations4);
+                break;
+            case DesignObjects.SomeObject5:
+                animations = typeof(SomeAnimations5);
                 break;
             default:
                 DebugHelper.Log(((DesignObjects)_object).ToString() + " Could not be found.", DebugHelper.Severity.error);
@@ -63,22 +126,47 @@ public class Rayman1MSDOS
         return anims;
     }
 
+    //All missing indexes are either Design objects with no animations, or Design objects that are not animated.
+    //I saw no point in adding them to the list if they don't.. animate
     public enum DesignObjects
     {
         Rayman,
         Items,
         MiniRayman,
         Items2,
-        Font,
-        BigFont,
-        ContinueClock,
-        EmptyObject,
-        EmptyObject2,
-        AnotherObject,
-        AnotherObject2,
+        //Fonts at 4 and 5 don't have animations
+        ContinueClock = 6,
+        //7 and 8 are parallax
+        HunterDreamForest = 9,
+        PoofEffects,
+        Electoons,
+        Livingstones,
+        Bzzit,
+        Moskito,
+        Plants,
+        Piranha,
+        WaterSplash,
+        LipMonster,
+        TarRayzan,
+        BlueAntitoons,
+        RedAntitoons,
+        RaymanOnBzzit,
+        RisingWater,
+        WingedRing,
+        BetillaJungle,
+        CloudSplash,
+        SpikyPlant,
+        CageUnlock,
+        StrangeGate,
+        Breakout,
+        //31 is parallax
+        HunterBandLand = 32,
+        SomeObject3,
+        SomeObject4,
+        SomeObject5,
     }
 
-    public enum RayAnimations
+    private enum RayAnimations
     {
         RayFistChargeStart,
         RayFistCharge,
@@ -217,7 +305,7 @@ public class Rayman1MSDOS
         RayIdleWaiting6,
     }
 
-    public enum ItemsAnimations
+    private enum ItemsAnimations
     {
         ItemFistPunch,
         ItemSmallP1Dot,
@@ -247,12 +335,12 @@ public class Rayman1MSDOS
         ItemMagicianShowTingRequirement,
     }
 
-    public enum MiniRayAnimations
+    private enum MiniRayAnimations
     {
 
     }
 
-    public enum Items2Animations
+    private enum Items2Animations
     {
         Item2Power,
         Item2Fist,
@@ -318,17 +406,7 @@ public class Rayman1MSDOS
         Item2SmallSparkles2,
     }
 
-    public enum FontAnimations
-    {
-        SomeAnimation1,
-    }
-
-    public enum BigFontAnimations
-    {
-        SomeAnimation1,
-    }
-
-    public enum ContinueClockAnimations
+    private enum ContinueClockAnimations
     {
         ClockWakeUpFast,
         ClockWakeUp,
@@ -337,22 +415,355 @@ public class Rayman1MSDOS
         ClockSleeping,
     }
 
-    public enum EmptyAnimations
+    private enum HunterDreamForestAnimations
     {
-        Empty1,
+        HunterIdle,
+        HunterHit,
+        HunterTakeAim,
+        HunterFire,
+        BulletIdle,
+        BulletHammerStart,
+        BulletHammer,
     }
 
-    public enum AnotherAnimations
+    private enum PoofAnimations
     {
-        SomeAnimation1,
-        SomeAnimation2,
-        SomeAnimation3,
+        Explosion,
+        DustCloud,
+        DustExplosion,
     }
 
-    public enum AnotherAnimations2
+    private enum ElectoonAnimations
     {
-        SomeAnimation1,
-        SomeAnimation2,
-        SomeAnimation3,
+        ElectoonFalling,
+        ElectoonIdle,
+        ElectoonSleepy,
+        ElectoonFlying,
+        ElectoonConfused,
+        ElectoonJumping,
+        ElectoonLove,
+        ElectoonWalking,
+        ElectoonLeaveStart,
+        ElectoonFalling2,
+        ElectoonLeave,
+        MusicEndSign,
+        EndSign,
+        ReverseEndSign,
+        MrStoneLaserShot,
+        ElectoonCageIdle,
+        ElectoonCageOpenBottom,
+        ElectoonCageHit,
+        ElectoonCageOpenTop,
+        ElectoonCage,
+        ElectoonCageBottom,
+        ElectoonCageHitFast,
+        ReturnSign,
+    }
+
+    private enum LivingStoneAnimations
+    {
+        BigLivingStoneRunningTowardsStart,
+        BigLivingStoneIdle,
+        BigLivingStoneRunningTowards,
+        BigLivingStoneWalking,
+        BigLivingStoneHit,
+        Plum,
+        BigLivingStoneWalkingPlum,
+        BigLivingStonePlumLanding,
+        BigLivingStonePlumHit,
+        BigLivingStoneTurnAround,
+        SmallLivingStoneIdleScare,
+        SmallLivingStoneIdle,
+        SmallLivingStoneWalkingAngry,
+        SmallLivingStoneWalking,
+        SmallLivingStoneHit,
+        SmallLivingStoneTurnAround,
+        SmallLivingStoneAttack,
+        SmallLivingStonePlumBounce,
+        SmallLivingStoneDuckStart,
+        SmallLivingStoneDuck,
+        SmallLivingStoneDuckEnd,
+    }
+
+    private enum BzzitAnimations
+    {
+        SpikyPlant,
+        BzzitBlink,
+        BzzitIdleSide,
+        BzzitMediumSpikySting,
+        BzzitFeetHandSting,
+        BzzitSting,
+        BzzitStrangeIdle,
+        BzzitHit,
+        BzzitSillyEnd,
+        BzzitIdleFront,
+        BzzitSpiky,
+        BzzitSpikyDrop,
+        BzzitDizzy,
+        BzzitZoom,
+        BzzitStingEnd,
+        BzzitStingStart,
+        BzzitStrange,
+        BzzitSilly,
+        MediumSpikyPlant,
+        BzzitMediumSpiky,
+        BzzitBigSpiky,
+        BzzitDefeatedFall,
+        BzzitDefeated,
+        BzzitDefeatedIdle,
+    }
+
+    private enum MoskitoAnimations
+    {
+        SpikyPlant,
+        MoskitoBlink,
+        MoskitoIdleSide,
+        MoskitoMediumSpikySting,
+        MoskitoFeetHandSting,
+        MoskitoSting,
+        MoskitoStrangeIdle,
+        MoskitoHit,
+        MoskitoSillyEnd,
+        MoskitoIdleFront,
+        MoskitoSpiky,
+        MoskitoSpikyDrop,
+        MoskitoDizzy,
+        MoskitoZoom,
+        MoskitoStingEnd,
+        MoskitoStingStart,
+        MoskitoStrange,
+        MoskitoSilly,
+        MediumSpikyPlant,
+        MoskitoMediumSpiky,
+        MoskitoBigSpiky,
+        MoskitoDefeatedFall,
+        MoskitoDefeated,
+        MoskitoDefeatedIdle,
+    }
+
+    private enum PlantAnimations
+    {
+        PlumSwingIdle,
+        PlumSwingFull,
+        PlumSwingRight,
+        PlumSwingLeft,
+        SpikyPlantSwingRight,
+        SpikyPlantSwingLeft,
+        PlumSwing360,
+        FloatingPlant,
+        BungiePlantIdle,
+        BungiePlantBounce,
+        FlowerDance,
+        MushroomDance,
+        MushroomStack,
+        Plum,
+        PlumWaterEnter,
+        PlumWaterIdle,
+        Butterfly1,
+        Butterfly2,
+        Butterfly3,
+        Butterfly4,
+        Butterfly5,
+        Butterfly6,
+        Butterfly7,
+        Butterfly8,
+        SeedPlantGrow,
+        SeedPlantIdle,
+        TinyFloatingPlant,
+    }
+
+    private enum PiranhaAnimations
+    {
+        PiranhaDead,
+        Piranha,
+        PiranhaHit,
+    }
+
+    private enum WaterSplashAnimation
+    {
+        WaterSplash,
+    }
+
+    private enum LipMonsterAnimations
+    {
+        LipMonsterWalking,
+        LipMonsterHit,
+        LipMonsterKO,
+    }
+
+    private enum TarRayzanAnimations
+    {
+        TarRayzanGetCloth,
+        TarRayzanSeed,
+        TarRayzanGiveSeed,
+        TarRayzanGiveSeedEnd,
+        TarRayzanLeave,
+        TarRayzanCutscene,
+        TarRayzanIdle,
+    }
+
+    private enum BlueAntitoonAnimations
+    {
+        AntitoonBite,
+        AntitoonZoof,
+        AntitoonEyesBlink,
+        AntitoonEyesBounce,
+        AntitoonJumpStart,
+        AntitoonZoofStart,
+        AntitoonJumpEnd,
+        AntitoonJumpStart2,
+        AntitoonHit,
+        AntitoonWalking,
+        AntitoonFlying,
+        AntitoonIdle,
+    }
+
+    private enum RedAntitoonAnimations
+    {
+        AntitoonBite,
+        AntitoonZoof,
+        AntitoonEyesBlink,
+        AntitoonEyesBounce,
+        AntitoonJumpStart,
+        AntitoonZoofStart,
+        AntitoonJumpEnd,
+        AntitoonJumpStart2,
+        AntitoonHit,
+        AntitoonWalking,
+        AntitoonFlying,
+        AntitoonIdle,
+    }
+
+    private enum RaymanOnBzzitAnimations
+    {
+        RayBzzitIdle,
+        RayBzzitIdleFlying,
+        RayBzzitSpeedflight,
+        RayBzzitHit,
+        RayBzzitFistChargeStart,
+        RayBzzitFistCharge,
+        RayBzzitFistThrow,
+        RayBzzitSting,
+        RayBzzitSpeedflightStart,
+        RayBzzitSpeedflightEnd,
+        RayBzzitLevelEndStart,
+        RayBzzitLevelEndStart2,
+        RayBzzitFriendshipCutscene,
+        RayBzzitFriendshipCutsceneEnd,
+        RayBzzitLevelEnd,
+        RayBzzitLevelLoadCutscene,
+        RayBzzitLevelLoadCutscene2,
+    }
+
+    private enum RisingWaterAnimations
+    {
+        RisingWater1,
+        RisingWater2,
+        RisingWater3,
+        RisingWater4,
+    }
+
+    private enum WingedRingAnimations
+    {
+        DamagedWingedRing,
+        PinkWingedRing,
+    }
+
+    private enum BetillaAnimations
+    {
+        BetillaIdle,
+        BetillaTalking,
+        BetillaTalking2,
+        BetillaGivePowerStart,
+        BetillaGivePower,
+        BetillaGivePowerEnd,
+        BetillaIdle2,
+    }
+
+    private enum CloudSplashAnimations
+    {
+        CloudSplashBack,
+        CloudSplashFront,
+    }
+
+    private enum SpikyPlantAnimations
+    {
+        SpikyPlant,
+    }
+
+    private enum CageUnlockAnimations
+    {
+        CageUnlock1,
+        CageUnlock2,
+        CageUnlock3,
+        CageUnlock4,
+        CageUnlock5,
+        CageUnlock6,
+    }
+
+    private enum StrangeGateAnimations
+    {
+        TopHalf,
+        LowerHalf,
+    }
+
+    private enum BreakoutAnimations
+    {
+        Pinball,
+        PlumBrick,
+        LevelLayouts,
+    }
+
+    private enum HunterBandLandAnimations
+    {
+        HunterIdle,
+        HunterHit,
+        HunterTakeAim,
+        HunterFire,
+        BulletIdle,
+        BulletHammerStart,
+        BulletHammer,
+    }
+
+    private enum SomeAnimations3
+    {
+        Anim1,
+        Anim2,
+        Anim3,
+        Anim4,
+        Anim5,
+        Anim6,
+        Anim7,
+        Anim8,
+        Anim9,
+        Anim10,
+    }
+
+    private enum SomeAnimations4
+    {
+        Anim1,
+        Anim2,
+        Anim3,
+        Anim4,
+        Anim5,
+        Anim6,
+        Anim7,
+        Anim8,
+        Anim9,
+        Anim10,
+    }
+
+    private enum SomeAnimations5
+    {
+        Anim1,
+        Anim2,
+        Anim3,
+        Anim4,
+        Anim5,
+        Anim6,
+        Anim7,
+        Anim8,
+        Anim9,
+        Anim10,
     }
 }

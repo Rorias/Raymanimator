@@ -37,7 +37,9 @@ public class BinaryTests : MonoBehaviour
         }
         Debug.Log(pixelDataString);
 
-        var palette = Rayman1BinaryAnimation.world1levels[0].MapInfo.Palettes.First();
+        yield return new WaitForSeconds(3f);
+
+        var palette = Rayman1BinaryAnimation.jungleLvls[0].MapInfo.Palettes.First();
         List<Color> paletteColors = new List<Color>();
         paletteColors.Add(new Color(0, 0, 0, 0));
         for (int i = 1; i < 112; i++)
@@ -93,6 +95,8 @@ public class BinaryTests : MonoBehaviour
         var instance = Rayman1BinaryAnimation.Instance;
 
         Design raymanDes = Rayman1BinaryAnimation.allfix.DesItems[0];
+
+        yield return new WaitForSeconds(3f);
 
         Dictionary<int, UnityEngine.Sprite> spriteset = instance.LoadSpritesetFromBinary(0);
         byte[] newImageData = instance.SaveSpriteset(spriteset, raymanDes, false);
@@ -150,17 +154,44 @@ public class BinaryTests : MonoBehaviour
         GameSettings.file = Application.persistentDataPath + "/" + GameSettings.fileName + ".json";
         var instance = Rayman1BinaryAnimation.Instance;
 
-        for(int i = 0; i < Rayman1BinaryAnimation.worlds[0].DesItems.Length; i++)
+        for (int i = 0; i < Rayman1BinaryAnimation.allfix.DesItems.Length; i++)
         {
-            if (Rayman1BinaryAnimation.worlds[0].DesItems[i].IsAnimatedSprite)
+            if (Rayman1BinaryAnimation.allfix.DesItems[i].IsAnimatedSprite)
             {
-                Debug.Log(i + " is animated");
+                Debug.Log(i + " allfix is animated");
             }
             else
             {
-                Debug.Log(i + " is NOT animated");
+                Debug.Log(i + " allfix is NOT animated");
             }
         }
+
+        yield return new WaitForSeconds(3f);
+
+        for (int i = 0; i < Rayman1BinaryAnimation.worlds[0].DesItems.Length; i++)
+        {
+            if (Rayman1BinaryAnimation.worlds[0].DesItems[i].IsAnimatedSprite)
+            {
+                Debug.Log("1 - " + i + " is animated");
+            }
+            else
+            {
+                Debug.Log("1 - " + i + " is NOT animated");
+            }
+        }
+
+        for (int i = 0; i < Rayman1BinaryAnimation.worlds[1].DesItems.Length; i++)
+        {
+            if (Rayman1BinaryAnimation.worlds[1].DesItems[i].IsAnimatedSprite)
+            {
+                Debug.Log("2 - " + i + " is animated");
+            }
+            else
+            {
+                Debug.Log("2 - " + i + " is NOT animated");
+            }
+        }
+
 
         yield return new WaitForEndOfFrame();
     }

@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 
 using UnityEngine;
 
@@ -24,7 +25,10 @@ public sealed class Rayman1BinaryAnimation
             {
                 _instance = new Rayman1BinaryAnimation();
                 _instance.InitializeBinary();
-                LoadBinaryAnimations(GameSettings.Instance);
+                if (BinaryFilesExist(GameSettings.Instance.binaryBasePath))
+                {
+                    LoadBinaryFiles(GameSettings.Instance.binaryBasePath);
+                }
             }
             return _instance;
         }
@@ -33,46 +37,168 @@ public sealed class Rayman1BinaryAnimation
 
     private static string basePath = "";
     private static string allfixFile = @"ALLFIX.DAT";
-    private static string level1File = @"JUNGLE\RAY1.LEV";
+
+    private static Thread LoadBinaryWorldsThreaded = null;
+    private static Thread LoadBinaryLevelsThreaded = null;
 
     private static Context context;
+    private static string[][] files = new string[7][];
     public static AllfixFile allfix;
     public static WorldFile[] worlds = new WorldFile[6];
-    public static List<LevelFile> world1levels = new List<LevelFile>();
+    public static LevelFile[] jungleLvls = new LevelFile[22];
+    public static LevelFile[] musicLvls = new LevelFile[18];
+    public static LevelFile[] stoneLvls = new LevelFile[13];
+    public static LevelFile[] imageLvls = new LevelFile[13];
+    public static LevelFile[] caveLvls = new LevelFile[12];
+    public static LevelFile[] candyLvls = new LevelFile[4];
 
     private GameSettings settings;
 
-    public static void LoadBinaryAnimations(GameSettings _settings)
+    public static bool BinaryFilesExist(string _path)
     {
-        if ((!string.IsNullOrWhiteSpace(_settings.binaryBasePath) && context == null) || basePath != _settings.binaryBasePath)
+        if (string.IsNullOrWhiteSpace(_path) || !File.Exists(_path + "/" + allfixFile))
         {
-            basePath = _settings.binaryBasePath;
-            context = new Context(_settings.binaryBasePath);
+            DebugHelper.Log("Rayman 1 for MS-DOS could not be found in this folder.", DebugHelper.Severity.error);
+            return false;
+        }
+
+        return true;
+    }
+
+    public static void LoadBinaryFiles(string _path)
+    {
+        if (context == null || basePath != _path)
+        {
+            basePath = _path;
+            context = new Context(basePath);
             context.AddSettings(new Ray1Settings(Ray1EngineVersion.PC));
 
             using (context)
             {
+                //Allfix
                 context.AddFile(new LinearFile(context, allfixFile));
                 allfix = FileFactory.Read<AllfixFile>(context, allfixFile);
-            }
 
-            using (context)
-            {
-                string[] worldFiles = Directory.GetFiles(basePath, "*.WLD", SearchOption.TopDirectoryOnly);
-                for (int i = 0; i < worldFiles.Length; i++)
+                //Worlds
+                files[0] = Directory.GetFiles(basePath, "*.WLD", SearchOption.TopDirectoryOnly);
+                for (int i = 0; i < files[0].Length; i++)
                 {
-                    string fileName = Path.GetFileName(worldFiles[i]);
-                    context.AddFile(new LinearFile(context, fileName));
-                    worlds[i] = FileFactory.Read<WorldFile>(context, fileName);
+                    files[0][i] = Path.GetFileName(files[0][i]);
+                    context.AddFile(new LinearFile(context, files[0][i]));
                 }
+
+                //Levels
+                files[1] = Directory.GetFiles(basePath + "/JUNGLE", "*.LEV", SearchOption.TopDirectoryOnly);
+                for (int i = 0; i < files[1].Length; i++)
+                {
+                    files[1][i] = Path.GetFileName(files[1][i]);
+                    context.AddFile(new LinearFile(context, "JUNGLE/" + files[1][i]));
+                }
+
+                files[2] = Directory.GetFiles(basePath + "/MUSIC", "*.LEV", SearchOption.TopDirectoryOnly);
+                for (int i = 0; i < files[2].Length; i++)
+                {
+                    files[2][i] = Path.GetFileName(files[2][i]);
+                    context.AddFile(new LinearFile(context, "MUSIC/" + files[2][i]));
+                }
+
+                files[3] = Directory.GetFiles(basePath + "/MOUNTAIN", "*.LEV", SearchOption.TopDirectoryOnly);
+                for (int i = 0; i < files[3].Length; i++)
+                {
+                    files[3][i] = Path.GetFileName(files[3][i]);
+                    context.AddFile(new LinearFile(context, "MOUNTAIN/" + files[3][i]));
+                }
+
+                files[4] = Directory.GetFiles(basePath + "/IMAGE", "*.LEV", SearchOption.TopDirectoryOnly);
+                for (int i = 0; i < files[4].Length; i++)
+                {
+                    files[4][i] = Path.GetFileName(files[4][i]);
+                    context.AddFile(new LinearFile(context, "IMAGE/" + files[4][i]));
+                }
+
+                files[5] = Directory.GetFiles(basePath + "/CAVE", "*.LEV", SearchOption.TopDirectoryOnly);
+                for (int i = 0; i < files[5].Length; i++)
+                {
+                    files[5][i] = Path.GetFileName(files[5][i]);
+                    context.AddFile(new LinearFile(context, "CAVE/" + files[5][i]));
+                }
+
+                files[6] = Directory.GetFiles(basePath + "/CAKE", "*.LEV", SearchOption.TopDirectoryOnly);
+                for (int i = 0; i < files[6].Length; i++)
+                {
+                    files[6][i] = Path.GetFileName(files[6][i]);
+                    context.AddFile(new LinearFile(context, "CAKE/" + files[6][i]));
+                }
+                Debug.Log("Loaded fileNames into context.");
             }
 
-            using (context)
-            {
-                context.AddFile(new LinearFile(context, level1File));
-                world1levels.Add(FileFactory.Read<LevelFile>(context, level1File));
-            }
+
+            LoadBinaryWorldsThreaded = new Thread(LoadBinaryWorlds);
+            LoadBinaryWorldsThreaded.IsBackground = true;
+            LoadBinaryWorldsThreaded.Start();
+
+            LoadBinaryLevelsThreaded = new Thread(LoadBinaryLevels);
+            LoadBinaryLevelsThreaded.IsBackground = true;
+            LoadBinaryLevelsThreaded.Start();
         }
+    }
+
+    private static void LoadBinaryWorlds()
+    {
+        using (context)
+        {
+            for (int i = 0; i < files[0].Length; i++)
+            {
+                worlds[i] = FileFactory.Read<WorldFile>(context, files[0][i]);
+            }
+            Debug.Log("Loaded worlds");
+        }
+
+        LoadBinaryWorldsThreaded.Abort();
+    }
+
+    private static void LoadBinaryLevels()
+    {
+        using (context)
+        {
+            for (int i = 0; i < files[1].Length; i++)
+            {
+                jungleLvls[i] = FileFactory.Read<LevelFile>(context, "JUNGLE/" + files[1][i]);
+            }
+            Debug.Log("Loaded JUNGLE");
+
+            for (int i = 0; i < files[2].Length; i++)
+            {
+                musicLvls[i] = FileFactory.Read<LevelFile>(context, "MUSIC/" + files[2][i]);
+            }
+            Debug.Log("Loaded MUSIC");
+
+            for (int i = 0; i < files[3].Length; i++)
+            {
+                stoneLvls[i] = FileFactory.Read<LevelFile>(context, "MOUNTAIN/" + files[3][i]);
+            }
+            Debug.Log("Loaded MOUNTAIN");
+
+            for (int i = 0; i < files[4].Length; i++)
+            {
+                imageLvls[i] = FileFactory.Read<LevelFile>(context, "IMAGE/" + files[4][i]);
+            }
+            Debug.Log("Loaded IMAGE");
+
+            for (int i = 0; i < files[5].Length; i++)
+            {
+                caveLvls[i] = FileFactory.Read<LevelFile>(context, "CAVE/" + files[5][i]);
+            }
+            Debug.Log("Loaded CAVE");
+
+            for (int i = 0; i < files[6].Length; i++)
+            {
+                candyLvls[i] = FileFactory.Read<LevelFile>(context, "CAKE/" + files[6][i]);
+            }
+            Debug.Log("Loaded CAKE");
+        }
+
+        LoadBinaryLevelsThreaded.Abort();
     }
 
     private void InitializeBinary()
@@ -81,19 +207,19 @@ public sealed class Rayman1BinaryAnimation
         settings = GameSettings.Instance;
     }
 
-    public Animation LoadRaymAnimationFromBinary(string _animName, int _objectIndex, int _animIndex, string _spriteset, Mapping _map)
+    public Animation LoadRaymAnimationFromBinary(string _animName, Rayman1MSDOS.DesignObjects _object, int _animIndex, string _spriteset, Mapping _map)
     {
-        Design des = GetDesignFromIndex(_objectIndex);
+        Design des = GetDesignByIndex((int)_object);
         BinarySerializer.Ray1.Animation binaryAnim = des.Animations[_animIndex];
-        Debug.Log("Animation count for object " + _objectIndex.ToString() + ": " + des.Animations.Length);
+        Debug.Log("Animation count for object " + _object.ToString() + ": " + des.Animations.Length);
         Debug.Log("Succesfully retrieved animation data: " + des.Animations.Length);
 
         Animation rayman1Anim = new Animation();
         rayman1Anim.animationName = _animName;
         rayman1Anim.maxFrameCount = binaryAnim.FramesCount;
         rayman1Anim.maxPartCount = binaryAnim.LayersCount;
-        rayman1Anim.gridSizeX = 256;
-        rayman1Anim.gridSizeY = 256;
+        rayman1Anim.gridSizeX = binaryAnim.Frames[0].Width;
+        rayman1Anim.gridSizeY = binaryAnim.Frames[0].Height;
         rayman1Anim.usedSpriteset = _spriteset;
         rayman1Anim.binaryAnimationIndex = _animIndex;
         float pixelSize = _map == null ? 16f : _map.PixelSize;
@@ -108,7 +234,7 @@ public sealed class Rayman1BinaryAnimation
 
                 Part p = new Part();
                 p.partID = layerIndex;
-                p.partIndex = animLayer.SpriteIndex - 1;//Apply mapping where applicable
+                p.partIndex = animLayer.SpriteIndex - 1;
                 p.flipX = animLayer.FlipX;
                 p.flipY = animLayer.FlipY;
                 p.xPos = animLayer.XPosition / pixelSize;
@@ -128,7 +254,8 @@ public sealed class Rayman1BinaryAnimation
         int _objectIndex, int _animIndex,
         bool _animData, bool _visuals, bool _colls, float _pixelSize)
     {
-        BinarySerializer.Ray1.Animation binaryAnim = allfix.DesItems[_objectIndex].Animations[_animIndex];
+        Design des = GetDesignByIndex(_objectIndex);
+        BinarySerializer.Ray1.Animation binaryAnim = des.Animations[_animIndex];
         if (_animData)
         {
             SaveFrames(_rayman1Anim, binaryAnim, _pixelSize);
@@ -136,19 +263,44 @@ public sealed class Rayman1BinaryAnimation
 
         if (_visuals)
         {
-            byte[] imageData = SaveSpriteset(_spriteset, allfix.DesItems[_objectIndex], _colls);
+            byte[] imageData = SaveSpriteset(_spriteset, des, _colls);
             ConvertImageData(ref imageData);
-            allfix.DesItems[_objectIndex].ImageData = imageData;
+            des.ImageData = imageData;
+            Debug.Log("Recalculated imagedata size: " + des.ImageData.Length);
         }
 
         using (context)
         {
-            FileFactory.Write<AllfixFile>(context, allfixFile);
+            if (_objectIndex <= 7)
+            {
+                FileFactory.Write<AllfixFile>(context, allfixFile);
+            }
+
+            if (_objectIndex > 7 && _objectIndex < 31)
+            {
+                string[] worldFiles = Directory.GetFiles(basePath, "RAY1.WLD", SearchOption.TopDirectoryOnly);
+                for (int i = 0; i < worldFiles.Length; i++)
+                {
+                    string fileName = Path.GetFileName(worldFiles[0]);
+                    FileFactory.Write<WorldFile>(context, fileName);
+                }
+            }
         }
     }
 
     private void SaveFrames(Animation _rayman1Anim, BinarySerializer.Ray1.Animation _binaryAnim, float _pixelSize)
     {
+        //if (_binaryAnim.FramesCount < _rayman1Anim.maxFrameCount)
+        //{
+        //    for (int i = _binaryAnim.FramesCount - 1; i < _rayman1Anim.maxFrameCount; i++)
+        //    {
+        //        AnimationFrame af = new AnimationFrame()
+        //        {
+
+        //        }
+        //    }
+        //}
+
         for (int frameIndex = 0; frameIndex < _binaryAnim.FramesCount; frameIndex++)
         {
             Frame f = _rayman1Anim.frames[frameIndex];
@@ -169,7 +321,7 @@ public sealed class Rayman1BinaryAnimation
 
     public byte[] SaveSpriteset(Dictionary<int, UnityEngine.Sprite> _spriteset, Design _imageData, bool _colls)
     {
-        var palette = world1levels[0].MapInfo.Palettes.First();
+        var palette = jungleLvls[1].MapInfo.Palettes.First();
         List<Color> paletteColors = new List<Color>();
         paletteColors.Add(new Color(0, 0, 0, 0));
         for (int i = 1; i < 160; i++)
@@ -178,12 +330,10 @@ public sealed class Rayman1BinaryAnimation
         }
 
         List<byte> imageDataArray = new List<byte>(_imageData.ImageData);
-        //List<int> bufferOffsetIndex = new List<int>();
         int prevBufferOffset = 0;
 
         foreach (KeyValuePair<int, UnityEngine.Sprite> sprite in _spriteset)
         {
-            //bool outOfBounds = false;
             byte[] spriteData = new byte[sprite.Value.texture.width * sprite.Value.texture.height];
 
             //load sprite data into byte array
@@ -208,17 +358,18 @@ public sealed class Rayman1BinaryAnimation
                 }
             }
 
-            //Set the Width/Height of the current sprite to their new sizes, and set the next sprite's imageBufferOffset based on the size of the current one 
-            if (_imageData.Sprites.Length > sprite.Key + 2 && _imageData.Sprites[sprite.Key + 1].Id != 0)
+            //Set the Width/Height of the current sprite to their new sizes
+            _imageData.Sprites[sprite.Key + 1].Width = (short)sprite.Value.texture.width;
+            _imageData.Sprites[sprite.Key + 1].Height = (short)sprite.Value.texture.height;
+
+            if (_colls)
             {
-                _imageData.Sprites[sprite.Key + 1].Width = (short)sprite.Value.texture.width;
-                _imageData.Sprites[sprite.Key + 1].Height = (short)sprite.Value.texture.height;
+                RecalculateSpriteSize(_imageData.Sprites[sprite.Key + 1], spriteData);
+            }
 
-                if (_colls)
-                {
-                    RecalculateSpriteSize(_imageData.Sprites[sprite.Key + 1], spriteData);
-                }
-
+            //Set the next sprite's imageBufferOffset based on the size of the current one 
+            if (_imageData.Sprites.Length > sprite.Key + 2)
+            {
                 _imageData.Sprites[sprite.Key + 2].ImageBufferOffset = prevBufferOffset + spriteData.Length;
                 prevBufferOffset = _imageData.Sprites[sprite.Key + 2].ImageBufferOffset;
             }
@@ -267,22 +418,18 @@ public sealed class Rayman1BinaryAnimation
         }
     }
 
-    public Dictionary<int, UnityEngine.Sprite> LoadSpritesetFromBinary(int _objectIndex)
+    public Dictionary<int, UnityEngine.Sprite> LoadSpritesetFromBinary(Rayman1MSDOS.DesignObjects _object)
     {
-        Design des = GetDesignFromIndex(_objectIndex);
+        Design des = GetDesignByIndex((int)_object);
         Dictionary<int, UnityEngine.Sprite> spriteset = new Dictionary<int, UnityEngine.Sprite>();
 
         int offset = 1;
         for (int i = 1; i < des.Sprites.Length; i++)
         {
             BinarySerializer.Ray1.Sprite sprite = des.Sprites[i];
-            if (sprite.Id == 0)
-            {
-                offset++;
-                continue;
-            }
-
             byte[] pixels = new byte[sprite.Width * sprite.Height];
+            Debug.Log(sprite.ImageBufferOffset + " offset");
+            Debug.Log(pixels.Length + " length");
             Array.Copy(des.ImageData, sprite.ImageBufferOffset, pixels, 0, pixels.Length);
             if (sprite.Id != 0 && i + 1 < des.Sprites.Length)
             {
@@ -300,11 +447,16 @@ public sealed class Rayman1BinaryAnimation
                 }
             }
 
-            Texture2D sampleTexture = GetBinarySpriteTexture(sprite, world1levels[0].MapInfo.Palettes.First(), pixels);
+            Texture2D sampleTexture = GetBinarySpriteTexture(sprite, jungleLvls[1].MapInfo.Palettes.First(), pixels);
             if (sampleTexture == null)
             {
-                offset++;
-                continue;
+                sampleTexture = new Texture2D(1, 1, TextureFormat.RGBA32, false)
+                {
+                    filterMode = FilterMode.Point,
+                    wrapMode = TextureWrapMode.Clamp
+                };
+                sampleTexture.SetPixel(0, 0, Color.clear);
+                sampleTexture.Apply();
             }
 
             UnityEngine.Sprite newSprite = UnityEngine.Sprite.Create(sampleTexture, new Rect(0, 0, sampleTexture.width, sampleTexture.height), new Vector2(0f, 1f), 16, 0, SpriteMeshType.FullRect, new Vector4(0, 0, 0, 0), true);
@@ -314,18 +466,25 @@ public sealed class Rayman1BinaryAnimation
         return spriteset;
     }
 
-    public Design GetDesignFromIndex(int _objectIndex)
+    public Design GetDesignByIndex(int _objectIndex)
     {
         int world1Index = 7;
+        int world2Index = 31;
 
         if (_objectIndex < world1Index)
         {
             return allfix.DesItems[_objectIndex];
         }
 
-        if(_objectIndex >= world1Index)
+        if (_objectIndex >= world1Index && _objectIndex < world2Index)
         {
             return worlds[0].DesItems[_objectIndex - world1Index];
+        }
+
+        if (_objectIndex >= world2Index)
+        {
+            Debug.Log(worlds[1].DesItems.Length + " Music designs count");
+            return worlds[1].DesItems[_objectIndex - world2Index];
         }
 
         return null;

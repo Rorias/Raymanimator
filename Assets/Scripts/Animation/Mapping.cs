@@ -111,7 +111,7 @@ public class Mapping
         if (targetImages.Count == 0)
         {
             Rayman1MSDOS.DesignObjects currObject = (Rayman1MSDOS.DesignObjects)Enum.Parse(typeof(Rayman1MSDOS.DesignObjects), _targetSpriteset);
-            targetImages = Rayman1BinaryAnimation.Instance.LoadSpritesetFromBinary((int)currObject);
+            targetImages = Rayman1BinaryAnimation.Instance.LoadSpritesetFromBinary(currObject);
         }
 
         for (int i = 0; i < MappingValues.Length; i++)

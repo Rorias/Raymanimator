@@ -89,6 +89,8 @@ public sealed class GameSettings
     [SerializeField] private byte gOp = 100;
     public string binaryBasePath { get { return bbp; } set { bbp = value; } }
     [SerializeField] private string bbp = string.Empty;
+    public bool showExportBackupWarning { get { return ebw; } set { ebw = value; } }
+    [SerializeField] private bool ebw = true;
 
     public void SaveSettings()
     {

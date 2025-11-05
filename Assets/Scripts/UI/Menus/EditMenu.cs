@@ -29,6 +29,7 @@ public class EditMenu : Raymanimator
     private AnimationManager animManager;
     private InputManager input;
     private UIUtility uiUtility;
+    private MiniPlaybackController miniPlayback;
 
     private List<string> loadableAnims = new List<string>();
 
@@ -41,8 +42,9 @@ public class EditMenu : Raymanimator
         animManager = AnimationManager.Instance;
         input = InputManager.Instance;
         uiUtility = FindObjectOfType<UIUtility>();
+        miniPlayback = FindObjectOfType<MiniPlaybackController>();
 
-        loadAnimsDD.onValueChanged.AddListener(delegate { GetAnimationName(); });
+        loadAnimsDD.onValueChanged.AddListener(delegate { GetAnimationName(); CreatePreviewAnimation(); });
 
         renameBtn.onClick.AddListener(delegate { OpenRenameMenu(); });
         copyBtn.onClick.AddListener(delegate { CopyAnimation(); });
@@ -151,7 +153,17 @@ public class EditMenu : Raymanimator
                 gameManager.spritesetImages = map.GenerateMappingSpriteset(settings.lastSpriteset, gameManager.currentAnimation.usedSpriteset, settings.spritesetsPath, uiUtility);
             }
         }
+    }
 
+    private void CreatePreviewAnimation()
+    {
+        LoadAnimation();
+        miniPlayback.StartMiniPlayback();
+    }
+
+    public void LoadEditorWithAnimation()
+    {
+        LoadAnimation();
         SceneManager.LoadScene(1);
     }
     #endregion

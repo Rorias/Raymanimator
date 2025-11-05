@@ -60,7 +60,6 @@ public class EditBinaryMenu : Raymanimator
         gameVersionDD.onValueChanged.AddListener(delegate { SetObjectsForVersion(); });
         dataPathIF.onValueChanged.AddListener(delegate { SetDataPathViaBrowse(); });
         dataPathIF.onEndEdit.AddListener(delegate { SetDataPath(); });
-        dataPathIF.text = settings.binaryBasePath;
 
         objectDD.onValueChanged.AddListener(delegate { SetAnimationsForObject(); });
         animationDD.onValueChanged.AddListener(delegate { CreatePreviewAnimation(); });
@@ -72,7 +71,7 @@ public class EditBinaryMenu : Raymanimator
 
         //Speed up debugging
         gameVersionDD.value = 0;
-        objectDD.value = 0;
+        dataPathIF.text = settings.binaryBasePath;
     }
 
     private void InitializeDropdowns()
@@ -85,7 +84,10 @@ public class EditBinaryMenu : Raymanimator
 
     public void SetDataPathViaBrowse()
     {
-        SetDataPath();
+        if (dataPathIF.text[^1] == '/' || dataPathIF.text[^1] == '\\')
+        {
+            SetDataPath();
+        }
     }
 
     public bool SetDataPath()
@@ -95,15 +97,16 @@ public class EditBinaryMenu : Raymanimator
         if (!string.IsNullOrWhiteSpace(binaryPath) && Directory.Exists(binaryPath))
         {
             settings.binaryBasePath = binaryPath;
-            Rayman1BinaryAnimation.LoadBinaryAnimations(settings);
-            settings.SaveSettings();
-            Debug.Log("Succesfully loaded binary file data.");
-            SetObjectsForVersion();
-            return true;
+            if (Rayman1BinaryAnimation.BinaryFilesExist(binaryPath))
+            {
+                Rayman1BinaryAnimation.LoadBinaryFiles(binaryPath);
+                settings.SaveSettings();
+                SetObjectsForVersion();
+                Debug.Log("Succesfully loaded binary file data.");
+                return true;
+            }
         }
 
-        Debug.Log("Path cannot be found. Check if you spelled it correctly or use the browse button instead.");
-        DebugHelper.Log("Path cannot be found. Check if you spelled it correctly or use the browse button instead.");
         objectDD.interactable = false;
         animationDD.interactable = false;
         return false;
@@ -111,7 +114,7 @@ public class EditBinaryMenu : Raymanimator
 
     private void SetObjectsForVersion()
     {
-        if (gameVersionDD.value >= 0 && !string.IsNullOrWhiteSpace(dataPathIF.text))
+        if (gameVersionDD.value >= 0 && !string.IsNullOrWhiteSpace(settings.binaryBasePath))
         {
             Type designObjects;
 
@@ -134,6 +137,7 @@ public class EditBinaryMenu : Raymanimator
 
             objectDD.AddOptions(objs);
             objectDD.interactable = true;
+            objectDD.value = 0;
         }
     }
 
@@ -150,13 +154,17 @@ public class EditBinaryMenu : Raymanimator
         {
             case Rayman1MSDOS.msdos:
                 selectedSpriteset = objectDD.captionText.text;
-                anims = Rayman1MSDOS.SetAnimationsForObject(objectDD.value);
+                Rayman1MSDOS.DesignObjects currObject = (Rayman1MSDOS.DesignObjects)Enum.Parse(typeof(Rayman1MSDOS.DesignObjects), objectDD.captionText.text);
+                anims = Rayman1MSDOS.SetAnimationsForObject((int)currObject);
                 break;
             default:
                 break;
         }
 
-        animationDD.ClearOptions();
+        if (animationDD.options.Count > 0)
+        {
+            animationDD.ClearOptions();
+        }
         animationDD.AddOptions(anims);
         animationDD.interactable = true;
     }
@@ -174,22 +182,28 @@ public class EditBinaryMenu : Raymanimator
             }
             else
             {
-                gameManager.spritesetImages = rayBinary.LoadSpritesetFromBinary((int)currObject);
+                gameManager.spritesetImages = rayBinary.LoadSpritesetFromBinary(currObject);
             }
         }
 
-        gameManager.currentAnimation = rayBinary.LoadRaymAnimationFromBinary(animationDD.captionText.text, (int)currObject, animationDD.value, selectedSpriteset, map);
+        gameManager.currentAnimation = rayBinary.LoadRaymAnimationFromBinary(animationDD.captionText.text, currObject, animationDD.value, selectedSpriteset, map);
     }
 
     private void CreatePreviewAnimation()
     {
-        LoadBinaryAnimation();
-        miniPlayback.StartMiniPlayback();
+        if (objectDD.interactable && animationDD.interactable)
+        {
+            LoadBinaryAnimation();
+            miniPlayback.StartMiniPlayback();
+        }
     }
 
     public void LoadEditorWithAnimation()
     {
-        LoadBinaryAnimation();
-        SceneManager.LoadScene(1);
+        if (objectDD.interactable && animationDD.interactable)
+        {
+            LoadBinaryAnimation();
+            SceneManager.LoadScene(1);
+        }
     }
 }
