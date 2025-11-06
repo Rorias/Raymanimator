@@ -210,6 +210,12 @@ public sealed class Rayman1BinaryAnimation
     public Animation LoadRaymAnimationFromBinary(string _animName, Rayman1MSDOS.DesignObjects _object, int _animIndex, string _spriteset, Mapping _map)
     {
         Design des = GetDesignByIndex((int)_object);
+        if (des == null)
+        {
+            DebugHelper.Log("You need to choose a binary path first.", DebugHelper.Severity.warning);
+            return null;
+        }
+
         BinarySerializer.Ray1.Animation binaryAnim = des.Animations[_animIndex];
         Debug.Log("Animation count for object " + _object.ToString() + ": " + des.Animations.Length);
         Debug.Log("Succesfully retrieved animation data: " + des.Animations.Length);
@@ -255,6 +261,12 @@ public sealed class Rayman1BinaryAnimation
         bool _animData, bool _visuals, bool _colls, float _pixelSize)
     {
         Design des = GetDesignByIndex(_objectIndex);
+        if (des == null)
+        {
+            DebugHelper.Log("You need to choose a binary path first.", DebugHelper.Severity.warning);
+            return;
+        }
+
         BinarySerializer.Ray1.Animation binaryAnim = des.Animations[_animIndex];
         if (_animData)
         {
@@ -421,6 +433,12 @@ public sealed class Rayman1BinaryAnimation
     public Dictionary<int, UnityEngine.Sprite> LoadSpritesetFromBinary(Rayman1MSDOS.DesignObjects _object)
     {
         Design des = GetDesignByIndex((int)_object);
+        if (des == null)
+        {
+            DebugHelper.Log("You need to choose a binary path first.", DebugHelper.Severity.warning);
+            return null;
+        }
+
         Dictionary<int, UnityEngine.Sprite> spriteset = new Dictionary<int, UnityEngine.Sprite>();
 
         int offset = 1;
@@ -471,20 +489,23 @@ public sealed class Rayman1BinaryAnimation
         int world1Index = 7;
         int world2Index = 31;
 
-        if (_objectIndex < world1Index)
+        if (_objectIndex < world1Index && allfix != null)
         {
             return allfix.DesItems[_objectIndex];
         }
 
-        if (_objectIndex >= world1Index && _objectIndex < world2Index)
+        if (worlds != null && worlds.Length > 0)
         {
-            return worlds[0].DesItems[_objectIndex - world1Index];
-        }
+            if (_objectIndex >= world1Index && _objectIndex < world2Index)
+            {
+                return worlds[0].DesItems[_objectIndex - world1Index];
+            }
 
-        if (_objectIndex >= world2Index)
-        {
-            Debug.Log(worlds[1].DesItems.Length + " Music designs count");
-            return worlds[1].DesItems[_objectIndex - world2Index];
+            if (_objectIndex >= world2Index)
+            {
+                Debug.Log(worlds[1].DesItems.Length + " Music designs count");
+                return worlds[1].DesItems[_objectIndex - world2Index];
+            }
         }
 
         return null;
