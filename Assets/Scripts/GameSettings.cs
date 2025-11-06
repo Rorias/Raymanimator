@@ -96,8 +96,8 @@ public sealed class GameSettings
     {
         File.WriteAllText(file, JsonUtility.ToJson(Instance, true));
 
-        string json = JsonUtility.ToJson(Instance);
-        Debug.Log(json);
+        //string json = JsonUtility.ToJson(Instance);
+        //Debug.Log(json);
     }
 
     private static void LoadSettings()

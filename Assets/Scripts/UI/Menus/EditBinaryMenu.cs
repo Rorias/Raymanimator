@@ -84,7 +84,7 @@ public class EditBinaryMenu : Raymanimator
 
     public void SetDataPathViaBrowse()
     {
-        if (dataPathIF.text[^1] == '/' || dataPathIF.text[^1] == '\\')
+        if (!string.IsNullOrWhiteSpace(dataPathIF.text) && (dataPathIF.text[^1] == '/' || dataPathIF.text[^1] == '\\'))
         {
             SetDataPath();
         }

@@ -6803,7 +6803,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5ecd682e116d5b746adbb8d3c5627bc2, type: 2}
   - {fileID: 11400000, guid: 1473c9fbab78df843af7b862fbec9cbf, type: 2}
   - {fileID: 11400000, guid: ac2f855345f793a4fa6121824ac01d6e, type: 2}
-  cycleTime: 0.08
+  cycleTime: 0.12
 --- !u!1001 &776031650
 PrefabInstance:
   m_ObjectHideFlags: 0

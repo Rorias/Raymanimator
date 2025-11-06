@@ -14,6 +14,7 @@ public class ConsoleGUIDebug : MonoBehaviour
     private void Awake()
     {
         Application.logMessageReceivedThreaded += Log;
+        Debug.Log("Generating log files now!");
     }
 
     private void OnDisable()

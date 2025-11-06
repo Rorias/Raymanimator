@@ -55,6 +55,12 @@ public class DebugHelper : MonoBehaviour
 
     public static void Log(string _text, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
     {
+        if (debugBG == null)
+        {
+            Debug.Log("Called debughelper too early from: " + memberName + sourceFilePath + sourceLineNumber);
+            return;
+        }
+
         debugBG.color = vague;
         debugText.text = _text;
         debugText.color = none;
@@ -66,6 +72,12 @@ public class DebugHelper : MonoBehaviour
 
     public static void Log(string _text, Severity _severity, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
     {
+        if (debugBG == null)
+        {
+            Debug.Log("Called debughelper too early from: " + memberName + sourceFilePath + sourceLineNumber);
+            return;
+        }
+
         debugBG.color = vague;
         debugText.text = _text;
         disappearTime = 5;

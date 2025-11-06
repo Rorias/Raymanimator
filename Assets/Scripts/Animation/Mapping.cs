@@ -34,8 +34,8 @@ public class Mapping
     {
         File.WriteAllText(filePath + _fileName + ".json", JsonUtility.ToJson(this));
 
-        string json = JsonUtility.ToJson(this);
-        Debug.Log(json);
+        //string json = JsonUtility.ToJson(this);
+        //Debug.Log(json);
     }
 
     public static Mapping LoadMapping(string _fileName)
