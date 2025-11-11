@@ -113,7 +113,7 @@ public class FolderBrowser : MonoBehaviour
         }
         else
         {
-            path = Application.persistentDataPath.Replace("/", "\\");
+            path = Application.streamingAssetsPath.Replace("/", "\\");
         }
 
         string result = SelectFolder("Select the parent folder for your " + _folder + " folder.", path, IntPtr.Zero);

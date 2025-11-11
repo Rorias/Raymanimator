@@ -13,6 +13,7 @@ public class MappingController : Settings
     public ButtonPlus openButton;
     public GameObject animSettingsPanel;
     public GameObject mappingsPanel;
+    public GameObject hotkeysPanel;
     [Space]
     #region View mappings
     public GameObject viewMappingsPanel;
@@ -72,6 +73,7 @@ public class MappingController : Settings
 
     public void OpenMappingWindow()
     {
+        hotkeysPanel.SetActive(false);
         animSettingsPanel.SetActive(false);
         mappingsPanel.SetActive(true);
         openButton.onClick.RemoveAllListeners();
@@ -81,6 +83,7 @@ public class MappingController : Settings
     public void CloseMappingWindow()
     {
         mappingsPanel.SetActive(false);
+        hotkeysPanel.SetActive(false);
         animSettingsPanel.SetActive(true);
         openButton.onClick.RemoveAllListeners();
         openButton.onClick.AddListener(() => { OpenMappingWindow(); });

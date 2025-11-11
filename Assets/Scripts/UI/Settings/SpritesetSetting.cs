@@ -40,28 +40,27 @@ public class SpritesetSetting : Settings
 
     public void SetSpritesetPathViaBrowse()
     {
-        if (!SetSpritesetPath())
+        if (!string.IsNullOrWhiteSpace(spritesetPathIF.text) && (spritesetPathIF.text[^1] == '/' || spritesetPathIF.text[^1] == '\\'))
         {
-            settings.lastSpriteset = "";
-            settings.SaveSettings();
+            SetSpritesetPath();
         }
     }
 
-    public bool SetSpritesetPath()
+    public void SetSpritesetPath()
     {
         string spritesetPath = spritesetPathIF.text;
 
-        if (!string.IsNullOrWhiteSpace(spritesetPath) && Directory.Exists(spritesetPath))
+        if (string.IsNullOrWhiteSpace(spritesetPath) || !Directory.Exists(spritesetPath))
         {
-            settings.spritesetsPath = spritesetPath;
-            UpdateSpritesetDropdown();
-            return true;
+            Debug.Log("Path cannot be found. Check if you spelled it correctly or use the browse button instead.");
+            DebugHelper.Log("Path cannot be found. Check if you spelled it correctly or use the browse button instead.");
+            currentSpritesetDD.ClearOptions();
+            return;
         }
 
-        Debug.Log("Path cannot be found. Check if you spelled it correctly or use the browse button instead.");
-        DebugHelper.Log("Path cannot be found. Check if you spelled it correctly or use the browse button instead.");
-        currentSpritesetDD.ClearOptions();
-        return false;
+        settings.spritesetsPath = spritesetPath;
+        settings.SaveSettings();
+        UpdateSpritesetDropdown();
     }
 
     private void UpdateSpritesetDropdown()

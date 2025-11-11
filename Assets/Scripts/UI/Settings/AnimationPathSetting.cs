@@ -39,26 +39,24 @@ public class AnimationPathSetting : Settings
 
     public void SetAnimationPathViaBrowse()
     {
-        if (!SetAnimationPath())
+        if (!string.IsNullOrWhiteSpace(animationPathIF.text) && (animationPathIF.text[^1] == '/' || animationPathIF.text[^1] == '\\'))
         {
-            settings.animationsPath = "";
-            settings.SaveSettings();
+            SetAnimationPath();
         }
     }
 
-    public bool SetAnimationPath()
+    public void SetAnimationPath()
     {
         string animationPath = animationPathIF.text;
 
         if (string.IsNullOrWhiteSpace(animationPath) || !Directory.Exists(animationPath))
         {
             Debug.Log("Path cannot be found. Check if you spelled it correctly or use the browse button instead.");
-            DebugHelper.Log("Path cannot be found. Check if you spelled it correctly or use the browse button instead.");
-            return false;
+            DebugHelper.Log("Path cannot be found. Check if you spelled it correctly or use the browse button instead.", DebugHelper.Severity.warning);
+            return;
         }
 
         settings.animationsPath = animationPath;
         settings.SaveSettings();
-        return true;
     }
 }

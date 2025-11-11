@@ -55,6 +55,8 @@ public class Tooltips : MonoBehaviour
 
     private const string PlaybackSpeed = "Type the speed you want your animation to play at.\nThe higher the value, the faster the animation will play.\n";
     private const string PlaybackSpeedExtended = "You cannot go lower than 1.";
+
+    private const string ResetButton = "Reset";
     #endregion
     #region Frame settings
     private const string PreviousFrame = "Load the previous frame of the animation to edit.\n";
@@ -109,6 +111,20 @@ public class Tooltips : MonoBehaviour
     private const string PriorityExtended = "<b>Changing the priority in e.g. frame 5, will also change the priority for all the other frames.</b>\n" +
                                             "A higher priority number means it gets drawn over sprites with a lower number.";
     #endregion
+    #region Mapping
+    private const string DeleteMapping = "Deletes the selected mapping permanently.";
+    private const string EditMapping = "Edits the current mapping. You can only edit which parts are mapped to the previously selected spriteset. You can't change the spritesets themselves.";
+    private const string ToggleMapping = "Enable or disable the current mapping. Disabled mappings won't apply to their target spriteset when loaded. Previously saved binaries are unaffected.";
+    private const string BinaryMode = "Turning this on allows you to select target spritesets from the currently loaded binary.";
+    private const string MappingSourceSpriteset = "The spriteset to map to the target.";
+    private const string MappingTargetSpriteset = "The spriteset the source will get mapped to.";
+    private const string SaveMapping = "Save the created/edited mapping with all changes.";
+    private const string CancelMapping = "Cancel creation of the mapping or the changes made to the one currently being edited.";
+    #endregion
+    #region Binary Edit
+    private const string BinaryGameVersion = "";
+    private const string BinaryPath = "";
+    #endregion
     #endregion
 
     private void Awake()
@@ -137,6 +153,8 @@ public class Tooltips : MonoBehaviour
             DisableTooltip();
             return;
         }
+
+        //Debug.Log(UIUtility.rayResults[0].gameObject.name);
 
         Color c = bg.color;
         c.a = 0.7f;
@@ -186,6 +204,21 @@ public class Tooltips : MonoBehaviour
             "FixX" => FixX + (extendedOn ? FixXYExtended : ""),
             "FixY" => FixY + (extendedOn ? FixXYExtended : ""),
             "PriorityField" or "PriorityIF" => Priority + (extendedOn ? PriorityExtended : ""),
+            //Mappings
+            "DeleteMappingButtonText" => DeleteMapping,
+            "EditMappingButtonText" => EditMapping,
+            "MappingToggle" or "MappingToggleLabel" => ToggleMapping,
+            "BinaryModeToggle" or "BinaryModeLabel" => BinaryMode,
+            "SourceSelectorText" => MappingSourceSpriteset,
+            "TargetSelectorText" => MappingTargetSpriteset,
+            "SaveMappingButtonText" => SaveMapping,
+            "CancelMappingChangesButtonText" => CancelMapping,
+            //Binary Edit
+            "GameVersionSelectorText" => BinaryGameVersion,
+            "BinaryPathText" => BinaryPath,
+
+            //General items
+            "ResetButtonText" => ResetButton,
             _ => "",
         };
 
@@ -196,7 +229,7 @@ public class Tooltips : MonoBehaviour
         }
 
         int textLength = tooltipText.text.Split('.').Max(x => x.Length);
-        tooltipSize.x = textLength * 7f;
+        tooltipSize.x = textLength * 7f < 76 ? 76 : textLength * 7f;
         rect.sizeDelta = tooltipSize;
 
         float tooltipsSizeX = (rect.sizeDelta.x / 2f) * (Screen.width / uiScaler.referenceResolution.x);

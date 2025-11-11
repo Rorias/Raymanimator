@@ -14,6 +14,7 @@ public class HotkeySetting : Settings
     public ButtonPlus openButton;
     public GameObject hotkeySettingsPanel;
     public GameObject animSettingsPanel;
+    public GameObject mappingsPanel;
     [Space]
     public TMP_FontAsset redFont;
     public TMP_FontAsset yellowFont;
@@ -219,6 +220,7 @@ public class HotkeySetting : Settings
     public void OpenHotkeyWindow()
     {
         animSettingsPanel.SetActive(false);
+        mappingsPanel.SetActive(false);
         hotkeySettingsPanel.SetActive(true);
         openButton.onClick.RemoveAllListeners();
         openButton.onClick.AddListener(() => { CloseHotkeyWindow(); });
@@ -227,6 +229,7 @@ public class HotkeySetting : Settings
     public void CloseHotkeyWindow()
     {
         animSettingsPanel.SetActive(true);
+        mappingsPanel.SetActive(false);
         hotkeySettingsPanel.SetActive(false);
         openButton.onClick.RemoveAllListeners();
         openButton.onClick.AddListener(() => { OpenHotkeyWindow(); });

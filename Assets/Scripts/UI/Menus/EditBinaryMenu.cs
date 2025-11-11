@@ -44,7 +44,7 @@ public class EditBinaryMenu : Raymanimator
 
     private void Update()
     {
-        if (!loadBinaryBtn.gameObject.activeInHierarchy)
+        if (!loadBinaryBtn.gameObject.activeInHierarchy || dataPathIF.isFocused)
         {
             return;
         }
@@ -90,26 +90,31 @@ public class EditBinaryMenu : Raymanimator
         }
     }
 
-    public bool SetDataPath()
+    public void SetDataPath()
     {
         string binaryPath = dataPathIF.text;
 
-        if (!string.IsNullOrWhiteSpace(binaryPath) && Directory.Exists(binaryPath))
+        if (string.IsNullOrWhiteSpace(binaryPath) || !Directory.Exists(binaryPath))
         {
-            settings.binaryBasePath = binaryPath;
-            if (Rayman1BinaryAnimation.BinaryFilesExist(binaryPath))
-            {
-                Rayman1BinaryAnimation.LoadBinaryFiles(binaryPath);
-                settings.SaveSettings();
-                SetObjectsForVersion();
-                Debug.Log("Succesfully loaded binary file data.");
-                return true;
-            }
+            Debug.Log("Path cannot be found. Check if you spelled it correctly or use the browse button instead.");
+            DebugHelper.Log("Path cannot be found. Check if you spelled it correctly or use the browse button instead.", DebugHelper.Severity.warning);
+            objectDD.interactable = false;
+            animationDD.interactable = false;
+            return;
         }
 
-        objectDD.interactable = false;
-        animationDD.interactable = false;
-        return false;
+        if (!Rayman1BinaryAnimation.BinaryFilesExist(binaryPath))
+        {
+            objectDD.interactable = false;
+            animationDD.interactable = false;
+            return;
+        }
+
+        settings.binaryBasePath = binaryPath;
+        settings.SaveSettings();
+        Rayman1BinaryAnimation.LoadBinaryFiles(binaryPath);
+        SetObjectsForVersion();
+        Debug.Log("Succesfully loaded binary file data.");
     }
 
     private void SetObjectsForVersion()
@@ -167,6 +172,10 @@ public class EditBinaryMenu : Raymanimator
         }
         animationDD.AddOptions(anims);
         animationDD.interactable = true;
+        if (animationDD.value != -1)
+        {
+            animationDD.value = -1;
+        }
     }
 
     private void LoadBinaryAnimation()

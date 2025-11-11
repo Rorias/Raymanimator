@@ -500,7 +500,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2929091157604330248, guid: 135362558ef1c194fa3fb71dc42db36f, type: 3}
       propertyPath: m_Name
-      value: ResetHotkeyBtn
+      value: ResetButton
       objectReference: {fileID: 0}
     - target: {fileID: 4995144016994017681, guid: 135362558ef1c194fa3fb71dc42db36f, type: 3}
       propertyPath: m_Pivot.x
@@ -584,7 +584,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8286881940066428887, guid: 135362558ef1c194fa3fb71dc42db36f, type: 3}
       propertyPath: m_Name
-      value: ResetHotkeyBtnText
+      value: ResetButtonText
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -81,14 +81,13 @@ public class BackgroundSettings : Settings
 
     public void SetBackgroundPathViaBrowse()
     {
-        if (!SetBackgroundPath())
+        if (!string.IsNullOrWhiteSpace(backgroundImagePathIF.text) && (backgroundImagePathIF.text[^1] == '/' || backgroundImagePathIF.text[^1] == '\\'))
         {
-            settings.animationsPath = "";
-            settings.SaveSettings();
+            SetBackgroundPath();
         }
     }
 
-    public bool SetBackgroundPath()
+    public void SetBackgroundPath()
     {
         string backgroundPath = backgroundImagePathIF.text;
 
@@ -96,12 +95,11 @@ public class BackgroundSettings : Settings
         {
             Debug.Log("Path cannot be found. Check if you spelled it correctly or use the browse button instead.");
             DebugHelper.Log("Path cannot be found. Check if you spelled it correctly or use the browse button instead.");
-            return false;
+            return;
         }
 
         settings.backgroundPath = backgroundPath;
         settings.SaveSettings();
-        return true;
     }
 
     public void InitializeBackgroundsDropdown()

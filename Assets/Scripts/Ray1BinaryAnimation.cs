@@ -38,8 +38,7 @@ public sealed class Rayman1BinaryAnimation
     private static string basePath = "";
     private static string allfixFile = @"ALLFIX.DAT";
 
-    private static Thread LoadBinaryWorldsThreaded = null;
-    private static Thread LoadBinaryLevelsThreaded = null;
+    private static Thread LoadBinaryFilesThreaded = null;
 
     private static Context context;
     private static string[][] files = new string[7][];
@@ -132,18 +131,13 @@ public sealed class Rayman1BinaryAnimation
                 Debug.Log("Loaded fileNames into context.");
             }
 
-
-            LoadBinaryWorldsThreaded = new Thread(LoadBinaryWorlds);
-            LoadBinaryWorldsThreaded.IsBackground = true;
-            LoadBinaryWorldsThreaded.Start();
-
-            LoadBinaryLevelsThreaded = new Thread(LoadBinaryLevels);
-            LoadBinaryLevelsThreaded.IsBackground = true;
-            LoadBinaryLevelsThreaded.Start();
+            LoadBinaryFilesThreaded = new Thread(LoadBinaryFiles);
+            LoadBinaryFilesThreaded.IsBackground = true;
+            LoadBinaryFilesThreaded.Start();
         }
     }
 
-    private static void LoadBinaryWorlds()
+    private static void LoadBinaryFiles()
     {
         using (context)
         {
@@ -152,15 +146,7 @@ public sealed class Rayman1BinaryAnimation
                 worlds[i] = FileFactory.Read<WorldFile>(context, files[0][i]);
             }
             Debug.Log("Loaded worlds");
-        }
 
-        LoadBinaryWorldsThreaded.Abort();
-    }
-
-    private static void LoadBinaryLevels()
-    {
-        using (context)
-        {
             for (int i = 0; i < files[1].Length; i++)
             {
                 jungleLvls[i] = FileFactory.Read<LevelFile>(context, "JUNGLE/" + files[1][i]);
@@ -198,7 +184,7 @@ public sealed class Rayman1BinaryAnimation
             Debug.Log("Loaded CAKE");
         }
 
-        LoadBinaryLevelsThreaded.Abort();
+        LoadBinaryFilesThreaded.Abort();
     }
 
     private void InitializeBinary()

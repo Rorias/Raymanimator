@@ -62,6 +62,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3335659658772526910}
     m_Modifications:
+    - target: {fileID: 443654909395821300, guid: 9f10abc4e783ed1488b0034fbd39404b, type: 3}
+      propertyPath: m_Name
+      value: MappingToggle
+      objectReference: {fileID: 0}
     - target: {fileID: 1193226281757305867, guid: 9f10abc4e783ed1488b0034fbd39404b, type: 3}
       propertyPath: m_SizeDelta.x
       value: -56
@@ -185,6 +189,10 @@ PrefabInstance:
     - target: {fileID: 1901448992317065019, guid: 9f10abc4e783ed1488b0034fbd39404b, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853773045602947128, guid: 9f10abc4e783ed1488b0034fbd39404b, type: 3}
+      propertyPath: m_Name
+      value: MappingToggleLabel
       objectReference: {fileID: 0}
     - target: {fileID: 4664280209940967650, guid: 9f10abc4e783ed1488b0034fbd39404b, type: 3}
       propertyPath: m_Name
