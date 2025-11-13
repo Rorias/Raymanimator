@@ -416,7 +416,7 @@ public sealed class Rayman1BinaryAnimation
         }
     }
 
-    public Dictionary<int, UnityEngine.Sprite> LoadSpritesetFromBinary(Rayman1MSDOS.DesignObjects _object)
+    public Dictionary<int, UnityEngine.Sprite> LoadSpritesetFromBinary(Rayman1MSDOS.DesignObjects _object, int _paletteIndex)
     {
         Design des = GetDesignByIndex((int)_object);
         if (des == null)
@@ -427,13 +427,12 @@ public sealed class Rayman1BinaryAnimation
 
         Dictionary<int, UnityEngine.Sprite> spriteset = new Dictionary<int, UnityEngine.Sprite>();
 
+        IList<BaseColor> palette = GetPaletteByIndex(_paletteIndex);
         int offset = 1;
         for (int i = 1; i < des.Sprites.Length; i++)
         {
             BinarySerializer.Ray1.Sprite sprite = des.Sprites[i];
             byte[] pixels = new byte[sprite.Width * sprite.Height];
-            Debug.Log(sprite.ImageBufferOffset + " offset");
-            Debug.Log(pixels.Length + " length");
             Array.Copy(des.ImageData, sprite.ImageBufferOffset, pixels, 0, pixels.Length);
             if (sprite.Id != 0 && i + 1 < des.Sprites.Length)
             {
@@ -451,7 +450,7 @@ public sealed class Rayman1BinaryAnimation
                 }
             }
 
-            Texture2D sampleTexture = GetBinarySpriteTexture(sprite, jungleLvls[1].MapInfo.Palettes.First(), pixels);
+            Texture2D sampleTexture = GetBinarySpriteTexture(sprite, palette, pixels);
             if (sampleTexture == null)
             {
                 sampleTexture = new Texture2D(1, 1, TextureFormat.RGBA32, false)
@@ -470,7 +469,7 @@ public sealed class Rayman1BinaryAnimation
         return spriteset;
     }
 
-    public Design GetDesignByIndex(int _objectIndex)
+    private Design GetDesignByIndex(int _objectIndex)
     {
         int world1Index = 7;
         int world2Index = 31;
@@ -495,6 +494,25 @@ public sealed class Rayman1BinaryAnimation
         }
 
         return null;
+    }
+
+    private IList<BaseColor> GetPaletteByIndex(int _paletteIndex)
+    {
+        switch (_paletteIndex)
+        {
+            case 0:
+                return jungleLvls[0].MapInfo.Palettes.First();
+            case 1:
+                return jungleLvls[21].MapInfo.Palettes.First();
+            case 2:
+                return jungleLvls[14].MapInfo.Palettes.First();
+            case 3:
+                return jungleLvls[15].MapInfo.Palettes.First();
+            case 4:
+                return musicLvls[1].MapInfo.Palettes.First();
+            default:
+                return jungleLvls[0].MapInfo.Palettes.First();
+        }
     }
 
     public Texture2D GetBinarySpriteTexture(BinarySerializer.Ray1.Sprite s, IList<BaseColor> palette, byte[] processedImageData)

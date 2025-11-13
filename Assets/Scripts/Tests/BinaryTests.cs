@@ -98,7 +98,7 @@ public class BinaryTests : MonoBehaviour
 
         yield return new WaitForSeconds(3f);
 
-        Dictionary<int, UnityEngine.Sprite> spriteset = instance.LoadSpritesetFromBinary(0);
+        Dictionary<int, UnityEngine.Sprite> spriteset = instance.LoadSpritesetFromBinary(0,0);
         byte[] newImageData = instance.SaveSpriteset(spriteset, raymanDes, false);
         instance.ConvertImageData(ref newImageData);
 
@@ -127,7 +127,7 @@ public class BinaryTests : MonoBehaviour
             };
         }
 
-        Dictionary<int, UnityEngine.Sprite> spriteset = instance.LoadSpritesetFromBinary(0);
+        Dictionary<int, UnityEngine.Sprite> spriteset = instance.LoadSpritesetFromBinary(0,0);
         byte[] newImageData = instance.SaveSpriteset(spriteset, raymanDes, true);
         instance.ConvertImageData(ref newImageData);
         raymanDes.ImageData = newImageData;

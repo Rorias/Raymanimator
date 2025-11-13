@@ -8,15 +8,16 @@ using TMPro;
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class EditBinaryMenu : Raymanimator
 {
     public ButtonPlus loadBinaryBtn;
     public TMP_DropdownPlus gameVersionDD;
     public TMP_InputField dataPathIF;
+    public TMP_DropdownPlus fileDD;
     public TMP_DropdownPlus objectDD;
     public TMP_DropdownPlus animationDD;
+    public TMP_DropdownPlus paletteDD;
 
     private GameManager gameManager;
     private GameSettings settings;
@@ -57,24 +58,27 @@ public class EditBinaryMenu : Raymanimator
 
     public void Initialize()
     {
-        gameVersionDD.onValueChanged.AddListener(delegate { SetObjectsForVersion(); });
+        gameVersionDD.onValueChanged.AddListener(delegate { SetFilesForVersion(); });
         dataPathIF.onValueChanged.AddListener(delegate { SetDataPathViaBrowse(); });
         dataPathIF.onEndEdit.AddListener(delegate { SetDataPath(); });
 
+        fileDD.onValueChanged.AddListener(delegate { SetObjectsForFile(); });
         objectDD.onValueChanged.AddListener(delegate { SetAnimationsForObject(); });
         animationDD.onValueChanged.AddListener(delegate { CreatePreviewAnimation(); });
+        paletteDD.onValueChanged.AddListener(delegate { CreatePreviewAnimation(); });
 
+        fileDD.interactable = false;
         objectDD.interactable = false;
         animationDD.interactable = false;
+        paletteDD.interactable = false;
 
-        InitializeDropdowns();
+        InitializeGameVersionDropdown();
 
-        //Speed up debugging
         gameVersionDD.value = 0;
         dataPathIF.text = settings.binaryBasePath;
     }
 
-    private void InitializeDropdowns()
+    private void InitializeGameVersionDropdown()
     {
         if (gameVersionDD.options.Count > 0) { gameVersionDD.ClearOptions(); }
 
@@ -105,44 +109,71 @@ public class EditBinaryMenu : Raymanimator
 
         if (!Rayman1BinaryAnimation.BinaryFilesExist(binaryPath))
         {
+            fileDD.interactable = false;
             objectDD.interactable = false;
             animationDD.interactable = false;
+            paletteDD.interactable = false;
             return;
         }
 
         settings.binaryBasePath = binaryPath;
         settings.SaveSettings();
         Rayman1BinaryAnimation.LoadBinaryFiles(binaryPath);
-        SetObjectsForVersion();
+        SetFilesForVersion();
         Debug.Log("Succesfully loaded binary file data.");
     }
 
-    private void SetObjectsForVersion()
+    private void SetFilesForVersion()
     {
         if (gameVersionDD.value >= 0 && !string.IsNullOrWhiteSpace(settings.binaryBasePath))
         {
-            Type designObjects;
+            if (fileDD.options.Count > 0)
+            {
+                fileDD.ClearOptions();
+            }
 
             switch (gameVersionDD.captionText.text)
             {
                 case Rayman1MSDOS.msdos:
-                    designObjects = typeof(Rayman1MSDOS.DesignObjects);
+                    fileDD.AddOptions(Rayman1MSDOS.FileOptions);
                     break;
                 default:
-                    designObjects = null;
                     break;
             }
 
-            List<string> objs = new List<string>();
-
-            foreach (object obj in Enum.GetValues(designObjects))
+            fileDD.interactable = true;
+            if (fileDD.value != -1)
             {
-                objs.Add(obj.ToString());
+                fileDD.value = -1;
             }
+        }
+    }
 
-            objectDD.AddOptions(objs);
-            objectDD.interactable = true;
-            objectDD.value = 0;
+    private void SetObjectsForFile()
+    {
+        if (fileDD.value < 0)
+        {
+            return;
+        }
+
+        if (objectDD.options.Count > 0)
+        {
+            objectDD.ClearOptions();
+        }
+
+        switch (gameVersionDD.captionText.text)
+        {
+            case Rayman1MSDOS.msdos:
+                objectDD.AddOptions(Rayman1MSDOS.GetObjectsForFileIndex(fileDD.value));
+                break;
+            default:
+                break;
+        }
+
+        objectDD.interactable = true;
+        if (objectDD.value != -1)
+        {
+            objectDD.value = -1;
         }
     }
 
@@ -151,6 +182,11 @@ public class EditBinaryMenu : Raymanimator
         if (objectDD.value < 0)
         {
             return;
+        }
+
+        if (animationDD.options.Count > 0)
+        {
+            animationDD.ClearOptions();
         }
 
         List<string> anims = new List<string>();
@@ -166,12 +202,9 @@ public class EditBinaryMenu : Raymanimator
                 break;
         }
 
-        if (animationDD.options.Count > 0)
-        {
-            animationDD.ClearOptions();
-        }
         animationDD.AddOptions(anims);
         animationDD.interactable = true;
+        paletteDD.interactable = true;
         if (animationDD.value != -1)
         {
             animationDD.value = -1;
@@ -191,7 +224,7 @@ public class EditBinaryMenu : Raymanimator
             }
             else
             {
-                gameManager.spritesetImages = rayBinary.LoadSpritesetFromBinary(currObject);
+                gameManager.spritesetImages = rayBinary.LoadSpritesetFromBinary(currObject, paletteDD.value);
             }
         }
 

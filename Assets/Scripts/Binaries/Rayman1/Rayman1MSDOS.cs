@@ -58,6 +58,11 @@ public class Rayman1MSDOS
         { DesignObjects.SomeObject13, typeof(SomeAnimations13) },
     };
 
+    public static List<string> FileOptions = new List<string>()
+    {
+        "Global", "Dream Forest", "Band Land", "Blue Mountains", "Picture City", "Caves of Skops", "Candy Chateau"
+    };
+
     public static List<string> SetAnimationsForObject(int _object)
     {
         Type animations = ObjectAnimations[(DesignObjects)_object];
@@ -72,6 +77,42 @@ public class Rayman1MSDOS
         return anims;
     }
 
+    public static List<string> GetObjectsForFileIndex(int _index)
+    {
+        List<string> objects = new List<string>();
+
+        int startIndex = 0;
+        int endIndex = 6;
+
+        switch (_index)
+        {
+            case 0:
+                startIndex = 0;
+                endIndex = 6;
+                break;
+            case 1:
+                startIndex = 7;
+                endIndex = 31;
+                break;
+            case 2:
+                startIndex = 32;
+                endIndex = 99;
+                break;
+            default:
+                break;
+        }
+
+        foreach (object obj in Enum.GetValues(typeof(DesignObjects)))
+        {
+            if ((int)obj >= startIndex && (int)obj <= endIndex)
+            {
+                objects.Add(obj.ToString());
+            }
+        }
+
+        return objects;
+    }
+
     //All missing indexes are either Design objects with no animations, or Design objects that are not animated.
     //I saw no point in adding them to the list if they don't.. animate
     public enum DesignObjects
@@ -79,7 +120,7 @@ public class Rayman1MSDOS
         Rayman,
         Items,
         //MiniRayman, //doesn't have animations? I don't know how the game handles this
-        Items2=3,
+        Items2 = 3,
         //Fonts at 4 and 5 don't have animations
         ContinueClock = 6,
         //7 and 8 are parallax

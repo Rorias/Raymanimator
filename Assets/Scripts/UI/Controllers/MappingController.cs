@@ -209,7 +209,7 @@ public class MappingController : Settings
         if (binary)
         {
             Rayman1MSDOS.DesignObjects currObject = (Rayman1MSDOS.DesignObjects)Enum.Parse(typeof(Rayman1MSDOS.DesignObjects), targetSpritesetDD.captionText.text);
-            targetSpriteset = ray1Binary.LoadSpritesetFromBinary(currObject);
+            targetSpriteset = ray1Binary.LoadSpritesetFromBinary(currObject, 0);
         }
         else
         {
