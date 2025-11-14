@@ -220,12 +220,24 @@ MonoBehaviour:
       m_Image: {fileID: 21300000, guid: 38af1a8cddd51bc438324b641b346ccc, type: 3}
     - m_Text: Moskitos Nest 4
       m_Image: {fileID: 21300000, guid: 019c8c5db03ddff4e8759bdbf9944f2c, type: 3}
-    - m_Text: Moskitos Nest 5 Boss
+    - m_Text: Moskitos Nest 5 - Boss
       m_Image: {fileID: 21300000, guid: 1c3ffbc1f9b2e184aabee13d19b566fb, type: 3}
     - m_Text: Band Land Default
-      m_Image: {fileID: 21300000, guid: 2dc93b03d95569a428eb30eb147ac5e7, type: 3}
+      m_Image: {fileID: 21300000, guid: 6b6e5e002923df442b2010131e50140d, type: 3}
+    - m_Text: Band Land Secondary
+      m_Image: {fileID: 21300000, guid: 8b26e176c4e8cfc4f9c5f8e4df47d5d8, type: 3}
+    - m_Text: Gong Heights 1 & 2
+      m_Image: {fileID: 21300000, guid: 04c4e13ac03dc2d489edb31cba41a197, type: 3}
     - m_Text: Bongo Hills 1
       m_Image: {fileID: 21300000, guid: 1c5ec7d53500daf46bf7cd49fe4851f7, type: 3}
+    - m_Text: Mr Saxs Hullaballoo 3 - Boss
+      m_Image: {fileID: 21300000, guid: 2892a5b3bfeaeec4b96418c431018f8d, type: 3}
+    - m_Text: Blue Mountains Default
+      m_Image: {fileID: 21300000, guid: 27b1ab2c6ec3d08458e187bdb249ea5f, type: 3}
+    - m_Text: Mr. Stone's Peaks 1
+      m_Image: {fileID: 21300000, guid: 57dba957b2caca64586594da9c35b231, type: 3}
+    - m_Text: Mr. Stone's Peaks 5 - Boss
+      m_Image: {fileID: 21300000, guid: 567525ccc78f2f740bfbee705edf4340, type: 3}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -4219,7 +4231,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 72926491}
   m_HandleRect: {fileID: 72926490}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -14004,7 +14016,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 0}
   m_Type: 0
-  m_PreserveAspect: 1
+  m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1

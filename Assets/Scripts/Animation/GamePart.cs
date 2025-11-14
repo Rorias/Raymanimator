@@ -115,7 +115,7 @@ public class GamePart : MonoBehaviour
 
     public void RecalculateCollision()
     {
-        if (polyColl.enabled && sr.sprite != null)
+        if (sr.sprite != null)
         {
             polyColl.pathCount = 0;
             polyColl.pathCount = 1;

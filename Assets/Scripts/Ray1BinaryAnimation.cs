@@ -510,7 +510,16 @@ public sealed class Rayman1BinaryAnimation
                 return jungleLvls[15].MapInfo.Palettes.First();
             case 4:
                 return musicLvls[1].MapInfo.Palettes.First();
+            case 5:
+                return musicLvls[3].MapInfo.Palettes.First();
+            case 6:
+                return musicLvls[11].MapInfo.Palettes.First();
+            case 7:
+                return musicLvls[0].MapInfo.Palettes.First();
+            case 8:
+                return musicLvls[15].MapInfo.Palettes.First();
             default:
+                Debug.Log("<color=orange>THIS ISN'T SUPPOSED TO HAPPEN!!</color>");
                 return jungleLvls[0].MapInfo.Palettes.First();
         }
     }

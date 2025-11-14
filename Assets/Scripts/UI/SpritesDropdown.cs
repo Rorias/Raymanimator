@@ -18,7 +18,7 @@ public class SpritesDropdown : MonoBehaviour
 
     private void Update()
     {
-        dropdownActive = transform.Find("Dropdown List") is null;
+        dropdownActive = transform.Find("Dropdown List") is not null;
     }
 
     public void InitializeSpritesDropdown()
@@ -47,6 +47,7 @@ public class SpritesDropdown : MonoBehaviour
             _currentParts[i].partIndex = ddSprites.value;
             _currentGameParts[i].sr.sprite = _currentParts[i].part;
             _currentGameParts[i].anim.SetBool("WasSelected", true);
+            _currentGameParts[i].polyColl.enabled = true;
             _currentGameParts[i].RecalculateCollision();
         }
     }
