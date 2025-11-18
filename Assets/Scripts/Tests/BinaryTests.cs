@@ -98,7 +98,7 @@ public class BinaryTests : MonoBehaviour
 
         yield return new WaitForSeconds(3f);
 
-        Dictionary<int, UnityEngine.Sprite> spriteset = instance.LoadSpritesetFromBinary(0,0);
+        Dictionary<int, UnityEngine.Sprite> spriteset = instance.LoadSpritesetFromBinary(0, 0);
         byte[] newImageData = instance.SaveSpriteset(spriteset, raymanDes, false);
         instance.ConvertImageData(ref newImageData);
 
@@ -127,7 +127,7 @@ public class BinaryTests : MonoBehaviour
             };
         }
 
-        Dictionary<int, UnityEngine.Sprite> spriteset = instance.LoadSpritesetFromBinary(0,0);
+        Dictionary<int, UnityEngine.Sprite> spriteset = instance.LoadSpritesetFromBinary(0, 0);
         byte[] newImageData = instance.SaveSpriteset(spriteset, raymanDes, true);
         instance.ConvertImageData(ref newImageData);
         raymanDes.ImageData = newImageData;
@@ -168,30 +168,20 @@ public class BinaryTests : MonoBehaviour
 
         yield return new WaitForSeconds(3f);
 
-        for (int i = 0; i < Rayman1BinaryAnimation.worlds[0].DesItems.Length; i++)
+        for (int j = 0; j < 6; j++)
         {
-            if (Rayman1BinaryAnimation.worlds[0].DesItems[i].IsAnimatedSprite)
+            for (int i = 0; i < Rayman1BinaryAnimation.worlds[j].DesItems.Length; i++)
             {
-                Debug.Log("1 - " + i + " is animated");
-            }
-            else
-            {
-                Debug.Log("1 - " + i + " is NOT animated");
+                if (Rayman1BinaryAnimation.worlds[j].DesItems[i].IsAnimatedSprite)
+                {
+                    Debug.Log(j + " - " + i + " is animated");
+                }
+                else
+                {
+                    Debug.Log(j + " - " + i + " is NOT animated");
+                }
             }
         }
-
-        for (int i = 0; i < Rayman1BinaryAnimation.worlds[1].DesItems.Length; i++)
-        {
-            if (Rayman1BinaryAnimation.worlds[1].DesItems[i].IsAnimatedSprite)
-            {
-                Debug.Log("2 - " + i + " is animated");
-            }
-            else
-            {
-                Debug.Log("2 - " + i + " is NOT animated");
-            }
-        }
-
 
         yield return new WaitForEndOfFrame();
     }

@@ -473,6 +473,7 @@ public sealed class Rayman1BinaryAnimation
     {
         int world1Index = 7;
         int world2Index = 31;
+        int world3Index = 57;
 
         if (_objectIndex < world1Index && allfix != null)
         {
@@ -486,10 +487,15 @@ public sealed class Rayman1BinaryAnimation
                 return worlds[0].DesItems[_objectIndex - world1Index];
             }
 
-            if (_objectIndex >= world2Index)
+            if (_objectIndex >= world2Index && _objectIndex < world3Index)
             {
-                Debug.Log(worlds[1].DesItems.Length + " Music designs count");
                 return worlds[1].DesItems[_objectIndex - world2Index];
+            }
+
+            if (_objectIndex >= world3Index)
+            {
+                Debug.Log(worlds[2].DesItems.Length + " Mountain designs count");
+                return worlds[2].DesItems[_objectIndex - world3Index];
             }
         }
 
@@ -518,6 +524,10 @@ public sealed class Rayman1BinaryAnimation
                 return musicLvls[0].MapInfo.Palettes.First();
             case 8:
                 return musicLvls[15].MapInfo.Palettes.First();
+            case 9:
+                return stoneLvls[0].MapInfo.Palettes.First();
+            case 10:
+            case 11:
             default:
                 Debug.Log("<color=orange>THIS ISN'T SUPPOSED TO HAPPEN!!</color>");
                 return jungleLvls[0].MapInfo.Palettes.First();
