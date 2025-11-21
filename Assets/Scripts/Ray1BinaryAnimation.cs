@@ -87,42 +87,60 @@ public sealed class Rayman1BinaryAnimation
                 }
 
                 //Levels
-                files[1] = Directory.GetFiles(basePath + "/JUNGLE", "*.LEV", SearchOption.TopDirectoryOnly);
+                files[1] = Directory.GetFiles(basePath + "/JUNGLE", "*.LEV", SearchOption.TopDirectoryOnly).OrderBy
+                    (
+                    f => Convert.ToInt32(new FileInfo(f).Name.Substring(3, new FileInfo(f).Name.IndexOf(".") - 3)).ToString("00")
+                    ).ToArray();
                 for (int i = 0; i < files[1].Length; i++)
                 {
                     files[1][i] = Path.GetFileName(files[1][i]);
                     context.AddFile(new LinearFile(context, "JUNGLE/" + files[1][i]));
                 }
 
-                files[2] = Directory.GetFiles(basePath + "/MUSIC", "*.LEV", SearchOption.TopDirectoryOnly);
+                files[2] = Directory.GetFiles(basePath + "/MUSIC", "*.LEV", SearchOption.TopDirectoryOnly).OrderBy
+                    (
+                    f => Convert.ToInt32(new FileInfo(f).Name.Substring(3, new FileInfo(f).Name.IndexOf(".") - 3)).ToString("00")
+                    ).ToArray();
                 for (int i = 0; i < files[2].Length; i++)
                 {
                     files[2][i] = Path.GetFileName(files[2][i]);
                     context.AddFile(new LinearFile(context, "MUSIC/" + files[2][i]));
                 }
 
-                files[3] = Directory.GetFiles(basePath + "/MOUNTAIN", "*.LEV", SearchOption.TopDirectoryOnly);
+                files[3] = Directory.GetFiles(basePath + "/MOUNTAIN", "*.LEV", SearchOption.TopDirectoryOnly).OrderBy
+                    (
+                    f => Convert.ToInt32(new FileInfo(f).Name.Substring(3, new FileInfo(f).Name.IndexOf(".") - 3)).ToString("00")
+                    ).ToArray();
                 for (int i = 0; i < files[3].Length; i++)
                 {
                     files[3][i] = Path.GetFileName(files[3][i]);
                     context.AddFile(new LinearFile(context, "MOUNTAIN/" + files[3][i]));
                 }
 
-                files[4] = Directory.GetFiles(basePath + "/IMAGE", "*.LEV", SearchOption.TopDirectoryOnly);
+                files[4] = Directory.GetFiles(basePath + "/IMAGE", "*.LEV", SearchOption.TopDirectoryOnly).OrderBy
+                    (
+                    f => Convert.ToInt32(new FileInfo(f).Name.Substring(3, new FileInfo(f).Name.IndexOf(".") - 3)).ToString("00")
+                    ).ToArray();
                 for (int i = 0; i < files[4].Length; i++)
                 {
                     files[4][i] = Path.GetFileName(files[4][i]);
                     context.AddFile(new LinearFile(context, "IMAGE/" + files[4][i]));
                 }
 
-                files[5] = Directory.GetFiles(basePath + "/CAVE", "*.LEV", SearchOption.TopDirectoryOnly);
+                files[5] = Directory.GetFiles(basePath + "/CAVE", "*.LEV", SearchOption.TopDirectoryOnly).OrderBy
+                    (
+                    f => Convert.ToInt32(new FileInfo(f).Name.Substring(3, new FileInfo(f).Name.IndexOf(".") - 3)).ToString("00")
+                    ).ToArray();
                 for (int i = 0; i < files[5].Length; i++)
                 {
                     files[5][i] = Path.GetFileName(files[5][i]);
                     context.AddFile(new LinearFile(context, "CAVE/" + files[5][i]));
                 }
 
-                files[6] = Directory.GetFiles(basePath + "/CAKE", "*.LEV", SearchOption.TopDirectoryOnly);
+                files[6] = Directory.GetFiles(basePath + "/CAKE", "*.LEV", SearchOption.TopDirectoryOnly).OrderBy
+                    (
+                    f => Convert.ToInt32(new FileInfo(f).Name.Substring(3, new FileInfo(f).Name.IndexOf(".") - 3)).ToString("00")
+                    ).ToArray();
                 for (int i = 0; i < files[6].Length; i++)
                 {
                     files[6][i] = Path.GetFileName(files[6][i]);
@@ -269,14 +287,44 @@ public sealed class Rayman1BinaryAnimation
 
         using (context)
         {
-            if (_objectIndex <= 7)
+            if (_objectIndex <= Rayman1MSDOS.allfixEndIndex)
             {
                 FileFactory.Write<AllfixFile>(context, allfixFile);
             }
 
-            if (_objectIndex > 7 && _objectIndex < 31)
+            if (_objectIndex > Rayman1MSDOS.allfixEndIndex && _objectIndex <= Rayman1MSDOS.jungleEndIndex)
             {
                 string[] worldFiles = Directory.GetFiles(basePath, "RAY1.WLD", SearchOption.TopDirectoryOnly);
+                for (int i = 0; i < worldFiles.Length; i++)
+                {
+                    string fileName = Path.GetFileName(worldFiles[0]);
+                    FileFactory.Write<WorldFile>(context, fileName);
+                }
+            }
+
+            if (_objectIndex > Rayman1MSDOS.jungleEndIndex && _objectIndex <= Rayman1MSDOS.musicEndIndex)
+            {
+                string[] worldFiles = Directory.GetFiles(basePath, "RAY2.WLD", SearchOption.TopDirectoryOnly);
+                for (int i = 0; i < worldFiles.Length; i++)
+                {
+                    string fileName = Path.GetFileName(worldFiles[0]);
+                    FileFactory.Write<WorldFile>(context, fileName);
+                }
+            }
+
+            if (_objectIndex > Rayman1MSDOS.musicEndIndex && _objectIndex <= Rayman1MSDOS.mountainEndIndex)
+            {
+                string[] worldFiles = Directory.GetFiles(basePath, "RAY3.WLD", SearchOption.TopDirectoryOnly);
+                for (int i = 0; i < worldFiles.Length; i++)
+                {
+                    string fileName = Path.GetFileName(worldFiles[0]);
+                    FileFactory.Write<WorldFile>(context, fileName);
+                }
+            }
+
+            if (_objectIndex > Rayman1MSDOS.mountainEndIndex && _objectIndex <= Rayman1MSDOS.imageEndIndex)
+            {
+                string[] worldFiles = Directory.GetFiles(basePath, "RAY4.WLD", SearchOption.TopDirectoryOnly);
                 for (int i = 0; i < worldFiles.Length; i++)
                 {
                     string fileName = Path.GetFileName(worldFiles[0]);
@@ -433,6 +481,11 @@ public sealed class Rayman1BinaryAnimation
         {
             BinarySerializer.Ray1.Sprite sprite = des.Sprites[i];
             byte[] pixels = new byte[sprite.Width * sprite.Height];
+            if (sprite.ImageBufferOffset >= des.ImageData.Length)
+            {
+                Debug.Log("<color=red>object is simply out of bounds of the image data array. How? I don't know either.</color>\n");
+                continue;
+            }
             Array.Copy(des.ImageData, sprite.ImageBufferOffset, pixels, 0, pixels.Length);
             if (sprite.Id != 0 && i + 1 < des.Sprites.Length)
             {
@@ -471,31 +524,37 @@ public sealed class Rayman1BinaryAnimation
 
     private Design GetDesignByIndex(int _objectIndex)
     {
-        int world1Index = 7;
-        int world2Index = 31;
-        int world3Index = 57;
-
-        if (_objectIndex < world1Index && allfix != null)
+        if (_objectIndex <= Rayman1MSDOS.allfixEndIndex && allfix != null)
         {
             return allfix.DesItems[_objectIndex];
         }
 
         if (worlds != null && worlds.Length > 0)
         {
-            if (_objectIndex >= world1Index && _objectIndex < world2Index)
+            if (_objectIndex > Rayman1MSDOS.allfixEndIndex && _objectIndex <= Rayman1MSDOS.jungleEndIndex)
             {
-                return worlds[0].DesItems[_objectIndex - world1Index];
+                return worlds[0].DesItems[_objectIndex - Rayman1MSDOS.allfixEndIndex - 1];
             }
 
-            if (_objectIndex >= world2Index && _objectIndex < world3Index)
+            if (_objectIndex > Rayman1MSDOS.jungleEndIndex && _objectIndex <= Rayman1MSDOS.musicEndIndex)
             {
-                return worlds[1].DesItems[_objectIndex - world2Index];
+                return worlds[1].DesItems[_objectIndex - Rayman1MSDOS.jungleEndIndex - 1];
             }
 
-            if (_objectIndex >= world3Index)
+            if (_objectIndex > Rayman1MSDOS.musicEndIndex && _objectIndex <= Rayman1MSDOS.mountainEndIndex)
             {
-                Debug.Log(worlds[2].DesItems.Length + " Mountain designs count");
-                return worlds[2].DesItems[_objectIndex - world3Index];
+                return worlds[2].DesItems[_objectIndex - Rayman1MSDOS.musicEndIndex - 1];
+            }
+
+            if (_objectIndex > Rayman1MSDOS.mountainEndIndex && _objectIndex <= Rayman1MSDOS.imageEndIndex)
+            {
+                return worlds[3].DesItems[_objectIndex - Rayman1MSDOS.mountainEndIndex - 1];
+            }
+
+            if (_objectIndex > Rayman1MSDOS.imageEndIndex && _objectIndex <= Rayman1MSDOS.caveEndIndex)
+            {
+                Debug.Log(worlds[4].DesItems.Length + " Cave designs count");
+                return worlds[4].DesItems[_objectIndex - Rayman1MSDOS.imageEndIndex - 1];
             }
         }
 
@@ -527,7 +586,23 @@ public sealed class Rayman1BinaryAnimation
             case 9:
                 return stoneLvls[0].MapInfo.Palettes.First();
             case 10:
+                return stoneLvls[5].MapInfo.Palettes.First();
             case 11:
+                return stoneLvls[9].MapInfo.Palettes.First();
+            case 12:
+                return imageLvls[0].MapInfo.Palettes.First();
+            case 13:
+                return imageLvls[3].MapInfo.Palettes.First();
+            case 14:
+                return imageLvls[10].MapInfo.Palettes.First();
+            case 15:
+                return caveLvls[1].MapInfo.Palettes.First();
+            case 16:
+                return caveLvls[0].MapInfo.Palettes.First();
+            case 17:
+                return caveLvls[2].MapInfo.Palettes.First();
+            case 18:
+                return caveLvls[10].MapInfo.Palettes.First();
             default:
                 Debug.Log("<color=orange>THIS ISN'T SUPPOSED TO HAPPEN!!</color>");
                 return jungleLvls[0].MapInfo.Palettes.First();

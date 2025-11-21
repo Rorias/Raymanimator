@@ -10,6 +10,13 @@ using UnityEngine.UI;
 public class Rayman1MSDOS
 {
     public const string msdos = "Rayman 1 PC (MS-DOS)";
+    public const int allfixEndIndex = 6;
+    public const int jungleEndIndex = 31;
+    public const int musicEndIndex = 56;
+    public const int mountainEndIndex = 79;
+    public const int imageEndIndex = 105;
+    public const int caveEndIndex = 199;
+    public const int candyEndIndex = 199;
 
     private static Dictionary<DesignObjects, Type> ObjectAnimations = new Dictionary<DesignObjects, Type>()
     {
@@ -54,7 +61,7 @@ public class Rayman1MSDOS
         { DesignObjects.RedDrummer, typeof(RedDrummerAnimations) },
         { DesignObjects.BlueAntitoonsBandLand, typeof(BlueAntitoonAnimations) },
         { DesignObjects.PoofEffectsBandLand, typeof(PoofAnimations) },
-        { DesignObjects.BadEyes, typeof(BadEyesAnimations) },
+        { DesignObjects.BadEyesBandLand, typeof(BadEyesAnimations) },
         { DesignObjects.BlueSpiky, typeof(BlueSpikyBallAnimation) },
         { DesignObjects.DivingDrum, typeof(DivingDrumAnimations) },
         { DesignObjects.WaterSplashBandLand, typeof(WaterSplashAnimation) },
@@ -68,15 +75,15 @@ public class Rayman1MSDOS
         { DesignObjects.HunterBlueMountains, typeof(HunterAnimations) },
         { DesignObjects.ElectoonsBlueMountains, typeof(ElectoonAnimations) },
         { DesignObjects.CloudsBlueMountains, typeof(CloudAnimations) },
-        { DesignObjects.RockGolem, typeof(RockGolemAnimations) },
-        { DesignObjects.StoneDog, typeof(StoneDogAnimations) },
+        { DesignObjects.RockGolemBlueMountains, typeof(RockGolemAnimations) },
+        { DesignObjects.StoneDogBlueMountains, typeof(StoneDogAnimations) },
         { DesignObjects.MrStone, typeof(MrStoneAnimations) },
         { DesignObjects.GiantLavaRock, typeof(GiantLavaRockAnimation) },
         { DesignObjects.BlueMountainsItems, typeof(BlueMountainsAnimations) },
-        { DesignObjects.LavaRockPieces, typeof(LavaRockPieceAnimations) },
+        { DesignObjects.LavaRockPiecesBlueMountains, typeof(LavaRockPieceAnimations) },
         { DesignObjects.LitBeacon, typeof(LitBeaconAnimation) },
         { DesignObjects.BlueMountainsItems2, typeof(BlueMountainsAnimations2) },
-        { DesignObjects.CaveSpider, typeof(CaveSpiderAnimations) },
+        { DesignObjects.CaveSpiderBlueMountains, typeof(CaveSpiderAnimations) },
         { DesignObjects.BlueMountainsItems3, typeof(BlueMountainsAnimations3) },
         { DesignObjects.BlueAntitoonsBlueMountains, typeof(BlueAntitoonAnimations) },
         { DesignObjects.PoofEffectsBlueMountains, typeof(PoofAnimations) },
@@ -85,7 +92,62 @@ public class Rayman1MSDOS
         { DesignObjects.RisingWaterBlueMountains, typeof(RisingWaterAnimations) },
         { DesignObjects.CageUnlockBlueMountains, typeof(CageUnlockAnimations) },
         { DesignObjects.StrangeGateBlueMountains, typeof(StrangeGateAnimations) },
-        { DesignObjects.SomeObject20, typeof(SomeAnimations20) },
+        { DesignObjects.HunterPictureCity, typeof(HunterAnimations) },
+        { DesignObjects.CloudSplashPictureCity, typeof(CloudSplashAnimations) },
+        { DesignObjects.PictureCityItems, typeof(PictureCityAnimations) },
+        { DesignObjects.ElectoonsPictureCity, typeof(ElectoonAnimations) },
+        { DesignObjects.RisingOil, typeof(RisingOilAnimations) },
+        { DesignObjects.CloudsPictureCity, typeof(CloudAnimations) },
+        { DesignObjects.GroundPirate, typeof(GroundPirateAnimations) },
+        { DesignObjects.MastPirate, typeof(MastPirateAnimations) },
+        { DesignObjects.SpaceMama, typeof(SpaceMamaAnimations) },
+        { DesignObjects.PoofEffectsPictureCity, typeof(PoofAnimations) },
+        { DesignObjects.BlueAntitoonsPictureCity, typeof(BlueAntitoonAnimations) },
+        { DesignObjects.WingedRingPictureCity, typeof(WingedRingAnimations) },
+        { DesignObjects.PirateMama, typeof(PirateMamaAnimations) },
+        { DesignObjects.FryingPanMonkey, typeof(FryingPanMonkeyAnimations) },
+        { DesignObjects.BetillaPictureCity, typeof(BetillaAnimations) },
+        { DesignObjects.CookingPot, typeof(CookingPotAnimations) },
+        { DesignObjects.BadEyesPictureCity, typeof(BadEyesAnimations) },
+        { DesignObjects.UnusedPin, typeof(UnusedPinAnimation) },
+        { DesignObjects.Eraser, typeof(EraserAnimations) },
+        { DesignObjects.Curtains, typeof(CurtainAnimations) },
+        { DesignObjects.CageUnlockPictureCity, typeof(CageUnlockAnimations) },
+        { DesignObjects.StrangeGatePictureCity, typeof(StrangeGateAnimations) },
+        { DesignObjects.BounceSparkles, typeof(BounceSparklesAnimation) },
+        { DesignObjects.LavaRockPiecesCavesOfSkops, typeof(LavaRockPieceAnimations) },
+        { DesignObjects.HunterCavesOfSkops, typeof(HunterAnimations) },
+        { DesignObjects.JoeBall, typeof(JoeBallAnimations) },
+        { DesignObjects.PoofEffectsCavesOfSkops, typeof(PoofAnimations) },
+        { DesignObjects.ElectoonsCavesOfSkops, typeof(ElectoonAnimations) },
+        { DesignObjects.CloudsCavesOfSkops, typeof(CloudAnimations) },
+        { DesignObjects.RockGolemCavesOfSkops, typeof(RockGolemAnimations) },
+        { DesignObjects.BadEyesCavesOfSkops, typeof(BadEyesAnimations) },
+        { DesignObjects.StoneDogCavesOfSkops, typeof(StoneDogAnimations) },
+        { DesignObjects.SeaUrchin, typeof(SeaUrchinAnimation) },
+        { DesignObjects.CavesOfSkopsItems, typeof(BlueMountainsAnimations2) },
+        { DesignObjects.CaveSpiderCavesOfSkops, typeof(CaveSpiderAnimations) },
+        { DesignObjects.Fish, typeof(FishAnimations) },
+        { DesignObjects.BlueAntitoonsCavesOfSkops, typeof(BlueAntitoonAnimations) },
+        { DesignObjects.CavesOfSkopsItems2, typeof(BlueMountainsAnimations3) },
+        { DesignObjects.MrSkops, typeof(MrSkopsAnimations) },
+        { DesignObjects.WingedRingCavesOfSkops, typeof(WingedRingAnimations) },
+        { DesignObjects.BetillaCavesOfSkops, typeof(BetillaAnimations) },
+        { DesignObjects.RisingWaterCavesOfSkops, typeof(RisingWaterAnimations) },
+        { DesignObjects.JoeUFOControls, typeof(JoeUFOControlAnimations) },
+        { DesignObjects.Joe, typeof(JoeAnimations) },
+        { DesignObjects.EatAtJoesSign, typeof(EatAtJoesSignAnimations) },
+        { DesignObjects.WaterSplashCavesOfSkops, typeof(WaterSplashAnimation) },
+        { DesignObjects.ElectricPlug, typeof(PlugAnimations) },
+        { DesignObjects.RisingLava, typeof(RisingLavaAnimation) },
+        { DesignObjects.SomethingStrange, typeof(SomethingAnimation) },
+        { DesignObjects.CageUnlockCaveOfSkops, typeof(CageUnlockAnimations) },
+        { DesignObjects.StrangeGateCaveOfSkops, typeof(StrangeGateAnimations) },
+        { DesignObjects.CavesOfSkopsItems3, typeof(CavesOfSkopsAnimations) },
+        { DesignObjects.BreakableRock, typeof(BreakableRockAnimations) },
+        { DesignObjects.MiniLavaRock, typeof(MiniLavaRockAnimation) },
+        { DesignObjects.SomeObject1, typeof(SomeAnimations1) },
+        { DesignObjects.SomeObject2, typeof(SomeAnimations2) },
     };
 
     public static List<string> FileOptions = new List<string>()
@@ -112,25 +174,33 @@ public class Rayman1MSDOS
         List<string> objects = new List<string>();
 
         int startIndex = 0;
-        int endIndex = 6;
+        int endIndex = allfixEndIndex;
 
         switch (_index)
         {
             case 0:
                 startIndex = 0;
-                endIndex = 6;
+                endIndex = allfixEndIndex;
                 break;
             case 1:
-                startIndex = 7;
-                endIndex = 31;
+                startIndex = allfixEndIndex + 1;
+                endIndex = jungleEndIndex;
                 break;
             case 2:
-                startIndex = 32;
-                endIndex = 56;
+                startIndex = jungleEndIndex + 1;
+                endIndex = musicEndIndex;
                 break;
             case 3:
-                startIndex = 57;
-                endIndex = 99;
+                startIndex = musicEndIndex + 1;
+                endIndex = mountainEndIndex;
+                break;
+            case 4:
+                startIndex = mountainEndIndex + 1;
+                endIndex = imageEndIndex;
+                break;
+            case 5:
+                startIndex = imageEndIndex + 1;
+                endIndex = caveEndIndex;
                 break;
             default:
                 break;
@@ -196,7 +266,7 @@ public class Rayman1MSDOS
         RedDrummer,
         BlueAntitoonsBandLand,
         PoofEffectsBandLand,
-        BadEyes,
+        BadEyesBandLand,
         BlueSpiky,
         DivingDrum,
         WaterSplashBandLand,
@@ -211,15 +281,15 @@ public class Rayman1MSDOS
         HunterBlueMountains,
         ElectoonsBlueMountains,
         CloudsBlueMountains,
-        RockGolem,
-        StoneDog,
+        RockGolemBlueMountains,
+        StoneDogBlueMountains,
         MrStone,
         GiantLavaRock,
         BlueMountainsItems,
-        LavaRockPieces,
+        LavaRockPiecesBlueMountains,
         LitBeacon,
         BlueMountainsItems2,
-        CaveSpider,
+        CaveSpiderBlueMountains,
         BlueMountainsItems3,
         BlueAntitoonsBlueMountains,
         PoofEffectsBlueMountains,
@@ -228,7 +298,64 @@ public class Rayman1MSDOS
         RisingWaterBlueMountains,
         CageUnlockBlueMountains,
         StrangeGateBlueMountains,
-        SomeObject20,
+        //80, 81 & 82 are parallax
+        HunterPictureCity = 83,
+        CloudSplashPictureCity,
+        PictureCityItems,
+        ElectoonsPictureCity,
+        RisingOil,
+        CloudsPictureCity,
+        GroundPirate,
+        MastPirate,
+        SpaceMama,
+        PoofEffectsPictureCity,
+        BlueAntitoonsPictureCity,
+        WingedRingPictureCity,
+        PirateMama,
+        FryingPanMonkey,
+        BetillaPictureCity,
+        CookingPot,
+        BadEyesPictureCity,
+        UnusedPin,
+        Eraser,
+        Curtains,
+        CageUnlockPictureCity,
+        StrangeGatePictureCity,
+        BounceSparkles,
+        //106 is parallax
+        LavaRockPiecesCavesOfSkops = 107,
+        HunterCavesOfSkops,
+        JoeBall,
+        PoofEffectsCavesOfSkops,
+        ElectoonsCavesOfSkops,
+        CloudsCavesOfSkops,
+        RockGolemCavesOfSkops,
+        BadEyesCavesOfSkops,
+        StoneDogCavesOfSkops,
+        SeaUrchin,
+        CavesOfSkopsItems,
+        CaveSpiderCavesOfSkops,
+        Fish,
+        BlueAntitoonsCavesOfSkops,
+        CavesOfSkopsItems2,
+        MrSkops,
+        WingedRingCavesOfSkops,
+        BetillaCavesOfSkops,
+        RisingWaterCavesOfSkops,
+        JoeUFOControls,
+        Joe,
+        EatAtJoesSign,
+        WaterSplashCavesOfSkops,
+        ElectricPlug,
+        RisingLava,
+        SomethingStrange,
+        CageUnlockCaveOfSkops,
+        StrangeGateCaveOfSkops,
+        CavesOfSkopsItems3,
+        BreakableRock,
+        MiniLavaRock,
+        SomeObject1,
+        SomeObject2,
     }
 
     private enum RayAnimations
@@ -1023,23 +1150,23 @@ public class Rayman1MSDOS
 
     private enum MothAnimations
     {
-       MothJumpStart,
-       MothJump,
-       MothBounce,
-       MothHit,
-       MothAngryFlyingStart,
-       MothAngryStart,
-       MothAttack,
-       MothAvoid,
-       MothTurnAround,
-       MothAngryFlying,
-       MothIdle,
-       MothDuckStart,
-       MothDuck,
-       MothDuckAttackStart,
-       MothFlyingAttack,
-       MothDuckAttack,
-       MothWalking,
+        MothJumpStart,
+        MothJump,
+        MothBounce,
+        MothHit,
+        MothAngryFlyingStart,
+        MothAngryStart,
+        MothAttack,
+        MothAvoid,
+        MothTurnAround,
+        MothAngryFlying,
+        MothIdle,
+        MothDuckStart,
+        MothDuck,
+        MothDuckAttackStart,
+        MothFlyingAttack,
+        MothDuckAttack,
+        MothWalking,
     }
 
     private enum DrumSlamAnimations
@@ -1111,7 +1238,7 @@ public class Rayman1MSDOS
         RockGolemRockAttack,
         RockGolemWalking,
         RockGolemHit,
-        RockGolemLavaRock,
+        RockGolemMiniLavaRock,
         RockGolemSlamAttack,
         RockGolemSlamAttackEnd,
         RockGolemKO,
@@ -1172,7 +1299,7 @@ public class Rayman1MSDOS
         MrStonePillarBall3,
         MrStonePillarStone1,
         MrStonePillarHead,
-        MrStoneDeath,
+        MrStoneDead,
         MrStonePillarEye,
         MrStoneRockSummonAndThrowAttack,
         MrStoneDanceStart,
@@ -1299,7 +1426,84 @@ public class Rayman1MSDOS
         BlueBigSpikySwingSwinging,
     }
 
-    private enum SomeAnimations20
+    private enum PictureCityAnimations
+    {
+        PencilDown,
+        PencilPointUp,
+        PencilUp,
+        PencilPointDown,
+        PencilStump,
+        PencilWithoutPoint,
+        Pen,
+        TackDown,
+        TackUp,
+        TackLeft,
+        PencilSharpener,
+        YinYangBall,
+        YinYangBallPointy,
+        YinYangBallCrazy,
+        TackUpDown,
+        PartialTackDown,
+        PenClicking,
+    }
+
+    private enum RisingOilAnimations
+    {
+        RisingOil1,
+        RisingOil2,
+        RisingOil3,
+        RisingOil4,
+    }
+
+    private enum GroundPirateAnimations
+    {
+        Earring,
+        EarringThrow,
+        Appearing,
+        BoatSwingAndLand,
+        Falling,
+        BoatSwing,
+        BoatSwingFast,
+        Falling2,
+        Landing,
+        Hit,
+        TurnAround,
+        Idle,
+        Walking,
+        DuckingStart,
+        Ducking,
+        DuckingEnd,
+    }
+
+    private enum MastPirateAnimations
+    {
+        Bomb,
+        BombThrow,
+        JumpOut,
+        Falling,
+        Landing,
+        NinjaKickStart,
+        NinjaKick,
+        NinjaKickEnd,
+        BombThrowGrounded,
+        Hit,
+        IdleBomb,
+        IdleBombGrab,
+        Idle,
+        IdleMast,
+        MastDuckAway,
+        MastAppear,
+        MastHide,
+        DuckingStart,
+        Ducking,
+        DuckingEnd,
+        DuckingBombStart,
+        DuckingBomb,
+        DuckingBombEnd,
+        MastHit,
+    }
+
+    private enum SpaceMamaAnimations
     {
         Anim1,
         Anim2,
@@ -1311,5 +1515,354 @@ public class Rayman1MSDOS
         Anim8,
         Anim9,
         Anim10,
+        Anim11,
+        Anim12,
+        Anim13,
+        Anim14,
+        Anim15,
+        Anim16,
+        Anim17,
+        Anim18,
+        Anim19,
+        Anim20,
+        Anim21,
+        Anim22,
+        Anim23,
+        Anim24,
+        Anim25,
+        Anim26,
+        Anim27,
+        Anim28,
+        Anim29,
+        Anim30,
+        Anim31,
+        Anim32,
+        Anim33,
+        Anim34,
+        Anim35,
+        Anim36,
+        Anim37,
+        Anim38,
+        Anim39,
+        Anim40,
+        Anim41,
+        Anim42,
+        Anim43,
+        Anim44,
+        Anim45,
+        Anim46,
+        Anim47,
+        Anim48,
+        Anim49,
+    }
+
+    private enum PirateMamaAnimations
+    {
+        PirateBoatIdle,
+        SeaWaves,
+        PirateMamaIdle,
+        PirateMamaIdle2,
+        PirateMamaFiringKnifesStart,
+        PirateMamaFiringKnifes,
+        PirateMamaFiringKnifesFull,
+        PirateMamaHit,
+        SeaWaves2,
+        PirateMamaWalking,
+        PirateMamaFiringKnifesEnd,
+        PirateMamaBounce,
+        PirateMamaDancing,
+        PirateMamaJumping,
+        PirateMamaLanding,
+        PirateMamaHitInAir,
+        PirateMamaKnifeBounce,
+        PirateMamaKnife,
+        PirateMamaKnife2,
+        PirateMamaKnife3,
+        PirateMamaKnifeFalling,
+        PirateMamaKnifeInGround,
+        PirateMamaSpawnStart,
+        PirateMamaSpawn,
+        PirateMamaSpawnEnd,
+    }
+
+    private enum FryingPanMonkeyAnimations
+    {
+        FryingPanMonkey1Flying1,
+        FryingPanMonkey1Flying2,
+        FryingPanMonkey1Flying3,
+        FryingPanMonkey1Flying4,
+        FryingPanMonkey1Breaking,
+        FryingPanMonkey1Hit,
+        FryingPanMonkey1FlyingStart,
+        FryingPanMonkey1Flying,
+        FryingPanMonkey1FlyingStop,
+        FryingPanMonkey1Idle,
+        FryingPanMonkey1Idle2,
+        FryingPanMonkey1Dead,
+        FryingPanMonkey1DeadFlyingOff,
+        FryingPanMonkey2Flying1,
+        FryingPanMonkey2Flying2,
+        FryingPanMonkey2Flying3,
+        FryingPanMonkey2Flying4,
+        FryingPanMonkey2Breaking,
+        FryingPanMonkey2Hit,
+        FryingPanMonkey2FlyingStart,
+        FryingPanMonkey2Flying,
+        FryingPanMonkey2FlyingStop,
+        FryingPanMonkey2Idle,
+        FryingPanMonkey2Idle2,
+        FryingPanMonkey2Dead,
+        FryingPanMonkey2DeadFlyingOff,
+        FryingPan,
+    }
+
+    private enum CookingPotAnimations
+    {
+        CookingPotDown,
+        CookingPotDownExplosion,
+        CookingPotSouthEast,
+        CookingPotSouthEastExplosion,
+        CookingPotEast,
+        CookingPotEastExplosion,
+        CookingPotLidDown,
+        CookingPotPotDown,
+        CookingPotLidSouthEast,
+        CookingPotPotSouthEast,
+        CookingPotLidEast,
+        CookingPotPotEast,
+    }
+
+    private enum UnusedPinAnimation
+    {
+        UnusedPinAngles,
+    }
+
+    private enum EraserAnimations
+    {
+        EraserIdle,
+        EraserBouncing,
+    }
+
+    private enum CurtainAnimations
+    {
+        EdgeCurtains,
+        MiddleCurtain,
+    }
+
+    private enum BounceSparklesAnimation
+    {
+        BounceSparkles,
+    }
+
+    private enum JoeBallAnimations
+    {
+        JoeBall,
+        JoeBallBounce,
+    }
+
+    private enum SeaUrchinAnimation
+    {
+        SeaUrchin,
+    }
+
+    private enum FishAnimations
+    {
+        GirlFishSwimming,
+        GirlFishScared,
+        GirlFishTurnAround,
+        GuyFishIdle,
+        GuyFishPush,
+        GuyFishTurnAround,
+        MeanFishBiteStart,
+        MeanFishBite,
+        MeanFishBiteEnd,
+        MeanFishSwimming,
+        MeanFishBiteStartLeft,
+        MeanFishBiteStartRight,
+        MeanFishTurnAround,
+        MeanFishHit,
+    }
+
+    private enum MrSkopsAnimations
+    {
+        Sleeping,
+        WakingUp,
+        Idle,
+        IdleFast,
+        GroundSlam,
+        ZapStart,
+        ZapEnd,
+        Zap,
+        ClawStart,
+        Clawing,
+        ClawEnd,
+        Hit,
+        Dead,
+        Walking,
+        Running,
+        WalkingBackwards,
+        ZapBeam,
+        ClawingClaw,
+        JumpStart,
+        Jumping,
+        JumpEnd,
+        Landing,
+        ZapBeamCopy,
+    }
+
+    private enum JoeUFOControlAnimations
+    {
+        SelectorBlinkingRight,
+        SelectorBlinkingDown,
+        SelectorBlinkingLeft,
+        SelectorBlinkingUp,
+        SelectorUpRight,
+        SelectorRightDown,
+        SelectorLeftUp,
+        SelectorDownLeft,
+        SelectorCenter,
+        SelectorLeft1Right2,
+        SelectorLeft2Right1,
+        SelectorUp1Down2,
+        SelectorUp2Down1,
+        JoeUFO1,
+        JoeUFO2,
+    }
+
+    private enum JoeAnimations
+    {
+        DownIdle,
+        SadIdle,
+        HappyIdle,
+        SadTalkingStart,
+        SadIdle2,
+        SadTalking,
+        HappyTalking,
+        HappyTalkingFlipped,
+        HappyCelebrate,
+        HappyCelebrateFlipped,
+        SadTalking2,
+    }
+
+    private enum EatAtJoesSignAnimations
+    {
+        SignOff,
+        SignOneAtATime,
+        SignOneLEDString,
+    }
+
+    private enum PlugAnimations
+    {
+        PlugOut,
+        PlugSlammedIn,
+        PlugIn,
+    }
+
+    private enum RisingLavaAnimation
+    {
+        RisingLava,
+    }
+
+    private enum SomethingAnimation
+    {
+        SomethingStrange,
+    }
+
+    private enum CavesOfSkopsAnimations
+    {
+        SlidingPlateau,
+        SlidingPlateauSliding,
+        Empty1,
+        BigSpikeRockFlyingUp,
+        SmallSpikeRockFlying,
+        SmallSpikeRockFlyingUp,
+        SmallSpikeRockIdle,
+        SmallSpikeRockFlyingStart,
+        Empty2,
+        Empty3,
+        Empty4,
+        Empty5,
+        Empty6,
+        Empty7,
+        Empty8,
+        Empty9,
+        SmokePuff,
+        SlidingPlateau2,
+        SlidingPlateau2Sliding,
+    }
+
+    private enum BreakableRockAnimations
+    {
+        Empty1,
+        Empty2,
+        Empty3,
+        Empty4,
+        Empty5,
+        BreakableRockIdle,
+        BreakableRockShake,
+        BreakableRockPart1,
+        BreakableRockPart2,
+        BreakableRockPart3,
+        BreakableRockPart4,
+        BreakableRockPart5,
+    }
+
+    private enum MiniLavaRockAnimation
+    {
+        Empty1,
+        Empty2,
+        Empty3,
+        Empty4,
+        Empty5,
+        Empty6,
+        MiniLavaRock,
+    }
+
+    private enum SomeAnimations1
+    {
+        Anim1,
+        Anim2,
+        Anim3,
+        Anim4,
+        Anim5,
+        Anim6,
+        Anim7,
+        Anim8,
+        Anim9,
+        Anim10,
+        Anim11,
+        Anim12,
+        Anim13,
+        Anim14,
+        Anim15,
+        Anim16,
+        Anim17,
+        Anim18,
+        Anim19,
+        Anim20,
+    }
+
+    private enum SomeAnimations2
+    {
+        Anim1,
+        Anim2,
+        Anim3,
+        Anim4,
+        Anim5,
+        Anim6,
+        Anim7,
+        Anim8,
+        Anim9,
+        Anim10,
+        Anim11,
+        Anim12,
+        Anim13,
+        Anim14,
+        Anim15,
+        Anim16,
+        Anim17,
+        Anim18,
+        Anim19,
+        Anim20,
     }
 }
