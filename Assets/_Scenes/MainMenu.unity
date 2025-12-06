@@ -252,6 +252,10 @@ MonoBehaviour:
       m_Image: {fileID: 21300000, guid: 0549a7e316dc57b4fa34da6210368c31, type: 3}
     - m_Text: Mr. Skops' Stalactites 3 - Boss
       m_Image: {fileID: 21300000, guid: 30eebeb9293f781408c73055b568fdd0, type: 3}
+    - m_Text: Candy Chateau Default
+      m_Image: {fileID: 21300000, guid: 7090db3b7580b264baaba8b957652f7a, type: 3}
+    - m_Text: Mr. Dark - Boss
+      m_Image: {fileID: 21300000, guid: 205c49f7139bd46448ab16bb7eb328d7, type: 3}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

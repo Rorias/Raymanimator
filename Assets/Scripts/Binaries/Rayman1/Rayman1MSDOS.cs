@@ -15,8 +15,8 @@ public class Rayman1MSDOS
     public const int musicEndIndex = 56;
     public const int mountainEndIndex = 79;
     public const int imageEndIndex = 105;
-    public const int caveEndIndex = 199;
-    public const int candyEndIndex = 199;
+    public const int caveEndIndex = 137;
+    public const int candyEndIndex = 161;
 
     private static Dictionary<DesignObjects, Type> ObjectAnimations = new Dictionary<DesignObjects, Type>()
     {
@@ -146,8 +146,27 @@ public class Rayman1MSDOS
         { DesignObjects.CavesOfSkopsItems3, typeof(CavesOfSkopsAnimations) },
         { DesignObjects.BreakableRock, typeof(BreakableRockAnimations) },
         { DesignObjects.MiniLavaRock, typeof(MiniLavaRockAnimation) },
-        { DesignObjects.SomeObject1, typeof(SomeAnimations1) },
-        { DesignObjects.SomeObject2, typeof(SomeAnimations2) },
+        { DesignObjects.CloudSplashCandyChateau, typeof(CloudSplashAnimations) },
+        { DesignObjects.MrDarkBosses, typeof(MrDarkBossAnimations) },
+        { DesignObjects.HunterCandyChateau, typeof(HunterAnimations) },
+        { DesignObjects.MrDarkFire, typeof(MrDarkFireAnimations) },
+        { DesignObjects.ElectoonsCandyChateau, typeof(ElectoonAnimations) },
+        { DesignObjects.BigClown, typeof(BigClownAnimations) },
+        { DesignObjects.SmallClown, typeof(SmallClownAnimations) },
+        { DesignObjects.CloudsCandyChateau, typeof(CloudAnimations) },
+        { DesignObjects.FlyingClown, typeof(FlyingClownAnimations) },
+        { DesignObjects.PoofEffectsCandyChateau, typeof(PoofAnimations) },
+        { DesignObjects.BlueAntitoonsCandyChateau, typeof(BlueAntitoonAnimations) },
+        { DesignObjects.WingedRingCandyChateau, typeof(WingedRingAnimations) },
+        { DesignObjects.BetillaCandyChateau, typeof(BetillaAnimations) },
+        { DesignObjects.FryingPanCandyChateau, typeof(FryingPanAnimations) },
+        { DesignObjects.MrDark, typeof(MrDarkAnimations) },
+        { DesignObjects.WaterSplashCandyChateau, typeof(WaterSplashAnimation) },
+        { DesignObjects.SomeObject18, typeof(LeftOverObjectAnimations) },
+        { DesignObjects.CageUnlockCandyChateau, typeof(CageUnlockAnimations) },
+        { DesignObjects.StrangeGateCandyChateau, typeof(StrangeGateAnimations) },
+        { DesignObjects.CandyChateauItems, typeof(CandyChateauAnimations) },
+        { DesignObjects.SmallClownWater, typeof(SmallClownWaterAnimations) },
     };
 
     public static List<string> FileOptions = new List<string>()
@@ -201,6 +220,10 @@ public class Rayman1MSDOS
             case 5:
                 startIndex = imageEndIndex + 1;
                 endIndex = caveEndIndex;
+                break;
+            case 6:
+                startIndex = caveEndIndex + 1;
+                endIndex = candyEndIndex;
                 break;
             default:
                 break;
@@ -354,8 +377,29 @@ public class Rayman1MSDOS
         CavesOfSkopsItems3,
         BreakableRock,
         MiniLavaRock,
-        SomeObject1,
-        SomeObject2,
+        //138 & 139 are parallax
+        CloudSplashCandyChateau = 140,
+        MrDarkBosses,
+        HunterCandyChateau,
+        MrDarkFire,
+        ElectoonsCandyChateau,
+        BigClown,
+        SmallClown,
+        CloudsCandyChateau,
+        FlyingClown,
+        PoofEffectsCandyChateau,
+        BlueAntitoonsCandyChateau,
+        WingedRingCandyChateau,
+        BetillaCandyChateau,
+        FryingPanCandyChateau,
+        MrDark,
+        WaterSplashCandyChateau,
+        //156 has no animation data for some reason
+        SomeObject18 = 157,
+        CageUnlockCandyChateau,
+        StrangeGateCandyChateau,
+        CandyChateauItems,
+        SmallClownWater,
     }
 
     private enum RayAnimations
@@ -1818,51 +1862,126 @@ public class Rayman1MSDOS
         MiniLavaRock,
     }
 
-    private enum SomeAnimations1
+    private enum MrDarkBossAnimations
     {
-        Anim1,
-        Anim2,
-        Anim3,
-        Anim4,
-        Anim5,
-        Anim6,
-        Anim7,
-        Anim8,
-        Anim9,
-        Anim10,
-        Anim11,
-        Anim12,
-        Anim13,
-        Anim14,
-        Anim15,
-        Anim16,
-        Anim17,
-        Anim18,
-        Anim19,
-        Anim20,
+        Boss2Idle,
+        Boss2Hit,
+        Boss2Attack,
+        Boss2AimDown,
+        Boss2AimUp,
+        Boss2Aim,
+        Boss3Hit,
+        Boss3JumpStart,
+        Boss3JumpMiddle,
+        Boss3Jump,
+        Moss3LandingStart,
+        Moss3Landing,
+        Boss3Idle,
+        Boss1AttackStart,
+        Boss1Attack,
+        Boss1AttackEnd,
+        Boss1AttackHit,
+        Boss1AttackClaw,
+        Boss1BlockingStart,
+        Boss1Blocking,
+        Boss1BlockingEnd,
+        Boss1AttackBlockingStart,
+        Boss1AttackBlocking,
+        Boss1AttackBlockingEnd,
+        Boss1Idle,
+        Boss2Beam,
+        Boss1Hit,
+        Boss1Walking,
     }
 
-    private enum SomeAnimations2
+    private enum MrDarkFireAnimations
     {
-        Anim1,
-        Anim2,
-        Anim3,
-        Anim4,
-        Anim5,
-        Anim6,
-        Anim7,
-        Anim8,
-        Anim9,
-        Anim10,
-        Anim11,
-        Anim12,
-        Anim13,
-        Anim14,
-        Anim15,
-        Anim16,
-        Anim17,
-        Anim18,
-        Anim19,
-        Anim20,
+        FireVanish,
+        FireThin,
+        Fire,
+        FireStart,
+        FireEnd,
+    }
+
+    private enum BigClownAnimations
+    {
+        HammerAttack,
+        HammerAttackEnd,
+        Dead,
+        Hit,
+        TurnAround,
+        Idle,
+        Walking,
+    }
+
+    private enum SmallClownAnimations
+    {
+        Attack,
+        AttackEnd,
+        WaterSquirt,
+        Dead,
+        Hit,
+        TurnAround,
+        Idle,
+        Walking,
+    }
+
+    private enum FlyingClownAnimations
+    {
+        Idle,
+        Idle2,
+        Bomb,
+        BombDrop,
+        PresentShake,
+        PresentAttack,
+        PresentAttackFull,
+    }
+
+    private enum MrDarkAnimations
+    {
+        FlyingAway,
+        FlyingAwayStart,
+        Cursing,
+        Idle,
+        Jumping,
+        MagicBoltMiddle,
+        MagicBoltHead,
+        MagicBoltTail,
+        Rope,
+        MrDarkRope,
+        MrDarkPullRopeStart,
+        MrDarkPullRope,
+        MrDarkPullRopeEnd,
+        MrDarkRemoveRope,
+    }
+
+    private enum LeftOverObjectAnimations
+    {
+        Center,
+        Up,
+        Right,
+        Down,
+        Left,
+    }
+
+    private enum CandyChateauAnimations
+    {
+        CandyWrapper,
+        LongCandyWrapper,
+        LongCandyWrapperExtend,
+        SwissArmyKnife,
+        Fork,
+        Nougat,
+        SwissArmyKnifeMiniRight,
+        SwissArmyKnifeMiniLeft,
+        Corkscrew,
+    }
+
+    private enum SmallClownWaterAnimations
+    {
+        Falling,
+        FallingDrop,
+        FallingDropThin,
+        Landing,
     }
 }

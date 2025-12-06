@@ -213,7 +213,7 @@ public sealed class Rayman1BinaryAnimation
 
     public Animation LoadRaymAnimationFromBinary(string _animName, Rayman1MSDOS.DesignObjects _object, int _animIndex, string _spriteset, Mapping _map)
     {
-        Design des = GetDesignByIndex((int)_object);
+        Design des = GetR1MSDOSDesignByIndex((int)_object);
         if (des == null)
         {
             DebugHelper.Log("You need to choose a binary path first.", DebugHelper.Severity.warning);
@@ -264,7 +264,7 @@ public sealed class Rayman1BinaryAnimation
         int _objectIndex, int _animIndex,
         bool _animData, bool _visuals, bool _colls, float _pixelSize)
     {
-        Design des = GetDesignByIndex(_objectIndex);
+        Design des = GetR1MSDOSDesignByIndex(_objectIndex);
         if (des == null)
         {
             DebugHelper.Log("You need to choose a binary path first.", DebugHelper.Severity.warning);
@@ -325,6 +325,26 @@ public sealed class Rayman1BinaryAnimation
             if (_objectIndex > Rayman1MSDOS.mountainEndIndex && _objectIndex <= Rayman1MSDOS.imageEndIndex)
             {
                 string[] worldFiles = Directory.GetFiles(basePath, "RAY4.WLD", SearchOption.TopDirectoryOnly);
+                for (int i = 0; i < worldFiles.Length; i++)
+                {
+                    string fileName = Path.GetFileName(worldFiles[0]);
+                    FileFactory.Write<WorldFile>(context, fileName);
+                }
+            }
+
+            if (_objectIndex > Rayman1MSDOS.imageEndIndex && _objectIndex <= Rayman1MSDOS.caveEndIndex)
+            {
+                string[] worldFiles = Directory.GetFiles(basePath, "RAY5.WLD", SearchOption.TopDirectoryOnly);
+                for (int i = 0; i < worldFiles.Length; i++)
+                {
+                    string fileName = Path.GetFileName(worldFiles[0]);
+                    FileFactory.Write<WorldFile>(context, fileName);
+                }
+            }
+
+            if (_objectIndex > Rayman1MSDOS.caveEndIndex && _objectIndex <= Rayman1MSDOS.candyEndIndex)
+            {
+                string[] worldFiles = Directory.GetFiles(basePath, "RAY6.WLD", SearchOption.TopDirectoryOnly);
                 for (int i = 0; i < worldFiles.Length; i++)
                 {
                     string fileName = Path.GetFileName(worldFiles[0]);
@@ -466,7 +486,7 @@ public sealed class Rayman1BinaryAnimation
 
     public Dictionary<int, UnityEngine.Sprite> LoadSpritesetFromBinary(Rayman1MSDOS.DesignObjects _object, int _paletteIndex)
     {
-        Design des = GetDesignByIndex((int)_object);
+        Design des = GetR1MSDOSDesignByIndex((int)_object);
         if (des == null)
         {
             DebugHelper.Log("You need to choose a binary path first.", DebugHelper.Severity.warning);
@@ -475,7 +495,7 @@ public sealed class Rayman1BinaryAnimation
 
         Dictionary<int, UnityEngine.Sprite> spriteset = new Dictionary<int, UnityEngine.Sprite>();
 
-        IList<BaseColor> palette = GetPaletteByIndex(_paletteIndex);
+        IList<BaseColor> palette = GetR1MSDOSPaletteByIndex(_paletteIndex);
         int offset = 1;
         for (int i = 1; i < des.Sprites.Length; i++)
         {
@@ -522,7 +542,7 @@ public sealed class Rayman1BinaryAnimation
         return spriteset;
     }
 
-    private Design GetDesignByIndex(int _objectIndex)
+    private Design GetR1MSDOSDesignByIndex(int _objectIndex)
     {
         if (_objectIndex <= Rayman1MSDOS.allfixEndIndex && allfix != null)
         {
@@ -553,15 +573,20 @@ public sealed class Rayman1BinaryAnimation
 
             if (_objectIndex > Rayman1MSDOS.imageEndIndex && _objectIndex <= Rayman1MSDOS.caveEndIndex)
             {
-                Debug.Log(worlds[4].DesItems.Length + " Cave designs count");
                 return worlds[4].DesItems[_objectIndex - Rayman1MSDOS.imageEndIndex - 1];
+            }
+
+            if (_objectIndex > Rayman1MSDOS.caveEndIndex && _objectIndex <= Rayman1MSDOS.candyEndIndex)
+            {
+                Debug.Log(worlds[5].DesItems.Length + " candy designs count");
+                return worlds[5].DesItems[_objectIndex - Rayman1MSDOS.caveEndIndex - 1];
             }
         }
 
         return null;
     }
 
-    private IList<BaseColor> GetPaletteByIndex(int _paletteIndex)
+    private IList<BaseColor> GetR1MSDOSPaletteByIndex(int _paletteIndex)
     {
         switch (_paletteIndex)
         {
@@ -603,6 +628,10 @@ public sealed class Rayman1BinaryAnimation
                 return caveLvls[2].MapInfo.Palettes.First();
             case 18:
                 return caveLvls[10].MapInfo.Palettes.First();
+            case 19:
+                return candyLvls[0].MapInfo.Palettes.First();
+            case 20:
+                return candyLvls[3].MapInfo.Palettes.First();
             default:
                 Debug.Log("<color=orange>THIS ISN'T SUPPOSED TO HAPPEN!!</color>");
                 return jungleLvls[0].MapInfo.Palettes.First();
