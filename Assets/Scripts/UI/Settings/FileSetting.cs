@@ -1,15 +1,8 @@
 using ImageMagick;
 
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.IO.Compression;
-
-using TMPro;
 
 using UnityEngine;
-using UnityEngine.UI;
 
 public class FileSetting : Settings
 {
@@ -18,9 +11,14 @@ public class FileSetting : Settings
 
     public ImportWindow importWindow;
     public ButtonPlus importButton;
-
+    public ButtonPlus saveAnimationButton;
+    public ButtonPlus saveGifButton;
+    public ButtonPlus saveReverseButton;
+    public ButtonPlus saveDoubleButton;
+    [Space]
     public ExportBinaryWindow exportBinaryWindow;
     public ButtonPlus exportBinaryButton;
+    public ButtonPlus saveBinaryButton;
 
     private GameManager gameManager;
     private AnimationManager animManager;
@@ -32,15 +30,29 @@ public class FileSetting : Settings
         gameManager = GameManager.Instance;
         animManager = AnimationManager.Instance;
 
-        importButton.onClick.AddListener(delegate { importWindow.OpenWindow(); gameObject.SetActive(false); });
-
-        if (gameManager.currentAnimation != null && gameManager.currentAnimation.binaryAnimationIndex == -1)
+        if (gameManager.currentAnimation != null)
         {
-            exportBinaryButton.gameObject.SetActive(false);
-            return;
+            if (gameManager.currentAnimation.binaryAnimationIndex != -1)
+            {
+                importButton.gameObject.SetActive(false);
+                saveAnimationButton.gameObject.SetActive(false);
+                saveGifButton.gameObject.SetActive(false);
+                saveReverseButton.gameObject.SetActive(false);
+                saveDoubleButton.gameObject.SetActive(false);
+                exportBinaryButton.onClick.AddListener(delegate { exportBinaryWindow.OpenWindow(); gameObject.SetActive(false); });
+            }
+            else
+            {
+                saveBinaryButton.gameObject.SetActive(false);
+                exportBinaryButton.gameObject.SetActive(false);
+                importButton.onClick.AddListener(delegate { importWindow.OpenWindow(); gameObject.SetActive(false); });
+            }
         }
+    }
 
-        exportBinaryButton.onClick.AddListener(delegate { exportBinaryWindow.OpenWindow(); gameObject.SetActive(false); });
+    public void SaveBinary()
+    {
+        animManager.SaveBinaryFile(gameManager.currentAnimation, gameManager.spritesetImages);
     }
 
     public void Save()

@@ -52,6 +52,7 @@ public sealed class InputManager
         DownMenu,
         MultiSelect,
         HideUI,
+        PlayAnimation,
         Select,
         Confirm,
         Return,
@@ -167,6 +168,11 @@ public sealed class InputManager
             new Key(){ code = KeyCode.F1, type = KeyType.Keyboard },
             new Key(){ code = KeyCode.None, type = KeyType.Keyboard } }
         },
+        { InputKey.PlayAnimation, new List<Key>
+        {
+            new Key(){ code = KeyCode.K, type = KeyType.Keyboard },
+            new Key(){ code = KeyCode.None, type = KeyType.Keyboard } }
+        },
         { InputKey.LeftMenu, new List<Key> { new Key() { code = KeyCode.LeftArrow, type = KeyType.Meta } } },
         { InputKey.UpMenu, new List<Key> { new Key() { code = KeyCode.UpArrow, type = KeyType.Meta } } },
         { InputKey.RightMenu, new List<Key> { new Key() { code = KeyCode.RightArrow, type = KeyType.Meta } } },
@@ -214,23 +220,24 @@ public sealed class InputManager
         { InputKey.DragCamera, new KeyCode[]{ KeyCode.Mouse2, KeyCode.None } },
         { InputKey.MoveCameraLeft, new KeyCode[]{ KeyCode.A, KeyCode.None } },
         { InputKey.MoveCameraUp, new KeyCode[]{ KeyCode.W, KeyCode.None } },
-        { InputKey.MoveCameraRight,new KeyCode[]{ KeyCode.D, KeyCode.None } },
+        { InputKey.MoveCameraRight, new KeyCode[]{ KeyCode.D, KeyCode.None } },
         { InputKey.MoveCameraDown,  new KeyCode[]{ KeyCode.S, KeyCode.None } },
 
         { InputKey.Select, new KeyCode[]{ KeyCode.Mouse0, KeyCode.None } },
-        { InputKey.MultiSelect,new KeyCode[]{ KeyCode.LeftShift, KeyCode.RightShift } },
-        { InputKey.SpritePrevious,new KeyCode[]{ KeyCode.Comma, KeyCode.None } },
+        { InputKey.MultiSelect, new KeyCode[]{ KeyCode.LeftShift, KeyCode.RightShift } },
+        { InputKey.SpritePrevious, new KeyCode[]{ KeyCode.Comma, KeyCode.None } },
         { InputKey.SpriteNext, new KeyCode[]{ KeyCode.Period, KeyCode.None } },
         { InputKey.DeletePart, new KeyCode[]{ KeyCode.Delete, KeyCode.None } },
         { InputKey.MoveSpriteLeft, new KeyCode[]{ KeyCode.LeftArrow, KeyCode.None } },
         { InputKey.MoveSpriteRight, new KeyCode[]{ KeyCode.RightArrow, KeyCode.None } },
         { InputKey.MoveSpriteUp, new KeyCode[]{ KeyCode.UpArrow, KeyCode.None } },
-        { InputKey.MoveSpriteDown,new KeyCode[]{ KeyCode.DownArrow, KeyCode.None } },
+        { InputKey.MoveSpriteDown, new KeyCode[]{ KeyCode.DownArrow, KeyCode.None } },
 
         { InputKey.FramePrevious, new KeyCode[]{ KeyCode.Minus, KeyCode.None } },
         { InputKey.FrameNext, new KeyCode[]{ KeyCode.Equals, KeyCode.None } },
 
-        { InputKey.HideUI,new KeyCode[]{ KeyCode.F1, KeyCode.None } },
+        { InputKey.HideUI, new KeyCode[]{ KeyCode.F1, KeyCode.None } },
+        { InputKey.PlayAnimation, new KeyCode[]{ KeyCode.K, KeyCode.None } },
     };
 
     public readonly Dictionary<InputKey, KeyCode> DefaultButtons = new Dictionary<InputKey, KeyCode>()

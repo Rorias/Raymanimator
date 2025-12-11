@@ -12,7 +12,6 @@ public partial class AnimatorController : Raymanimator
 {
     private GameManager gameManager;
     private GameSettings settings;
-    private UIUtility uiUtility;
     private InputManager input;
 
     //current frame and current parts
@@ -33,6 +32,11 @@ public partial class AnimatorController : Raymanimator
     public SpritesDropdown spritesDDController;
     public TMP_DropdownPlus ddSprites;
     public ButtonPlus playButton;
+    //TODO: Temp until binary part/frame add/remove works
+    public ButtonPlus addFrameButton;
+    public ButtonPlus removeFrameButton;
+    public ButtonPlus addPartButton;
+    public ButtonPlus removePartButton;
     [Space]
     public ConfirmWindow exitConfirmWindow;
     public ButtonPlus exitButton;
@@ -79,7 +83,6 @@ public partial class AnimatorController : Raymanimator
     {
         gameManager = GameManager.Instance;
         settings = GameSettings.Instance;
-        uiUtility = FindObjectOfType<UIUtility>();
         input = InputManager.Instance;
 
         allInputfields = FindObjectsOfType<TMP_InputField>();
@@ -117,6 +120,15 @@ public partial class AnimatorController : Raymanimator
             DebugHelper.Log("No proper animation was loaded during initiatization.", DebugHelper.Severity.critical);
             Debug.Log("No proper animation was loaded during initiatization.");
             return;
+        }
+
+        //TODO: Temp until binary part/frame add/remove works
+        if (thisAnim.binaryAnimationIndex != -1)
+        {
+            addFrameButton.interactable = false;
+            removeFrameButton.interactable = false;
+            addPartButton.interactable = false;
+            removePartButton.interactable = false;
         }
 
         spritesDDController.InitializeSpritesDropdown();
@@ -177,6 +189,11 @@ public partial class AnimatorController : Raymanimator
             {
                 return;
             }
+        }
+
+        if (input.GetKeyDown(InputManager.InputKey.PlayAnimation))
+        {
+            PlayAnimation();
         }
 
         if (spritesDDController.dropdownActive || playingAnimation)
@@ -1007,7 +1024,14 @@ public partial class AnimatorController : Raymanimator
     public void SaveAndQuit()
     {
         AnimationManager animManager = AnimationManager.Instance;
-        animManager.SaveFile(gameManager.currentAnimation);
+        if (gameManager.currentAnimation.binaryAnimationIndex != -1)
+        {
+            animManager.SaveFile(gameManager.currentAnimation);
+        }
+        else
+        {
+            animManager.SaveBinaryFile(gameManager.currentAnimation, gameManager.spritesetImages);
+        }
         exitConfirmWindow.noButton.onClick.RemoveAllListeners();
         Quit();
     }

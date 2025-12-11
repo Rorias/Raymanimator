@@ -4,6 +4,8 @@ using System.IO;
 using System.Text;
 using System.Xml.Linq;
 
+using UnityEngine;
+
 public sealed class AnimationManager
 {
     #region Singleton
@@ -36,6 +38,23 @@ public sealed class AnimationManager
 
     private XDocument model;
     private XElement XModel;
+
+    public void SaveBinaryFile(Animation _anim, Dictionary<int, Sprite> _spriteset)
+    {
+        if (!Directory.Exists(settings.spritesetsPath + "\\" + _anim.usedSpriteset))
+        {
+            Directory.CreateDirectory(settings.spritesetsPath + "\\" + _anim.usedSpriteset);
+            foreach (KeyValuePair<int, Sprite> sprite in _spriteset)
+            {
+                byte[] image = sprite.Value.texture.EncodeToPNG();
+                File.WriteAllBytes(settings.spritesetsPath + "\\" + _anim.usedSpriteset + "\\" + (sprite.Key).ToString("000") + ".png", image);
+            }
+        }
+
+        //TODO: Save the spriteset used by the binary animation if it doesn't already exist
+        SaveAnimationXMLFile(settings.animationsPath + "\\" + _anim.animationName, _anim);
+        DebugHelper.Log(_anim.animationName + " binary saved!");
+    }
 
     public void SaveFile(Animation _anim)
     {
