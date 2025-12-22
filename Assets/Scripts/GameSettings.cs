@@ -54,7 +54,7 @@ public sealed class GameSettings
     public bool fullScreen { get { return fs; } set { fs = value; } }
     [SerializeField] private bool fs = false;
     public bool tooltipsOn { get { return tt; } set { tt = value; } }
-    [SerializeField] private bool tt = false;
+    [SerializeField] private bool tt = true;
     public bool previousGhostOn { get { return pg; } set { pg = value; } }
     [SerializeField] private bool pg = true;
     public bool nextGhostOn { get { return ng; } set { ng = value; } }

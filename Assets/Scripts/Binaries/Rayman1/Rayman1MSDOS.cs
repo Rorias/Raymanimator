@@ -11,7 +11,7 @@ public class Rayman1MSDOS
 {
     public const string msdos = "Rayman 1 PC (MS-DOS)";
     public const int allfixEndIndex = 6;
-    public const int jungleEndIndex = 31;
+    public const int jungleEndIndex = 30;
     public const int musicEndIndex = 56;
     public const int mountainEndIndex = 79;
     public const int imageEndIndex = 105;

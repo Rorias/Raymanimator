@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Placeholder: {fileID: 0}
   m_ItemText: {fileID: 646270555}
   m_ItemImage: {fileID: 1681338317}
-  m_Value: 15
+  m_Value: 0
   m_Options:
     m_Options:
     - m_Text: Dream Forest Default
@@ -3526,7 +3526,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5be70a752df5fdf4787c01c6bdcf8a94, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dcf23f0719b43814eb8ced589e5b83e4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5439,6 +5439,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2714985622637139816, guid: 529a20f445d22b447989ddadad5fa5bc, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2714985622637139816, guid: 529a20f445d22b447989ddadad5fa5bc, type: 3}
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: -7577939231897647816, guid: 5dfd16bc7a2bc0b4da9ec6885b4f3ca9, type: 2}
@@ -5713,7 +5717,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -8906,6 +8910,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: BinaryFolderPathIF
       objectReference: {fileID: 0}
+    - target: {fileID: 4416295983083415453, guid: 8f413f55858d6c141b4ab6258c2c88d2, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 640
+      objectReference: {fileID: 0}
+    - target: {fileID: 4416295983083415453, guid: 8f413f55858d6c141b4ab6258c2c88d2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 320
+      objectReference: {fileID: 0}
     - target: {fileID: 4462288414510034433, guid: 8f413f55858d6c141b4ab6258c2c88d2, type: 3}
       propertyPath: m_Name
       value: BinaryPathBrowser
@@ -9025,6 +9037,10 @@ PrefabInstance:
     - target: {fileID: 9049906311106473719, guid: 8f413f55858d6c141b4ab6258c2c88d2, type: 3}
       propertyPath: m_fontSizeBase
       value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 9049906311106473719, guid: 8f413f55858d6c141b4ab6258c2c88d2, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9049906311106473719, guid: 8f413f55858d6c141b4ab6258c2c88d2, type: 3}
       propertyPath: m_sharedMaterial
@@ -9634,7 +9650,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Caves of Skops Default
+  m_text: Dream Forest Default
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

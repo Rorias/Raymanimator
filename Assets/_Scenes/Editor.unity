@@ -1186,6 +1186,10 @@ PrefabInstance:
       value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 783697147244491248, guid: ac4ee0750ca2b0f4f9282effc3d9d382, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 783697147244491248, guid: ac4ee0750ca2b0f4f9282effc3d9d382, type: 3}
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: -7577939231897647816, guid: 5dfd16bc7a2bc0b4da9ec6885b4f3ca9, type: 2}
@@ -1236,6 +1240,10 @@ PrefabInstance:
     - target: {fileID: 2612919723083986055, guid: ac4ee0750ca2b0f4f9282effc3d9d382, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 4267634378519145991, guid: ac4ee0750ca2b0f4f9282effc3d9d382, type: 3}
+      propertyPath: m_Name
+      value: PixelScaleFieldText
       objectReference: {fileID: 0}
     - target: {fileID: 4908253050053302251, guid: ac4ee0750ca2b0f4f9282effc3d9d382, type: 3}
       propertyPath: m_Name
@@ -1711,6 +1719,10 @@ PrefabInstance:
     - target: {fileID: 3782626596087012820, guid: 9f10abc4e783ed1488b0034fbd39404b, type: 3}
       propertyPath: m_IsOn
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853773045602947128, guid: 9f10abc4e783ed1488b0034fbd39404b, type: 3}
+      propertyPath: m_Name
+      value: AnimationDataLabel
       objectReference: {fileID: 0}
     - target: {fileID: 4664280209940967650, guid: 9f10abc4e783ed1488b0034fbd39404b, type: 3}
       propertyPath: m_Name
@@ -13695,6 +13707,10 @@ PrefabInstance:
       propertyPath: m_IsOn
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3853773045602947128, guid: 9f10abc4e783ed1488b0034fbd39404b, type: 3}
+      propertyPath: m_Name
+      value: SpritesetCollisionsLabel
+      objectReference: {fileID: 0}
     - target: {fileID: 4664280209940967650, guid: 9f10abc4e783ed1488b0034fbd39404b, type: 3}
       propertyPath: m_Name
       value: SpritesetCollToggle
@@ -14978,6 +14994,10 @@ PrefabInstance:
     - target: {fileID: 3782626596087012820, guid: 9f10abc4e783ed1488b0034fbd39404b, type: 3}
       propertyPath: m_IsOn
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853773045602947128, guid: 9f10abc4e783ed1488b0034fbd39404b, type: 3}
+      propertyPath: m_Name
+      value: SpritesetVisualsLabel
       objectReference: {fileID: 0}
     - target: {fileID: 4664280209940967650, guid: 9f10abc4e783ed1488b0034fbd39404b, type: 3}
       propertyPath: m_Name
@@ -18028,14 +18048,6 @@ PrefabInstance:
       propertyPath: uiScaler
       value: 
       objectReference: {fileID: 1448009711}
-    - target: {fileID: 5268705680743691664, guid: 6e4192f06bc5a95408e6b451af811165, type: 3}
-      propertyPath: extendedToggle
-      value: 
-      objectReference: {fileID: 432000038}
-    - target: {fileID: 5268705680743691664, guid: 6e4192f06bc5a95408e6b451af811165, type: 3}
-      propertyPath: tooltipsToggle
-      value: 
-      objectReference: {fileID: 9174924300996162542}
     - target: {fileID: 5999137097560128305, guid: 6e4192f06bc5a95408e6b451af811165, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -18119,10 +18131,6 @@ PrefabInstance:
     - target: {fileID: 7155116127193463244, guid: 6e4192f06bc5a95408e6b451af811165, type: 3}
       propertyPath: m_Name
       value: Tooltip
-      objectReference: {fileID: 0}
-    - target: {fileID: 8446160436422791913, guid: 6e4192f06bc5a95408e6b451af811165, type: 3}
-      propertyPath: m_Color.a
-      value: 0.78431374
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

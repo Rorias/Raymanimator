@@ -57,6 +57,7 @@ public class Tooltips : MonoBehaviour
     private const string PlaybackSpeedExtended = "You cannot go lower than 1.";
 
     private const string ResetButton = "Reset";
+    private const string OpenFolder = "Opens the given path in your file explorer.";
     #endregion
     #region Frame settings
     private const string PreviousFrame = "Load the previous frame of the animation to edit.\n";
@@ -122,8 +123,22 @@ public class Tooltips : MonoBehaviour
     private const string CancelMapping = "Cancel creation of the mapping or the changes made to the one currently being edited.";
     #endregion
     #region Binary Edit
-    private const string BinaryGameVersion = "";
-    private const string BinaryPath = "";
+    private const string BinaryGameVersion = "Select the version of Rayman that you want to edit/view.\n" +
+        "Every game has its own binaries that you'll need to have somewhere on your computer in order to edit them.";
+    private const string BinaryPath = "The path for the selected version of Rayman that contains the binary data for animations.\n" +
+        "For Rayman 1 PC (MS-DOS) this is the 'PCMAP' folder.";
+    private const string ColorPalette = "The palette to display the animation in. This will not affect the palette in the actual game.";
+    #endregion
+    #region Binary Export
+    private const string ExportAnimationData = "Toggling this means that all edits to frames of this animation will be saved to the binary of the selected game.\n" +
+        "They can then be viewed in the actual game.";
+    private const string ExportSpritesetVisuals = "Toggling this means that any mappings or edits to the spriteset will be saved to the binary of the selected game.\n" +
+        "If applicable, they can then be viewed in the actual game.";
+    private const string ExportSpritesetCollisions = "Toggling this means that any changes to the size or visual of sprites\n" +
+        "in the spriteset will influence the hitbox of said sprite in the game.\n" +
+        "This can be saved to the binary of the selected game and 'viewed' in the actual game.";
+    private const string ExportPixelScale = "Setting this scales up/down the pixel distance between parts used in this animation when saving to the binary of the selected game.\n" +
+        "This matters when exporting R3GBA sprites for R1 animations, for example.";
     #endregion
     #endregion
 
@@ -216,9 +231,15 @@ public class Tooltips : MonoBehaviour
             //Binary Edit
             "GameVersionSelectorText" => BinaryGameVersion,
             "BinaryPathText" => BinaryPath,
-
+            "PaletteSelectorText" => ColorPalette,
+            //Binary Export
+            "AnimationDataLabel" => ExportAnimationData,
+            "SpritesetVisualsLabel" => ExportSpritesetVisuals,
+            "SpritesetCollisionsLabel" => ExportSpritesetCollisions,
+            "ExportSizeName" or "ExportPixelSizeIF" => ExportPixelScale,
             //General items
             "ResetButtonText" => ResetButton,
+            "OpenButton" => OpenFolder,
             _ => "",
         };
 
@@ -228,7 +249,9 @@ public class Tooltips : MonoBehaviour
             return;
         }
 
-        int textLength = tooltipText.text.Split('.').Max(x => x.Length);
+        int sentenceLength = tooltipText.text.Split('.').Max(x => x.Length);
+        int breakLength = tooltipText.text.Split('\n').Max(x => x.Length);
+        int textLength = Math.Min(sentenceLength, breakLength);
         tooltipSize.x = textLength * 7f < 76 ? 76 : textLength * 7f;
         rect.sizeDelta = tooltipSize;
 
