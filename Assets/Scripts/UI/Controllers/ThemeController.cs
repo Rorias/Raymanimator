@@ -74,9 +74,10 @@ public class ThemeController : Raymanimator
             case GameSettings.Themes.Dark:
                 currentScheme = colorSchemeDark;
                 break;
-            case GameSettings.Themes.Colorcoded:
-                return;
+            //case GameSettings.Themes.Colorcoded:
+            //    return;
             default:
+                DebugHelper.Log("Settings file is missing or has been tampered with.", DebugHelper.Severity.warning);
                 Debug.Log("Settings file is missing or has been tampered with.");
                 break;
         }

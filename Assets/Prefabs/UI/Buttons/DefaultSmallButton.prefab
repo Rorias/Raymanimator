@@ -70,7 +70,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_PressedColor: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
-    m_SelectedColor: {r: 0.627451, g: 0.627451, b: 0.627451, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.3764706, g: 0.3764706, b: 0.3764706, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -91,6 +91,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   ignoreValidation: 0
+  onMouseEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onMouseExit:
+    m_PersistentCalls:
+      m_Calls: []
+  onButtonDeselect:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8286881940066428887
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,7 +112,7 @@ GameObject:
   - component: {fileID: 3278940120515052562}
   - component: {fileID: 1290450715371847851}
   m_Layer: 5
-  m_Name: DefaultButtonText
+  m_Name: DefaultSmallButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

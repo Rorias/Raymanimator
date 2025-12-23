@@ -34,6 +34,7 @@ public class Tooltips : MonoBehaviour
 
     private const string ReverseButton = "Saves the animation with the frame order reversed to a seperate file.\n";
     private const string DoubleButton = "Saves the animation with each frame duplicated in order, to a seperate file.\n";
+    private const string BinaryButton = "Saves the animation to your disk for separate editing.\n This does not save the changes to the actual game.";
 
     private const string CameraZoom = "Type the zoom level of the camera.\n<b>You can also increase and decrease the zoom level using the scroll wheel.</b>";
     private const string CameraZoomReset = "Resets the zoom level of the camera.";
@@ -53,8 +54,8 @@ public class Tooltips : MonoBehaviour
     private const string Play = "Press this button to start playing your animation.\nCopy To Next will be automatically turned off when you press play.\n";
     private const string PlayExtended = "No functions can be used whilst the animation is playing to prevent accidental changes during the playback.";
 
-    private const string PlaybackSpeed = "Type the speed you want your animation to play at.\nThe higher the value, the faster the animation will play.\n";
-    private const string PlaybackSpeedExtended = "You cannot go lower than 1.";
+    private const string PlaybackSpeed = "Type the speed you want your animation to play at.\nThe higher the value, the faster the animation will play.\nYou cannot go lower than 1.";
+    private const string PlaybackSpeedExtended = "When editing a binary animation, the playback speed does not get saved to the actual game.";
 
     private const string ResetButton = "Reset";
     private const string OpenFolder = "Opens the given path in your file explorer.";
@@ -178,6 +179,7 @@ public class Tooltips : MonoBehaviour
         tooltipText.text = UIUtility.rayResults[0].gameObject.name switch
         {
             //File settings
+            "SaveBinaryText" => BinaryButton,
             "SaveAnimationButtonText" => SaveButton + (extendedOn ? SaveButtonExtended : ""),
             "SaveAsGIFButtonText" => GifButton + (extendedOn ? GifButtonExtended : ""),
             "SaveInReverseButtonText" => ReverseButton,

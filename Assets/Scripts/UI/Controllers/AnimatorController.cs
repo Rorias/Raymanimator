@@ -74,7 +74,7 @@ public partial class AnimatorController : Raymanimator
     private float playbackSpeed = 24f;
 
     private bool playingAnimation = false;
-    private bool copyToNextFrame = true;
+    private bool copyToNextFrame = false;
     private bool copyToNextFrameWasOn = false;
     [NonSerialized] public bool ghostingPrevious = true;
     [NonSerialized] public bool ghostingNext = true;
@@ -470,6 +470,15 @@ public partial class AnimatorController : Raymanimator
             {
                 button.interactable = _state;
             }
+        }
+
+        //TODO: Temp until binary part/frame add/remove works
+        if (thisAnim.binaryAnimationIndex != -1)
+        {
+            addFrameButton.interactable = false;
+            removeFrameButton.interactable = false;
+            addPartButton.interactable = false;
+            removePartButton.interactable = false;
         }
 
         foreach (Toggle toggle in allToggles)
@@ -1026,11 +1035,11 @@ public partial class AnimatorController : Raymanimator
         AnimationManager animManager = AnimationManager.Instance;
         if (gameManager.currentAnimation.binaryAnimationIndex != -1)
         {
-            animManager.SaveFile(gameManager.currentAnimation);
+            animManager.SaveBinaryFile(gameManager.currentAnimation, gameManager.spritesetImages);
         }
         else
         {
-            animManager.SaveBinaryFile(gameManager.currentAnimation, gameManager.spritesetImages);
+            animManager.SaveFile(gameManager.currentAnimation);
         }
         exitConfirmWindow.noButton.onClick.RemoveAllListeners();
         Quit();

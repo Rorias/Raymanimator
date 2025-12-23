@@ -3,7 +3,6 @@ using BinarySerializer.Ray1;
 using BinarySerializer.Ray1.PC;
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -221,8 +220,8 @@ public sealed class Rayman1BinaryAnimation
         }
 
         BinarySerializer.Ray1.Animation binaryAnim = des.Animations[_animIndex];
-        Debug.Log("Animation count for object " + _object.ToString() + ": " + des.Animations.Length);
-        Debug.Log("Succesfully retrieved animation data: " + des.Animations.Length);
+        //Debug.Log("Animation count for object " + _object.ToString() + ": " + des.Animations.Length);
+        //Debug.Log("Succesfully retrieved animation data: " + des.Animations.Length);
 
         Animation rayman1Anim = new Animation();
         rayman1Anim.animationName = _animName;

@@ -31,7 +31,7 @@ public sealed class GameSettings
     public static string file;
     public const string fileName = "RaymanimatorSettings";
 
-    public enum Themes { Light, Dark, Colorcoded };
+    public enum Themes { Light, Dark/*, Colorcoded*/ };
     public enum Languages { English, Nederlands };
 
     public bool firstLoad;
@@ -42,7 +42,7 @@ public sealed class GameSettings
     public class Hotkeys
     {
         [SerializeField] public InputManager.InputKey nm;
-        [SerializeField] public KeyCode[] hks;//hotkeys
+        [SerializeField] public KeyCode[] hks = { KeyCode.None, KeyCode.None };//hotkeys
     }
 
     public Hotkeys[] keyboardHotkeys { get { return kbhs; } set { kbhs = value; } }

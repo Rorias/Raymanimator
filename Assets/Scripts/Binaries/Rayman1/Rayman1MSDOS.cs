@@ -245,8 +245,8 @@ public class Rayman1MSDOS
     public enum DesignObjects
     {
         Rayman,
-        Items,
-        //MiniRayman, //doesn't have animations? I don't know how the game handles this
+        Items, 
+        //is Mini Rayman, so animation data is copied over from Rayman and halved.
         Items2 = 3,
         //Fonts at 4 and 5 don't have animations
         ContinueClock = 6,
@@ -394,7 +394,7 @@ public class Rayman1MSDOS
         FryingPanCandyChateau,
         MrDark,
         WaterSplashCandyChateau,
-        //156 has no animation data for some reason
+        //156 is Dark Rayman, so animation data is copied over from Rayman
         SomeObject18 = 157,
         CageUnlockCandyChateau,
         StrangeGateCandyChateau,
@@ -556,18 +556,18 @@ public class Rayman1MSDOS
         ItemMagicianShowBonus,
         ItemMagicianTakeTings,
         ItemMagicianIdleWait2,
-        ItemStrangeSmallP2Dot,
-        ItemStrangeSmallP2Dot2,
-        ItemStrangeSmallP2Dot3,
-        ItemStrangeSmallP2Dot4,
-        ItemStrangeSmallP2Dot5,
-        ItemStrangeSmallP2Dot6,
-        ItemStrangeSmallP2Dot7,
-        ItemStrangeSmallP2Dot8,
-        ItemStrangeSmallP2Dot9,
-        ItemStrangeSmallP2Dot10,
-        ItemStrangeSmallP2Dot11,
-        ItemStrangeSmallP2Dot12,
+        ItemPaletteSwap1to2Hori,
+        ItemPaletteSwap1to3Hori,
+        ItemPaletteSwap2to3Hori,
+        ItemPaletteSwap2to1Hori,
+        ItemPaletteSwap3to1Hori,
+        ItemPaletteSwap3to2Hori,
+        ItemPaletteSwap1to2Vert,
+        ItemPaletteSwap1to3Vert,
+        ItemPaletteSwap2to3Vert,
+        ItemPaletteSwap2to1Vert,
+        ItemPaletteSwap3to1Vert,
+        ItemPaletteSwap3to2Vert,
         ItemMagicianShowTingRequirement,
     }
 
