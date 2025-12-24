@@ -54,6 +54,7 @@ public class MiniPlaybackController : Raymanimator
         }
 
         currentFrame = thisAnim.frames[0];
+        Camera.main.transform.position = new Vector3(thisAnim.frames[0].frameParts[0].xPos, thisAnim.frames[0].frameParts[0].yPos, -10);
 
         StartCoroutine(StartAnimation());
     }

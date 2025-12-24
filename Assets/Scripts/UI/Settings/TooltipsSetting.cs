@@ -11,9 +11,11 @@ public class TooltipsSetting : Settings
     {
         base.Awake();
 
-        tooltipsToggle.onValueChanged.AddListener((_state)=> { TooltipState(_state); });
-        extendedToggle.onValueChanged.AddListener(delegate { ExtendedState(); });
-
+        tooltipsToggle.onValueChanged.AddListener((_state) => { TooltipState(_state); });
+        if (extendedToggle != null)
+        {
+            extendedToggle.onValueChanged.AddListener(delegate { ExtendedState(); });
+        }
         tooltips = FindObjectOfType<Tooltips>();
     }
 
@@ -25,7 +27,10 @@ public class TooltipsSetting : Settings
     public void TooltipState(bool _state)
     {
         settings.tooltipsOn = _state;
-        extendedToggle.interactable = settings.tooltipsOn;
+        if (extendedToggle != null)
+        {
+            extendedToggle.interactable = settings.tooltipsOn;
+        }
         settings.SaveSettings();
     }
 

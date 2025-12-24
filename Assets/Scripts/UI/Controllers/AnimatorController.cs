@@ -169,6 +169,8 @@ public partial class AnimatorController : Raymanimator
         UpdatePos();
         UpdatePriorityText();
         UpdateFlip();
+
+        Camera.main.transform.position = new Vector3(thisAnim.frames[0].frameParts[0].xPos, thisAnim.frames[0].frameParts[0].yPos, -10);
     }
 
     private void Update()
