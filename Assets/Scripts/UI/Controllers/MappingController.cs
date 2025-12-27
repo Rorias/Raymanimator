@@ -110,12 +110,15 @@ public class MappingController : Settings
 
     private void ClearCreateEditMapping()
     {
-        for (int i = targetSpriteset.Count - 1; i >= 0; i--)
+        if (targetSpriteset != null)
         {
-            if (mapperItems.Count > 0)
+            for (int i = targetSpriteset.Count - 1; i >= 0; i--)
             {
-                Destroy(mapperItems[i].gameObject);
-                mapperItems.RemoveAt(i);
+                if (mapperItems.Count > 0)
+                {
+                    Destroy(mapperItems[i].gameObject);
+                    mapperItems.RemoveAt(i);
+                }
             }
         }
 
@@ -214,6 +217,11 @@ public class MappingController : Settings
         else
         {
             targetSpriteset = uiUtility.LoadSpriteset(targetSpritesetDD.captionText.text);
+        }
+
+        if (targetSpriteset == null)
+        {
+            return;
         }
 
         for (int i = 0; i < targetSpriteset.Count; i++)

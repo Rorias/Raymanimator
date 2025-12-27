@@ -548,7 +548,7 @@ public sealed class Rayman1BinaryAnimation
             return allfix.DesItems[_objectIndex];
         }
 
-        if (worlds != null && worlds.Length > 0)
+        if (worlds[0] != null)
         {
             if (_objectIndex > Rayman1MSDOS.allfixEndIndex && _objectIndex <= Rayman1MSDOS.jungleEndIndex)
             {
@@ -577,7 +577,6 @@ public sealed class Rayman1BinaryAnimation
 
             if (_objectIndex > Rayman1MSDOS.caveEndIndex && _objectIndex <= Rayman1MSDOS.candyEndIndex)
             {
-                Debug.Log(worlds[5].DesItems.Length + " candy designs count");
                 return worlds[5].DesItems[_objectIndex - Rayman1MSDOS.caveEndIndex - 1];
             }
         }

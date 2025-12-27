@@ -45,10 +45,10 @@ public class ThemeController : Raymanimator
     public void ReloadSceneData()
     {
         panels = FindObjectsByType<Image>(FindObjectsInactive.Include, FindObjectsSortMode.None).Where(x => x.tag == "MenuPanel").ToArray();
-        dropdowns = FindObjectsByType<TMP_DropdownPlus>(FindObjectsSortMode.None);
-        inputfields = FindObjectsByType<TMP_InputField>(FindObjectsSortMode.None);
-        buttons = FindObjectsByType<ButtonPlus>(FindObjectsSortMode.None);
-        toggles = FindObjectsByType<Toggle>(FindObjectsSortMode.None);
+        dropdowns = FindObjectsByType<TMP_DropdownPlus>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        inputfields = FindObjectsByType<TMP_InputField>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        buttons = FindObjectsByType<ButtonPlus>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        toggles = FindObjectsByType<Toggle>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         labels = FindObjectsByType<TMP_Text>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         for (int i = 0; i < inputfields.Length; i++)
         {
