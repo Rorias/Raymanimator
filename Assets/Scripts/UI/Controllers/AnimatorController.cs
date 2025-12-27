@@ -286,7 +286,6 @@ public partial class AnimatorController : Raymanimator
             if (Convert.ToInt32(partSelectSlider.value) < thisAnim.maxPartCount)
             {
                 partSelectSlider.value++;
-                ChangeSelectedPart();
                 UpdatePos();
                 partSwapTimer = Time.time + standardDelayTime;
             }
@@ -296,7 +295,6 @@ public partial class AnimatorController : Raymanimator
             if (Convert.ToInt32(partSelectSlider.value) > 0)
             {
                 partSelectSlider.value--;
-                ChangeSelectedPart();
                 UpdatePos();
                 partSwapTimer = Time.time + standardDelayTime;
             }
@@ -423,11 +421,7 @@ public partial class AnimatorController : Raymanimator
 
             for (int i = 0; i < gameParts.Count; i++)
             {
-                if (gameParts[i].polyColl != null)
-                {
-                    gameParts[i].polyColl.enabled = false;
-                }
-
+                gameParts[i].polyColl.enabled = false;
                 gameParts[i].anim.enabled = false;
             }
 
@@ -444,12 +438,9 @@ public partial class AnimatorController : Raymanimator
 
             for (int i = 0; i < gameParts.Count; i++)
             {
-                if (gameParts[i].polyColl != null)
-                {
-                    gameParts[i].polyColl.enabled = true;
-                }
-
+                gameParts[i].polyColl.enabled = true;
                 gameParts[i].anim.enabled = true;
+                gameParts[i].RecalculateCollision();
             }
 
             playButton.GetComponentInChildren<TMP_Text>().text = "Play";
@@ -668,12 +659,7 @@ public partial class AnimatorController : Raymanimator
         currentFrame = thisAnim.frames[frameId];//set current frame to selected frame from the frame selector
         UpdateFrameSelectText();
         UpdateSelectedParts();
-
-        //if (!playingAnimation)
-        //{
-        //    SetSelectedPart();
-        //    LoadPartData();
-        //}
+        UpdateFlip();
     }
 
     public void ClearFrame()
@@ -805,11 +791,6 @@ public partial class AnimatorController : Raymanimator
 
             currentParts.Add(currentFrame.frameParts[i]);
 
-            if (currentGameParts[i].polyColl == null)
-            {
-                continue;
-            }
-
             if (currentGameParts[i].sr.sprite == null)
             {
                 currentGameParts[i].polyColl.enabled = false;
@@ -883,6 +864,7 @@ public partial class AnimatorController : Raymanimator
             currentGameParts[i].sr.flipX = _value;
             currentGameParts[i].sr.sprite = currentGameParts[i].sr.sprite != null ? CreateSpriteWithPivot(currentGameParts[i].sr.sprite, new Vector2(Convert.ToInt32(_value), Convert.ToInt32(!currentGameParts[i].sr.flipY))) : null;
             currentParts[i].flipX = currentGameParts[i].sr.flipX;
+            currentGameParts[i].RecalculateCollision();
         }
     }
 
@@ -893,6 +875,7 @@ public partial class AnimatorController : Raymanimator
             currentGameParts[i].sr.flipY = _value;
             currentGameParts[i].sr.sprite = currentGameParts[i].sr.sprite != null ? CreateSpriteWithPivot(currentGameParts[i].sr.sprite, new Vector2(Convert.ToInt32(currentGameParts[i].sr.flipX), Convert.ToInt32(!_value))) : null;
             currentParts[i].flipY = currentGameParts[i].sr.flipY;
+            currentGameParts[i].RecalculateCollision();
         }
     }
 

@@ -1,12 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-
-using TMPro;
 
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class GamePart : MonoBehaviour
 {
@@ -139,8 +135,13 @@ public class GamePart : MonoBehaviour
                         path[n] = new Vector2(x, y);
                     }
                     polyColl.SetPath(p, path);
+                    polyColl.enabled = true;
                 }
             }
+        }
+        else
+        {
+            polyColl.enabled = false;
         }
     }
 }

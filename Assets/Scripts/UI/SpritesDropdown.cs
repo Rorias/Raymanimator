@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -45,10 +46,16 @@ public class SpritesDropdown : MonoBehaviour
         {
             _currentParts[i].part = ddSprites.options[ddSprites.value].image;
             _currentParts[i].partIndex = ddSprites.value;
-            _currentGameParts[i].sr.sprite = _currentParts[i].part;
+            //_currentGameParts[i].sr.sprite = _currentParts[i].part;
+            _currentGameParts[i].sr.sprite = _currentParts[i].part != null ? CreateSpriteWithPivot(_currentParts[i].part, new Vector2(Convert.ToInt32(_currentParts[i].flipX), Convert.ToInt32(!_currentParts[i].flipY))) : null;
             _currentGameParts[i].anim.SetBool("WasSelected", true);
             _currentGameParts[i].polyColl.enabled = true;
             _currentGameParts[i].RecalculateCollision();
         }
+    }
+
+    private Sprite CreateSpriteWithPivot(Sprite existingSprite, Vector2 pivot)
+    {
+        return Sprite.Create(existingSprite.texture, existingSprite.rect, pivot, existingSprite.pixelsPerUnit, 0, SpriteMeshType.FullRect, new Vector4(0, 0, 0, 0), true);
     }
 }
