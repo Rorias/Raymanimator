@@ -10,21 +10,21 @@ using System.Threading;
 
 using UnityEngine;
 
-public sealed class Rayman1BinaryAnimation
+public sealed class BinaryAnimation
 {
     #region Singleton
-    private static Rayman1BinaryAnimation _instance;
-    private Rayman1BinaryAnimation() { }
+    private static BinaryAnimation _instance;
+    private BinaryAnimation() { }
 
-    public static Rayman1BinaryAnimation Instance
+    public static BinaryAnimation Instance
     {
         get
         {
             if (null == _instance)
             {
-                _instance = new Rayman1BinaryAnimation();
+                _instance = new BinaryAnimation();
                 _instance.InitializeBinary();
-                if (BinaryFilesExist(GameSettings.Instance.binaryBasePath))
+                if (BinaryFilesExist(GameSettings.Instance.binaryBasePath, ""))
                 {
                     LoadBinaryFiles(GameSettings.Instance.binaryBasePath);
                 }
@@ -50,13 +50,23 @@ public sealed class Rayman1BinaryAnimation
     public static LevelFile[] caveLvls = new LevelFile[12];
     public static LevelFile[] candyLvls = new LevelFile[4];
 
+    //These are set here on purpose, despite not being used in the file. Leave them.
     private GameSettings settings;
 
-    public static bool BinaryFilesExist(string _path)
+    public static bool BinaryFilesExist(string _path, string _version)
     {
         if (string.IsNullOrWhiteSpace(_path) || !File.Exists(_path + "/" + allfixFile))
         {
-            DebugHelper.Log("Rayman 1 for MS-DOS could not be found in this folder.", DebugHelper.Severity.error);
+            switch (_version)
+            {
+                case Rayman1MSDOS.msdos:
+                case Rayman1PS1.ps1:
+                    DebugHelper.Log(_version + " could not be found in this folder.", DebugHelper.Severity.error);
+                    break;
+                default:
+                    DebugHelper.Log(_version + " is unknown to the Raymanimator at this time.", DebugHelper.Severity.critical);
+                    break;
+            }
             return false;
         }
 
@@ -70,6 +80,7 @@ public sealed class Rayman1BinaryAnimation
             basePath = _path;
             context = new Context(basePath);
             context.AddSettings(new Ray1Settings(Ray1EngineVersion.PC));
+            //context.AddSettings(new Ray1Settings(Ray1EngineVersion.PS1));
 
             using (context)
             {

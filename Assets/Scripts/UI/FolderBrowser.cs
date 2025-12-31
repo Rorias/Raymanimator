@@ -121,6 +121,7 @@ public class FolderBrowser : MonoBehaviour
         if (!string.IsNullOrWhiteSpace(result))
         {
             pathInputField.text = result;
+            pathInputField.onEndEdit.Invoke(result);
         }
     }
 

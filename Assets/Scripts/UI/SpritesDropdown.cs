@@ -46,7 +46,6 @@ public class SpritesDropdown : MonoBehaviour
         {
             _currentParts[i].part = ddSprites.options[ddSprites.value].image;
             _currentParts[i].partIndex = ddSprites.value;
-            //_currentGameParts[i].sr.sprite = _currentParts[i].part;
             _currentGameParts[i].sr.sprite = _currentParts[i].part != null ? CreateSpriteWithPivot(_currentParts[i].part, new Vector2(Convert.ToInt32(_currentParts[i].flipX), Convert.ToInt32(!_currentParts[i].flipY))) : null;
             _currentGameParts[i].anim.SetBool("WasSelected", true);
             _currentGameParts[i].polyColl.enabled = true;

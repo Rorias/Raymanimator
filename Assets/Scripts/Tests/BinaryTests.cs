@@ -21,9 +21,9 @@ public class BinaryTests : MonoBehaviour
     public IEnumerator TestConvertSpriteFromBinaryToUnityAndBack()
     {
         GameSettings.file = Application.persistentDataPath + "/" + GameSettings.fileName + ".json";
-        var instance = Rayman1BinaryAnimation.Instance;
+        var instance = BinaryAnimation.Instance;
 
-        Design raymanDes = Rayman1BinaryAnimation.allfix.DesItems[0];
+        Design raymanDes = BinaryAnimation.allfix.DesItems[0];
 
         BinarySerializer.Ray1.Sprite sprite = raymanDes.Sprites[1];
         byte[] pixels = new byte[sprite.Width * sprite.Height];
@@ -39,7 +39,7 @@ public class BinaryTests : MonoBehaviour
 
         yield return new WaitForSeconds(3f);
 
-        var palette = Rayman1BinaryAnimation.jungleLvls[0].MapInfo.Palettes.First();
+        var palette = BinaryAnimation.jungleLvls[0].MapInfo.Palettes.First();
         List<Color> paletteColors = new List<Color>();
         paletteColors.Add(new Color(0, 0, 0, 0));
         for (int i = 1; i < 112; i++)
@@ -92,9 +92,9 @@ public class BinaryTests : MonoBehaviour
     public IEnumerator TestIsSpritesetDataImageData()
     {
         GameSettings.file = Application.persistentDataPath + "/" + GameSettings.fileName + ".json";
-        var instance = Rayman1BinaryAnimation.Instance;
+        var instance = BinaryAnimation.Instance;
 
-        Design raymanDes = Rayman1BinaryAnimation.allfix.DesItems[0];
+        Design raymanDes = BinaryAnimation.allfix.DesItems[0];
 
         yield return new WaitForSeconds(3f);
 
@@ -111,9 +111,9 @@ public class BinaryTests : MonoBehaviour
     public IEnumerator TestSpriteSizeRecalculationResult()
     {
         GameSettings.file = Application.persistentDataPath + "/" + GameSettings.fileName + ".json";
-        var instance = Rayman1BinaryAnimation.Instance;
+        var instance = BinaryAnimation.Instance;
 
-        Design raymanDes = Rayman1BinaryAnimation.allfix.DesItems[0];
+        Design raymanDes = BinaryAnimation.allfix.DesItems[0];
 
         byte[][] originalSpriteData = new byte[raymanDes.Sprites.Length][];
         for (int i = 0; i < originalSpriteData.Length; i++)
@@ -152,11 +152,11 @@ public class BinaryTests : MonoBehaviour
     public IEnumerator TestGetAnimationDesigns()
     {
         GameSettings.file = Application.persistentDataPath + "/" + GameSettings.fileName + ".json";
-        var instance = Rayman1BinaryAnimation.Instance;
+        var instance = BinaryAnimation.Instance;
 
-        for (int i = 0; i < Rayman1BinaryAnimation.allfix.DesItems.Length; i++)
+        for (int i = 0; i < BinaryAnimation.allfix.DesItems.Length; i++)
         {
-            if (Rayman1BinaryAnimation.allfix.DesItems[i].IsAnimatedSprite)
+            if (BinaryAnimation.allfix.DesItems[i].IsAnimatedSprite)
             {
                 Debug.Log(i + " allfix is animated");
             }
@@ -170,9 +170,9 @@ public class BinaryTests : MonoBehaviour
 
         for (int j = 0; j < 6; j++)
         {
-            for (int i = 0; i < Rayman1BinaryAnimation.worlds[j].DesItems.Length; i++)
+            for (int i = 0; i < BinaryAnimation.worlds[j].DesItems.Length; i++)
             {
-                if (Rayman1BinaryAnimation.worlds[j].DesItems[i].IsAnimatedSprite)
+                if (BinaryAnimation.worlds[j].DesItems[i].IsAnimatedSprite)
                 {
                     Debug.Log(j + " - " + i + " is animated");
                 }

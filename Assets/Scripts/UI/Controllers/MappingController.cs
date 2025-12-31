@@ -34,7 +34,7 @@ public class MappingController : Settings
     #endregion
 
     private GameManager gameManager;
-    private Rayman1BinaryAnimation ray1Binary;
+    private BinaryAnimation ray1Binary;
     private ThemeController themeController;
 
     private Dictionary<int, Sprite> sourceSpriteset = new Dictionary<int, Sprite>();
@@ -50,7 +50,7 @@ public class MappingController : Settings
     {
         base.Awake();
         gameManager = GameManager.Instance;
-        ray1Binary = Rayman1BinaryAnimation.Instance;
+        ray1Binary = BinaryAnimation.Instance;
         themeController = FindObjectOfType<ThemeController>();
 
         binaryToggle.onValueChanged.AddListener((_state) => { SetBinaryState(_state); });

@@ -22,7 +22,7 @@ public class EditBinaryMenu : Raymanimator
     private GameManager gameManager;
     private GameSettings settings;
     private InputManager input;
-    private Rayman1BinaryAnimation rayBinary;
+    private BinaryAnimation rayBinary;
     private UIUtility uiUtility;
     private MiniPlaybackController miniPlayback;
 
@@ -33,7 +33,7 @@ public class EditBinaryMenu : Raymanimator
         gameManager = GameManager.Instance;
         settings = GameSettings.Instance;
         input = InputManager.Instance;
-        rayBinary = Rayman1BinaryAnimation.Instance;
+        rayBinary = BinaryAnimation.Instance;
         uiUtility = FindObjectOfType<UIUtility>();
         miniPlayback = FindObjectOfType<MiniPlaybackController>();
     }
@@ -107,7 +107,7 @@ public class EditBinaryMenu : Raymanimator
             return;
         }
 
-        if (!Rayman1BinaryAnimation.BinaryFilesExist(binaryPath))
+        if (!BinaryAnimation.BinaryFilesExist(binaryPath, gameVersionDD.captionText.text))
         {
             fileDD.interactable = false;
             objectDD.interactable = false;
@@ -118,7 +118,7 @@ public class EditBinaryMenu : Raymanimator
 
         settings.binaryBasePath = binaryPath;
         settings.SaveSettings();
-        Rayman1BinaryAnimation.LoadBinaryFiles(binaryPath);
+        BinaryAnimation.LoadBinaryFiles(binaryPath);
         SetFilesForVersion();
         Debug.Log("Succesfully loaded binary file data.");
     }

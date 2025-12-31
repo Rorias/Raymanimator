@@ -51,7 +51,6 @@ public sealed class AnimationManager
             }
         }
 
-        //TODO: Save the spriteset used by the binary animation if it doesn't already exist
         SaveAnimationXMLFile(settings.animationsPath + "\\" + _anim.animationName, _anim);
         DebugHelper.Log(_anim.animationName + " binary saved!");
     }
@@ -111,7 +110,7 @@ public sealed class AnimationManager
     public void SaveToBinary(Animation _anim, bool _animData, bool _visuals, bool _colls, float _pixelSize)
     {
         Rayman1MSDOS.DesignObjects currObject = (Rayman1MSDOS.DesignObjects)Enum.Parse(typeof(Rayman1MSDOS.DesignObjects), _anim.usedSpriteset);
-        Rayman1BinaryAnimation rayBinary = Rayman1BinaryAnimation.Instance;
+        BinaryAnimation rayBinary = BinaryAnimation.Instance;
         rayBinary.SaveRaymAnimationToBinary(
             _anim, gameManager.spritesetImages,
             (int)currObject,
