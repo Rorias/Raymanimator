@@ -271,7 +271,7 @@ public sealed class BinaryAnimation
 
     public void SaveRaymAnimationToBinary(
         Animation _rayman1Anim, Dictionary<int, UnityEngine.Sprite> _spriteset,
-        int _objectIndex, int _animIndex,
+        int _objectIndex, int _animIndex, int _paletteIndex,
         bool _animData, bool _visuals, bool _colls, float _pixelSize)
     {
         Design des = GetR1MSDOSDesignByIndex(_objectIndex);
@@ -289,7 +289,7 @@ public sealed class BinaryAnimation
 
         if (_visuals)
         {
-            byte[] imageData = SaveSpriteset(_spriteset, des, _colls);
+            byte[] imageData = SaveSpriteset(_spriteset, des, _paletteIndex, _colls);
             ConvertImageData(ref imageData);
             des.ImageData = imageData;
             Debug.Log("Recalculated imagedata size: " + des.ImageData.Length);
@@ -395,9 +395,9 @@ public sealed class BinaryAnimation
         }
     }
 
-    public byte[] SaveSpriteset(Dictionary<int, UnityEngine.Sprite> _spriteset, Design _imageData, bool _colls)
+    public byte[] SaveSpriteset(Dictionary<int, UnityEngine.Sprite> _spriteset, Design _imageData, int _paletteIndex, bool _colls)
     {
-        var palette = jungleLvls[1].MapInfo.Palettes.First();
+        var palette = GetR1MSDOSPaletteByIndex(_paletteIndex);
         List<Color> paletteColors = new List<Color>();
         paletteColors.Add(new Color(0, 0, 0, 0));
         for (int i = 1; i < 160; i++)

@@ -229,6 +229,7 @@ public class EditBinaryMenu : Raymanimator
         }
 
         gameManager.currentAnimation = rayBinary.LoadRaymAnimationFromBinary(animationDD.captionText.text, currObject, animationDD.value, selectedSpriteset, map);
+        gameManager.currentAnimation.binaryPaletteIndex = paletteDD.value;
     }
 
     private void CreatePreviewAnimation()

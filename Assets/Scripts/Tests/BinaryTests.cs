@@ -99,7 +99,7 @@ public class BinaryTests : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         Dictionary<int, UnityEngine.Sprite> spriteset = instance.LoadSpritesetFromBinary(0, 0);
-        byte[] newImageData = instance.SaveSpriteset(spriteset, raymanDes, false);
+        byte[] newImageData = instance.SaveSpriteset(spriteset, raymanDes, 0, false);
         instance.ConvertImageData(ref newImageData);
 
         Debug.Log(raymanDes.ImageData.Length + " original length, " + newImageData.Length + " new length");
@@ -128,7 +128,7 @@ public class BinaryTests : MonoBehaviour
         }
 
         Dictionary<int, UnityEngine.Sprite> spriteset = instance.LoadSpritesetFromBinary(0, 0);
-        byte[] newImageData = instance.SaveSpriteset(spriteset, raymanDes, true);
+        byte[] newImageData = instance.SaveSpriteset(spriteset, raymanDes, 0, true);
         instance.ConvertImageData(ref newImageData);
         raymanDes.ImageData = newImageData;
 
