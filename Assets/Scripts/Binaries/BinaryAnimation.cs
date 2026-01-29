@@ -271,7 +271,7 @@ public sealed class BinaryAnimation
 
     public void SaveRaymAnimationToBinary(
         Animation _rayman1Anim, Dictionary<int, UnityEngine.Sprite> _spriteset,
-        int _objectIndex, int _animIndex, int _paletteIndex,
+        int _objectIndex, int _animIndex,
         bool _animData, bool _visuals, bool _colls, float _pixelSize)
     {
         Design des = GetR1MSDOSDesignByIndex(_objectIndex);
@@ -289,7 +289,7 @@ public sealed class BinaryAnimation
 
         if (_visuals)
         {
-            byte[] imageData = SaveSpriteset(_spriteset, des, _paletteIndex, _colls);
+            byte[] imageData = SaveSpriteset(_spriteset, des, _rayman1Anim.binaryPaletteIndex, _rayman1Anim.binarySecondaryPaletteIndex, _colls);
             ConvertImageData(ref imageData);
             des.ImageData = imageData;
             Debug.Log("Recalculated imagedata size: " + des.ImageData.Length);
@@ -395,9 +395,9 @@ public sealed class BinaryAnimation
         }
     }
 
-    public byte[] SaveSpriteset(Dictionary<int, UnityEngine.Sprite> _spriteset, Design _imageData, int _paletteIndex, bool _colls)
+    public byte[] SaveSpriteset(Dictionary<int, UnityEngine.Sprite> _spriteset, Design _imageData, int _paletteIndex, int _secPaletteIndex, bool _colls)
     {
-        var palette = GetR1MSDOSPaletteByIndex(_paletteIndex);
+        IList<BaseColor> palette = GetR1MSDOSPaletteByIndex(_paletteIndex, _secPaletteIndex);
         List<Color> paletteColors = new List<Color>();
         paletteColors.Add(new Color(0, 0, 0, 0));
         for (int i = 1; i < 160; i++)
@@ -494,7 +494,7 @@ public sealed class BinaryAnimation
         }
     }
 
-    public Dictionary<int, UnityEngine.Sprite> LoadSpritesetFromBinary(Rayman1MSDOS.DesignObjects _object, int _paletteIndex)
+    public Dictionary<int, UnityEngine.Sprite> LoadSpritesetFromBinary(Rayman1MSDOS.DesignObjects _object, int _paletteIndex, int _secPaletteIndex)
     {
         Design des = GetR1MSDOSDesignByIndex((int)_object);
         if (des == null)
@@ -505,7 +505,7 @@ public sealed class BinaryAnimation
 
         Dictionary<int, UnityEngine.Sprite> spriteset = new Dictionary<int, UnityEngine.Sprite>();
 
-        IList<BaseColor> palette = GetR1MSDOSPaletteByIndex(_paletteIndex);
+        IList<BaseColor> palette = GetR1MSDOSPaletteByIndex(_paletteIndex, _secPaletteIndex);
         int offset = 1;
         for (int i = 1; i < des.Sprites.Length; i++)
         {
@@ -595,56 +595,178 @@ public sealed class BinaryAnimation
         return null;
     }
 
-    private IList<BaseColor> GetR1MSDOSPaletteByIndex(int _paletteIndex)
+    private IList<BaseColor> GetR1MSDOSPaletteByIndex(int _paletteIndex, int _secPaletteIndex)
     {
+        IList<BaseColor> palette;
+        IList<BaseColor> secPalette;
+
         switch (_paletteIndex)
         {
             case 0:
-                return jungleLvls[0].MapInfo.Palettes.First();
+                palette = jungleLvls[0].MapInfo.Palettes.First();
+                break;
             case 1:
-                return jungleLvls[21].MapInfo.Palettes.First();
+                palette = jungleLvls[21].MapInfo.Palettes.First();
+                break;
             case 2:
-                return jungleLvls[14].MapInfo.Palettes.First();
+                palette = jungleLvls[14].MapInfo.Palettes.First();
+                break;
             case 3:
-                return jungleLvls[15].MapInfo.Palettes.First();
+                palette = jungleLvls[15].MapInfo.Palettes.First();
+                break;
             case 4:
-                return musicLvls[1].MapInfo.Palettes.First();
+                palette = musicLvls[1].MapInfo.Palettes.First();
+                break;
             case 5:
-                return musicLvls[3].MapInfo.Palettes.First();
+                palette = musicLvls[3].MapInfo.Palettes.First();
+                break;
             case 6:
-                return musicLvls[11].MapInfo.Palettes.First();
+                palette = musicLvls[11].MapInfo.Palettes.First();
+                break;
             case 7:
-                return musicLvls[0].MapInfo.Palettes.First();
+                palette = musicLvls[0].MapInfo.Palettes.First();
+                break;
             case 8:
-                return musicLvls[15].MapInfo.Palettes.First();
+                palette = musicLvls[15].MapInfo.Palettes.First();
+                break;
             case 9:
-                return stoneLvls[0].MapInfo.Palettes.First();
+                palette = stoneLvls[0].MapInfo.Palettes.First();
+                break;
             case 10:
-                return stoneLvls[5].MapInfo.Palettes.First();
+                palette = stoneLvls[5].MapInfo.Palettes.First();
+                break;
             case 11:
-                return stoneLvls[9].MapInfo.Palettes.First();
+                palette = stoneLvls[9].MapInfo.Palettes.First();
+                break;
             case 12:
-                return imageLvls[0].MapInfo.Palettes.First();
+                palette = imageLvls[0].MapInfo.Palettes.First();
+                break;
             case 13:
-                return imageLvls[3].MapInfo.Palettes.First();
+                palette = imageLvls[3].MapInfo.Palettes.First();
+                break;
             case 14:
-                return imageLvls[10].MapInfo.Palettes.First();
+                palette = imageLvls[10].MapInfo.Palettes.First();
+                break;
             case 15:
-                return caveLvls[1].MapInfo.Palettes.First();
+                palette = caveLvls[1].MapInfo.Palettes.First();
+                break;
             case 16:
-                return caveLvls[0].MapInfo.Palettes.First();
+                palette = caveLvls[0].MapInfo.Palettes.First();
+                break;
             case 17:
-                return caveLvls[2].MapInfo.Palettes.First();
+                palette = caveLvls[2].MapInfo.Palettes.First();
+                break;
             case 18:
-                return caveLvls[10].MapInfo.Palettes.First();
+                palette = caveLvls[10].MapInfo.Palettes.First();
+                break;
             case 19:
-                return candyLvls[0].MapInfo.Palettes.First();
+                palette = candyLvls[0].MapInfo.Palettes.First();
+                break;
             case 20:
-                return candyLvls[3].MapInfo.Palettes.First();
+                palette = candyLvls[3].MapInfo.Palettes.First();
+                break;
             default:
                 Debug.Log("<color=orange>THIS ISN'T SUPPOSED TO HAPPEN!!</color>");
-                return jungleLvls[0].MapInfo.Palettes.First();
+                palette = jungleLvls[0].MapInfo.Palettes.First();
+                break;
         }
+
+        switch (_secPaletteIndex)
+        {
+            case 0:
+                secPalette = jungleLvls[0].MapInfo.Palettes.First();
+                break;
+            case 1:
+                secPalette = jungleLvls[21].MapInfo.Palettes.First();
+                break;
+            case 2:
+                secPalette = jungleLvls[14].MapInfo.Palettes.First();
+                break;
+            case 3:
+                secPalette = jungleLvls[15].MapInfo.Palettes.First();
+                break;
+            case 4:
+                secPalette = musicLvls[1].MapInfo.Palettes.First();
+                break;
+            case 5:
+                secPalette = musicLvls[3].MapInfo.Palettes.First();
+                break;
+            case 6:
+                secPalette = musicLvls[11].MapInfo.Palettes.First();
+                break;
+            case 7:
+                secPalette = musicLvls[0].MapInfo.Palettes.First();
+                break;
+            case 8:
+                secPalette = musicLvls[15].MapInfo.Palettes.First();
+                break;
+            case 9:
+                secPalette = stoneLvls[0].MapInfo.Palettes.First();
+                break;
+            case 10:
+                secPalette = stoneLvls[5].MapInfo.Palettes.First();
+                break;
+            case 11:
+                secPalette = stoneLvls[9].MapInfo.Palettes.First();
+                break;
+            case 12:
+                secPalette = imageLvls[0].MapInfo.Palettes.First();
+                break;
+            case 13:
+                secPalette = imageLvls[3].MapInfo.Palettes.First();
+                break;
+            case 14:
+                secPalette = imageLvls[10].MapInfo.Palettes.First();
+                break;
+            case 15:
+                secPalette = caveLvls[1].MapInfo.Palettes.First();
+                break;
+            case 16:
+                secPalette = caveLvls[0].MapInfo.Palettes.First();
+                break;
+            case 17:
+                secPalette = caveLvls[2].MapInfo.Palettes.First();
+                break;
+            case 18:
+                secPalette = caveLvls[10].MapInfo.Palettes.First();
+                break;
+            case 19:
+                secPalette = candyLvls[0].MapInfo.Palettes.First();
+                break;
+            case 20:
+                secPalette = candyLvls[3].MapInfo.Palettes.First();
+                break;
+            default:
+                secPalette = palette;
+                break;
+        }
+
+        IList<BaseColor> totalPalette = new RGB666Color[256];
+
+        //combine palettes
+        for (int i = 0; i < palette.Count; i++)
+        {
+            if (i > 160)
+            {
+                totalPalette[i] = palette[i];
+                continue;
+            }
+
+            for (int j = 0; j < secPalette.Count; j++)
+            {
+                if (palette[i].Red == secPalette[j].Red && palette[i].Green == secPalette[j].Green && palette[i].Blue == secPalette[j].Blue)
+                {
+                    totalPalette[i] = palette[i];
+                    break;
+                }
+                else
+                {
+                    totalPalette[i] = new RGB666Color() { Red = 0, Green = 0, Blue = 0, Alpha = 1 };
+                }
+            }
+        }
+
+        return totalPalette;
     }
 
     public Texture2D GetBinarySpriteTexture(BinarySerializer.Ray1.Sprite s, IList<BaseColor> palette, byte[] processedImageData)

@@ -18,6 +18,7 @@ public class EditBinaryMenu : Raymanimator
     public TMP_DropdownPlus objectDD;
     public TMP_DropdownPlus animationDD;
     public TMP_DropdownPlus paletteDD;
+    public TMP_DropdownPlus secPaletteDD;
 
     private GameManager gameManager;
     private GameSettings settings;
@@ -66,11 +67,13 @@ public class EditBinaryMenu : Raymanimator
         objectDD.onValueChanged.AddListener(delegate { SetAnimationsForObject(); });
         animationDD.onValueChanged.AddListener(delegate { CreatePreviewAnimation(); });
         paletteDD.onValueChanged.AddListener(delegate { CreatePreviewAnimation(); });
+        secPaletteDD.onValueChanged.AddListener(delegate { CreatePreviewAnimation(); });
 
         fileDD.interactable = false;
         objectDD.interactable = false;
         animationDD.interactable = false;
         paletteDD.interactable = false;
+        secPaletteDD.interactable = false;
 
         InitializeGameVersionDropdown();
 
@@ -113,6 +116,7 @@ public class EditBinaryMenu : Raymanimator
             objectDD.interactable = false;
             animationDD.interactable = false;
             paletteDD.interactable = false;
+            secPaletteDD.interactable = false;
             return;
         }
 
@@ -205,6 +209,7 @@ public class EditBinaryMenu : Raymanimator
         animationDD.AddOptions(anims);
         animationDD.interactable = true;
         paletteDD.interactable = true;
+        secPaletteDD.interactable = true;
         if (animationDD.value != -1)
         {
             animationDD.value = -1;
@@ -224,12 +229,13 @@ public class EditBinaryMenu : Raymanimator
             }
             else
             {
-                gameManager.spritesetImages = rayBinary.LoadSpritesetFromBinary(currObject, paletteDD.value);
+                gameManager.spritesetImages = rayBinary.LoadSpritesetFromBinary(currObject, paletteDD.value, secPaletteDD.value);
             }
         }
 
         gameManager.currentAnimation = rayBinary.LoadRaymAnimationFromBinary(animationDD.captionText.text, currObject, animationDD.value, selectedSpriteset, map);
         gameManager.currentAnimation.binaryPaletteIndex = paletteDD.value;
+        gameManager.currentAnimation.binarySecondaryPaletteIndex = secPaletteDD.value;
     }
 
     private void CreatePreviewAnimation()

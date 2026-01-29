@@ -128,7 +128,10 @@ public class Tooltips : MonoBehaviour
         "Every game has its own binaries that you'll need to have somewhere on your computer in order to edit them.";
     private const string BinaryPath = "The path for the selected version of Rayman that contains the binary data for animations.\n" +
         "For Rayman 1 PC (MS-DOS) this is the 'PCMAP' folder.";
-    private const string ColorPalette = "The palette to display the animation in. This will not affect the palette in the actual game.";
+    private const string ColorPalette = "The palette to display the animation in.\n" +
+        "This will affect which indexes the palette in the actual game reads from in the level this object appears in.";
+    private const string SecondaryColorPalette = "The secondary palette to display the animation in. \n" +
+        "Using this will combine the two palettes only on matching colors, degrading the overall quality,\n but making it look the same in all levels where either palette applies.";
     #endregion
     #region Binary Export
     private const string ExportAnimationData = "Toggling this means that all edits to frames of this animation will be saved to the binary of the selected game.\n" +
@@ -234,6 +237,7 @@ public class Tooltips : MonoBehaviour
             "GameVersionSelectorText" => BinaryGameVersion,
             "BinaryPathText" => BinaryPath,
             "PaletteSelectorText" => ColorPalette,
+            "SecPaletteSelectorText" => SecondaryColorPalette,
             //Binary Export
             "AnimationDataLabel" => ExportAnimationData,
             "SpritesetVisualsLabel" => ExportSpritesetVisuals,

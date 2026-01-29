@@ -115,7 +115,6 @@ public sealed class AnimationManager
             _anim, gameManager.spritesetImages,
             (int)currObject,
             _anim.binaryAnimationIndex,
-            _anim.binaryPaletteIndex,
             _animData,
             _visuals,
             _colls,
