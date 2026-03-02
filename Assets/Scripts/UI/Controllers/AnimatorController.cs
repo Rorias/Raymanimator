@@ -158,6 +158,12 @@ public partial class AnimatorController : Raymanimator
             CreateNextGhostPart(part);
         }
 
+        //Load empty animations to modify the spritesets
+        if (thisAnim.maxFrameCount == 1 && thisAnim.frames.Count == 0)
+        {
+            return;
+        }
+
         SetSliderValues();
 
         currentFrame = thisAnim.frames[0];

@@ -230,6 +230,18 @@ public sealed class BinaryAnimation
             return null;
         }
 
+        //Load empty animations to modify the spritesets
+        if (des.Animations.Length == 0)
+        {
+            Animation emptyAnim = new Animation();
+            emptyAnim.animationName = _animName;
+            emptyAnim.usedSpriteset = _spriteset;
+            emptyAnim.binaryAnimationIndex = _animIndex;
+            emptyAnim.maxFrameCount = 1;
+
+            return emptyAnim;
+        }
+
         BinarySerializer.Ray1.Animation binaryAnim = des.Animations[_animIndex];
         //Debug.Log("Animation count for object " + _object.ToString() + ": " + des.Animations.Length);
         //Debug.Log("Succesfully retrieved animation data: " + des.Animations.Length);
@@ -281,10 +293,13 @@ public sealed class BinaryAnimation
             return;
         }
 
-        BinarySerializer.Ray1.Animation binaryAnim = des.Animations[_animIndex];
-        if (_animData)
+        if (des.Animations.Length > 0)
         {
-            SaveFrames(_rayman1Anim, binaryAnim, _pixelSize);
+            BinarySerializer.Ray1.Animation binaryAnim = des.Animations[_animIndex];
+            if (_animData)
+            {
+                SaveFrames(_rayman1Anim, binaryAnim, _pixelSize);
+            }
         }
 
         if (_visuals)

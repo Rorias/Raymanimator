@@ -30,7 +30,14 @@ public class MiniPlaybackController : Raymanimator
     public void StartMiniPlayback()
     {
         thisAnim = gameManager.currentAnimation;
+
         DestroyPreviousPlayback();
+
+        //Load empty animations to modify the spritesets
+        if (thisAnim.maxFrameCount == 1 && thisAnim.frames.Count == 0)
+        {
+            return;
+        }
 
         spritesDDController.InitializeSpritesDropdown();
 

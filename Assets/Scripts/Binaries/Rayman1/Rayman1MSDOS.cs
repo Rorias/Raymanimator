@@ -21,8 +21,11 @@ public class Rayman1MSDOS
     private static Dictionary<DesignObjects, Type> ObjectAnimations = new Dictionary<DesignObjects, Type>()
     {
         { DesignObjects.Rayman, typeof(RayAnimations) },
+        { DesignObjects.MiniRayman, typeof(NoAnimations) },
         { DesignObjects.Items, typeof(ItemsAnimations) },
         { DesignObjects.Items2, typeof(Items2Animations) },
+        { DesignObjects.SmallFont, typeof(NoAnimations) },
+        { DesignObjects.BigAndMediumFont, typeof(NoAnimations) },
         { DesignObjects.ContinueClock, typeof(ContinueClockAnimations) },
         { DesignObjects.HunterDreamForest, typeof(HunterAnimations) },
         { DesignObjects.PoofEffectsDreamForest, typeof(PoofAnimations) },
@@ -246,9 +249,10 @@ public class Rayman1MSDOS
     {
         Rayman,
         Items, 
-        //is Mini Rayman, so animation data is copied over from Rayman and halved.
+        MiniRayman=2,//is Mini Rayman, so animation data is copied over from Rayman and halved. It has no animations itself, but the spriteset can be edited
         Items2 = 3,
-        //Fonts at 4 and 5 don't have animations
+        SmallFont=4,//Fonts don't have animations
+        BigAndMediumFont =5,//Fonts don't have animations
         ContinueClock = 6,
         //7 and 8 are parallax
         HunterDreamForest = 9,
@@ -774,6 +778,11 @@ public class Rayman1MSDOS
         Item2SmallSparkle3,
         Item2SmallSparkles,
         Item2SmallSparkles2,
+    }
+
+    private enum NoAnimations
+    {
+        None,
     }
 
     private enum ContinueClockAnimations
