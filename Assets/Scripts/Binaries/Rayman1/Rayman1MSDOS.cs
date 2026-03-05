@@ -21,12 +21,14 @@ public class Rayman1MSDOS
     private static Dictionary<DesignObjects, Type> ObjectAnimations = new Dictionary<DesignObjects, Type>()
     {
         { DesignObjects.Rayman, typeof(RayAnimations) },
-        { DesignObjects.MiniRayman, typeof(NoAnimations) },
         { DesignObjects.Items, typeof(ItemsAnimations) },
+        { DesignObjects.MiniRayman, typeof(NoAnimations) },
         { DesignObjects.Items2, typeof(Items2Animations) },
         { DesignObjects.SmallFont, typeof(NoAnimations) },
         { DesignObjects.BigAndMediumFont, typeof(NoAnimations) },
         { DesignObjects.ContinueClock, typeof(ContinueClockAnimations) },
+        { DesignObjects.DreamForestParallax1, typeof(NoAnimations) },
+        { DesignObjects.DreamForestParallax2, typeof(NoAnimations) },
         { DesignObjects.HunterDreamForest, typeof(HunterAnimations) },
         { DesignObjects.PoofEffectsDreamForest, typeof(PoofAnimations) },
         { DesignObjects.ElectoonsDreamForest, typeof(ElectoonAnimations) },
@@ -49,6 +51,7 @@ public class Rayman1MSDOS
         { DesignObjects.CageUnlockDreamForest, typeof(CageUnlockAnimations) },
         { DesignObjects.StrangeGateDreamForest, typeof(StrangeGateAnimations) },
         { DesignObjects.Breakout, typeof(BreakoutAnimations) },
+        { DesignObjects.BandLandParallax, typeof(NoAnimations) },
         { DesignObjects.HunterBandLand, typeof(HunterAnimations) },
         { DesignObjects.ElectoonsBandLand, typeof(ElectoonAnimations) },
         { DesignObjects.Trumpet, typeof(TrumpetAnimations) },
@@ -74,6 +77,8 @@ public class Rayman1MSDOS
         { DesignObjects.CloudSplashBandLand, typeof(CloudSplashAnimations) },
         { DesignObjects.CageUnlockBandLand, typeof(CageUnlockAnimations) },
         { DesignObjects.StrangeGateBandLand, typeof(StrangeGateAnimations) },
+        { DesignObjects.BlueMountainsParallax1, typeof(NoAnimations) },
+        { DesignObjects.BlueMountainsParallax2, typeof(NoAnimations) },
         { DesignObjects.CloudSplashBlueMountains, typeof(CloudSplashAnimations) },
         { DesignObjects.HunterBlueMountains, typeof(HunterAnimations) },
         { DesignObjects.ElectoonsBlueMountains, typeof(ElectoonAnimations) },
@@ -95,6 +100,9 @@ public class Rayman1MSDOS
         { DesignObjects.RisingWaterBlueMountains, typeof(RisingWaterAnimations) },
         { DesignObjects.CageUnlockBlueMountains, typeof(CageUnlockAnimations) },
         { DesignObjects.StrangeGateBlueMountains, typeof(StrangeGateAnimations) },
+        { DesignObjects.PictureCityParallax1, typeof(NoAnimations) },
+        { DesignObjects.PictureCityParallax2, typeof(NoAnimations) },
+        { DesignObjects.PictureCityParallax3, typeof(NoAnimations) },
         { DesignObjects.HunterPictureCity, typeof(HunterAnimations) },
         { DesignObjects.CloudSplashPictureCity, typeof(CloudSplashAnimations) },
         { DesignObjects.PictureCityItems, typeof(PictureCityAnimations) },
@@ -118,6 +126,7 @@ public class Rayman1MSDOS
         { DesignObjects.CageUnlockPictureCity, typeof(CageUnlockAnimations) },
         { DesignObjects.StrangeGatePictureCity, typeof(StrangeGateAnimations) },
         { DesignObjects.BounceSparkles, typeof(BounceSparklesAnimation) },
+        { DesignObjects.CavesOfSkopsParallax, typeof(NoAnimations) },
         { DesignObjects.LavaRockPiecesCavesOfSkops, typeof(LavaRockPieceAnimations) },
         { DesignObjects.HunterCavesOfSkops, typeof(HunterAnimations) },
         { DesignObjects.JoeBall, typeof(JoeBallAnimations) },
@@ -149,6 +158,8 @@ public class Rayman1MSDOS
         { DesignObjects.CavesOfSkopsItems3, typeof(CavesOfSkopsAnimations) },
         { DesignObjects.BreakableRock, typeof(BreakableRockAnimations) },
         { DesignObjects.MiniLavaRock, typeof(MiniLavaRockAnimation) },
+        { DesignObjects.CandyChateauParallax1, typeof(NoAnimations) },
+        { DesignObjects.CandyChateauParallax2, typeof(NoAnimations) },
         { DesignObjects.CloudSplashCandyChateau, typeof(CloudSplashAnimations) },
         { DesignObjects.MrDarkBosses, typeof(MrDarkBossAnimations) },
         { DesignObjects.HunterCandyChateau, typeof(HunterAnimations) },
@@ -165,6 +176,7 @@ public class Rayman1MSDOS
         { DesignObjects.FryingPanCandyChateau, typeof(FryingPanAnimations) },
         { DesignObjects.MrDark, typeof(MrDarkAnimations) },
         { DesignObjects.WaterSplashCandyChateau, typeof(WaterSplashAnimation) },
+        { DesignObjects.DarkRayman, typeof(NoAnimations) },
         { DesignObjects.SomeObject18, typeof(LeftOverObjectAnimations) },
         { DesignObjects.CageUnlockCandyChateau, typeof(CageUnlockAnimations) },
         { DesignObjects.StrangeGateCandyChateau, typeof(StrangeGateAnimations) },
@@ -243,18 +255,18 @@ public class Rayman1MSDOS
         return objects;
     }
 
-    //All missing indexes are either Design objects with no animations, or Design objects that are not animated.
-    //I saw no point in adding them to the list if they don't.. animate
+    //Some indexes are Design objects with no animations, or Design objects that are not animated. These are marked with a comment
     public enum DesignObjects
     {
         Rayman,
-        Items, 
-        MiniRayman=2,//is Mini Rayman, so animation data is copied over from Rayman and halved. It has no animations itself, but the spriteset can be edited
-        Items2 = 3,
-        SmallFont=4,//Fonts don't have animations
-        BigAndMediumFont =5,//Fonts don't have animations
-        ContinueClock = 6,
-        //7 and 8 are parallax
+        Items,
+        MiniRayman, //is Mini Rayman, so animation data is copied over from Rayman and halved. It has no animations itself, but the spriteset can be edited
+        Items2,
+        SmallFont, //Fonts don't have animations
+        BigAndMediumFont, //Fonts don't have animations
+        ContinueClock,
+        DreamForestParallax1, //Parallax doesn't have animations
+        DreamForestParallax2, //Parallax doesn't have animations
         HunterDreamForest = 9,
         PoofEffectsDreamForest,
         ElectoonsDreamForest,
@@ -277,7 +289,7 @@ public class Rayman1MSDOS
         CageUnlockDreamForest,
         StrangeGateDreamForest,
         Breakout,
-        //31 is parallax
+        BandLandParallax, //Parallax doesn't have animations
         HunterBandLand = 32,
         ElectoonsBandLand,
         Trumpet,
@@ -303,7 +315,8 @@ public class Rayman1MSDOS
         CloudSplashBandLand,
         CageUnlockBandLand,
         StrangeGateBandLand,
-        //57 & 58 are parallax
+        BlueMountainsParallax1, //Parallax doesn't have animations
+        BlueMountainsParallax2, //Parallax doesn't have animations
         CloudSplashBlueMountains = 59,
         HunterBlueMountains,
         ElectoonsBlueMountains,
@@ -325,7 +338,9 @@ public class Rayman1MSDOS
         RisingWaterBlueMountains,
         CageUnlockBlueMountains,
         StrangeGateBlueMountains,
-        //80, 81 & 82 are parallax
+        PictureCityParallax1, //Parallax doesn't have animations
+        PictureCityParallax2, //Parallax doesn't have animations
+        PictureCityParallax3, //Parallax doesn't have animations
         HunterPictureCity = 83,
         CloudSplashPictureCity,
         PictureCityItems,
@@ -349,7 +364,7 @@ public class Rayman1MSDOS
         CageUnlockPictureCity,
         StrangeGatePictureCity,
         BounceSparkles,
-        //106 is parallax
+        CavesOfSkopsParallax, //Parallax doesn't have animations
         LavaRockPiecesCavesOfSkops = 107,
         HunterCavesOfSkops,
         JoeBall,
@@ -381,7 +396,8 @@ public class Rayman1MSDOS
         CavesOfSkopsItems3,
         BreakableRock,
         MiniLavaRock,
-        //138 & 139 are parallax
+        CandyChateauParallax1, //Parallax doesn't have animations
+        CandyChateauParallax2, //Parallax doesn't have animations
         CloudSplashCandyChateau = 140,
         MrDarkBosses,
         HunterCandyChateau,
@@ -398,7 +414,7 @@ public class Rayman1MSDOS
         FryingPanCandyChateau,
         MrDark,
         WaterSplashCandyChateau,
-        //156 is Dark Rayman, so animation data is copied over from Rayman
+        DarkRayman, //is Dark Rayman, so animation data is copied over from Rayman. It has no animations itself, but the spriteset can be edited
         SomeObject18 = 157,
         CageUnlockCandyChateau,
         StrangeGateCandyChateau,

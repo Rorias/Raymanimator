@@ -82,6 +82,28 @@ public sealed class BinaryAnimation
             context.AddSettings(new Ray1Settings(Ray1EngineVersion.PC));
             //context.AddSettings(new Ray1Settings(Ray1EngineVersion.PS1));
 
+            // palette = jungleLvls[0].MapInfo.Palettes.First();
+            // palette = jungleLvls[21].MapInfo.Palettes.First();
+            // palette = jungleLvls[14].MapInfo.Palettes.First();
+            // palette = jungleLvls[15].MapInfo.Palettes.First();
+            // palette = musicLvls[1].MapInfo.Palettes.First();
+            // palette = musicLvls[3].MapInfo.Palettes.First();
+            // palette = musicLvls[11].MapInfo.Palettes.First();
+            // palette = musicLvls[0].MapInfo.Palettes.First();
+            // palette = musicLvls[15].MapInfo.Palettes.First();
+            // palette = stoneLvls[0].MapInfo.Palettes.First();
+            // palette = stoneLvls[5].MapInfo.Palettes.First();
+            // palette = stoneLvls[9].MapInfo.Palettes.First();
+            // palette = imageLvls[0].MapInfo.Palettes.First();
+            // palette = imageLvls[3].MapInfo.Palettes.First();
+            // palette = imageLvls[10].MapInfo.Palettes.First();
+            // palette = caveLvls[1].MapInfo.Palettes.First();
+            // palette = caveLvls[0].MapInfo.Palettes.First();
+            // palette = caveLvls[2].MapInfo.Palettes.First();
+            // palette = caveLvls[10].MapInfo.Palettes.First();
+            // palette = candyLvls[0].MapInfo.Palettes.First();
+            // palette = candyLvls[3].MapInfo.Palettes.First();
+
             using (context)
             {
                 //Allfix
@@ -96,64 +118,39 @@ public sealed class BinaryAnimation
                     context.AddFile(new LinearFile(context, files[0][i]));
                 }
 
-                //Levels
-                files[1] = Directory.GetFiles(basePath + "/JUNGLE", "*.LEV", SearchOption.TopDirectoryOnly).OrderBy
-                    (
-                    f => Convert.ToInt32(new FileInfo(f).Name.Substring(3, new FileInfo(f).Name.IndexOf(".") - 3)).ToString("00")
-                    ).ToArray();
+                files[1] = new string[4] { "RAY1.LEV", "RAY22.LEV", "RAY15.LEV", "RAY16.LEV" };
                 for (int i = 0; i < files[1].Length; i++)
                 {
-                    files[1][i] = Path.GetFileName(files[1][i]);
                     context.AddFile(new LinearFile(context, "JUNGLE/" + files[1][i]));
                 }
 
-                files[2] = Directory.GetFiles(basePath + "/MUSIC", "*.LEV", SearchOption.TopDirectoryOnly).OrderBy
-                    (
-                    f => Convert.ToInt32(new FileInfo(f).Name.Substring(3, new FileInfo(f).Name.IndexOf(".") - 3)).ToString("00")
-                    ).ToArray();
+                files[2] = new string[5] { "RAY2.LEV", "RAY4.LEV", "RAY12.LEV", "RAY1.LEV", "RAY16.LEV" };
                 for (int i = 0; i < files[2].Length; i++)
                 {
-                    files[2][i] = Path.GetFileName(files[2][i]);
                     context.AddFile(new LinearFile(context, "MUSIC/" + files[2][i]));
                 }
 
-                files[3] = Directory.GetFiles(basePath + "/MOUNTAIN", "*.LEV", SearchOption.TopDirectoryOnly).OrderBy
-                    (
-                    f => Convert.ToInt32(new FileInfo(f).Name.Substring(3, new FileInfo(f).Name.IndexOf(".") - 3)).ToString("00")
-                    ).ToArray();
+                files[3] = new string[3] { "RAY1.LEV", "RAY6.LEV", "RAY10.LEV" };
                 for (int i = 0; i < files[3].Length; i++)
                 {
-                    files[3][i] = Path.GetFileName(files[3][i]);
                     context.AddFile(new LinearFile(context, "MOUNTAIN/" + files[3][i]));
                 }
 
-                files[4] = Directory.GetFiles(basePath + "/IMAGE", "*.LEV", SearchOption.TopDirectoryOnly).OrderBy
-                    (
-                    f => Convert.ToInt32(new FileInfo(f).Name.Substring(3, new FileInfo(f).Name.IndexOf(".") - 3)).ToString("00")
-                    ).ToArray();
+                files[4] = new string[3] { "RAY1.LEV", "RAY4.LEV", "RAY11.LEV" };
                 for (int i = 0; i < files[4].Length; i++)
                 {
-                    files[4][i] = Path.GetFileName(files[4][i]);
                     context.AddFile(new LinearFile(context, "IMAGE/" + files[4][i]));
                 }
 
-                files[5] = Directory.GetFiles(basePath + "/CAVE", "*.LEV", SearchOption.TopDirectoryOnly).OrderBy
-                    (
-                    f => Convert.ToInt32(new FileInfo(f).Name.Substring(3, new FileInfo(f).Name.IndexOf(".") - 3)).ToString("00")
-                    ).ToArray();
+                files[5] = new string[4] { "RAY2.LEV", "RAY1.LEV", "RAY3.LEV", "RAY11.LEV" };
                 for (int i = 0; i < files[5].Length; i++)
                 {
-                    files[5][i] = Path.GetFileName(files[5][i]);
                     context.AddFile(new LinearFile(context, "CAVE/" + files[5][i]));
                 }
 
-                files[6] = Directory.GetFiles(basePath + "/CAKE", "*.LEV", SearchOption.TopDirectoryOnly).OrderBy
-                    (
-                    f => Convert.ToInt32(new FileInfo(f).Name.Substring(3, new FileInfo(f).Name.IndexOf(".") - 3)).ToString("00")
-                    ).ToArray();
+                files[6] = new string[2] { "RAY1.LEV", "RAY4.LEV" };
                 for (int i = 0; i < files[6].Length; i++)
                 {
-                    files[6][i] = Path.GetFileName(files[6][i]);
                     context.AddFile(new LinearFile(context, "CAKE/" + files[6][i]));
                 }
                 Debug.Log("Loaded fileNames into context.");
@@ -618,67 +615,67 @@ public sealed class BinaryAnimation
         switch (_paletteIndex)
         {
             case 0:
-                palette = jungleLvls[0].MapInfo.Palettes.First();
+                palette = jungleLvls[0].MapInfo.Palettes.First();//1.lev
                 break;
             case 1:
-                palette = jungleLvls[21].MapInfo.Palettes.First();
+                palette = jungleLvls[1].MapInfo.Palettes.First();//22.lev
                 break;
             case 2:
-                palette = jungleLvls[14].MapInfo.Palettes.First();
+                palette = jungleLvls[2].MapInfo.Palettes.First();//15.lev
                 break;
             case 3:
-                palette = jungleLvls[15].MapInfo.Palettes.First();
+                palette = jungleLvls[3].MapInfo.Palettes.First();//16.lev
                 break;
             case 4:
-                palette = musicLvls[1].MapInfo.Palettes.First();
+                palette = musicLvls[0].MapInfo.Palettes.First();//2.lev
                 break;
             case 5:
-                palette = musicLvls[3].MapInfo.Palettes.First();
+                palette = musicLvls[1].MapInfo.Palettes.First();//4.lev
                 break;
             case 6:
-                palette = musicLvls[11].MapInfo.Palettes.First();
+                palette = musicLvls[2].MapInfo.Palettes.First();//12.lev
                 break;
             case 7:
-                palette = musicLvls[0].MapInfo.Palettes.First();
+                palette = musicLvls[3].MapInfo.Palettes.First();//1.lev
                 break;
             case 8:
-                palette = musicLvls[15].MapInfo.Palettes.First();
+                palette = musicLvls[4].MapInfo.Palettes.First();//16.lev
                 break;
             case 9:
-                palette = stoneLvls[0].MapInfo.Palettes.First();
+                palette = stoneLvls[0].MapInfo.Palettes.First();//1.lev
                 break;
             case 10:
-                palette = stoneLvls[5].MapInfo.Palettes.First();
+                palette = stoneLvls[1].MapInfo.Palettes.First();//6.lev
                 break;
             case 11:
-                palette = stoneLvls[9].MapInfo.Palettes.First();
+                palette = stoneLvls[2].MapInfo.Palettes.First();//10.lev
                 break;
             case 12:
-                palette = imageLvls[0].MapInfo.Palettes.First();
+                palette = imageLvls[0].MapInfo.Palettes.First();//1.lev
                 break;
             case 13:
-                palette = imageLvls[3].MapInfo.Palettes.First();
+                palette = imageLvls[1].MapInfo.Palettes.First();//4.lev
                 break;
             case 14:
-                palette = imageLvls[10].MapInfo.Palettes.First();
+                palette = imageLvls[2].MapInfo.Palettes.First();//11.lev
                 break;
             case 15:
-                palette = caveLvls[1].MapInfo.Palettes.First();
+                palette = caveLvls[0].MapInfo.Palettes.First();//2.lev
                 break;
             case 16:
-                palette = caveLvls[0].MapInfo.Palettes.First();
+                palette = caveLvls[1].MapInfo.Palettes.First();//1.lev
                 break;
             case 17:
-                palette = caveLvls[2].MapInfo.Palettes.First();
+                palette = caveLvls[2].MapInfo.Palettes.First();//3.lev
                 break;
             case 18:
-                palette = caveLvls[10].MapInfo.Palettes.First();
+                palette = caveLvls[3].MapInfo.Palettes.First();//11.lev
                 break;
             case 19:
-                palette = candyLvls[0].MapInfo.Palettes.First();
+                palette = candyLvls[0].MapInfo.Palettes.First();//1.lev
                 break;
             case 20:
-                palette = candyLvls[3].MapInfo.Palettes.First();
+                palette = candyLvls[1].MapInfo.Palettes.First();//4.lev
                 break;
             default:
                 Debug.Log("<color=orange>THIS ISN'T SUPPOSED TO HAPPEN!!</color>");
