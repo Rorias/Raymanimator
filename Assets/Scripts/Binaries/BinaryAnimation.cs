@@ -82,28 +82,6 @@ public sealed class BinaryAnimation
             context.AddSettings(new Ray1Settings(Ray1EngineVersion.PC));
             //context.AddSettings(new Ray1Settings(Ray1EngineVersion.PS1));
 
-            // palette = jungleLvls[0].MapInfo.Palettes.First();
-            // palette = jungleLvls[21].MapInfo.Palettes.First();
-            // palette = jungleLvls[14].MapInfo.Palettes.First();
-            // palette = jungleLvls[15].MapInfo.Palettes.First();
-            // palette = musicLvls[1].MapInfo.Palettes.First();
-            // palette = musicLvls[3].MapInfo.Palettes.First();
-            // palette = musicLvls[11].MapInfo.Palettes.First();
-            // palette = musicLvls[0].MapInfo.Palettes.First();
-            // palette = musicLvls[15].MapInfo.Palettes.First();
-            // palette = stoneLvls[0].MapInfo.Palettes.First();
-            // palette = stoneLvls[5].MapInfo.Palettes.First();
-            // palette = stoneLvls[9].MapInfo.Palettes.First();
-            // palette = imageLvls[0].MapInfo.Palettes.First();
-            // palette = imageLvls[3].MapInfo.Palettes.First();
-            // palette = imageLvls[10].MapInfo.Palettes.First();
-            // palette = caveLvls[1].MapInfo.Palettes.First();
-            // palette = caveLvls[0].MapInfo.Palettes.First();
-            // palette = caveLvls[2].MapInfo.Palettes.First();
-            // palette = caveLvls[10].MapInfo.Palettes.First();
-            // palette = candyLvls[0].MapInfo.Palettes.First();
-            // palette = candyLvls[3].MapInfo.Palettes.First();
-
             using (context)
             {
                 //Allfix
@@ -378,16 +356,7 @@ public sealed class BinaryAnimation
 
     private void SaveFrames(Animation _rayman1Anim, BinarySerializer.Ray1.Animation _binaryAnim, float _pixelSize)
     {
-        //if (_binaryAnim.FramesCount < _rayman1Anim.maxFrameCount)
-        //{
-        //    for (int i = _binaryAnim.FramesCount - 1; i < _rayman1Anim.maxFrameCount; i++)
-        //    {
-        //        AnimationFrame af = new AnimationFrame()
-        //        {
-
-        //        }
-        //    }
-        //}
+        ResizeAnimation(_binaryAnim, _rayman1Anim);
 
         for (int frameIndex = 0; frameIndex < _binaryAnim.FramesCount; frameIndex++)
         {
@@ -405,6 +374,59 @@ public sealed class BinaryAnimation
                 animLayer.YPosition = (byte)((255 - (p.yPos + 255)) * _pixelSize);
             }
         }
+    }
+
+    //Written with help from RayCarrot
+    private void ResizeAnimation(BinarySerializer.Ray1.Animation _anim, Animation _newAnim)
+    {
+        //Fewer frames
+        if (_newAnim.maxFrameCount < _anim.FramesCount)
+        {
+            //Remove frames
+            AnimationFrame[] frames = _anim.Frames;
+            Array.Resize(ref frames, _newAnim.maxFrameCount);
+            _anim.Frames = frames;
+
+            //Remove layers
+            AnimationLayer[] layers = _anim.Layers;
+            Array.Resize(ref layers, _newAnim.maxFrameCount * _anim.LayersCount);
+            _anim.Layers = layers;
+        }
+        // More frames
+        else if (_newAnim.maxFrameCount > _anim.FramesCount)
+        {
+            AnimationFrame[] frames = _anim.Frames;
+            Array.Resize(ref frames, _newAnim.maxFrameCount);
+
+            for (int i = _anim.FramesCount; i < _newAnim.maxFrameCount - 1; i++)
+            {
+                AnimationFrame af = new AnimationFrame()
+                {
+                    Height = _anim.Frames[0].Height,//TODO: proper math
+                    Width = _anim.Frames[0].Width,//TODO: proper math
+                    XPosition = _anim.Frames[0].XPosition,//TODO: proper math
+                    YPosition = _anim.Frames[0].YPosition,//TODO: proper math
+                };
+
+                frames[i] = af;
+            }
+
+            _anim.Frames = frames;
+
+            //Add layers
+            AnimationLayer[] layers = _anim.Layers;
+            int initialSize = layers.Length;
+            Array.Resize(ref layers, _newAnim.maxFrameCount * _anim.LayersCount);
+
+            for (int i = initialSize; i < layers.Length; i++)
+            {
+                layers[i] = new AnimationLayer();
+            }
+
+            _anim.Layers = layers;
+        }
+
+        _anim.FramesCount = (ushort)_newAnim.maxFrameCount;
     }
 
     public byte[] SaveSpriteset(Dictionary<int, UnityEngine.Sprite> _spriteset, Design _imageData, int _paletteIndex, int _secPaletteIndex, bool _colls)

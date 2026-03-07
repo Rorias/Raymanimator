@@ -34,7 +34,6 @@ public class FileSetting : Settings
         {
             if (gameManager.currentAnimation.binaryAnimationIndex != -1)
             {
-                importButton.gameObject.SetActive(false);
                 saveAnimationButton.gameObject.SetActive(false);
                 saveGifButton.gameObject.SetActive(false);
                 saveReverseButton.gameObject.SetActive(false);
@@ -45,8 +44,9 @@ public class FileSetting : Settings
             {
                 saveBinaryButton.gameObject.SetActive(false);
                 exportBinaryButton.gameObject.SetActive(false);
-                importButton.onClick.AddListener(delegate { importWindow.OpenWindow(); gameObject.SetActive(false); });
             }
+
+            importButton.onClick.AddListener(delegate { importWindow.OpenWindow(); gameObject.SetActive(false); });
         }
     }
 

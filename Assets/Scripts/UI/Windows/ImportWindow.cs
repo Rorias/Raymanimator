@@ -50,6 +50,7 @@ public class ImportWindow : Raymanimator
 
     public void OpenWindow()
     {
+        GetLoadableAnimations();
         gameObject.SetActive(true);
         importButton.onClick.RemoveAllListeners();
         importButton.onClick.AddListener(() => { Import(); });
@@ -100,7 +101,7 @@ public class ImportWindow : Raymanimator
         insertIF.text = "0";
     }
 
-    private void Import()
+    private void Import()//TODO: fix previous frame still showing despite not being at that frame visually
     {
         if (string.IsNullOrWhiteSpace(startIF.text) || string.IsNullOrWhiteSpace(endIF.text) || string.IsNullOrWhiteSpace(insertIF.text))
         {
@@ -111,6 +112,12 @@ public class ImportWindow : Raymanimator
         int startFrame = Convert.ToInt32(startIF.text);
         int endFrame = Convert.ToInt32(endIF.text);
         int insertFrame = Convert.ToInt32(insertIF.text);
+
+        if (importAnim.maxPartCount != gameManager.currentAnimation.maxPartCount)
+        {
+            DebugHelper.Log("Animations with different part counts are not currently supported.", DebugHelper.Severity.warning);
+            return;
+        }
 
         if (startFrame > endFrame)
         {

@@ -33,8 +33,8 @@ public partial class AnimatorController : Raymanimator
     public TMP_DropdownPlus ddSprites;
     public ButtonPlus playButton;
     //TODO: Temp until binary part/frame add/remove works
-    public ButtonPlus addFrameButton;
-    public ButtonPlus removeFrameButton;
+    //public ButtonPlus addFrameButton;
+    //public ButtonPlus removeFrameButton;
     public ButtonPlus addPartButton;
     public ButtonPlus removePartButton;
     [Space]
@@ -125,8 +125,8 @@ public partial class AnimatorController : Raymanimator
         //TODO: Temp until binary part/frame add/remove works
         if (thisAnim.binaryAnimationIndex != -1)
         {
-            addFrameButton.interactable = false;
-            removeFrameButton.interactable = false;
+            //addFrameButton.interactable = false;
+            //removeFrameButton.interactable = false;
             addPartButton.interactable = false;
             removePartButton.interactable = false;
         }
@@ -474,8 +474,8 @@ public partial class AnimatorController : Raymanimator
         //TODO: Temp until binary part/frame add/remove works
         if (thisAnim.binaryAnimationIndex != -1)
         {
-            addFrameButton.interactable = false;
-            removeFrameButton.interactable = false;
+            //addFrameButton.interactable = false;
+            //removeFrameButton.interactable = false;
             addPartButton.interactable = false;
             removePartButton.interactable = false;
         }
