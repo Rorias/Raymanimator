@@ -273,7 +273,7 @@ public sealed class BinaryAnimation
             BinarySerializer.Ray1.Animation binaryAnim = des.Animations[_animIndex];
             if (_animData)
             {
-                SaveFrames(_rayman1Anim, binaryAnim, _pixelSize);
+                SaveFrames(des, _rayman1Anim, binaryAnim, _pixelSize);
             }
         }
 
@@ -354,9 +354,9 @@ public sealed class BinaryAnimation
         }
     }
 
-    private void SaveFrames(Animation _rayman1Anim, BinarySerializer.Ray1.Animation _binaryAnim, float _pixelSize)
+    private void SaveFrames(Design _des, Animation _rayman1Anim, BinarySerializer.Ray1.Animation _binaryAnim, float _pixelSize)
     {
-        ResizeAnimation(_binaryAnim, _rayman1Anim);
+        ResizeAnimation(_des, _binaryAnim, _rayman1Anim);
 
         for (int frameIndex = 0; frameIndex < _binaryAnim.FramesCount; frameIndex++)
         {
@@ -377,7 +377,7 @@ public sealed class BinaryAnimation
     }
 
     //Written with help from RayCarrot
-    private void ResizeAnimation(BinarySerializer.Ray1.Animation _anim, Animation _newAnim)
+    private void ResizeAnimation(Design _des, BinarySerializer.Ray1.Animation _anim, Animation _newAnim)
     {
         //Fewer frames
         if (_newAnim.maxFrameCount < _anim.FramesCount)
@@ -395,24 +395,6 @@ public sealed class BinaryAnimation
         // More frames
         else if (_newAnim.maxFrameCount > _anim.FramesCount)
         {
-            AnimationFrame[] frames = _anim.Frames;
-            Array.Resize(ref frames, _newAnim.maxFrameCount);
-
-            for (int i = _anim.FramesCount; i < _newAnim.maxFrameCount - 1; i++)
-            {
-                AnimationFrame af = new AnimationFrame()
-                {
-                    Height = _anim.Frames[0].Height,//TODO: proper math
-                    Width = _anim.Frames[0].Width,//TODO: proper math
-                    XPosition = _anim.Frames[0].XPosition,//TODO: proper math
-                    YPosition = _anim.Frames[0].YPosition,//TODO: proper math
-                };
-
-                frames[i] = af;
-            }
-
-            _anim.Frames = frames;
-
             //Add layers
             AnimationLayer[] layers = _anim.Layers;
             int initialSize = layers.Length;
@@ -424,9 +406,104 @@ public sealed class BinaryAnimation
             }
 
             _anim.Layers = layers;
+
+            AnimationFrame[] frames = _anim.Frames;
+            Array.Resize(ref frames, _newAnim.maxFrameCount);
+
+            for (int i = _anim.FramesCount; i < _newAnim.maxFrameCount - 1; i++)
+            {
+                frames[i] = CreateFrame(_des, _anim, i);
+            }
+
+            _anim.Frames = frames;
+
+
+            //AnimationFrame[] frames = _anim.Frames;
+            //Array.Resize(ref frames, _newAnim.maxFrameCount);
+
+            //for (int i = _anim.FramesCount; i < _newAnim.maxFrameCount - 1; i++)
+            //{
+            //    AnimationFrame af = new AnimationFrame()
+            //    {
+            //        Height = _anim.Frames[0].Height,//TODO: proper math
+            //        Width = _anim.Frames[0].Width,//TODO: proper math
+            //        XPosition = _anim.Frames[0].XPosition,//TODO: proper math
+            //        YPosition = _anim.Frames[0].YPosition,//TODO: proper math
+            //    };
+
+            //    frames[i] = af;
+            //}
+
+            //_anim.Frames = frames;
+
+            ////Add layers
+            //AnimationLayer[] layers = _anim.Layers;
+            //int initialSize = layers.Length;
+            //Array.Resize(ref layers, _newAnim.maxFrameCount * _anim.LayersCount);
+
+            //for (int i = initialSize; i < layers.Length; i++)
+            //{
+            //    layers[i] = new AnimationLayer();
+            //}
+
+            //_anim.Layers = layers;
         }
 
         _anim.FramesCount = (ushort)_newAnim.maxFrameCount;
+    }
+
+    private AnimationFrame CreateFrame(Design _des, BinarySerializer.Ray1.Animation anim, int frameIndex)
+    {
+        int minX = 255;
+        int minY = 255;
+        int maxX = 1;
+        int maxY = 1;
+
+        for (int layerIndex = 0; layerIndex < anim.LayersCount; layerIndex++)
+        {
+            AnimationLayer layer = anim.Layers[frameIndex * anim.LayersCount + layerIndex];
+
+            if (layer.SpriteIndex >= _des.Sprites.Length)
+                continue;
+
+            BinarySerializer.Ray1.Sprite sprite = _des.Sprites[layer.SpriteIndex];
+
+            if (sprite.Id == 0)
+                continue;
+
+            int spriteMinX = layer.XPosition + sprite.SpriteXPosition;
+            int spriteMinY = layer.YPosition + sprite.SpriteYPosition;
+            int spriteMaxX = spriteMinX + sprite.SpriteWidth;
+            int spriteMaxY = spriteMinY + sprite.SpriteHeight;
+
+            if (spriteMinX < minX)
+                minX = spriteMinX;
+            if (spriteMinY < minY)
+                minY = spriteMinY;
+            if (spriteMaxX > maxX)
+                maxX = spriteMaxX;
+            if (spriteMaxY > maxY)
+                maxY = spriteMaxY;
+        }
+
+        int frameX = minX;
+        int frameY = minY;
+
+        int frameWidth = maxX;
+        if (maxX > minX)
+            frameWidth -= minX + 1;
+
+        int frameHeight = maxY;
+        if (maxY > minY)
+            frameHeight -= minY + 1;
+
+        return new AnimationFrame
+        {
+            XPosition = (byte)frameX,
+            YPosition = (byte)frameY,
+            Width = (byte)frameWidth,
+            Height = (byte)frameHeight
+        };
     }
 
     public byte[] SaveSpriteset(Dictionary<int, UnityEngine.Sprite> _spriteset, Design _imageData, int _paletteIndex, int _secPaletteIndex, bool _colls)
@@ -708,67 +785,67 @@ public sealed class BinaryAnimation
         switch (_secPaletteIndex)
         {
             case 0:
-                secPalette = jungleLvls[0].MapInfo.Palettes.First();
+                secPalette = jungleLvls[0].MapInfo.Palettes.First();//1.lev
                 break;
             case 1:
-                secPalette = jungleLvls[21].MapInfo.Palettes.First();
+                secPalette = jungleLvls[1].MapInfo.Palettes.First();//22.lev
                 break;
             case 2:
-                secPalette = jungleLvls[14].MapInfo.Palettes.First();
+                secPalette = jungleLvls[2].MapInfo.Palettes.First();//15.lev
                 break;
             case 3:
-                secPalette = jungleLvls[15].MapInfo.Palettes.First();
+                secPalette = jungleLvls[3].MapInfo.Palettes.First();//16.lev
                 break;
             case 4:
-                secPalette = musicLvls[1].MapInfo.Palettes.First();
+                secPalette = musicLvls[0].MapInfo.Palettes.First();//2.lev
                 break;
             case 5:
-                secPalette = musicLvls[3].MapInfo.Palettes.First();
+                secPalette = musicLvls[1].MapInfo.Palettes.First();//4.lev
                 break;
             case 6:
-                secPalette = musicLvls[11].MapInfo.Palettes.First();
+                secPalette = musicLvls[2].MapInfo.Palettes.First();//12.lev
                 break;
             case 7:
-                secPalette = musicLvls[0].MapInfo.Palettes.First();
+                secPalette = musicLvls[3].MapInfo.Palettes.First();//1.lev
                 break;
             case 8:
-                secPalette = musicLvls[15].MapInfo.Palettes.First();
+                secPalette = musicLvls[4].MapInfo.Palettes.First();//16.lev
                 break;
             case 9:
-                secPalette = stoneLvls[0].MapInfo.Palettes.First();
+                secPalette = stoneLvls[0].MapInfo.Palettes.First();//1.lev
                 break;
             case 10:
-                secPalette = stoneLvls[5].MapInfo.Palettes.First();
+                secPalette = stoneLvls[1].MapInfo.Palettes.First();//6.lev
                 break;
             case 11:
-                secPalette = stoneLvls[9].MapInfo.Palettes.First();
+                secPalette = stoneLvls[2].MapInfo.Palettes.First();//10.lev
                 break;
             case 12:
-                secPalette = imageLvls[0].MapInfo.Palettes.First();
+                secPalette = imageLvls[0].MapInfo.Palettes.First();//1.lev
                 break;
             case 13:
-                secPalette = imageLvls[3].MapInfo.Palettes.First();
+                secPalette = imageLvls[1].MapInfo.Palettes.First();//4.lev
                 break;
             case 14:
-                secPalette = imageLvls[10].MapInfo.Palettes.First();
+                secPalette = imageLvls[2].MapInfo.Palettes.First();//11.lev
                 break;
             case 15:
-                secPalette = caveLvls[1].MapInfo.Palettes.First();
+                secPalette = caveLvls[0].MapInfo.Palettes.First();//2.lev
                 break;
             case 16:
-                secPalette = caveLvls[0].MapInfo.Palettes.First();
+                secPalette = caveLvls[1].MapInfo.Palettes.First();//1.lev
                 break;
             case 17:
-                secPalette = caveLvls[2].MapInfo.Palettes.First();
+                secPalette = caveLvls[2].MapInfo.Palettes.First();//3.lev
                 break;
             case 18:
-                secPalette = caveLvls[10].MapInfo.Palettes.First();
+                secPalette = caveLvls[3].MapInfo.Palettes.First();//11.lev
                 break;
             case 19:
-                secPalette = candyLvls[0].MapInfo.Palettes.First();
+                secPalette = candyLvls[0].MapInfo.Palettes.First();//1.lev
                 break;
             case 20:
-                secPalette = candyLvls[3].MapInfo.Palettes.First();
+                secPalette = candyLvls[1].MapInfo.Palettes.First();//4.lev
                 break;
             default:
                 secPalette = palette;
